@@ -5692,27 +5692,6 @@ iCf8P3kRYMB31fZQAAAAAElFTkSuQmCC
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [231]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chosen_symbol&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;['BAC', 'AAPL', 'FB', 'GE', 'MSFT', 'F', 'INTC', 'CSCO', 'HPQ', 'PFE', 'MU', 'T', 'C', 'EBAY', 'FCX', 'NFLX', 'YHOO', 'JPM', 'ORCL', 'WFC', 'CHK', 'VZ', 'RF', 'GM', 'KO', 'AMAT', 'FOXA', 'MS', 'CMCSA', 'XOM', 'FTR', 'KMI', 'BSX', 'DAL', 'MRK', 'GILD', 'HAL', 'QCOM', 'KEY', 'V', 'GLW', 'AIG', 'AAL', 'ARNC', 'HBAN', 'XRX', 'MDLZ', 'SPLS', 'SBUX', 'MRO']
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;In [232]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
