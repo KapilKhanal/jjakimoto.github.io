@@ -1025,7 +1025,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Economic indicators are statistics to measure glowth and contraction of econmics. Trading based on such indicators, what is called thechincal trading, are one of the main trends in recent stock trading. Especially S&P500;(Standard & Poor's 500 Index) is frequently used as a bench mark for stock trading performance. Roughly speaking, constructing a portfolio, a grouping of financial assets like stocks, with better return and lower risk than S&P500; is one of the main goals for strock trading. Thus, figuring out the relation between S&P500; and stock prices are important to construct a good portfolio.</p>
+<p>Economic indicators are statistics to measure growth and contraction of econmics. Trading based on such indicators, what is called technical trading, is one of the main trends in recent stock trading. Especially S&P500;(Standard & Poor's 500 Index) is frequently used as a bench mark to evaluate portfolio -- a grouping of financial assets like stocks. Roughly speaking, constructing a portfolio with better return and lower risk than S&P500; is one of the main goals for strock trading. Therefore, clarfiying the relation between S&P500; and stock prices are important to construct a good portfolio.</p>
 </div>
 </div>
 </div>
@@ -1034,7 +1034,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this article, we work on dpulication of S&P500; with stock price data. At first part, we use various lienar models like linear regression, factor anlaysis, etc. In the latter part, we also consider an extension with neural network. We show that the neural network as an extension of linear regression works better than a simple neural network.</p>
+<p>In this article, we work on duplication of S&P500; with stock price data. At first part, we use various lienar models like linear regression, factor anlaysis, etc. In the latter part, we also consider an extension with neural network. We show that the neural network as an extension of linear regression works better than a simple neural network.</p>
 </div>
 </div>
 </div>
@@ -1101,7 +1101,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We fetch stock price and S&P500; data from open source: yahoo finance. We also refer to <a href="https://en.wikipedia.org/wiki/List_of_S%26P_500_companies">the Wikipedia</a> to fetch informaion about which stocks are used for S&P500.; For precise implementation, you can check <a href="https://github.com/jjakimoto/Indicator_Analysis/blob/master/utils.py">here</a>.</p>
+<p>We fetch stock price and S&P500; data from open source, yahoo finance. We also refer to <a href="https://en.wikipedia.org/wiki/List_of_S%26P_500_companies">the Wikipedia</a> to get informaion about which stocks are used for S&P500.; For precise implementation, you can check <a href="https://github.com/jjakimoto/Indicator_Analysis/blob/master/utils.py">here</a>.</p>
 </div>
 </div>
 </div>
@@ -1162,10 +1162,10 @@ Wall time: 3min 1s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>S&P500; is compuated by linear combination of U.S. 500 stocks, which are selected by economists. The weight parameters for each stock is determined by <a href="http://www.investopedia.com/ask/answers/05/sp500calculation.asp">market capitals</a>. 
+<p>S&P500; is calculated by linear combination of U.S. 500 stocks selected by economists. The weight parameters for each stock is determined by <a href="http://www.investopedia.com/ask/answers/05/sp500calculation.asp">market capitals</a>. 
 Thus, we can write down the relation of S&P500; and stock prices as 
 $$y = \bf{w}\cdot \bf{x} ,$$
-where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 500 dimensional vectors. This simple linear relation even enables a vanilla linear regression to duplicate S&P500; good enough under a certain condition.</p>
+where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 500 dimensional vectors. This simple linear relation enables even a vanilla linear regression to duplicate S&P500; with high accuracy under a certain condition.</p>
 </div>
 </div>
 </div>
@@ -1965,7 +1965,7 @@ where $\tilde{y_i}$ and $y_i$ are duplicatation and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Since we want to see how the relation between S&P500; and stock prices as time goes, we evaluate error for every two weeks average.</p>
+<p>Since data contains a lot of noise, we need smoothing to see how the error changes along with time. Then, we evaluate error for every two weeks average.</p>
 </div>
 </div>
 </div>
@@ -2344,7 +2344,7 @@ ERGJhgoTERERiYYKExEREYmGChMRERGJhgoTERERicb/AFj9uQolrQoQAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>While we have less than 2% error in the first two weeks, we have almost 12% ~ 14% error in the latter part: the error grows along with time. This implies that the weight parameters vary as the economic condition changes along with time. From now on, taking the linear regression result above as a bench mark, we work on various algorithms and compare their performance.</p>
+<p>x-axis number indicate x-th two weeks average: i.e., x-th two weeks average is the average from 2<em>x th to 2</em>(x + 1) th week average. While we have less than 2% error in the first two weeks, we have almost 12% ~ 14% error in the latter part. The error grows along with time. This implies that the weight parameters vary as the economic condition changes along with time. From now on, taking the linear regression result above as a bench mark, we work on various algorithms and compare their performance.</p>
 </div>
 </div>
 </div>
@@ -2362,7 +2362,7 @@ ERGJhgoTERERiYYKExEREYmGChMRERGJhgoTERERicb/AFj9uQolrQoQAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Stock prices' behavior are konwn to correlate to each other. If this correlation can be described as linear combinations, the dimension of independent factors that determines stock prices is equal to or less than the number of stocks. Thus, input information may be able to reduce to lower dimension. With this view point, the duplication of fiancial indicators like S&P; 500 traditionally has been doen with factor analysis. We will now work on PCA and factor analysis(PPCA).</p>
+<p>Stock prices are konwn to behave while correlating to each other. If this correlation can be described as linear combinations, the dimension of independent factors that determines stock prices is equal to or less than the number of stocks. Thus, input information may be able to reduce to lower dimension. With this view point, the duplication of fiancial indicators like S&P; 500 traditionally has been doen with factor analysis. We will now work on PCA and factor analysis(PPCA).</p>
 </div>
 </div>
 </div>
@@ -3902,7 +3902,7 @@ iIiI+IJCiYiIiPiCQomIiIj4gkKJiIiI+ML/B0C5FLk/FO1HAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>PPCA has the best performance almost all over observations. Note that both PCA and PPCA have better peformances especially at the latter observations. This comes from the fact that simple model is robust to the generalization. In the latter part far from train data, vanilla linear regression fails in generalization and results in poor performance.</p>
+<p>PPCA has the best performance almost all over observations. Note that both PCA and PPCA have better peformances  than the linear regression especially at the latter observations. This comes from the fact that simple model is robust to unobserved data. Since the latter part data is changes a lot from train data, the vanilla linear regression fails in generalization and results in poor performance.</p>
 </div>
 </div>
 </div>
@@ -3938,7 +3938,7 @@ iIiI+IJCiYiIiPiCQomIiIj4gkKJiIiI+ML/B0C5FLk/FO1HAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As we disucussed above, the contribution of each stock toward S&P500; will be detemined by the scale of company: i.e. market cap. Thus, only a few stocks may have dominant effect on S&P500.; In that case, focusing on such terms makes the model robust and have better generalization error. ARD(Automatic Relevance Determination) is one of the bayesian methods to choose dominant factors by introducing diagonal covariance noraml distributed prior for weight parameters. Roughly speaking, this algorithm will choose the most important factors automatically.</p>
+<p>The contribution of each stock toward S&P500; will be detemined by the scale of company -- market cap. Thus, stocks of only some influential companies may have dominant effect on the behavior of S&P500.; In that case, focusing on such terms makes the model robust and have better generalization error. ARD(Automatic Relevance Determination) is one of the bayesian methods to choose dominant factors by introducing diagonal covariance noraml distributed prior for weight parameters. Roughly speaking, this algorithm will choose the most important factors automatically.</p>
 </div>
 </div>
 </div>
@@ -5734,7 +5734,7 @@ iCf8P3kRYMB31fZQAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We will now consider using only 10% of selected stocks: i.e. 50 stocks.</p>
+<p>We will now consider using only 10% of selected stocks, i.e., 50 stocks.</p>
 <p>We shall choose 50 stocks based on volume: quntity refers to the number of traded contracts. Roughly speaking, the more volume a company has, the stronger impact it has on the stock market. Hence, it is natural to choose the 50 biggest volume companies to duplicate S&P500.;  Technically, we use the average volume over the observation period.</p>
 </div>
 </div>
@@ -6422,7 +6422,7 @@ SUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see the relation between stocks chonse by ARD and Volume.</p>
+<p>Let's see the relation between stocks choen by ARD and Volume.</p>
 </div>
 </div>
 </div>
@@ -7676,7 +7676,7 @@ xegAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Focusing on only the large volume stocks improves the perforamcne over all of the observations.  we suceeded to keep good performance even in the latter part of duplication. This implies that the largest volume stocks are the dominant factors.</p>
+<p>Focusing on only the large volume stocks improves the perforamcne over all of the observations. This implies that the largest volume stocks are the dominant factors.</p>
 </div>
 </div>
 </div>
@@ -8380,7 +8380,7 @@ EBRKREREJAgKJSIiIhKE/wdBkWTCJfKUHAAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As you see in the above graph, dimension reduction has an effect of keeping good performance in the latter part. One of the reasons comes from the fact that variance beomes smaller when having fewer variables for linear regression. The benchmark linear regression has from twice to ten times variabales, which gives from twice to ten times varaince if all of the variables are i.i.d. Thus, the change of stock prices along with time gives more error to the benchmark than to other model with fewer dimensions.</p>
+<p>As you see in the above figure, dimension reduction has an effect of keeping good performance in the latter part. One of the reasons comes from the fact that variance beomes smaller when having fewer variables for linear regression., e.g. the benchmark linear regression has ten times a much variabales as the linear regression with the 50 largest volume companies, which gives ten times varaince if all of the variables are i.i.d. Thus, the change of stock prices along with time gives more error to the benchmark than to other model with fewer dimensions.</p>
 </div>
 </div>
 </div>
@@ -8398,10 +8398,10 @@ EBRKREREJAgKJSIiIhKE/wdBkWTCJfKUHAAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Stocks may have nonlinear correlation, which require more complex model than linear model discussed above. In this section, we apply neural network to the duplication of S&P500.; Neural network has been recently attracting a lot of attentions due to the great sucess in various fields like image recognition. According to <a href="http://deeplearning.cs.cmu.edu/pdfs/Kornick_et_al.pdf">Universal Approximation Theorem</a>, we can approximate almost any functions. More precisely, let $f$ be a borel function mapping from $\mathbb{R}^n$to $\mathbb{R}^r$. Let $\bf{X}$ a space of one layer simple feed forward neural network with a certain class activation function like sigmoid, tanh, Relu, etc. For any $\epsilon > 0$ and compact subset $K \subset \mathbb{R}^n$, there exists $\tilde{f} \in \bf{X}$ such that 
+<p>Stocks may have nonlinear correlation, which require more complex model than linear model discussed above. In this section, we apply neural network to the duplication of S&P500.; Neural network has been recently attracting a lot of attentions due to the great success in image recognition. According to <a href="http://deeplearning.cs.cmu.edu/pdfs/Kornick_et_al.pdf">Universal Approximation Theorem</a>, we can approximate almost any functions. More precisely, let $f$ be a borel function mapping from $\mathbb{R}^n$to $\mathbb{R}^r$. Let $\bf{X}$ a space of one layer simple feed forward neural network with a certain class activation function like sigmoid, tanh, Relu, etc. For any $\epsilon > 0$ and compact subset $K \subset \mathbb{R}^n$, there exists $\tilde{f} \in \bf{X}$ such that 
 $$ \underset{x \in K}{sup}\| f(x) - \tilde{f}(x)\| < \epsilon.$$
 In the original paper, more general statement has been shown. Most of funcions you see are included in borel function, unless you work on pure mathematics. Hence, we can say that we can choose a neural network for almost any funciton with any accuracy.</p>
-<p>Note that this statement, however, is just quilitative. How to find such functions is another problem.</p>
+<p>Note that this statement, however, is just qualitative. The approximation is not constructive and does not give any ideas as to how to determine the number of hidden.</p>
 </div>
 </div>
 </div>
@@ -8410,7 +8410,7 @@ In the original paper, more general statement has been shown. Most of funcions y
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, we implement a multi layer perceptron with output as duplication of S&P500.; Generally speaking, the batch normalization has an effect to makes learning faster and avoid over fitting by reducing covariate shift. Application of batch normalization to output layer, however, makes a model unstable because of scales difference between target value and batch normalized output. Therefore, we will use batch normalization for all layers but the last layer.</p>
+<p>Now, we implement a multi layer perceptron taking output as duplication of S&P500.; Generally speaking, the batch normalization has an effect to make learning faster and avoid over fitting by reducing covariate shift. Application of batch normalization to output layer, however, makes a model unstable because of scales difference between target value and batch normalized output. Therefore, we will use batch normalization for all layers but the last layer.</p>
 </div>
 </div>
 </div>
@@ -9307,7 +9307,7 @@ jpOTuEhxHMdxHCcncZHiOI7jOE5O4iLFcRzHcZyc5P8DnFD+N1bQdmgAAAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The network just adjust output to the scale of S&P500; by increasing bias and produce almost the same value irrelevant to input values. This is one of the examples to indicate that  Universal Approximation Theorem does not grantee that we can easily find the optimal solutions. Before implementing network, we have to establish a model that reflects the charactersitc of data.</p>
-<p>As we discussed previously, S&P500; consists of linear combination of stocks. Thus, duplication has to satisfy the linear sensitivity with respect to stock prices. That is not the case for the simple nerual network. Instead, we use the network to learn weight like linear regression: i.e.
+<p>Since S&P500; consists of linear combination of stocks, duplication has to satisfy the linear sensitivity with respect to stock prices, which is not satisfied by the simple nerual network. Instead, we use the network to learn weight like linear regression: i.e.
 $$\bf{f(\bf{x})}\cdot \bf{x},$$
 where $\bf{f}(\cdot)$ is the output of the neural network.</p>
 </div>
@@ -10823,8 +10823,19 @@ gg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Nonlinearlity and universal approximation theorem makes neural network attractive. Neural network, however,  is difficult to determine the optimal hyper parameters and optimization. As you seen in the example, a simple archtecture with stock price as input and output as duplication does not fit data at all. Imitating linear regressino does the trick. Thus, when applying neural network, we have to consider which parts network shoulld learn; otherwise, we fail in even fitting training data.</p>
-<p>Various research has been done for neural network. As as future work, we can apply such state of art algorithms to prediction of S&P500; with the historical data.</p>
+<p>Nonlinearlity and universal approximation theorem makes neural network attractive. Neural network, however,  is difficult to determine the optimal hyper parameters and optimize parameters. As you seen in the example, a simple archtecture taking stock price as input and output as duplication does not fit data at all. Introducing linear regression structure does the trick. Thus, when applying neural network, we have to consider which parts network should lbe applied to; otherwise, we fail in even fitting training data.</p>
+<p>Various research has been done for neural network. As a future work, we can apply state of art algorithms to prediction of S&P500; with the historical data.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
 </div>
 </div>
 </div>
