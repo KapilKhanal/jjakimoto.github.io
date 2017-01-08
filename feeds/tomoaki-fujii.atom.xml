@@ -1145,7 +1145,7 @@ $$f_{actor}:\mathbb{R}^n \to \mathbb{R}^{n}. $$&lt;/p&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Next, we compare the performance with other algorithms: randomly chosen portfolio and CNN.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="trade_result" src="http://jjakimoto.github.io/images/trade_result.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;Randomly chosen portfolio follows the normal distribution $N(0, 10 \cdot\bf{I_n})$, where $\bf{I_n}$ is n-dimensional identity matrix.&lt;/p&gt;
+&lt;p&gt;Randomly chosen portfolio follows the normal distribution $N(0, 10 \cdot \bf{I_n})$, where $\bf{I_n}$ is n-dimensional identity matrix.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
