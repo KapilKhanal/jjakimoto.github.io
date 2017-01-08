@@ -1025,7 +1025,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Reinforcement learning has recently been succeeded to go over the human's ability in some fileds like playing video games. Algorithms find patters and find optimal actions as well as we do in the daily life. Some professional traders are good at predicting the trend of the stock price moves based on patters and make the profit.</p>
+<p>Reinforcement learning has recently been succeeded to go over the human's ability in video games and Go. This implies possiblities to beat human's performance in other fields where human is doing well. Stock trading can be one of such fields. Some professional  In this article, we consider application of reinforcement learning to stock trading. Especially, we work on constructing a portoflio to make profit. Since portfolio can take inifinite number, we tackle this task based on Deep Deterministic Policy Gradient (DDPG). The behavior of stock prices is konwn to depend on history and several time scales, which leads us to use multiscale CNN for Q and actor network. We show that our algorithm has better performance than monkey trading.</p>
 </div>
 </div>
 </div>
@@ -1034,7 +1034,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Background">Background<a class="anchor-link" href="#Background">¶</a></h1>
+<h1 id="1.-Background">1. Background<a class="anchor-link" href="#1.-Background">¶</a></h1>
 </div>
 </div>
 </div>
@@ -1043,7 +1043,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Reinforcement learning is one of categories of machine learning method along with unsupervised and supervised learning. Roughly speaking, reinforcemtn learning designs algorithms to learn the best perfomance action in the given situation. The performance of action is evaluated through rewards signals: the action to maximize reward singnals is considered as the best one. This frame work has been sucess in various fields such as robotics and video games. In this section, we review the basic and recent development of Q-learninig and its variation with neural network. If you want to learn this topic deeply, I recommend you to read <a href="https://webdocs.cs.ualberta.ca/~sutton/book/the-book.html">this book</a>.</p>
+<p>Reinforcement learning is one of categories of machine learning method along with unsupervised and supervised learning. This learning framework has recently been succeeded to go over the human's ability in some fields. Algorithms find patters and best performance actions from received signals as well as we do in our daily life. The performance of action is evaluated through reward signals;, i.e., the action to maximize reward signals is considered as the best one. In this section, we review recent development of Q-learning and its variation with neural network. If you want to learn this topic deeply, I highly recommend you to read <a href="https://webdocs.cs.ualberta.ca/~sutton/book/the-book.html">this book</a>.</p>
 </div>
 </div>
 </div>
@@ -1061,10 +1061,10 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Q-learning is a method based on temporal difference learninig(TDL), which results from the combination of Dynamic Programming(DP) ideas and Monte Carlo(MC) ideas.</p>
+<p>Q-learning is a method based on temporal difference learning(TDL), which results from the combination of Dynamic Programming(DP) ideas and Monte Carlo(MC) ideas.</p>
 <p>Let $Q(s, a)$ be an $\mathbb{R}$ valued function taking state $s$ and action $a$ as input, i.e., $Q(s, a)$ is a function to estimate the value of a pair $(s, a)$. With respect to a policy $\pi$, we can evaluate the value of state $s$ as
 $$V_{\pi}(s) = E_{\pi} [Q(s, \cdot)] = \int P_{\pi}(da | s) Q(s, a), $$
-where $P_{\pi}(da | s)$ is conditional probability of action given state $s$.  $V_{\pi}(s)$ evaluates the value of state $s$ under the policy $\pi$. After taking action, the environment returns reward $r_t$. With decay rate $0 < \gamma \leq 1$, we define the total reward as 
+where $P_{\pi}(da | s)$ is conditional probability of action given state $s$.  $V_{\pi}(s)$ evaluates the value of state $s$ under the policy $\pi$. Everytime taking action, the environment gives you reward $r_t$. With decay rate $0 < \gamma \leq 1$, we define the total reward as 
 $$R_t = \sum_{s=0}^\infty \gamma^s r_{t+s}$$
 Then, we obtain
 $$V_{\pi}(s_t) = E_{\pi}[R_t]$$
@@ -1072,7 +1072,7 @@ $$= E_{\pi}[r_t + \gamma R_{t+1}]$$
 $$= E_{\pi} [r_t + \gamma V_{\pi}(s_{t+1})]$$
 Since we use maximal operator $\pi$ in Q-learning, we have 
 $$Q(s_t, a_t) =  E[r_t + \gamma \underset{a}{max} Q_{\theta}(s_{t+1}, a)],$$
-where $a_t$ is action chosen by the behavior policy at $t$. This is equilvalent one of the Bellman equation, which is funcermental equation of DP.</p>
+where $a_t$ is action chosen by the behavior policy at $t$. This is one of the Bellman equations, which is fundamental equation of DP.</p>
 <p>To optimize function to satisfy above identity as much as possible, we use $\alpha-MC$. For each $(s_t, a_t)$, we have the following update:
 $$Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha E[r_t + \gamma \underset{a}{max} Q_{\theta}(s_{t+1}, a) - Q(s_t, a_t)].$$
 Note that when $\alpha = \frac{1}{n}$, this is equivalent to the normal MC method.
@@ -1080,7 +1080,7 @@ $$Q^n(s_t, a_t) = \frac{1}{n}[\sum_{i=1}^nR_t^i]$$
 $$= \frac{1}{n}[R_t^1 + (n - 1)\frac{1}{n - 1}\gamma \sum_{i=2}^nR_{t}^i]$$
 $$= \frac{1}{n}[R_t^1 + (n - 1)Q^{n-1}(s_t, a_t)]$$
 $$= Q^{n-1}(s_t, a_t) + \frac{1}{n}[R_t^1 - Q^{n-1}(s_t, a_t)]$$</p>
-<p>Q-learning frame work does not require you to wait for updating parameteres until getting truth value $R_t$. Thus, that is suited to online-learning.</p>
+<p>Q-learning frame work does not require you to wait for updating parameters until getting truth value $R_t$. Thus, Q-learning is suited for online-learning.</p>
 </div>
 </div>
 </div>
@@ -1098,9 +1098,9 @@ $$= Q^{n-1}(s_t, a_t) + \frac{1}{n}[R_t^1 - Q^{n-1}(s_t, a_t)]$$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In above discussion, we used $\alpha-MC$ for updating parameters. This method, however, is effective only with the lower dimensional input state. We have to consider different approaches for the case with hiegher or infinite dimesional input; e.g., real value input. As one of the approaches, we can use neural network for Q-function. This method is introduced as Deep Q-Network(DQN). Instead of $\alpha-MC$, we use gradient descent method to update; i.e., we minimize the folllowing loss function:
+<p>In vanilla Q-learning, we used $\alpha-MC$ for updating parameters. This method, however, is effective only with the lower dimensional input state. We have to consider different approaches for the case with high or infinite dimensional input; e.g., real value input. As one of the approaches, we can use neural network for Q-function. This method is introduced as Deep Q-Network(DQN). Instead of $\alpha-MC$, we use gradient descent method to update parameters; i.e., we minimize the following loss function:
 $$L_{\theta} = [r_t + \gamma \underset{a}{max} Q_{\theta}(s_{t+1}, a) - Q_{\theta}(s_{t}, a_t) ]^2.$$
-For detail, you can check <a href="http://www.nature.com/nature/journal/v518/n7540/full/nature14236.html">the original paper</a></p>
+For detail, you can check <a href="http://www.nature.com/nature/journal/v518/n7540/full/nature14236.html">the original paper</a>.</p>
 </div>
 </div>
 </div>
@@ -1118,7 +1118,7 @@ For detail, you can check <a href="http://www.nature.com/nature/journal/v518/n75
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In some situation, we have high or infinite dimesional action space, which makes it difficult for maximal operator to be used. Then, we introduce neural network, policy network, to learn optimal action instead of maximal operator. Let $A_{\tilde{\theta}}$ be a policy network. Then, we have the following method 
+<p>For some tasks like car driving and playing sports, we have high or infinite dimensional action space, which makes it difficult for maximal operator to be used. Then, we introduce neural network to determine action, policy network, instead of maximal operator. This network learns optimal action through parameter optimization like gradient descent. Let $A_{\tilde{\theta}}$ be a policy network. Then, we have the following loss function,
 $$L_{\theta, \tilde{\theta}} = [r_t + \gamma Q_{\theta}(s_{t+1}, A_{\tilde{\theta}}(s_{t+1})) - Q_{\theta}(s_{t}, a_t) ]^2.$$
 For detail, you can check <a href="https://arxiv.org/pdf/1509.02971.pdf">Deep Deterministic Policy Gradient(DDPG)</a>.</p>
 </div>
@@ -1129,6 +1129,7 @@ For detail, you can check <a href="https://arxiv.org/pdf/1509.02971.pdf">Deep De
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="2.-Reinforcement-Learninig-for-Stock-Trading">2. Reinforcement Learninig for Stock Trading<a class="anchor-link" href="#2.-Reinforcement-Learninig-for-Stock-Trading">¶</a></h1>
 </div>
 </div>
 </div>
@@ -1137,7 +1138,7 @@ For detail, you can check <a href="https://arxiv.org/pdf/1509.02971.pdf">Deep De
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Reinforcement-Learninig-for-Stock-Trading">Reinforcement Learninig for Stock Trading<a class="anchor-link" href="#Reinforcement-Learninig-for-Stock-Trading">¶</a></h1>
+<p>In the previous section, we introduce Q-learning and its extensions with neural network. We now move to considering application of Q-learning to stock trading.</p>
 </div>
 </div>
 </div>
@@ -1146,16 +1147,24 @@ For detail, you can check <a href="https://arxiv.org/pdf/1509.02971.pdf">Deep De
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In the previous section, we review over the history and recent development of Q-learning. We now move to considering application of Q-learning to stock trading.</p>
-<p>One of the most important goals of stock trading is making profit through selling out downtrend stocks and buying uptrend stocks. The profit is basically determined by components of the portfolio -- a group of stocks -- and the behavior of stock prices. For instance, if you buy 3 units of stock A and its price goes up 20 dollars higher, you get $3 \times 20$ dollars profit.</p>
-<p>With this in mind, the algorithm should be designed to construct a portfolio that maximize the porfits. Reward in the framework of reinforcement learining here corresponds to the profit made by the portfolio, i.e. the difference between current and past portfolio value. Thus, we can write down as
+<h2 id="Framework">Framework<a class="anchor-link" href="#Framework">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One of the most important goals of stock trading is making profit through selling downtrend stocks and buying uptrend stocks. The profit is basically determined by components of the portfolio -- a group of stocks -- and the behavior of stock prices. For instance, if you buy 3 units of stock A and its price goes up 20 dollars higher, you get $3 \times 20$ dollars profit.</p>
+<p>With this in mind, the algorithm should be designed to construct a portfolio that maximize the profit. Reward here corresponds to the profit made by the portfolio; i.e. the difference between current and past portfolio value. Thus, we can write down as
 $$r_t = Port(s_{t+1} | \theta_t) - Port(s_t | \theta_t),$$
-where $r_t$ and $s_t$ are reward and stock prices at $t$; $\theta_t$ is weight parameters of a portfolio at $t$ -- how many each stock to hold determined at $t$; $Port(\cdot | \theta_t)$ is a portfolio value function of stock pirces given weight parameters $\theta_t$. In this framework,  constructing an optimal portfolio is equilvalent to finding the best performance $\theta_t$, i.e., we guess $s_{t+1}$ and find  $\theta_t$ that maximize $r_t$ for each time $t$.</p>
-<p>Next, we consider the network architecture. Since there are infinite number of allowed values for weight parameters of a portfolio, we employ DDPG, which uses two network: Q-network and actor network. Let us assume that we contruct a portfolio consiting of $n$ stocks. Q-network takes $n$ portfolio weight parameters and $n$stock prices as input and then produce the value. We can write down as 
+where $r_t$ and $s_t$ are reward and stock prices at $t$; $\theta_t$ is weight parameters of a portfolio at $t$ -- how many each stock to hold determined at $t$; $Port(\cdot | \theta_t)$ is a portfolio value function of stock prices given weight parameters $\theta_t$. In this framework,  constructing an optimal portfolio is equivalent to finding $\theta_t$ to make the most profit, i.e., we guess $s_{t+1}$ and find $\theta_t$ that maximize $r_t$ for each time $t$.</p>
+<p>Next, we consider the network architecture. Since there are infinite number of allowed values for weight parameters of a portfolio, we employ DDPG, which uses two network: Q-network and actor network. Let us assume that we construct a portfolio consisting of $n$ stocks. Q-network takes $n$ portfolio weight parameters and $n$ stock prices as input and then produce the value. We can write down as 
 $$f_{Q}:\mathbb{R}^n \times\mathbb{R}^n \to \mathbb{R}.$$
-The output of actor network corresponds to the portfolio weight parameters. Weather reward is positive or negative is determined only by the relative ratio of weight parameters. Thus, scale does not have anything to do with if we have positive profit. Practically speaking, output unrestricted to finite range makes the performance unstable. scale free. Therefore, we use tanh activation function to restrict the portfolio weight parameters to $[-1, 1]$, i.e. we describe the actor network as
-$$f_{actor}:\mathbb{R}^n \to [-1, 1]^{n}. $$</p>
-<p>We shall specify the type of networks to use here. Professional traders often predict the behavior of stock prices based on <a href="http://www.investopedia.com/terms/t/technicalindicator.asp">techinical indicators</a>, which includes moving average, exponential moving average, MACD, etc. Especailly, some combinations of different time scale indicators like <a href="http://www.investopedia.com/terms/g/goldencross.asp">the golden cross</a> are consider to be effective. To introduce this intuition, we use <a href="https://arxiv.org/abs/1603.06995">multiscale CNN</a> for both the actor network and the cirtic network.</p>
+The output of the actor network corresponds to the portfolio weight parameters. Though weight parameters practically have to be integers, we take $\mathbb{R}^{n}$ as action space. Thus, we define as
+$$f_{actor}:\mathbb{R}^n \to \mathbb{R}^{n}. $$</p>
+<p>We shall specify the type of networks to use. Professional traders often predict the behavior of stock prices based on <a href="http://www.investopedia.com/terms/t/technicalindicator.asp">techinical indicators</a>, which includes moving average, exponential moving average, MACD, etc. Especially, some combinations of different time scale indicators like <a href="http://www.investopedia.com/terms/g/goldencross.asp">the golden cross</a> are consider to be effective. To introduce this intuition, we use <a href="https://arxiv.org/abs/1603.06995">multiscale CNN</a> for both of the Q-network and the actor network.</p>
 </div>
 </div>
 </div>
@@ -1164,6 +1173,7 @@ $$f_{actor}:\mathbb{R}^n \to [-1, 1]^{n}. $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Experimental-Results">Experimental Results<a class="anchor-link" href="#Experimental-Results">¶</a></h2>
 </div>
 </div>
 </div>
@@ -1172,6 +1182,7 @@ $$f_{actor}:\mathbb{R}^n \to [-1, 1]^{n}. $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>We here consider constructing a portfolio with the 10 biggest volume companies out of 500 stocks used for Standard and Poor's 500. The figure below shows chosen stocks and their volume.</p>
 <p><img alt="trade_result" src="http://jjakimoto.github.io/images/trade_result.jpg" /></p>
 </div>
 </div>
@@ -1181,7 +1192,28 @@ $$f_{actor}:\mathbb{R}^n \to [-1, 1]^{n}. $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, we compare the performance with randomly chosen portfolio. Randomly chosen portfolio follows the normal distribution $N(0, \bf{I_n})$, where $\bf{I_n}$ is n-dimensional identity matrix. </p>
 <p><img alt="10_biggest_volume_companies" src="http://jjakimoto.github.io/images/10_biggest_volume_companies.jpg" /></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="3.-Conclusion">3. Conclusion<a class="anchor-link" href="#3.-Conclusion">¶</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
 </div>
 </div>
 </div>
