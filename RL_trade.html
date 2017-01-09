@@ -1025,7 +1025,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Reinforcement learning has recently been succeeded to go over the human's ability in video games and Go. This implies possiblities to beat human's performance in other fields where human is doing well. Stock trading can be one of such fields. Some professional  In this article, we consider application of reinforcement learning to stock trading. Especially, we work on constructing a portoflio to make profit. Since portfolio can take inifinite number, we tackle this task based on Deep Deterministic Policy Gradient (DDPG). The behavior of stock prices is konwn to depend on history and several time scales, which leads us to use multiscale CNN for Q and actor network. We show that our algorithm has better performance than monkey trading.</p>
+<p>Reinforcement learning has recently been succeeded to go over the human's ability in video games and Go. This implies possiblities to beat human's performance in other fields where human is doing well. Stock trading can be one of such fields. Some professional  In this article, we consider application of reinforcement learning to stock trading. Especially, we work on constructing a portoflio to make profit. Since portfolio can take inifinite number, we tackle this task based on Deep Deterministic Policy Gradient (DDPG). The behavior of stock prices is konwn to depend on history and several time scales, which leads us to use multiscale CNN for Q and actor network. We show that our algorithm has better performance than monkey trading(taking actions at random).</p>
 </div>
 </div>
 </div>
@@ -1192,9 +1192,9 @@ $$f_{actor}:\mathbb{R}^n \to \mathbb{R}^{n}. $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We compare the performance with other algorithms: randomly chosen portfolio and CNN.</p>
-<p><img alt="trade_result" src="http://jjakimoto.github.io/images/trade_result.jpg" /></p>
-<p>In the above graph, we have three results: ‘Multi_CNN’, ‘CNN’, and ‘random’. ‘Multi_CNN’ corresponds to the result of the algorithm we develop in this article. For ‘CNN’, we use vanilla CNN instead of multi scale CNN for Q-network and actor network. Randomly chosen portfolio — ‘random’ in the graph — follows the normal distribution $N(0, 10 \cdot \bf{I_n})$, where $\bf{I_n}$ is n-dimensional identity matrix. Among three algorithms, multi scale CNN perfumes the best and random one just wanders around zero. This implies the effectiveness of multi scale CNN along with the fact that managing portfolio at random does not make any profit.</p>
+<p>We compare the performance with other algorithms: randomly chosen portfolio.</p>
+<p><img alt="trade_result" src="http://jjakimoto.github.io/images/mean_result.jpg" /></p>
+<p>In the above graph, we have two results: ‘Multi_CNN’ and ‘random’. S‘Multi_CNN’ corresponds to the result of the algorithm we develop in this article. Randomly chosen portfolio — ‘random’ in the graph — follows the normal distribution $N(0, 5 \cdot \bf{I_n})$, where $\bf{I_n}$ is n-dimensional identity matrix. Multi scale CNN perfumes better and random one just wanders around zero. This implies the effectiveness of multi scale CNN along with the fact that managing portfolio at random does not make any profit.</p>
 </div>
 </div>
 </div>
@@ -1212,7 +1212,7 @@ $$f_{actor}:\mathbb{R}^n \to \mathbb{R}^{n}. $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We have discussed how to apply reinforcement learning to stock trading and have developed framework with DDPG. To realize the intuition of professional traders, we multi use scale CNN, which results in better performance than CNN and random policy.</p>
+<p>We have discussed how to apply reinforcement learning to stock trading and have developed framework with DDPG. To realize the intuition of professional traders, we multi use scale CNN, which results in better performance than randomly chosen portfolio.</p>
 <p>Since we allow the algorithm to short sell and portfolio is expressed as real numbers, we have to introduce some conditions for applying to real stock trading.</p>
 </div>
 </div>
