@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Data Rounder</title><link href="http://jjakimoto.github.io/" rel="alternate"></link><link href="https://jjakimoto.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://jjakimoto.github.io/</id><updated>2017-01-07T12:00:00+09:00</updated><entry><title>Reinforcement Learning for Stock Trading</title><link href="http://jjakimoto.github.io/RL_trade.html" rel="alternate"></link><published>2017-01-07T12:00:00+09:00</published><updated>2017-01-07T12:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-01-07:RL_trade.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Data Rounder</title><link href="http://jjakimoto.github.io/" rel="alternate"></link><link href="http://jjakimoto.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://jjakimoto.github.io/</id><updated>2017-01-07T12:00:00+09:00</updated><entry><title>Reinforcement Learning for Stock Trading</title><link href="http://jjakimoto.github.io/posts/2017/Jan/07/RL_trade/" rel="alternate"></link><published>2017-01-07T12:00:00+09:00</published><updated>2017-01-07T12:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-01-07:posts/2017/Jan/07/RL_trade/</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -1134,7 +1134,7 @@ $$f_{actor}:\mathbb{R}^n \to \mathbb{R}^{n}. $$&lt;/p&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;We here consider constructing a portfolio with the 10 biggest volume companies out of 500 stocks used for Standard and Poor's 500. The figure below shows chosen stocks and their volume.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="10_biggest_volume_companies" src="http://jjakimoto.github.io/images/RL_trade/10_biggest_volume_companies.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="10_biggest_volume_companies" src="{filename}images/RL_trade/10_biggest_volume_companies.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1144,7 +1144,7 @@ $$f_{actor}:\mathbb{R}^n \to \mathbb{R}^{n}. $$&lt;/p&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;We compare the performance with other algorithms: randomly chosen portfolio.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="trade_result" src="http://jjakimoto.github.io/images/RL_trade/mean_result.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="trade_result" src="{filename}images/RL_trade/mean_result.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;In the above graph, we have two results: ‘Multi_CNN’ and ‘random’. Since performances fluctuate, we evalute algorithms with 10 sample mean. ‘Multi_CNN’ corresponds to the result of the algorithm we develop in this article. Randomly chosen portfolio — ‘random’ in the graph — follows the normal distribution $N(0, 5 \cdot \bf{I_n})$, where $\bf{I_n}$ is n-dimensional identity matrix. Multi scale CNN perfumes better and random one just wanders around zero. This implies the effectiveness of multi scale CNN along with the fact that managing portfolio at random does not make any profit.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1195,7 +1195,7 @@ $$f_{actor}:\mathbb{R}^n \to \mathbb{R}^{n}. $$&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="Machine Learning"></category><category term="Finance"></category></entry><entry><title>Duplication of S&amp;P500 with Stock Prices</title><link href="http://jjakimoto.github.io/sp500.html" rel="alternate"></link><published>2016-12-31T20:00:00+09:00</published><updated>2016-12-31T20:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2016-12-31:sp500.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="Machine Learning"></category><category term="Finance"></category></entry><entry><title>Duplication of S&amp;P500 with Stock Prices</title><link href="http://jjakimoto.github.io/posts/2016/Dec/31/sp500/" rel="alternate"></link><published>2016-12-31T20:00:00+09:00</published><updated>2016-12-31T20:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2016-12-31:posts/2016/Dec/31/sp500/</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -2330,7 +2330,7 @@ where $y$ and $\bf{x}$ are S&amp;P500; and stock prices; $\bf{w}$ and $\bf{x}$ a
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="vanilla_linear" src="http://jjakimoto.github.io/images/sp500/vanilla_linear.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="vanilla_linear" src="{filename}images/sp500/vanilla_linear.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2377,7 +2377,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="vanilla_error" src="http://jjakimoto.github.io/images/sp500/vanilla_error.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="vanilla_error" src="{filename}images/sp500/vanilla_error.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2413,7 +2413,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="compare1" src="http://jjakimoto.github.io/images/sp500/compare1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="compare1" src="{filename}images/sp500/compare1.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2422,7 +2422,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="compare_error1" src="http://jjakimoto.github.io/images/sp500/compare_error1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="compare_error1" src="{filename}images/sp500/compare_error1.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2476,7 +2476,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="ARD_weight" src="http://jjakimoto.github.io/images/sp500/ARD_weight.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ARD_weight" src="{filename}images/sp500/ARD_weight.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2494,7 +2494,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="ARD_linear" src="http://jjakimoto.github.io/images/sp500/ARD_linear.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ARD_linear" src="{filename}images/sp500/ARD_linear.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2503,7 +2503,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="ARD_linear_error" src="http://jjakimoto.github.io/images/sp500/ARD_linear_error.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ARD_linear_error" src="{filename}images/sp500/ARD_linear_error.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2540,7 +2540,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="50biggest_volume" src="http://jjakimoto.github.io/images/sp500/50biggest_volume.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="50biggest_volume" src="{filename}images/sp500/50biggest_volume.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2567,7 +2567,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="sublinear" src="http://jjakimoto.github.io/images/sp500/sublinear.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="sublinear" src="{filename}images/sp500/sublinear.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2576,7 +2576,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="sublinear_error" src="http://jjakimoto.github.io/images/sp500/sublinear_error.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="sublinear_error" src="{filename}images/sp500/sublinear_error.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2594,7 +2594,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="compare_error2" src="http://jjakimoto.github.io/images/sp500/compare_error2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="compare_error2" src="{filename}images/sp500/compare_error2.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2642,7 +2642,7 @@ In the original paper, more general statement has been shown. Most of functions 
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="neural1" src="http://jjakimoto.github.io/images/sp500/neural1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="neural1" src="{filename}images/sp500/neural1.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2663,7 +2663,7 @@ where $\bf{f}(\cdot)$ is the output of the neural network.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="neural2" src="http://jjakimoto.github.io/images/sp500/neural2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="neural2" src="{filename}images/sp500/neural2.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2672,7 +2672,7 @@ where $\bf{f}(\cdot)$ is the output of the neural network.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="neural_error" src="http://jjakimoto.github.io/images/sp500/neural_error.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="neural_error" src="{filename}images/sp500/neural_error.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
