@@ -1144,7 +1144,7 @@ $$f_{actor}:\mathbb{R}^n \to \mathbb{R}^{n}. $$&lt;/p&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;We compare the performance with other algorithms: randomly chosen portfolio.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="trade_result" src="{filename}images/RL_trade/mean_result.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="trade_result" src="http://jjakimoto.github.io/images/RL_trade/mean_result.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;In the above graph, we have two results: ‘Multi_CNN’ and ‘random’. Since performances fluctuate, we evalute algorithms with 10 sample mean. ‘Multi_CNN’ corresponds to the result of the algorithm we develop in this article. Randomly chosen portfolio — ‘random’ in the graph — follows the normal distribution $N(0, 5 \cdot \bf{I_n})$, where $\bf{I_n}$ is n-dimensional identity matrix. Multi scale CNN perfumes better and random one just wanders around zero. This implies the effectiveness of multi scale CNN along with the fact that managing portfolio at random does not make any profit.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
