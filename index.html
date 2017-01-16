@@ -1,183 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Data Rounder</title>
-	<meta name="description" content="Data Science and Programming">
-	<meta name="author" content="Tomoaki Fujii">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-	<!--[if lt IE 9]>
-		<script src="http://jjakimoto.github.io/theme/html5.js"></script>
-		<![endif]-->
-	<link href="http://jjakimoto.github.io/theme/css/ipython.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
-	<link href="http://jjakimoto.github.io/theme/css/local.css" rel="stylesheet">
-	<link href="http://jjakimoto.github.io/theme/css/pygments.css" rel="stylesheet">
-    
-</head>
-<body>
-<div class="container">
-	<div class="page-header">
-		<h1><a href="http://jjakimoto.github.io/">Data Rounder</a>
-			<br><small>Machine Learning and Programming</small></h1>	</div>
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-        
-        
-<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<a href="http://jjakimoto.github.io/movie.html">
-		<h2 itemprop="name headline">Movie Review with Vector Representations</h2>
-	</a>
-	<time datetime="2017-01-13T12:00:00+09:00" itemprop="datePublished">Fri, 13/01/2017</time>
-	&nbsp;—&nbsp;
-	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-		<span itemprop="name">Tomoaki Fujii</span>
-	</span>
-	<div class="summary">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>Blog - Data Rounder</title>
+    <meta charset="utf-8" />
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://jjakimoto.github.io/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://jjakimoto.github.io/theme/pastie.css" />
+    <link href="http://jjakimoto.github.io/" type="application/atom+xml" rel="alternate" title="Data Rounder Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+<h1>Blog</h1>
+
+<ul class="unstyled">
+        <li>
+            <div>
+                <div class="header">
+                    <h2>Movie Review with Vector Representations</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://jjakimoto.github.io/author/tomoaki-fujii/">Tomoaki Fujii</a> - </span><span>Fri, 13/01/2017</span> - <span class="tags"><a href="/tag/NLP/">NLP</a></span></small></p>
+                <div class="entry-content">
+                    
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Majority of data is expressed as text format such as news articles, SNS and speech. Each article has some meanings and opinions, which have significant effects on things around us like economics, politics, etc. Therefore, using these information for prediction systems is important. Most of prediction algorithms, however, take input in the form of tensor (1st-order tensor is vector), which requires us to represent text data in the tensor(vector) form. In this article, we review popular three vector representation: Bag or Words, Word2Vec, and Doc2Vec. Then, we compare these qualities through sentiment analysis for movie reviews of <a href="http://ai.stanford.edu/~amaas/data/sentiment">IMDb</a></div>
-	Category:
-	<span itemprop="articleSection">
-		<a href="http://jjakimoto.github.io/category/machine-learning.html" rel="category">Machine Learning</a>
-	</span>
-	Tags:
- 
-	<span itemprop="keywords">
-		<a href="http://jjakimoto.github.io/tag/nlp.html" rel="tag">NLP</a>
-	</span>
-</div>
-<hr>
-        
-<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<a href="http://jjakimoto.github.io/RL_trade.html">
-		<h2 itemprop="name headline">Reinforcement Learning for Stock Trading</h2>
-	</a>
-	<time datetime="2017-01-07T12:00:00+09:00" itemprop="datePublished">Sat, 07/01/2017</time>
-	&nbsp;—&nbsp;
-	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-		<span itemprop="name">Tomoaki Fujii</span>
-	</span>
-	<div class="summary">
+<p>Majority of data is expressed as text format such as news articles, SNS and speech. Each article has some meanings and opinions, which have significant effects on things around us like economics, politics, etc. Therefore, using these information for prediction systems is important. Most of prediction algorithms, however, take input in the form of tensor (1st-order tensor is vector), which requires us to represent text data in the tensor(vector) form. In this article, we review popular three vector representation: Bag or Words, Word2Vec, and Doc2Vec. Then, we compare these qualities through sentiment analysis for movie reviews of <a href="http://ai.stanford.edu/~amaas/data/sentiment">IMDb</a>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://jjakimoto.github.io/movie.html" rel="bookmark" title="Permalink to Movie Review with Vector Representations">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>Reinforcement Learning for Stock Trading</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://jjakimoto.github.io/author/tomoaki-fujii/">Tomoaki Fujii</a> - </span><span>Sat, 07/01/2017</span> - <span class="tags"><a href="/tag/Reinforcement Learning/">Reinforcement Learning</a></span></small></p>
+                <div class="entry-content">
+                    
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Reinforcement learning has recently been succeeded to go over the human's ability in video games and Go. This implies possiblities to beat human's performance in other fields where human is doing well. Stock trading can be one of such fields. Some professional  In this article, we consider application of reinforcement learning to stock trading. Especially, we work on constructing a portoflio to make profit. Since portfolio can take inifinite number, we tackle this task based on Deep Deterministic Policy Gradient (DDPG). The behavior of stock prices is konwn to depend on history and several time scales, which leads us to use multiscale CNN for Q and actor network. We show that our algorithm has better performance than monkey trading(taking actions at random).</p></div>
-	Category:
-	<span itemprop="articleSection">
-		<a href="http://jjakimoto.github.io/category/machine-learning.html" rel="category">Machine Learning</a>
-	</span>
-	Tags:
- 
-	<span itemprop="keywords">
-		<a href="http://jjakimoto.github.io/tag/reinforcement-learning.html" rel="tag">Reinforcement Learning</a>
-	</span>
-</div>
-<hr>
-        
-<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<a href="http://jjakimoto.github.io/sp500.html">
-		<h2 itemprop="name headline">Duplication of S&P500 with Stock Prices</h2>
-	</a>
-	<time datetime="2016-12-31T12:00:00+09:00" itemprop="datePublished">Sat, 31/12/2016</time>
-	&nbsp;—&nbsp;
-	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-		<span itemprop="name">Tomoaki Fujii</span>
-	</span>
-	<div class="summary">
+<p>Reinforcement learning has recently been succeeded to go over the human's ability in video games and Go. This implies possiblities to beat human's performance in other fields where human is doing well. Stock trading can be one of such fields. Some professional  In this article, we consider application of reinforcement learning to stock trading. Especially, we work on constructing a portoflio to make profit. Since portfolio can take inifinite number, we tackle this task based on Deep Deterministic Policy Gradient (DDPG). The behavior of stock prices is konwn to depend on history and several time scales, which leads us to use multiscale CNN for Q and actor network. We show that our algorithm has better performance than monkey trading(taking actions at random).</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://jjakimoto.github.io/RL_trade.html" rel="bookmark" title="Permalink to Reinforcement Learning for Stock Trading">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>Duplication of S&P500 with Stock Prices</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://jjakimoto.github.io/author/tomoaki-fujii/">Tomoaki Fujii</a> - </span><span>Sat, 31/12/2016</span> - <span class="tags"><a href="/tag/Regresion/">Regresion</a></span></small></p>
+                <div class="entry-content">
+                    
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Economic indicators are statistics to measure growth and contraction of economics. Trading based on such indicators, what is called technical trading, is one of the main trends in recent stock trading. Especially S&P500;(Standard and Poor's 500 Index) is frequently used as a bench mark to evaluate portfolio -- a grouping of financial assets like stocks. Roughly speaking, constructing a portfolio with better return and lower risk than S&P500; is one of the main goals for stock trading. Therefore, clarifying the relation between S&P500; and stock prices are important to construct a good portfolio.</p></div>
-	Category:
-	<span itemprop="articleSection">
-		<a href="http://jjakimoto.github.io/category/machine-learning.html" rel="category">Machine Learning</a>
-	</span>
-	Tags:
- 
-	<span itemprop="keywords">
-		<a href="http://jjakimoto.github.io/tag/regresion.html" rel="tag">Regresion</a>
-	</span>
+<p>Economic indicators are statistics to measure growth and contraction of economics. Trading based on such indicators, what is called technical trading, is one of the main trends in recent stock trading. Especially S&P500;(Standard and Poor's 500 Index) is frequently used as a bench mark to evaluate portfolio -- a grouping of financial assets like stocks. Roughly speaking, constructing a portfolio with better return and lower risk than S&P500; is one of the main goals for stock trading. Therefore, clarifying the relation between S&P500; and stock prices are important to construct a good portfolio.</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://jjakimoto.github.io/sp500.html" rel="bookmark" title="Permalink to Duplication of S&P500 with Stock Prices">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+</ul><!-- /#posts-list -->
+
+<div class="pagination pagination-centered">
+    <ul>
+        <li class="active"><a href="#">1</a></li>
+    </ul>
 </div>
-<hr>
- <div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+</div><!-- /#content -->
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li class="active"><a href="http://jjakimoto.github.io">Index</a></li>
+              <li ><a href="http://jjakimoto.github.io/tags/">Tags</a></li>
+              <li ><a href="http://jjakimoto.github.io/archives/">Archiv</a></li>
+              <li class="nav-header">Seiten</li>
+              <li><a href="http://jjakimoto.github.io/pages/about-me.html">About Me</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
 
-    <li class="active"><a href="http://jjakimoto.github.io/index.html">1</a></li>
+      <hr />
 
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
 
-</ul>
-</div> 		</div>
-	</div> 	<!-- <hr> -->
-</article> <!-- /container -->
-<footer class="aw-footer bg-danger">
-	<div class="container"> <!-- footer -->
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-				<div class="row">
-					<div class="col-md-3">
-						<h4>Navigation</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="http://jjakimoto.github.io">Data Rounder</a></li>
-							<li><a href="http://jjakimoto.github.io/pages/about-me.html"><i class="fa fa-About Me "></i> About Me</a></li>
-							<li><a href="http://jjakimoto.github.io/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3">
-						<h4>Social</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="https://github.com/jjakimoto">GitHub</a></li>
-							<li><a href="https://www.linkedin.com/in/tomoaki-fujii-5bba56133">LinkedIn</a></li>
-							<li><a href="https://www.facebook.com/tomoaki.fujii.73">FaceBook</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3">
-						<h4>Categories</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="http://jjakimoto.github.io/category/machine-learning.html">Machine Learning (3)</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 text-center center-block aw-bottom">
-			<p>&copy; Tomoaki Fujii 2016</p>
-			<p>Powered by Pelican</p>
-		</div>
-	</div>
-</div>
-<!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-jQuery(document).ready(function($) {
-	$("div.collapseheader").click(function () {
-		$header = $(this).children("span").first();
-		$codearea = $(this).children(".input_area");
-		$codearea.slideToggle(500, function () {
-			$header.text(function () {
-				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
-			});
-		});
-	});
-});
-</script>
-<a href="https://github.com/jjakimoto"><img style="position: absolute; top: 40px; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub" /></a>
-</body>
+
+  </body>
 </html>
