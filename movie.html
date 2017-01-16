@@ -1,41 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-          <title>Data Rounder</title>
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <link rel="shortcut icon" href="" />
+
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Tomoaki Fujii" />
+        <title>Movie Review with Vector Representations</title>
+        
+<meta name="description" content="
+&lt;div class=&#34;cell border-box-sizing text_cell rendered&#34;&gt;
+&lt;div class=&#34;prompt input_prompt&#34;&gt;
+&lt;/div&gt;
+&lt;div class=&#34;inner_cell&#34;&gt;
+&lt;div class=&#34;text_cell_render border-box-sizing rendered_html&#34;&gt;
+&lt;p&gt;Majority of data is expressed as text format such as news articles, SNS and speech. Each article has some meanings and opinions, which have significant effects on things around us like economics, politics, etc. Therefore, using these information for prediction systems is important. Most of prediction algorithms, however, take input in the form of tensor (1st-order tensor is vector), which requires us to represent text data in the tensor(vector) form. In this article, we review popular three vector representation: Bag or Words, Word2Vec, and Doc2Vec. Then, we compare these qualities through sentiment analysis for movie reviews of &lt;a href=&#34;http://ai.stanford.edu/~amaas/data/sentiment&#34;&gt;IMDb&lt;/a&gt;" />
+<meta name="keywords" content=" NLP  "/>
+
+        <!--[if !IE 7]>
+        <style type="text/css">
+            #main-content {display:table;height:100%}
+        </style>
+        <![endif]-->
+        <link rel="stylesheet" href="http://jjakimoto.github.io/theme/css/backdrop.css" />
+        <link rel="stylesheet" href="http://jjakimoto.github.io/theme/css/pygments.css" />
+        <script src="http://jjakimoto.github.io/theme/js/modernizr.js"></script>
+
         <link href="http://jjakimoto.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Data Rounder Full Atom Feed" />
         <link href="http://jjakimoto.github.io/feeds/machine-learning.atom.xml" type="application/atom+xml" rel="alternate" title="Data Rounder Categories Atom Feed" />
 
+    </head>
+      
 
+    <body>
+        <div class="master-row">
 
-    <meta name="tags" content="NLP" />
+            <div class="content-pane main-content">
+                <nav class="top-bar" data-topbar role="navigation">
+                    <ul class="title-area">
+                        <li class="name"><!-- Leave this empty --></li>
+                        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+                    </ul>
+                    <section class="top-bar-section">
+                        <ul class="left">
+                            <li><a href="http://jjakimoto.github.io/pages/about-me.html">About Me</a></li>
+                        </ul>
+                        <ul class="right">
+                            <li class="active"><a href="http://jjakimoto.github.io/category/machine-learning.html">Machine Learning</a></li>
+                        </ul>
+                    </section>
+                </nav>
 
-</head>
-
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="http://jjakimoto.github.io/">Data Rounder <strong></strong></a></h1>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="http://jjakimoto.github.io/pages/about-me.html">About Me</a></li>
-        </ul></nav><!-- /#menu -->
-<section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="http://jjakimoto.github.io/movie.html" rel="bookmark"
-         title="Permalink to Movie Review with Vector Representations">Movie Review with Vector Representations</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <abbr class="published" title="2017-01-13T12:00:00+09:00">
-      Fri, 13/01/2017
-    </abbr>
-    <address class="vcard author">
-      By           <a class="url fn" href="http://jjakimoto.github.io/author/tomoaki-fujii.html">Tomoaki Fujii</a>
-    </address>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
-    <style type="text/css">/*!
+                <div class="row title-bar">
+                    <div class="small-12 columns">
+                        <h1><a href="http://jjakimoto.github.io">Data Rounder</a></h1><h2> <small></small></h2>
+                        <hr>
+                    </div>
+                </div>
+            
+                <div id="contents">
+<div class="row">
+    <div class="small-12 columns article">
+        <h2>Movie Review with Vector Representations</h2>
+        <div class="row info-bar" style="margin-left:0rem;margin-bottom:6px;">
+    <div class="small-12 columns">
+        <ul class="inline-list">
+            <li><span><i class="fa fa-calendar"></i>&nbsp; Fri, 13/01/2017</span></li>
+            <li><span><i class="fa fa-folder-open"></i>&nbsp; <a href="http://jjakimoto.github.io/category/machine-learning.html">Machine Learning</a></span></li>
+            <li>
+                <span>
+                    <i class="fa fa-tags"></i>&nbsp;
+                    <a href="http://jjakimoto.github.io/tag/nlp.html"><span class="label">NLP</span></a>
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+        <section class="article">
+            <style type="text/css">/*!
 *
 * IPython notebook
 *
@@ -1397,14 +1439,123 @@ We can say that these algorithms are succeeded to find an effective representati
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 </script>
+    
+        </section>
+    </div>
+</div>
+                </div>
 
-  </div><!-- /.entry-content -->
-</section>
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
-</body>
+                <footer class="show-for-large-up">
+<div class="row">
+    <div class="small-6 medium-3 columns">
+        <ul class="left-nav">
+            <li><a href="http://jjakimoto.github.io">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
+            <li><a href="http://jjakimoto.github.io/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
+        </ul>
+    </div>
+    <div class="small-6 medium-3 medium-push-6 columns">
+        <ul class="right-nav">
+            <li><a href="http://jjakimoto.github.io/feeds/all.atom.xml"><i class="fa fa-rss fa-fw"></i>&nbsp; Feed</a></li>
+            <li><a href="http://jjakimoto.github.io/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-6 medium-pull-3 columns text-center">
+        <p class="tag-cloud">
+            <a href="http://jjakimoto.github.io/tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
+            &nbsp;&hellip;
+        </p>
+    </div>
+    <div class="small-12 columns sub-footer">
+        <hr>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-left">
+                &copy;  Tomoaki Fujii 
+                <!-- <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
+            </p>
+        </div>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-right">
+                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+            </p>
+        </div>
+    </div>
+</div>                </footer>
+            </div>
+            
+            <div class="image-pane main-content" style="background: url(''); background-size:cover; background-position: right;">
+                <div class="row">
+                    <div class="small-12 medium-4 large-12 columns">
+                        <h5 class='text-center'>About</h5>
+                        <div class="about-me">
+                            <div class="small-12 columns text-justify">
+                                
+                            </div>
+                            <div class="small-12 columns">
+                                <ul class="inline-center social-list">
+                                    <li><a href="https://github.com/jjakimoto"><i class="fa fa-github"></i>&nbsp; GitHub</a></li>
+                                    <li><a href="https://www.linkedin.com/in/tomoaki-fujii-5bba56133"><i class="fa fa-linkedin"></i>&nbsp; LinkedIn</a></li>
+                                    <li><a href="https://www.facebook.com/tomoaki.fujii.73"><i class="fa fa-facebook"></i>&nbsp; FaceBook</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="small-12 medium-4  large-12 columns link-list">
+                    </div>
+
+<!--
+                    <div class="small-12 medium-3 large-12 columns">
+                    </div>
+-->
+               </div>
+            </div>
+        </div>
+        
+        
+        <div class="row">
+            <footer class="hide-for-large-up">
+<div class="row">
+    <div class="small-6 medium-3 columns">
+        <ul class="left-nav">
+            <li><a href="http://jjakimoto.github.io">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
+            <li><a href="http://jjakimoto.github.io/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
+        </ul>
+    </div>
+    <div class="small-6 medium-3 medium-push-6 columns">
+        <ul class="right-nav">
+            <li><a href="http://jjakimoto.github.io/feeds/all.atom.xml"><i class="fa fa-rss fa-fw"></i>&nbsp; Feed</a></li>
+            <li><a href="http://jjakimoto.github.io/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-6 medium-pull-3 columns text-center">
+        <p class="tag-cloud">
+            <a href="http://jjakimoto.github.io/tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
+            &nbsp;&hellip;
+        </p>
+    </div>
+    <div class="small-12 columns sub-footer">
+        <hr>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-left">
+                &copy;  Tomoaki Fujii 
+                <!-- <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
+            </p>
+        </div>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-right">
+                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+            </p>
+        </div>
+    </div>
+</div>            </footer>
+        </div>
+        
+        
+        <script src="http://jjakimoto.github.io/theme/js/jquery.min.js"></script>
+        <script src="http://jjakimoto.github.io/theme/js/foundation.min.js"></script>
+        <script src="http://jjakimoto.github.io/theme/js/app.js"></script>
+    </body>
+  
 </html>
