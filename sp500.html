@@ -52,7 +52,41 @@ ul.topnav li a:hover {background-color: #555;}
 
 /* Hide the list item that contains the link that should open and close the topnav on small screens */
 ul.topnav li.icon {display: none;}
-    </style>
+        
+     
+/* sidebar configuration */   
+div.sidebar{
+float:right;
+background-color: transparent;
+width: 300px;
+}
+
+div.sidebar ul.large{
+list-style-type: none;
+margin:0;
+padding: 0;
+background-color: transparent;
+}
+
+div.sidebar ul.large li{
+margin-bottom: 20px;
+background-color: lightgrey;
+}
+
+div.sidebar h2 {
+background-color: black;
+color: white;
+margin: 0;
+padding: 10px;
+}
+
+div.sidebar p{
+margin:0;
+padding: 10px;
+}
+
+        
+</style>
 </head>
 <body>
     
@@ -1657,6 +1691,28 @@ where $\bf{f}(\cdot)$ is the output of the neural network.</p>
 		</div>
 	</div> 	<!-- <hr> -->
 </div> <!-- /container -->
+    
+<!-- Sidebar -->
+<div class="sidebar">
+    <ul class="large">
+        <li>
+            <h2>Social</h2>
+            <ul class="small">
+                <li><a href="https://github.com/jjakimoto">GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/tomoaki-fujii-5bba56133">LinkedIn</a></li>
+                <li><a href="https://www.facebook.com/tomoaki.fujii.73">FaceBook</a></li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="large">
+        <li>
+            <h2>Categories</h2>
+            <ul class="small">
+                <li><a href="http://jjakimoto.github.io/category/machine-learning.html">Machine Learning (3)</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
     
     
 <footer class="aw-footer bg-danger">
