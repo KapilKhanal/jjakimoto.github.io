@@ -73,8 +73,7 @@ ul.topnav li a:hover {background-color: #555;}
 ul.topnav li.icon {display: none;}
         
      
-    <style>
-        /* sidebar configuration */      
+ /* sidebar configuration */      
 div.sidebar{
 float:left;
 background-color: transparent;
@@ -132,4 +131,3 @@ padding: 0;
 text-align:left;
 font-size: 150%;
 }    
-    </style>
