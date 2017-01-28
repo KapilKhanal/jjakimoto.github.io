@@ -1,161 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Tags — Data Rounder</title>
-	<meta name="description" content="The Tags page lists all tags used to classify the posts. Each post has at least one tag helping readers find out easily what they are looking for.">
-	<meta name="author" content="Tomoaki Fujii">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-	<!--[if lt IE 9]>
-		<script src="http://jjakimoto.github.io/theme/html5.js"></script>
-		<![endif]-->
-	<link href="http://jjakimoto.github.io/theme/css/ipython.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
-	<link href="http://jjakimoto.github.io/theme/css/local.css" rel="stylesheet">
-	<link href="http://jjakimoto.github.io/theme/css/pygments.css" rel="stylesheet">
-   <link href="http://jjakimoto.github.io/theme/css/custom.css" rel="stylesheet">
-    <style>
-     ul.topnav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-    float: top;
-}
-
-/* Float the list items side by side */
-ul.topnav li {float: left;}
-
-/* Style the links inside the list items */
-ul.topnav li a {
-    display: inline-block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    transition: 0.3s;
-    font-size: 17px;
-    float: top;
-}
-
-/* Change background color of links on hover */
-ul.topnav li a:hover {background-color: #555;}
-
-/* Hide the list item that contains the link that should open and close the topnav on small screens */
-ul.topnav li.icon {display: none;}
-        
-     
-/* sidebar configuration */      
-div.sidebar{
-float:left;
-background-color: transparent;
-margin-left: 10px;
-width: 20%;
-}
-
-div.sidebar img{
-    width:auto;
-    height:auto;
-    max-width:100%;
-    max-height:100%;
-}
-
-div.sidebar ul.large{
-list-style-type: none;
-margin:0;
-padding: 0;
-background-color: transparent;
-}
-
-div.sidebar ul.large li{
-margin-bottom: 20px;
-background-color: lightgrey;
-}
-
-div.sidebar ul.small li{
-margin-left: 0;
-margin-top: 10px;
-margin-bottom: 10px;
-}
-
-div.sidebar h1 {
-background-color: black;
-color: white;
-margin: 0;
-padding: 10px;
-text-align:center;
-font-size: 200%;
-}     
-        
-div.sidebar p {
-margin: 0;
-padding: 10px;
-text-align:center;
-font-size: 100%;
-color: black;
-} 
-        
-ul.small p {
-margin-top: 10px;
-margin-bottom: 10px;
-margin-left: 0;
-padding: 0;
-text-align:left;
-font-size: 150%;
-}    
-        
-</style>
-<style type="text/css" media="screen">
-ul.tagcloud {
-	list-style: none;
-	padding: 0;
-	padding-top: 7em;
-	padding-bottom: 7em;
-	width: 50%;
-	margin-left: 25%;
-}
-
-ul.tagcloud li {
-	display: inline-block;
-}
-
-li.tag-1 {
-	font-size: 150%;
-}
-
-li.tag-2 {
-	font-size: 120%;
-}
-
-li.tag-3 {
-	font-size: 100%;
-}
-
-li.tag-4 {
-	font-size: 80%;
-}
-</style>
+    <meta charset="utf-8" />
+    <title>Data Rounder - Tags</title>
+    <link href="http://jjakimoto.github.io/theme/css/style.css" rel="stylesheet">
+    
+    
 </head>
-<body>
-    
-<ul class="topnav">
-  <li><a href="http://jjakimoto.github.io/">Data Rounder</a></li>
-  <li><a href="http://jjakimoto.github.io/pages/about">About</a></li>
-  <li><a href="http://jjakimoto.github.io/pages/books">Books I Have Read</a></li>
-</ul>
-<br>
-<br>
-<br>   
 
-    
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://jjakimoto.github.io/">Data Rounder <strong>Machine Learning and Programming</strong></a></h1>
+            
 <!-- Sidebar -->
 <div class="sidebar">
     <ul class="large">
@@ -180,77 +36,20 @@ li.tag-4 {
         </li>
     </ul>
 </div>
-       
-<div class="container">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-<h1>Tags</h1>
-<div class="text-center">
-<ul class="tagcloud">
-</ul>
-</div>
-		</div>
-	</div> 	<!-- <hr> -->
-</div> <!-- /container -->
-    
-    
-<footer class="aw-footer bg-danger">
-	<div class="container"> <!-- footer -->
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-				<div class="row">
-					<div class="col-md-3">
-						<h4>Navigation</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="http://jjakimoto.github.io">Data Rounder</a></li>
-							<li><a href="http://jjakimoto.github.io/pages/about/"><i class="fa fa-About "></i> About</a></li>
-							<li><a href="http://jjakimoto.github.io/pages/books/"><i class="fa fa-Books I Have Read "></i> Books I Have Read</a></li>
-							<li><a href="http://jjakimoto.github.io/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3">
-						<h4>Social</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="https://github.com/jjakimoto">GitHub</a></li>
-							<li><a href="https://www.linkedin.com/in/tomoaki-fujii-5bba56133">LinkedIn</a></li>
-							<li><a href="https://www.facebook.com/tomoaki.fujii.73">FaceBook</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3">
-						<h4>Categories</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="http://jjakimoto.github.io/category/machine-learning.html">Machine Learning (4)</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>
-    
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 text-center center-block aw-bottom">
-			<p>&copy; Tomoaki Fujii 2016</p>
-			<p>Powered by Pelican</p>
-		</div>
-	</div>
-</div>
-<!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-jQuery(document).ready(function($) {
-	$("div.collapseheader").click(function () {
-		$header = $(this).children("span").first();
-		$codearea = $(this).children(".input_area");
-		$codearea.slideToggle(500, function () {
-			$header.text(function () {
-				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
-			});
-		});
-	});
-});
-</script>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+            <li><a href="http://jjakimoto.github.io/pages/about/">About</a></li>
+            <li><a href="http://jjakimoto.github.io/pages/books/">Books I Have Read</a></li>
+        </ul></nav><!-- /#menu -->
+    <h1>Tags for Data Rounder</h1>        <li><a href="http://jjakimoto.github.io/tag/classification.html">Classification</a> (1)</li>
+        <li><a href="http://jjakimoto.github.io/tag/nlp.html">NLP</a> (1)</li>
+        <li><a href="http://jjakimoto.github.io/tag/regresion.html">Regresion</a> (1)</li>
+        <li><a href="http://jjakimoto.github.io/tag/reinforcement-learning.html">Reinforcement Learning</a> (1)</li>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
 </body>
 </html>
