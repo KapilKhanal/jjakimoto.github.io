@@ -976,15 +976,6 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h1 id="Feature-Selection-and-Random-Forests"&gt;Feature Selection and Random Forests&lt;a class="anchor-link" href="#Feature-Selection-and-Random-Forests"&gt;¶&lt;/a&gt;&lt;/h1&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;In prediction tasks, given data does not necessary consist of only useful information. The data may contain irrelevant features, which impairs the performance of a predictor due to overfitting. This situation is often the case for medical data. Sometimes, only a few hundreds of samples are available while we have thousands of features. In this case, we have to extract a small subset of effective features to reduce computational costs and overfitting. Random forest is one of the popular predictors due to the robustness. As one of the useful byproducts, random forests are able to estimate how much each feature has an effect on a performance of the forests. Thus, random forests give us one of possible approaches to reduce the number features to use. In this article, we work on a binary classification task of &lt;a href="https://archive.ics.uci.edu/ml/datasets/Dorothea"&gt;“Dorothea Data Set” from UCL Machine Learning Repository&lt;/a&gt;. We show that features selected by random forests are efficient not only for random forests  themselves but also for logistic regression.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
