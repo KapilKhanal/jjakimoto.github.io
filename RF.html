@@ -3,8 +3,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Duplication of S&P500 with Stock Prices — Data Rounder</title>
-	<meta name="description" content="Title: Duplication of S&P500 with Stock Prices; Date: 2016-12-31; Author: Tomoaki Fujii">
+	<title>Feature Selection and Random Forests — Data Rounder</title>
+	<meta name="description" content="Title: Feature Selection and Random Forests; Date: 2017-01-28; Author: Tomoaki Fujii">
 	<meta name="author" content="Tomoaki Fujii">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -157,11 +157,11 @@ font-size: 150%;
 		<div class="col-md-8 col-md-offset-2">
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<div class="text-center article-header">
-		<h1 itemprop="name headline" class="article-title">Duplication of S&P500 with Stock Prices</h1>
+		<h1 itemprop="name headline" class="article-title">Feature Selection and Random Forests</h1>
 		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
 			<h4 itemprop="name">Tomoaki Fujii</h4>
 		</span>
-		<time datetime="2016-12-31T12:00:00+09:00" itemprop="datePublished">Sat, 31/12/2016</time>
+		<time datetime="2017-01-28T12:00:00+09:00" itemprop="datePublished">Sat, 28/01/2017</time>
 	</div>
 	<div>
 		Category:
@@ -173,7 +173,7 @@ font-size: 150%;
 	<div>
 		Tags:
 		<span itemprop="keywords">
-			<a href="http://jjakimoto.github.io/tag/regresion.html" rel="tag">Regresion</a>
+			<a href="http://jjakimoto.github.io/tag/classification.html" rel="tag">Classification</a>
 		</span>
 	</div>
 	<div itemprop="articleBody" class="article-body"><style type="text/css">/*!
@@ -1153,7 +1153,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Economic indicators are statistics to measure growth and contraction of economics. Trading based on such indicators, what is called technical trading, is one of the main trends in recent stock trading. Especially S&P500;(Standard and Poor's 500 Index) is frequently used as a bench mark to evaluate portfolio -- a grouping of financial assets like stocks. Roughly speaking, constructing a portfolio with better return and lower risk than S&P500; is one of the main goals for stock trading. Therefore, clarifying the relation between S&P500; and stock prices are important to construct a good portfolio.</p>
+<h1 id="Feature-Selection-and-Random-Forests">Feature Selection and Random Forests<a class="anchor-link" href="#Feature-Selection-and-Random-Forests">¶</a></h1>
 </div>
 </div>
 </div>
@@ -1162,7 +1162,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this article, we work on duplication of S&P500; with stock price data. At first part, we use various linear models like linear regression, factor analysis, etc. In the latter part, we also consider an extension with neural network. We show that the neural network as an extension of linear regression works better than a simple neural network.</p>
+<p>In prediction tasks, given data does not necessary consist of only useful information. The data may contain irrelevant features, which impairs the performance of a predictor due to overfitting. This situation is often the case for medical data. Sometimes, only a few hundreds of samples are available while we have thousands of features. In this case, we have to extract a small subset of effective features to reduce computational costs and overfitting. Random forest is one of the popular predictors due to the robustness. As one of the useful byproducts, random forests are able to estimate how much each feature has an effect on a performance of the forests. Thus, random forests give us one of possible approaches to reduce the number features to use. In this article, we work on a binary classification task of <a href="https://archive.ics.uci.edu/ml/datasets/Dorothea">“Dorothea Data Set” from UCL Machine Learning Repository</a>. We show that features selected by random forests are efficient not only for random forests  themselves but also for logistic regression.</p>
 </div>
 </div>
 </div>
@@ -1171,7 +1171,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Analysis-Environment">Analysis Environment<a class="anchor-link" href="#Analysis-Environment">¶</a></h1>
+<h1 id="1.-Background">1. Background<a class="anchor-link" href="#1.-Background">¶</a></h1>
 </div>
 </div>
 </div>
@@ -1180,89 +1180,214 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We basically work with 'sklearn' and also use 'keras' and 'tensorflow' for implementation of neural networks. For fetching data, we will use a local library <a href="https://github.com/jjakimoto/Indicator_Analysis/blob/master/utils.py">utils.py</a>.</p>
+<p>Random forests has been introduced by Breiman in <a href="https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf">the paper</a> in 2001. He proposed collecting many classification and regression trees(CART) and used them to establish better predictors. The key concept of random forests is bagging introduced by Breiman in <a href="rhttp://statistics.berkeley.edu/sites/default/files/tech-reports/421.pdf">the paper</a> in 1994. The name comes from the combination of acronym of two words: bootstrap and aggregating. Bagging has been succeeded to improve unstable predictors like neural network and CART. By applying bagging to CART, we obtain the better accuracy tree, random forests. As one of the useful byproducts, we can use random forests to measure importance of each input feature.  We explain these concepts in the following order: bootstrap, bagging, and random forests.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="1.1.-Bootstrap">1.1. Bootstrap<a class="anchor-link" href="#1.1.-Bootstrap">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Bootstrap is a general methodology to measure the accuracy of estimations based on resampling, which has been introduced by Efron and Tibshirani in <a href="https://projecteuclid.org/download/pdf_1/euclid.ss/1177013815">the paper</a>. Since the variance of an estimation is frequently used to measure the accuracy of estimation, bootstrap is practically used to guess the variance of the estimation. Especially, bootstrap gives us a computational approach to analytically intractable cases.</p>
+<p>Let's say we have $n$ samples from distribution $F$ and estimate its mean with the unbiased estimator,
+$$ \bar{x} = \sum_{i=1}^n x_i / n.$$
+Let us denote by $\mu_2 (F) = E_F X^2 - (E_F X)^2$  the variance of distribution $F$. We analytically calculate the standard deviation $\sigma(F; N, \bar{x})$ as
+$$\sigma (F) = [\mu_2 (F) / n]^{1/2},$$
+where $\sigma(F) \equiv \sigma(F; n, \bar{x})$. Since $\mu_2 (F) $ is unknown function, we use unbiased estimator  $\bar{\mu}_2 = \sum_{i=1}^n (x_i - \bar{x})^2 / (n - 1)$ instead; i.e., we have
+$$\bar{\sigma} = [\bar{\mu}_2 / n]^{1/2}.$$</p>
+<p>There is another way. Let $\hat{F}$ be the empirical distribution; i.e., $\hat{F}$ assigns the probability mass $1/n$ to each data point $x_i$. Then, we obtain
+$$\bar{\sigma} \equiv \sigma(\hat{F}) = [\mu_2(\hat{F}) / n]^{1/2},$$
+where $\mu_2(\hat{F}) = \sum_{i=1}^n (x_i - \bar{x})^2 / n$. This approach is more flexible. In the above mean estimation example, we have to know the analytical expression of unbiased estimation of the variance, which is not often the case for more complex estimations.</p>
+<p>To apply the second method to even more complex cases, we introduce the new sampling concept called bootstrap sampling. Let us assume that we estimate $\theta$, which corresponds to $E_F X$ in the previous example. To formalize into the second method, we need to calculate
+$$E_{\hat{F}} (\hat{{\theta}}(\bf{x}) - E_{\hat{F}} \hat{{\theta}}(\bf{x}))^2,$$
+where $\hat{F}$ is the empirical distribution of n data points $\bf{x} = (x_1, x_2, \dots, x_n)$. Since computing all of the case $\hat{{\theta}}(\bf{x})$ is too expensive, we resort to Monte Carlo method; i.e., we take sample mean with B sets of data $\{\bf{x}^b\}_{b=1}^B = \{x_1^b, x_2^b, \dots, x_n^b\}_{b=1}^B$ sampled from empirical distribution $\hat{F}$. Note that all of sets must have exactly n data because the expression of estimation depends on n. This sampling method is called bootstrap sampling. Taking sample mean instead of expectation leads to
+$$\theta^*(\cdot) = \frac{\sum_{b=1}^B \hat{\theta }(b)}{B}$$
+$$\sigma_B = \left(\frac{\sum_{b=1}^B (\hat{\theta}(b) - \theta^*(\cdot) }{B - 1}\right)^{1/2}.$$
+$\sigma_B$ can be used to measure the accuracy of the estimation.</p>
+<p>For more precise discussion over the accuracy of this method itself, you can check <a href="https://projecteuclid.org/download/pdf_1/euclid.ss/1177013815">the original paper</a>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="1.2.-Bagging">1.2. Bagging<a class="anchor-link" href="#1.2.-Bagging">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Bagging has been introduced by Breiman in <a href="rhttp://statistics.berkeley.edu/sites/default/files/tech-reports/421.pdf">the paper</a>. He used bootstrap sampling to improve the accuracy of unstable predictors. The concept is quite simple. Consider a predictor trained by training set $\mathcal{L}$. For each input $x$, prediction can be expressed as $\varphi(x, \mathcal{L})$. For regression case, we can define the aggregated predictor as 
+$$\varphi_A(x) = E_{\mathcal{L}} \varphi(x, \mathcal{L}).$$</p>
+<p>For the classification case, the class voted by the most predictors would be the prediction value. That is, each $\varphi(x, \mathcal{L})$ has C dimensional output $\varphi(x, \mathcal{L}) = (\varphi^1(x, \mathcal{L}), \varphi^2(x, \mathcal{L}), \dots, \varphi^C(x, \mathcal{L}))$ and each component corresponds to each class confidence. Then, the aggregated predictor is defined as 
+$$\varphi_A(x) = \underset{1 \leq c \leq C}{max} E_{\mathcal{L}} \varphi^c(x, \mathcal{L}).$$</p>
+<p>This aggregation procedure especially increase the accuracy of unstable predictors. Consider the regression case. We have the generalized prediction error in $\varphi (x, \mathcal{L})$ and $\varphi_A(x)$:
+$$e = E_{\mathcal{L}} E_{y, x} (y - \varphi(x, \mathcal{L}))^2,$$
+$$e_A = E_{y, x} (y - \varphi_A(x))^2.$$
+Then, we obtain
+$$e = E_{\mathcal{L}} E_{y, x} y^2 - 2 E_{y, x}y \varphi_A(x) +  E_{\mathcal{L}} E_{y, x} \varphi(x, \mathcal{L})^2\\
+\geq E_{y, x} (y - \varphi_A(x))^2\\
+= e_A,$$
+where we use Jensen inequality, $E_{\mathcal{L}}\varphi(x, \mathcal{L})^2 \geq (E_{\mathcal{L}}\varphi(x, \mathcal{L}))^2$. Hence, aggregated predictor has better performance if and only if $E_{\mathcal{L}}\varphi(x, \mathcal{L})^2$ is strictly greater than $(E_{\mathcal{L}}\varphi(x, \mathcal{L}))^2$, which implies that unstable predictors — large variance predictors — will be improved by the aggregation.</p>
+<p>In the practical situation, the calculation of $E_{\mathcal{L}} \varphi(x, \mathcal{L})$ is often intractable. Then, we often use 
+$$\varphi_B(x) = \hat{E}_{\mathcal{L}} \varphi(x, \mathcal{L}),$$
+where $\hat{E}(\cdot)$ is empirical expectation calculated through bootstrap sampling. Bootstrap sampling gives us some numerical errors between $\varphi_B(x)$ and $\varphi_A(x)$. Therefore, there is cross-over point between instability and stability at which $\varphi_B(x)$ stop improving and does worse. Indeed, there is the example that stability predictor does worse through bagging in <a href="rhttp://statistics.berkeley.edu/sites/default/files/tech-reports/421.pdf">the paper</a>.</p>
+<p>In classification, a predictor predicts a class label $c \in \{1, 2, \dots, C\}$. The probability of correct classification can be calculated as 
+$$r(\mathcal{L}) = \sum_{c} P(\varphi(x, \mathcal{L}) = c | y = c) P(y = c).$$
+We define $Q(c | x) \equiv P_{\mathcal{L}}(\varphi(x, \mathcal{L}) = c)$, where$P_{\mathcal{L}}$ is probability measure of samples $\mathcal{L}$. By taking marginalization over $P_\mathcal{L}$, we have
+$$r = \sum_{c}E[Q(c | x) | y=c] P(y = c)\\
+= \sum_{c} \int Q(c | x) P(y=c|x) P_x(dx).$$</p>
+<p>Since the aggregated predictor is equivalent to $\varphi_A(x) = \underset{c}{argmax} Q(c | x)$, we can write down the probability of correct classification of the aggregated predictor as
+$$r_A = \sum_{c} \int I(\underset{j}{argmax} Q(j | x) = c) P(y=c|x) P_x(dx),$$
+where $I(\cdot)$ is the indicator function. Consider a set $D$,
+$$D = \{x; \underset{c}{argmax} Q(c | x) = \underset{c}{argmax} P(c | x) \}.$$
+We can express $r_A$ as 
+$$r_A = \int_D \underset{c}{max}P(y=c|x) P_x(dx) + \sum_{c} \int_{D^c} I(\varphi_A(x) = c) P(y=c|x) P_x(dx).$$</p>
+<p>For each predictor, the highest attainable correct prediction is obtained when $P_x(D) = 1$; i.e., we have
+$$r^* = \int \underset{c}{max}P(y=c|x) P_x(dx).$$
+For $x \in D$, $\sum_{c} Q(c | x) P(y = c | x)$ can be less than $\underset{c}{max}P(y=c|x)$. Thus, even if $P_x(D) \simeq 1$, non-aggregated predictor might be far from optimal.</p>
+<p>In classification, aggregation actually improves the performance more for the better performance predictor. This can be deduced from the above expression of $r_A$. In order to have the performance close to optimal one $r^*$, we have to assign large probability mass to $D$; i.e., the predictor already have high probability of correct classification. As to the stability of the predictor, the same statement as regression holds for classification.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="1.3.-Random-Forests-and-Feature-Importance">1.3. Random Forests and Feature Importance<a class="anchor-link" href="#1.3.-Random-Forests-and-Feature-Importance">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Random forest has been introduced by Breiman in <a href="https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf">the paper</a> . As we discussed previously, bagging improves the accuracy of unstable predictors like neural network and CART. Then, He applied bagging to CART to improve the accuracy.</p>
+<p>Concept is quite simple. At every node, we just split data depending on subset of variable. Let's say we have $M$ dimensional input feature. At every node, randomly chosen subset $s$ variables  of $M$ variables are used to split data. After established some trees, we mean of outputs of trees for regression, or 
+take vote as to which class will data should be classified for classification.</p>
+<p>As one of the useful byproducts of bootstrap sampling, we have unused samples called out-of-bags, which has been discussed in <a href="https://www.stat.berkeley.edu/~breiman/OOBestimation.pdf">the paper</a>  by Breiman. When using bootstrap sampling, we have unsampled data for each set. This comes from the following:</p>
+<p>Let $N$ be the number of data. The probability to unsample one of the data $x_i$ is $(1 - \frac{1}{N})^N$. By using the fact that $\underset{n\to \infty}{lim}(1 + \frac{1}{N})^{-N} = \frac{1}{e}$, we can lead to $\underset{N \to \infty}{lim}(1 - \frac{1}{N})^N = \frac{1}{e} \simeq 0.3679$. Thus, for large enough data, almost 37% data will not be sampled. Using these unsampled data, we can improve accuracy of prediction for important some statistical quantities. For example, it is known that training error has downside bias. We can use out-of-bag to have more accurate estimation of generalized error without any additional data. Thus, to evaluate the performance of random forests, we need neither of test data nor additional computational time coming from cross validation.</p>
+<p>As another useful byproducts, we have feature importance. This is a quantity to measure the importance of each component of input for prediction. As we mentioned above, the performance of random forest is measured on out-of-bag. The performance should be measured by certain criteria such as Gini index, entropy, and accuracy. Then, we add noise to each variables and see how much the value of the criteria changes. We do this through the following process.</p>
+<p>Let us assume that we use $M$ dimensional input feature $\bf{x} = (x_1, x_2, \dots, x_M)$ and $N_T$ trees for estimation.</p>
+<p>FOR i = 1 to $N_T$</p>
+<ul>
+<li>Generate a tree</li>
+<li>Evaluate performance on out-of-bag</li>
+</ul>
+<p>FOR m = 1 to $M$</p>
+<ul>
+<li>Collapse $x_m$ by noise </li>
+<li>Evaluate and save the change of the value of the criteria</li>
+</ul>
+<p>END FOR</p>
+<p>END FOR</p>
+<ul>
+<li>Take mean saved changes (The higher, the more important)</li>
+</ul>
+<p>Through this process, we identify which component is significant for prediction. In scikit-learn implementation, normalized criteria are used to evaluate the feature importance; they measure how much noised feature increases the value of criteria in the percentage. Gini impurity and mean squared error used as default for classification and regression respectively.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="2.-Experiments">2. Experiments<a class="anchor-link" href="#2.-Experiments">¶</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When developing new drugs, we have to specify which compound of ingredients works on a human body. We here call active or inactive for if compounds are effective or not.  <a href="https://archive.ics.uci.edu/ml/datasets/Dorothea">Dorothea Data Set</a> contains labels and binary features. Labels indicate if each compound is active(positive) or inactive(negative), and binary features correspond to which ingredients out of $10^5$ kinds each compound contains. <a href="https://archive.ics.uci.edu/ml/datasets/Dorothea">Dorothea Data Set</a> has 800, 350, and 800 instances for training, validation, and test set respectively. Since labels of test data are not available, we use validation data as test data instead. Hence, we have training input: (800, 100000), test input: (350, 100000), training label: (800, ), and test label: (350, ).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="2.1.-Fetch-data">2.1. Fetch data<a class="anchor-link" href="#2.1.-Fetch-data">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the repository, labels are expressed as -1 (negative) or +1(positive), and we convert them into 0 (negative) or 1(positive). For binary features, each candidate is recorded as [3, 14, 56, 146, ....., 99953, 99999], where numbers indicate which features exist. We convert features into binary data; e.g., [0, 0, 1, 0, ....., 1, 0].</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [1]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
-
-<span class="kn">import</span> <span class="nn">pickle</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">keras</span>
-<span class="kn">import</span> <span class="nn">sklearn</span>
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="n">xrange</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="c1"># local library</span>
-<span class="kn">import</span> <span class="nn">utils</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">roc_auc_score</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Using TensorFlow backend.
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We fetch stock price and S&P500; data from open source, yahoo finance. We also refer to <a href="https://en.wikipedia.org/wiki/List_of_S%26P_500_companies">the Wikipedia</a> to get information about which stocks are used for S&P500.; For precise implementation, you can check <a href="https://github.com/jjakimoto/Indicator_Analysis/blob/master/utils.py">here</a>.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [226]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_feature</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">num_feature</span><span class="o">=</span><span class="mi">100000</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> 
+    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">num_feature</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">features</span>
 
-print ("Started!!")
-symbols = utils.get_sap_symbols('sap500')
-np.random.shuffle(symbols)
-start_date="2012-10-01"
-end_date="2016-04-01"
-# use Open data
-input_data = utils.get_data_list_key(symbols, start_date, end_date)
-target_data = utils.get_data('^GSPC', start_date, end_date)['Open']
+<span class="k">def</span> <span class="nf">get_label</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">labels</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Started!!
-we cound not fetch data from the following companies
-['NEE', 'NWS', 'CSRA', 'HPE', 'CFG', 'WRK', 'PYPL', 'UA', 'COTY', 'QRVO', 'SYF', 'EVHC', 'ZTS', 'NWSA', 'ALLE', 'ABBV', 'MNK', 'KHC', 'WLTW', 'FTV', 'NAVI']
-CPU times: user 7.89 s, sys: 988 ms, total: 8.88 s
-Wall time: 3min 1s
-</pre>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_input</span><span class="p">,</span> <span class="n">test_input</span> <span class="o">=</span> <span class="n">get_feature</span><span class="p">(</span><span class="s2">"dorothea_train.data"</span><span class="p">),</span> <span class="n">get_feature</span><span class="p">(</span><span class="s2">"dorothea_valid.data"</span><span class="p">)</span>
+<span class="n">train_target</span><span class="p">,</span> <span class="n">test_target</span> <span class="o">=</span> <span class="n">get_label</span><span class="p">(</span><span class="s2">"dorothea_train.labels"</span><span class="p">),</span> <span class="n">get_label</span><span class="p">(</span><span class="s2">"dorothea_valid.labels"</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -1272,7 +1397,7 @@ Wall time: 3min 1s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Due to the lack of some data from "2012-10-01" to "2016-04-01", 484 companies stock data can be used at maximum.</p>
+<h2 id="2.2.-Feature-Importance">2.2. Feature Importance<a class="anchor-link" href="#2.2.-Feature-Importance">¶</a></h2>
 </div>
 </div>
 </div>
@@ -1281,7 +1406,19 @@ Wall time: 3min 1s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Breaking-Down-S&amp;P500">Breaking Down S&P500;<a class="anchor-link" href="#Breaking-Down-S&amp;P500">¶</a></h1>
+<p>Let's estimate importance of feature!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">forest</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">forest</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1290,10 +1427,10 @@ Wall time: 3min 1s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>S&P500; is calculated by linear combination of U.S. 500 stocks selected by economists. The weight parameters for each stock is determined by <a href="http://www.investopedia.com/ask/answers/05/sp500calculation.asp">market capitals</a>. 
-Thus, we can write down the relation of S&P500; and stock prices as 
-$$y = \bf{w}\cdot \bf{x} ,$$
-where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 500 dimensional vectors. This simple linear relation enables even a vanilla linear regression to duplicate S&P500; with high accuracy under a certain condition.</p>
+<p><img alt="10000_importance" src="http://jjakimoto.github.io/images/RF/10000_importance.png" /></p>
+<p><img alt="1000_importance" src="http://jjakimoto.github.io/images/RF/1000_importance.png" /></p>
+<p><img alt="100_importance" src="http://jjakimoto.github.io/images/RF/100_importance.png" /></p>
+<p>These figures are the largest 100, 1000, and 10000 importance of features. As we see in the figures, the importance decreases drastically till reaching around 100. This implies that a prediction with the top 100 importance features is able to attain good enough performances.</p>
 </div>
 </div>
 </div>
@@ -1302,7 +1439,7 @@ where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's work on linear regression! We use three years data for training and an half an year data for test.</p>
+<h2 id="2.3.-Performance">2.3. Performance<a class="anchor-link" href="#2.3.-Performance">¶</a></h2>
 </div>
 </div>
 </div>
@@ -1311,7 +1448,79 @@ where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="vanilla_linear" src="http://jjakimoto.github.io/images/sp500/vanilla_linear.png" /></p>
+<p>Let’s see the effectiveness in numerical experiments. Less than 10% instances of given data contains are positive. That is, the class distribution is skewed. In this situation, usual accuracy does not work. For instance, consider the case where there are 99% negative and 1% positive instances. Even a predictor that always returns negative achieves 99% accuracy. On the other hand, a predictor that predict classify negative instances with 98% correctly and positive instances with 99% correctly achieves only 98.01% accuracy as a whole. Does that mean the former predict is better than the latter one? Not necessary! Sometimes, detecting the class occupying small portion of data is more important; e.g., cancer diagnosis.</p>
+<p>When working on binary classification task, we usually first have real value outputs from a predictor and classify instances over a certain threshold into positive. Mostly, the outputs are restricted to $[0, 1]$ and the threshold is set as 0.5. This setting may work when class is equivalently distributed; i.e., positive 50% and negative 50%. Skewed class distribution, however, cause too little detecting the smaller occupation side. This comes from the learning architecture. In most cases, we use a non skewed cost function like binary cross entropy in the learning stage, which makes outputs incline to the negative side.To avoid this, we have to set threshold as a hyper parameter. There is a measure taking this problem into consideration called receiver operating characteristic(ROC). Taking TPR and FPR as y-axis and axis respectively, the measure visualize the performance of a predictor with plot along with various thresholds. This plot is called ROC Curve. The area under this curve in the graph is often used as a measure of the performance of predictors, which is called the area under an ROC Curve (AUC). We use AUC to evaluate the performance.</p>
+<p>We test the performance of random forests and logistic regression. As a benchmark, we use a predictor with randomly chosen input features.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get index of features in descending order of the importance</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">forest</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">shuffle_index</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">shuffle_index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">predictor_RFC_score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s1">'gini'</span><span class="p">):</span>
+    <span class="n">forest</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="n">criterion</span><span class="p">)</span>
+    <span class="n">forest</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">forest</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">predictor_logistic_score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+    <span class="sd">"""Return prediciton of random forests regressor"""</span>
+    <span class="n">regr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+    <span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">regr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">compute_auc_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># the number of features to check the performance</span>
+<span class="n">logspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">))),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">logspace</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">logspace</span><span class="p">]</span>
+
+<span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">logspace</span><span class="p">:</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">predictor_RFC_score</span><span class="p">(</span><span class="n">train_input</span><span class="p">[:,</span> <span class="n">index</span><span class="p">[:</span><span class="n">i</span><span class="p">]],</span> <span class="n">test_input</span><span class="p">[:,</span> <span class="n">index</span><span class="p">[:</span><span class="n">i</span><span class="p">]],</span> <span class="n">train_target</span><span class="p">)</span>
+    <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">compute_auc_score</span><span class="p">(</span><span class="n">test_target</span><span class="p">,</span> <span class="n">prediction</span><span class="p">))</span>
+    
+<span class="n">shuffle_scores</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">logspace</span><span class="p">:</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">predictor_RFC_score</span><span class="p">(</span><span class="n">train_input</span><span class="p">[:,</span> <span class="n">index</span><span class="p">[:</span><span class="n">i</span><span class="p">]],</span> <span class="n">test_input</span><span class="p">[:,</span> <span class="n">index</span><span class="p">[:</span><span class="n">i</span><span class="p">]],</span> <span class="n">train_target</span><span class="p">)</span>
+    <span class="n">shuffle_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">compute_auc_score</span><span class="p">(</span><span class="n">test_target</span><span class="p">,</span> <span class="n">prediction</span><span class="p">))</span>
+    
+<span class="n">logistic_scores</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">logspace</span><span class="p">:</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">predictor_logistic_score</span><span class="p">(</span><span class="n">train_input</span><span class="p">[:,</span> <span class="n">index</span><span class="p">[:</span><span class="n">i</span><span class="p">]],</span> <span class="n">test_input</span><span class="p">[:,</span> <span class="n">index</span><span class="p">[:</span><span class="n">i</span><span class="p">]],</span> <span class="n">train_target</span><span class="p">)</span>
+    <span class="n">logistic_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">compute_auc_score</span><span class="p">(</span><span class="n">test_target</span><span class="p">,</span> <span class="n">prediction</span><span class="p">))</span>
+    
+<span class="n">shuffle_logistic_scores</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">logspace</span><span class="p">:</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">predictor_logistic_score</span><span class="p">(</span><span class="n">train_input</span><span class="p">[:,</span> <span class="n">shuffle_index</span><span class="p">[:</span><span class="n">i</span><span class="p">]],</span> <span class="n">test_input</span><span class="p">[:,</span> <span class="n">shuffle_index</span><span class="p">[:</span><span class="n">i</span><span class="p">]],</span> <span class="n">train_target</span><span class="p">)</span>
+    <span class="n">shuffle_linear_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">compute_auc_score</span><span class="p">(</span><span class="n">test_target</span><span class="p">,</span> <span class="n">prediction</span><span class="p">))</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1320,7 +1529,8 @@ where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This result looks succeeding in the first part but failing in the latter part. To evaluate this performance quantitatively, we shall introduce an accuracy.</p>
+<p><img alt="10000_importance" src="http://jjakimoto.github.io/images/RF/auc_compare.png" /></p>
+<p>Results labeled “<em>_shuffle” correspond to AUC scores of predictors with randomly chosen input features.  Logistic regression with selected features almost reached the peak around 100 features as well as random forests. With more features, logistic regression had rather worse performance. Compared to the scores of “</em>_shuffle”,  we saw that predictors with selected features had significantly better performance with small number of features.</p>
 </div>
 </div>
 </div>
@@ -1329,7 +1539,7 @@ where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Accuracy">Accuracy<a class="anchor-link" href="#Accuracy">¶</a></h3>
+<h1 id="3.-Discussion">3. Discussion<a class="anchor-link" href="#3.-Discussion">¶</a></h1>
 </div>
 </div>
 </div>
@@ -1338,359 +1548,7 @@ where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Risk and return in a portfolio are usually evaluated as the percentage. Thus, when S&P500; is used as a benchmark of portfolios's performance, the percentage evaluation is more appropriate than the value itself. Then, we use the following accuracy:
-$$ \frac{1}{N} \sum_1^N \frac{|\tilde{y_i} - y_i|}{y_i}, $$
-where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Since data contains a lot of noise, we need smoothing to see how the error changes along with time. Then, we evaluate error for every two weeks average.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="vanilla_error" src="http://jjakimoto.github.io/images/sp500/vanilla_error.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>x-axis number indicate x-th two weeks average: i.e., x-th two weeks average is the average from 2<em>x th to 2</em>(x + 1) th week average. While we have less than 2% error in the first two weeks, we have almost 12% ~ 14% error in the latter part. The error grows along with time. This implies that the weight parameters vary as the economic condition changes along with time. From now on, taking the linear regression result above as a bench mark, we work on various algorithms and compare their performance.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Factor-Analysis:-Probailistic-PCA(PPCA)-and-PCA">Factor Analysis: Probailistic PCA(PPCA) and PCA<a class="anchor-link" href="#Factor-Analysis:-Probailistic-PCA(PPCA)-and-PCA">¶</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Stock prices are known to behave while correlating to each other. If this correlation can be described as linear combinations, the dimension of independent factors that determines stock prices is equal to or less than the number of stocks. Thus, input information may be able to reduce to lower dimension. With this view point, the duplication of financial indicators like S&P; 500 traditionally has been done with factor analysis. We will now work on PCA and factor analysis(PPCA).</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="compare1" src="http://jjakimoto.github.io/images/sp500/compare1.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="compare_error1" src="http://jjakimoto.github.io/images/sp500/compare_error1.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>PPCA has the best performance almost all over observations. Note that both PCA and PPCA have better performances  than the linear regression especially at the latter observations. This comes from the fact that simple model is robust to unobserved data. Since the latter part data is changes a lot from train data, the vanilla linear regression fails in generalization and results in poor performance.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Duplication-with-Subsets-of-Stocks">Duplication with Subsets of Stocks<a class="anchor-link" href="#Duplication-with-Subsets-of-Stocks">¶</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In practical situation, you may use fewer stocks to constitute your portfolio. Since S&P; is often used as bench mark for performance of portfolios, we have to keep larger return and lower risk compared to S&P500.; Therefore, to hedge risk and maximize return, it is important to figure out the relation between S&P500; and subset of stocks.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Automatic-Relevance-Determination">Automatic Relevance Determination<a class="anchor-link" href="#Automatic-Relevance-Determination">¶</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The contribution of each stock toward S&P500; will be determined by the scale of company -- market cap. Thus, stocks of only some influential companies may have dominant effect on the behavior of S&P500.; In that case, focusing on such terms makes the model robust and have better generalization error. ARD(Automatic Relevance Determination) is one of the bayesian methods to choose dominant factors by introducing diagonal covariance normal distributed prior for weight parameters. Roughly speaking, this algorithm will choose the most important factors automatically.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="ARD_weight" src="http://jjakimoto.github.io/images/sp500/ARD_weight.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Only 218 companies out of 484 companies are chosen to use; i.e. almost half of stocks are used. Let's see the performance.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="ARD_linear" src="http://jjakimoto.github.io/images/sp500/ARD_linear.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="ARD_linear_error" src="http://jjakimoto.github.io/images/sp500/ARD_linear_error.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In the same way as factor analysis, the dimension reduction keep error rate with 1.0e-2 order even in the latter part.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Linear-Regression-with-Subset-of-Large-Volume-Stocks">Linear Regression with Subset of Large Volume Stocks<a class="anchor-link" href="#Linear-Regression-with-Subset-of-Large-Volume-Stocks">¶</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We will now consider using only 10% of selected stocks, i.e., 50 stocks.</p>
-<p>We shall choose 50 stocks based on volume: quantity refers to the number of traded contracts. Roughly speaking, the more volume a company has, the stronger impact it has on the stock market. Hence, it is natural to choose the 50 biggest volume companies to duplicate S&P500.;  Technically, we use the average volume over the observation period.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="50biggest_volume" src="http://jjakimoto.github.io/images/sp500/50biggest_volume.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see the relation among stocks choen by ARD and Volume.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Subset linear regression and ARD share only 5 stocks -- ['SPLS', 'HBAN', 'EBAY', 'HAL', 'PFE'] -- out of 50, 10%, stocks, which implies that the contribution of each stock for S&P500; cannot be described by simple volume. Let's see the performance.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="sublinear" src="http://jjakimoto.github.io/images/sp500/sublinear.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="sublinear_error" src="http://jjakimoto.github.io/images/sp500/sublinear_error.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Focusing on only the large volume stocks improves the performance over all of the observations. This implies that the largest volume stocks are the dominant factors.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="compare_error2" src="http://jjakimoto.github.io/images/sp500/compare_error2.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>As you see in the above figure, dimension reduction has an effect of keeping good performance in the latter part. One of the reasons comes from the fact that variance becomes smaller when having fewer variables for linear regression., e.g. the benchmark linear regression has ten times a much variables as the linear regression with the 50 largest volume companies, which gives ten times variance if all of the variables are i.i.d. Thus, the change of stock prices along with time gives more error to the benchmark than to other model with fewer dimensions.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Neural-Network">Neural Network<a class="anchor-link" href="#Neural-Network">¶</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Stocks may have nonlinear correlation, which require more complex model than linear model discussed above. In this section, we apply neural network to the duplication of S&P500.; Neural network has been recently attracting a lot of attentions due to the great success in image recognition. According to <a href="http://deeplearning.cs.cmu.edu/pdfs/Kornick_et_al.pdf">Universal Approximation Theorem</a>, we can approximate almost any functions. More precisely, let $f$ be a Borel function mapping from $\mathbb{R}^n$to $\mathbb{R}^r$. Let $\bf{X}$ a space of one layer simple feed forward neural network with a certain class activation function like sigmoid, tanh, ReLU, etc. For any $\epsilon > 0$ and compact subset $K \subset \mathbb{R}^n$, there exists $\tilde{f} \in \bf{X}$ such that 
-$$ \underset{x \in K}{sup}\| f(x) - \tilde{f}(x)\| < \epsilon.$$
-In the original paper, more general statement has been shown. Most of functions you see are included in Borel function, unless you work on pure mathematics. Hence, we can say that we can choose a neural network for almost any function with any accuracy.</p>
-<p>Note that this statement, however, is just qualitative. The approximation is not constructive and does not give any ideas as to how to determine the number of hidden.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, we implement a multi layer perceptron taking output as duplication of S&P500.; Generally speaking, the batch normalization has an effect to make learning faster and avoid over fitting by reducing covariate shift. Application of batch normalization to output layer, however, makes a model unstable because of scales difference between target value and batch normalized output. Therefore, we will use batch normalization for all layers but the last layer.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="neural1" src="http://jjakimoto.github.io/images/sp500/neural1.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The network just adjust output to the scale of S&P500; by increasing bias and produce almost the same value irrelevant to input values. This is one of the examples to indicate that  Universal Approximation Theorem does not grantee that we can easily find the optimal solutions. Before implementing network, we have to establish a model that reflects the characteristic of data.</p>
-<p>Since S&P500; consists of linear combination of stocks, duplication has to satisfy the linear sensitivity with respect to stock prices, which is not satisfied by the simple neural network. Instead, we use the network to learn weight like linear regression: i.e.
-$$\bf{f(\bf{x})}\cdot \bf{x},$$
-where $\bf{f}(\cdot)$ is the output of the neural network.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="neural2" src="http://jjakimoto.github.io/images/sp500/neural2.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="neural_error" src="http://jjakimoto.github.io/images/sp500/neural_error.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The change of architecture improves the performance.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Reducing dimensions has an effect of reduction of variance for the duplication of S&P500;, which leads to the better performance in the latter part of observations. Especially, we have better performance when choosing only dominant factors: large volume companies' stocks.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Nonlinearity and universal approximation theorem makes neural network attractive. Neural network, however,  is difficult to determine the optimal hyper parameters and optimize parameters. As you seen in the example, a simple architecture taking stock price as input and output as duplication does not fit data at all. Introducing linear regression structure does the trick. Thus, when applying neural network, we have to consider which parts network should be applied to; otherwise, we fail in even fitting training data.</p>
-<p>Various research has been done for neural network. As a future work, we can apply state of art algorithms to prediction of S&P500; with the historical data.</p>
+<p>We worked on feature selection with random forests for <a href="https://archive.ics.uci.edu/ml/datasets/Dorothea">“Dorothea Data Set”</a>, and evaluated the effectiveness with random forest itself and logistic regression. Only 100 out of 100000 features could reach the almost the best performance for both algorithms. Especially, logistic regression had better performance with small number of features through avoiding overfitting coming from the high dimensional input. This result imply the possibility that the importance of feature could be applied to other algorithms with high dimensional input.</p>
 </div>
 </div>
 </div>
@@ -1731,7 +1589,7 @@ where $\bf{f}(\cdot)$ is the output of the neural network.</p>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'datarounder'; 
-    var disqus_title = 'Duplication of S&P500 with Stock Prices';
+    var disqus_title = 'Feature Selection and Random Forests';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
