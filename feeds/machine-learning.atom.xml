@@ -1100,12 +1100,12 @@ take vote as to which class will data should be classified for classification.&l
 &lt;p&gt;Let $N$ be the number of data. The probability to unsample one of the data $x_i$ is $(1 - \frac{1}{N})^N$. By using the fact that $\underset{n\to \infty}{lim}(1 + \frac{1}{N})^{-N} = \frac{1}{e}$, we can lead to $\underset{N \to \infty}{lim}(1 - \frac{1}{N})^N = \frac{1}{e} \simeq 0.3679$. Thus, for large enough data, almost 37% data will not be sampled. Using these unsampled data, we can improve accuracy of prediction for important some statistical quantities. For example, it is known that training error has downside bias. We can use out-of-bag to have more accurate estimation of generalized error without any additional data. Thus, to evaluate the performance of random forests, we need neither of test data nor additional computational time coming from cross validation.&lt;/p&gt;
 &lt;p&gt;As another useful byproducts, we have feature importance. This is a quantity to measure the importance of each component of input for prediction. As we mentioned above, the performance of random forest is measured on out-of-bag. The performance should be measured by certain criteria such as Gini index, entropy, and accuracy. Then, we add noise to each variables and see how much the value of the criteria changes. We do this through the following process.&lt;/p&gt;
 &lt;p&gt;Let us assume that we use $M$ dimensional input feature $\bf{x} = (x_1, x_2, \dots, x_M)$ and $N_T$ trees for estimation.&lt;/p&gt;
-&lt;p&gt;FOR i = 1 to $N_T$&lt;/p&gt;
+&lt;p&gt;FOR $i = 1$ to $N_T$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Generate a tree&lt;/li&gt;
 &lt;li&gt;Evaluate performance on out-of-bag&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;FOR m = 1 to $M$&lt;/p&gt;
+&lt;p&gt;FOR $m = 1$ to $M$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Collapse $x_m$ by noise &lt;/li&gt;
 &lt;li&gt;Evaluate and save the change of the value of the criteria&lt;/li&gt;
@@ -1133,7 +1133,7 @@ take vote as to which class will data should be classified for classification.&l
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;When developing new drugs, we have to specify which compound of ingredients works on a human body. We here call active or inactive for if compounds are effective or not.  &lt;a href="https://archive.ics.uci.edu/ml/datasets/Dorothea"&gt;Dorothea Data Set&lt;/a&gt; contains labels and binary features. Labels indicate if each compound is active(positive) or inactive(negative), and binary features correspond to which ingredients out of $10^5$ kinds each compound contains. &lt;a href="https://archive.ics.uci.edu/ml/datasets/Dorothea"&gt;Dorothea Data Set&lt;/a&gt; has 800, 350, and 800 instances for training, validation, and test set respectively. Since labels of test data are not available, we use validation data as test data instead. Hence, we have training input: (800, 100000), test input: (350, 100000), training label: (800, ), and test label: (350, ).&lt;/p&gt;
+&lt;p&gt;When developing new drugs, we have to specify which compound of ingredients works on a human body. We here call active or inactive for if compounds are effective or not.  &lt;a href="https://archive.ics.uci.edu/ml/datasets/Dorothea"&gt;Dorothea Data Set&lt;/a&gt; contains labels and binary features. Labels indicate if each compound is active(positive) or inactive(negative), and binary features correspond to which ingredients out of 100,000 kinds each compound contains. &lt;a href="https://archive.ics.uci.edu/ml/datasets/Dorothea"&gt;Dorothea Data Set&lt;/a&gt; has 800, 350, and 800 instances for training, validation, and test set respectively. Since labels of test data are not available, we use validation data as test data instead. Hence, we have training input: (800, 100000), test input: (350, 100000), training label: (800, ), and test label: (350, ).&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
