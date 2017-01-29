@@ -14,6 +14,14 @@ body {
     margin-left: 0%;
 }
 
+h1 { color : inherit !important;  font-size: 2.5em }
+h2 { color : inherit !important;  font-size: 2.0em }
+h3 { color : inherit !important;  font-size: 1.5em }
+h4 { color : inherit !important;  font-size: 1.0em }
+h5 { color : inherit !important;  font-size: 1.0em }
+h6 { color : inherit !important;  font-size: 1.0em }
+p { font-size: 0.875em; }
+
 a:link    { color : blue ; text-decoration : none ;      }
 a:hover   { color : blue ; text-decoration : underline ; }
 a:visited { color : blue ;                               }
@@ -31,6 +39,9 @@ pre {
     margin-bottom : 1em ;
     margin-top : 1em ;
 }
+
+/* list of articles configuration */
+
 
 
 /* Headbar configuration*/
