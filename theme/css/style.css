@@ -20,7 +20,7 @@ h3 { color : inherit !important;  font-size: 1.2em }
 h4 { color : inherit !important;  font-size: 1.0em }
 h5 { color : inherit !important;  font-size: 1.0em }
 h6 { color : inherit !important;  font-size: 1.0em }
-p { font-size: 0.875em; }
+p { font-size: 1.0em; }
 
 a:link    { color : blue ; text-decoration : none ;      }
 a:hover   { color : blue ; text-decoration : underline ; }
