@@ -14,9 +14,9 @@ body {
     margin-left: 0%;
 }
 
-h1 { color : inherit !important;  font-size: 2.5em }
-h2 { color : inherit !important;  font-size: 2.0em }
-h3 { color : inherit !important;  font-size: 1.5em }
+h1 { color : inherit !important;  font-size: 2.0em }
+h2 { color : inherit !important;  font-size: 1.5em }
+h3 { color : inherit !important;  font-size: 1.2em }
 h4 { color : inherit !important;  font-size: 1.0em }
 h5 { color : inherit !important;  font-size: 1.0em }
 h6 { color : inherit !important;  font-size: 1.0em }
