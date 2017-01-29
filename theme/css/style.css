@@ -82,41 +82,48 @@ margin-left: 25%;
 width: 100%;
 }
 
+article {
+float:right;
+background-color: transparent;
+margin-left: 25%;
+width: 100%;
+}
+
 
  /* sidebar configuration */      
-div.sidebar{
+nav.sidebar{
 float:left;
 background-color: transparent;
 margin-left: 5%;
 width: 20%;
 }
 
-div.sidebar img{
+nav.sidebar img{
     width:auto;
     height:auto;
     max-width:100%;
     max-height:100%;
 }
 
-div.sidebar ul.large{
+nav.sidebar ul.large{
 list-style-type: none;
 margin:0;
 padding: 0;
 background-color: transparent;
 }
 
-div.sidebar ul.large li{
+nav.sidebar ul.large li{
 margin-bottom: 20px;
 background-color: lightgrey;
 }
 
-div.sidebar ul.small li{
+nav.sidebar ul.small li{
 margin-left: 0;
 margin-top: 10px;
 margin-bottom: 10px;
 }
 
-div.sidebar h1 {
+nav.sidebar h1 {
 background-color: black;
 color: white;
 margin: 0;
@@ -125,7 +132,7 @@ text-align:center;
 font-size: 200%;
 }     
         
-div.sidebar p {
+nav.sidebar p {
 margin: 0;
 padding: 10px;
 text-align:center;
