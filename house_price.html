@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="https://jjakimoto.github.io/theme/css/style.css" />
 
 
-    <meta name="tags" content="Regresion" />
+    <meta name="tags" content="Feature Selection" />
 
 </head>
 
@@ -53,13 +53,13 @@
 <section id="content" class="body">
   <header>
     <h1 class="entry-title"  >
-      <a href="http://jjakimoto.github.io/sp500.html" rel="bookmark"
-         title="Permalink to Duplication of S&P500 with Stock Prices">Duplication of S&P500 with Stock Prices</a></h1>
+      <a href="http://jjakimoto.github.io/house_price.html" rel="bookmark"
+         title="Permalink to Data Explore and Visualization">Data Explore and Visualization</a></h1>
  
   </header>
   <footer class="post-info">
-    <time class="published" datetime="2016-12-31T12:00:00+09:00">
-      Sat, 31/12/2016
+    <time class="published" datetime="2017-03-26T12:00:00+09:00">
+      Sun, 26/03/2017
     </time>
     <address class="vcard author">
       By           <a class="url fn" href="http://jjakimoto.github.io/author/tomoaki-fujii.html">Tomoaki Fujii</a>
@@ -1043,7 +1043,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Economic indicators are statistics to measure growth and contraction of economics. Trading based on such indicators, what is called technical trading, is one of the main trends in recent stock trading. Especially S&P500;(Standard and Poor's 500 Index) is frequently used as a bench mark to evaluate portfolio -- a grouping of financial assets like stocks. Roughly speaking, constructing a portfolio with better return and lower risk than S&P500; is one of the main goals for stock trading. Therefore, clarifying the relation between S&P500; and stock prices are important to construct a good portfolio.</p>
+<p>Data exploration is important. Before jumping into analysis, you will get some intuition as to how to use data and establish more sophisticated modeling. In some cases, how to use data improve even models robust to high dimensional input like Deep Learning. In this article, we work on data exploration and visualization for the house price data from <a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data">a kaggle competition</a>. This gives effective features selection, which has better performance than random feature selection.</p>
 </div>
 </div>
 </div>
@@ -1052,7 +1052,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this article, we work on duplication of S&P500; with stock price data. At first part, we use various linear models like linear regression, factor analysis, etc. In the latter part, we also consider an extension with neural network. We show that the neural network as an extension of linear regression works better than a simple neural network.</p>
+<h1 id="Data-Exploration-and-Visualization">Data Exploration and Visualization<a class="anchor-link" href="#Data-Exploration-and-Visualization">¶</a></h1>
 </div>
 </div>
 </div>
@@ -1061,7 +1061,21 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Analysis-Environment">Analysis Environment<a class="anchor-link" href="#Analysis-Environment">¶</a></h1>
+<p>House prices are determined through various factors such as location, quality, and size. Before jumping into analysis, we explore given data. Our data exploration process is divided into a few steps:</p>
+<ol>
+<li><p>Understand the Problem:
+Figure out characteristics of given data and the meaning of each feature</p>
+</li>
+<li><p>Univariate Study:
+Focus on understanding the characteristic of target value, 'SalePrice'.</p>
+</li>
+<li><p>Multivariate Study:
+Explore the relations among input features and target value.</p>
+</li>
+<li><p>Feature Selection:
+Determine which features have to be employed as input.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -1070,90 +1084,75 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We basically work with 'sklearn' and also use 'keras' and 'tensorflow' for implementation of neural networks. For fetching data, we will use a local library <a href="https://github.com/jjakimoto/Indicator_Analysis/blob/master/utils.py">utils.py</a>.</p>
+<h2 id="1.-Understand-the-Problem">1. Understand the Problem<a class="anchor-link" href="#1.-Understand-the-Problem">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [1]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this section, we look into basic information of given data. We have two kinds of data: train data and test data. Train data and test data have 1460 and 1459 candidates respectively. While both have 80 input features, target value, 'SalePrice', is given to train data additionally; i.e., shapes of train and test data are (1460, 81) and (1459, 80) respectively.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First, we consider classifying input features into a few categories. In given data, we have the following features:</p>
+<p>'Id', 'MSSubClass', 'MSZoning', 'LotFrontage', 'LotArea', 'Street',
+       'Alley', 'LotShape', 'LandContour', 'Utilities', 'LotConfig',
+       'LandSlope', 'Neighborhood', 'Condition1', 'Condition2', 'BldgType',
+       'HouseStyle', 'OverallQual', 'OverallCond', 'YearBuilt', 'YearRemodAdd',
+       'RoofStyle', 'RoofMatl', 'Exterior1st', 'Exterior2nd', 'MasVnrType',
+       'MasVnrArea', 'ExterQual', 'ExterCond', 'Foundation', 'BsmtQual',
+       'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinSF1',
+       'BsmtFinType2', 'BsmtFinSF2', 'BsmtUnfSF', 'TotalBsmtSF', 'Heating',
+       'HeatingQC', 'CentralAir', 'Electrical', '1stFlrSF', '2ndFlrSF',
+       'LowQualFinSF', 'GrLivArea', 'BsmtFullBath', 'BsmtHalfBath', 'FullBath',
+       'HalfBath', 'BedroomAbvGr', 'KitchenAbvGr', 'KitchenQual',
+       'TotRmsAbvGrd', 'Functional', 'Fireplaces', 'FireplaceQu', 'GarageType',
+       'GarageYrBlt', 'GarageFinish', 'GarageCars', 'GarageArea', 'GarageQual',
+       'GarageCond', 'PavedDrive', 'WoodDeckSF', 'OpenPorchSF',
+       'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea', 'PoolQC',
+       'Fence', 'MiscFeature', 'MiscVal', 'MoSold', 'YrSold', 'SaleType',
+       'SaleCondition'</p>
+<p>When considering purchasing a house, what comes into your mind first is the location. Convenience of access to your workplace or school is one of the most important factors. Next, we may consider the size. If you have your family in your house, you may need larger house. Finally, we consider the quality. The higher quality, the more expensive. Considering above, we divide input features into three categories: location, size, and quality.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Location:">Location:<a class="anchor-link" href="#Location:">¶</a></h3>
+<pre><code>'Neighborhood', 'Condition1', 'Condition2'
 
-<span class="kn">import</span> <span class="nn">pickle</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">keras</span>
-<span class="kn">import</span> <span class="nn">sklearn</span>
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="n">xrange</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+</code></pre>
+<h3 id="Size:">Size:<a class="anchor-link" href="#Size:">¶</a></h3>
+<pre><code>'LotFrontage', 'LotArea', 'MasVnrArea', 'BsmtUnfSF', 'TotalBsmtSF', 
+'BsmtFinSF1', 'BsmtFinSF2', '1stFlrSF', '2ndFlrSF', 'LowQualFinSF',
+'GrLivArea', 'GarageCars', 'GarageArea', 'WoodDeckSF', 'OpenPorchSF',
+'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea'
 
-<span class="c1"># local library</span>
-<span class="kn">import</span> <span class="nn">utils</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Using TensorFlow backend.
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We fetch stock price and S&P500; data from open source, yahoo finance. We also refer to <a href="https://en.wikipedia.org/wiki/List_of_S%26P_500_companies">the Wikipedia</a> to get information about which stocks are used for S&P500.; For precise implementation, you can check <a href="https://github.com/jjakimoto/Indicator_Analysis/blob/master/utils.py">here</a>.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [226]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">time</span>
-
-print ("Started!!")
-symbols = utils.get_sap_symbols('sap500')
-np.random.shuffle(symbols)
-start_date="2012-10-01"
-end_date="2016-04-01"
-# use Open data
-input_data = utils.get_data_list_key(symbols, start_date, end_date)
-target_data = utils.get_data('^GSPC', start_date, end_date)['Open']
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Started!!
-we cound not fetch data from the following companies
-['NEE', 'NWS', 'CSRA', 'HPE', 'CFG', 'WRK', 'PYPL', 'UA', 'COTY', 'QRVO', 'SYF', 'EVHC', 'ZTS', 'NWSA', 'ALLE', 'ABBV', 'MNK', 'KHC', 'WLTW', 'FTV', 'NAVI']
-CPU times: user 7.89 s, sys: 988 ms, total: 8.88 s
-Wall time: 3min 1s
-</pre>
-</div>
-</div>
+</code></pre>
+<h3 id="Quality:">Quality:<a class="anchor-link" href="#Quality:">¶</a></h3>
+<pre><code>'MSSubClass', 'MSZoning', 'Street', 'Alley', 'LotShape', 'LandContour',
+'Utilities', 'LotConfig', 'LandSlope',  'BldgType', 'HouseStyle', 
+'OverallQual', 'OverallCond', 'YearBuilt', 'YearRemodAdd', 'RoofStyle',
+'RoofMatl', 'Exterior1st', 'Exterior2nd', 'MasVnrType', 'ExterQual', 
+'ExterCond', 'Foundation', 'BsmtQual', 'BsmtCond', 'BsmtExposure',
+'BsmtFinType1', 'BsmtFinType2', 'Heating', 'HeatingQC', 'CentralAir',
+'Electrical',  'BsmtFullBath', 'BsmtHalfBath', 'FullBath', 'HalfBath', 
+'BedroomAbvGr', 'KitchenAbvGr', 'KitchenQual', 'TotRmsAbvGrd',
+'Functional', 'Fireplaces', 'FireplaceQu', 'GarageType', 'GarageYrBlt',
+'GarageFinish', 'GarageQual', 'GarageCond', 'PavedDrive', 'PoolQC',
+'Fence', 'MiscFeature', 'MiscVal', 'MoSold', 'YrSold', 'SaleType',
+'SaleCondition', 'SalePrice'</code></pre>
 </div>
 </div>
 </div>
@@ -1162,7 +1161,7 @@ Wall time: 3min 1s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Due to the lack of some data from "2012-10-01" to "2016-04-01", 484 companies stock data can be used at maximum.</p>
+<p>Other than above categorization, we have to consider types of data. Given data has two kinds: numerical and categorical.</p>
 </div>
 </div>
 </div>
@@ -1171,7 +1170,16 @@ Wall time: 3min 1s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Breaking-Down-S&amp;P500">Breaking Down S&P500;<a class="anchor-link" href="#Breaking-Down-S&amp;P500">¶</a></h1>
+<h3 id="Numerical:">Numerical:<a class="anchor-link" href="#Numerical:">¶</a></h3><p>'MSSubClass', 'MSZoning', 'LotFrontage', 'LotArea', 'Street', 'Alley', 'LotShape', 'LandContour', 'Utilities', 'LotConfig', 'LandSlope', 'Neighborhood', 'Condition1', 'Condition2', 'BldgType', 'HouseStyle', 'OverallQual', 'OverallCond', 'YearBuilt', 'YearRemodAdd', 'RoofStyle', 'RoofMatl', 'Exterior1st', 'Exterior2nd', 'MasVnrType', 'MasVnrArea', 'ExterQual', 'ExterCond', 'Foundation', 'BsmtQual', 'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinSF1', 'BsmtFinType2', 'BsmtFinSF2', 'BsmtUnfSF', 'TotalBsmtSF', 'Heating', 'HeatingQC', 'CentralAir', 'Electrical', '1stFlrSF', '2ndFlrSF', 'LowQualFinSF', 'GrLivArea', 'BsmtFullBath', 'BsmtHalfBath', 'FullBath', 'HalfBath', 'BedroomAbvGr', 'KitchenAbvGr', 'KitchenQual', 'TotRmsAbvGrd', 'Functional', 'Fireplaces', 'FireplaceQu', 'GarageType', 'GarageYrBlt', 'GarageFinish', 'GarageCars', 'GarageArea', 'GarageQual', 'GarageCond', 'PavedDrive', 'WoodDeckSF', 'OpenPorchSF', 'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea', 'PoolQC', 'Fence', 'MiscFeature', 'MiscVal', 'MoSold', 'YrSold', 'SaleType', 'SaleCondition'</p>
+<h3 id="Categorical:">Categorical:<a class="anchor-link" href="#Categorical:">¶</a></h3><p>'MSZoning', 'LotFrontage', 'Street', 'Alley', 'LotShape', 'LandContour',
+'Utilities', 'LotConfig', 'LandSlope', 'Neighborhood', 'Condition1',
+'Condition2', 'BldgType', 'HouseStyle', 'RoofStyle', 'RoofMatl',
+'Exterior1st', 'Exterior2nd', 'MasVnrType', 'MasVnrArea', 'ExterQual',
+'ExterCond', 'Foundation', 'BsmtQual', 'BsmtCond', 'BsmtExposure',
+'BsmtFinType1', 'BsmtFinType2', 'Heating', 'HeatingQC', 'CentralAir',
+'Electrical', 'KitchenQual', 'Functional', 'FireplaceQu', 'GarageType',
+'GarageYrBlt', 'GarageFinish', 'GarageQual', 'GarageCond', 'PavedDrive',
+'PoolQC', 'Fence', 'MiscFeature', 'SaleType', 'SaleCondition'</p>
 </div>
 </div>
 </div>
@@ -1180,10 +1188,7 @@ Wall time: 3min 1s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>S&P500; is calculated by linear combination of U.S. 500 stocks selected by economists. The weight parameters for each stock is determined by <a href="http://www.investopedia.com/ask/answers/05/sp500calculation.asp">market capitals</a>. 
-Thus, we can write down the relation of S&P500; and stock prices as 
-$$y = \bf{w}\cdot \bf{x} ,$$
-where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 500 dimensional vectors. This simple linear relation enables even a vanilla linear regression to duplicate S&P500; with high accuracy under a certain condition.</p>
+<h2 id="2.-Univariate-Study">2. Univariate Study<a class="anchor-link" href="#2.-Univariate-Study">¶</a></h2>
 </div>
 </div>
 </div>
@@ -1192,7 +1197,15 @@ where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's work on linear regression! We use three years data for training and an half an year data for test.</p>
+<p>Let's consider characteristics of target variable.</p>
+<p><img alt="y_dist" src="http://jjakimoto.github.io/images/house_price/y_dist.jpg" /></p>
+<p>This figure describes the distribution of target variable. It does not look like a normal distribution and seems to have heavy tail. Skew and kurtosis of the distribution are 1.88 and 6.54 respectively.</p>
+<p><img alt="y_probplot" src="http://jjakimoto.github.io/images/house_price/y_probplot.jpg" /></p>
+<p>This figure is probaility plot. Considering skew, kurtosis, and probability plot, we conclude that the distribution is not nomral distribution. Let's try a transform of the target variable with log(x).</p>
+<p><img alt="logy_probplot" src="http://jjakimoto.github.io/images/house_price/logy_probplot.jpg" /></p>
+<p>We did it!</p>
+<p>Given data seem to be on the line in the probability plot. Skew and kurtosis are 0.12 and 0.81 respectively. These facts imply that the target data spread with a normal distribution. In many cases, quadratic cost functions assume the gaussian noise, which gives you the normal distribution. Therefore, the transformed target variable is more convenient when working on optimization.</p>
+<p>From now on, we use log(y) instead of y as a target variable.</p>
 </div>
 </div>
 </div>
@@ -1201,7 +1214,7 @@ where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="vanilla_linear" src="http://jjakimoto.github.io/images/sp500/vanilla_linear.png" /></p>
+<h2 id="3.-Multivariate-Analysis">3. Multivariate Analysis<a class="anchor-link" href="#3.-Multivariate-Analysis">¶</a></h2>
 </div>
 </div>
 </div>
@@ -1210,7 +1223,8 @@ where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This result looks succeeding in the first part but failing in the latter part. To evaluate this performance quantitatively, we shall introduce an accuracy.</p>
+<p>While some features have significant effects on the behavior SalePrice, otheres do not. In this section, we work on figuring relations between variables.</p>
+<p>Before working on analysis, we have to deal with missing data. Let's roll!</p>
 </div>
 </div>
 </div>
@@ -1219,7 +1233,8 @@ where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Accuracy">Accuracy<a class="anchor-link" href="#Accuracy">¶</a></h3>
+<p>Most of candidates are missing top 3 features: PoolQC, MscFeature, and Alley. This may come from the fact that we do not care about these features when buying a house; e.g., we do not determine to purchase a house just because of the quality of pool (PoolQC).</p>
+<p>For the sake of simplicity, we just treat these missing values as a new category 'MISSING' for category variables. For numerical variables, we use mean imputation.</p>
 </div>
 </div>
 </div>
@@ -1228,9 +1243,7 @@ where $y$ and $\bf{x}$ are S&P500; and stock prices; $\bf{w}$ and $\bf{x}$ are 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Risk and return in a portfolio are usually evaluated as the percentage. Thus, when S&P500; is used as a benchmark of portfolios's performance, the percentage evaluation is more appropriate than the value itself. Then, we use the following accuracy:
-$$ \frac{1}{N} \sum_1^N \frac{|\tilde{y_i} - y_i|}{y_i}, $$
-where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
+<p>To analyze categorial variables along with numerical variables, we convert categorical variables into dummies.</p>
 </div>
 </div>
 </div>
@@ -1239,7 +1252,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Since data contains a lot of noise, we need smoothing to see how the error changes along with time. Then, we evaluate error for every two weeks average.</p>
+<p><img alt="corr_dummies" src="http://jjakimoto.github.io/images/house_price/corr_dummies.jpg" /></p>
 </div>
 </div>
 </div>
@@ -1248,7 +1261,9 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="vanilla_error" src="http://jjakimoto.github.io/images/sp500/vanilla_error.png" /></p>
+<p>Oops! Too many columns! 
+We consider reducing the number of features to a subset of features strongly correlated with the target variable.</p>
+<p>We here use 20 features. We extract 20 features that have the largest abolute value of correlation coefficient with the target variable.</p>
 </div>
 </div>
 </div>
@@ -1257,7 +1272,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>x-axis number indicate x-th two weeks average: i.e., x-th two weeks average is the average from 2<em>x th to 2</em>(x + 1) th week average. While we have less than 2% error in the first two weeks, we have almost 12% ~ 14% error in the latter part. The error grows along with time. This implies that the weight parameters vary as the economic condition changes along with time. From now on, taking the linear regression result above as a bench mark, we work on various algorithms and compare their performance.</p>
+<p>Let's pick up only higly correlated features.</p>
 </div>
 </div>
 </div>
@@ -1266,7 +1281,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Factor-Analysis:-Probailistic-PCA(PPCA)-and-PCA">Factor Analysis: Probailistic PCA(PPCA) and PCA<a class="anchor-link" href="#Factor-Analysis:-Probailistic-PCA(PPCA)-and-PCA">¶</a></h1>
+<p><img alt="20corr" src="http://jjakimoto.github.io/images/house_price/20corr.jpg" /></p>
 </div>
 </div>
 </div>
@@ -1275,7 +1290,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Stock prices are known to behave while correlating to each other. If this correlation can be described as linear combinations, the dimension of independent factors that determines stock prices is equal to or less than the number of stocks. Thus, input information may be able to reduce to lower dimension. With this view point, the duplication of financial indicators like S&P; 500 traditionally has been done with factor analysis. We will now work on PCA and factor analysis(PPCA).</p>
+<p>There are strong correlations in the following pairs: (GarageArea, GarageCars), (TotalBsmtSF, 1stFlrSF), (ExterQual_Gd, ExterQual_TA), (GarageYrBuilt, YearBuilt), and (TotRmsAbvTrd, GrLivArea).  In the first pair, both express the size of garage. The second one describes the area of basement and first floor. The third one is separated just because of introducing dummy. Both elements in the fourth one explain how old. In the last one, each element expresses living area and total rooms. In any of the above five pairs, it is natural that two elements are correlated to each other within each pair. Therefore, it is good enough to use either of two elements for each pair.</p>
 </div>
 </div>
 </div>
@@ -1284,7 +1299,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="compare1" src="http://jjakimoto.github.io/images/sp500/compare1.png" /></p>
+<p><img alt="15corr" src="http://jjakimoto.github.io/images/house_price/15corr.jpg" /></p>
 </div>
 </div>
 </div>
@@ -1293,7 +1308,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="compare_error1" src="http://jjakimoto.github.io/images/sp500/compare_error1.png" /></p>
+<p>Let's see more precise relations between the target variable and selected features.</p>
 </div>
 </div>
 </div>
@@ -1302,7 +1317,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>PPCA has the best performance almost all over observations. Note that both PCA and PPCA have better performances  than the linear regression especially at the latter observations. This comes from the fact that simple model is robust to unobserved data. Since the latter part data is changes a lot from train data, the vanilla linear regression fails in generalization and results in poor performance.</p>
+<p><img alt="overallqual" src="http://jjakimoto.github.io/images/house_price/overallqual.jpg" /></p>
 </div>
 </div>
 </div>
@@ -1311,7 +1326,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Duplication-with-Subsets-of-Stocks">Duplication with Subsets of Stocks<a class="anchor-link" href="#Duplication-with-Subsets-of-Stocks">¶</a></h1>
+<p>As we expected, the more OverallQual, the higher SalePrice.</p>
 </div>
 </div>
 </div>
@@ -1320,7 +1335,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In practical situation, you may use fewer stocks to constitute your portfolio. Since S&P; is often used as bench mark for performance of portfolios, we have to keep larger return and lower risk compared to S&P500.; Therefore, to hedge risk and maximize return, it is important to figure out the relation between S&P500; and subset of stocks.</p>
+<p><img alt="yearbuilt" src="http://jjakimoto.github.io/images/house_price/yearbuilt.jpg" /></p>
 </div>
 </div>
 </div>
@@ -1329,7 +1344,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Automatic-Relevance-Determination">Automatic Relevance Determination<a class="anchor-link" href="#Automatic-Relevance-Determination">¶</a></h2>
+<p>There seems to be a tendency that newer houses have higher prices. Let's see the effects of other categorical variables on the target variable.</p>
 </div>
 </div>
 </div>
@@ -1338,7 +1353,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The contribution of each stock toward S&P500; will be determined by the scale of company -- market cap. Thus, stocks of only some influential companies may have dominant effect on the behavior of S&P500.; In that case, focusing on such terms makes the model robust and have better generalization error. ARD(Automatic Relevance Determination) is one of the bayesian methods to choose dominant factors by introducing diagonal covariance normal distributed prior for weight parameters. Roughly speaking, this algorithm will choose the most important factors automatically.</p>
+<p><img alt="categorical" src="http://jjakimoto.github.io/images/house_price/categorical.jpg" /></p>
 </div>
 </div>
 </div>
@@ -1347,7 +1362,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="ARD_weight" src="http://jjakimoto.github.io/images/sp500/ARD_weight.png" /></p>
+<p><img alt="numerical" src="http://jjakimoto.github.io/images/house_price/numerical.jpg" /></p>
 </div>
 </div>
 </div>
@@ -1356,7 +1371,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Only 218 companies out of 484 companies are chosen to use; i.e. almost half of stocks are used. Let's see the performance.</p>
+<p>Look at the top raw. Generally speaking, the larger value feature tend to have higer prices.</p>
 </div>
 </div>
 </div>
@@ -1365,7 +1380,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="ARD_linear" src="http://jjakimoto.github.io/images/sp500/ARD_linear.png" /></p>
+<h2 id="4.-Feature-Selection">4. Feature Selection<a class="anchor-link" href="#4.-Feature-Selection">¶</a></h2>
 </div>
 </div>
 </div>
@@ -1374,7 +1389,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="ARD_linear_error" src="http://jjakimoto.github.io/images/sp500/ARD_linear_error.png" /></p>
+<p>So far, we have been analyzing the relation through correlation coefficient and visualization. Random forest work as an alternative method to figure out the relations. Indeed, random forest is one of the most popular methods to select important features.</p>
 </div>
 </div>
 </div>
@@ -1383,7 +1398,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In the same way as factor analysis, the dimension reduction keep error rate with 1.0e-2 order even in the latter part.</p>
+<p><img alt="importance" src="http://jjakimoto.github.io/images/house_price/importance.jpg" /></p>
 </div>
 </div>
 </div>
@@ -1392,7 +1407,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Linear-Regression-with-Subset-of-Large-Volume-Stocks">Linear Regression with Subset of Large Volume Stocks<a class="anchor-link" href="#Linear-Regression-with-Subset-of-Large-Volume-Stocks">¶</a></h2>
+<p>This figure describes the 20 features with the largest feature of importance.</p>
 </div>
 </div>
 </div>
@@ -1401,8 +1416,21 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We will now consider using only 10% of selected stocks, i.e., 50 stocks.</p>
-<p>We shall choose 50 stocks based on volume: quantity refers to the number of traded contracts. Roughly speaking, the more volume a company has, the stronger impact it has on the stock market. Hence, it is natural to choose the 50 biggest volume companies to duplicate S&P500.;  Technically, we use the average volume over the observation period.</p>
+<p>Features selected Through correlation coefficient are</p>
+<p>'LotArea', 'LowQualFinSF', 'BsmtUnfSF', 'GarageCars', 'GarageYrBlt',
+'MasVnrArea', 'TotalBsmtSF', 'OverallCond', 'HeatingQC_TA',
+'OverallQual', 'CentralAir_N', 'LotFrontage', '1stFlrSF',
+'YearBuilt', 'BsmtFinSF2', 'GarageType_CarPort', 'MSSubClass',
+'TotRmsAbvGrd', 'MSZoning_RL', 'WoodDeckSF'</p>
+<p>In the feature of importance, selected features are</p>
+<p>'SalePrice', 'OverallQual', 'GrLivArea', 'GarageCars', 'GarageArea',
+'TotalBsmtSF', '1stFlrSF', 'ExterQual_TA', 'FullBath', 'YearBuilt',
+'YearRemodAdd', 'KitchenQual_TA', 'TotRmsAbvGrd', 'Foundation_PConc',
+'FireplaceQu_MISSING', 'ExterQual_Gd', 'GarageYrBlt', 'Fireplaces',
+'BsmtQual_TA', 'HeatingQC_Ex'</p>
+<p>They share the following features:</p>
+<p>'1stFlrSF', 'GarageCars', 'GarageYrBlt', 'OverallQual', 'TotRmsAbvGrd', 'TotalBsmtSF', 'YearBuilt'</p>
+<p>0nly 7 features are shared. Besides that, the feature with the largest importance, 'LotArea' is not even selected as top 20 through correlation coefficient. Thus, these tow methods are quite different.Let's see the difference through another alogrithms</p>
 </div>
 </div>
 </div>
@@ -1411,7 +1439,24 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="50biggest_volume" src="http://jjakimoto.github.io/images/sp500/50biggest_volume.png" /></p>
+<table style="width:100%">
+<tr>
+<th>Method</th>
+<th>Error</th>
+</tr>
+<tr>
+<td>Correlation Coefficient</td>
+<td>0.0299</td>
+</tr>
+<tr>
+<td>Random Forest</td>
+<td>0.0300</td>
+</tr>
+<tr>
+<td>Random</td>
+<td>0.0935</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1420,167 +1465,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&P500.;</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see the relation among stocks choen by ARD and Volume.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Subset linear regression and ARD share only 5 stocks -- ['SPLS', 'HBAN', 'EBAY', 'HAL', 'PFE'] -- out of 50, 10%, stocks, which implies that the contribution of each stock for S&P500; cannot be described by simple volume. Let's see the performance.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="sublinear" src="http://jjakimoto.github.io/images/sp500/sublinear.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="sublinear_error" src="http://jjakimoto.github.io/images/sp500/sublinear_error.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Focusing on only the large volume stocks improves the performance over all of the observations. This implies that the largest volume stocks are the dominant factors.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="compare_error2" src="http://jjakimoto.github.io/images/sp500/compare_error2.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>As you see in the above figure, dimension reduction has an effect of keeping good performance in the latter part. One of the reasons comes from the fact that variance becomes smaller when having fewer variables for linear regression., e.g. the benchmark linear regression has ten times a much variables as the linear regression with the 50 largest volume companies, which gives ten times variance if all of the variables are i.i.d. Thus, the change of stock prices along with time gives more error to the benchmark than to other model with fewer dimensions.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Neural-Network">Neural Network<a class="anchor-link" href="#Neural-Network">¶</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Stocks may have nonlinear correlation, which require more complex model than linear model discussed above. In this section, we apply neural network to the duplication of S&P500.; Neural network has been recently attracting a lot of attentions due to the great success in image recognition. According to <a href="http://deeplearning.cs.cmu.edu/pdfs/Kornick_et_al.pdf">Universal Approximation Theorem</a>, we can approximate almost any functions. More precisely, let $f$ be a Borel function mapping from $\mathbb{R}^n$to $\mathbb{R}^r$. Let $\bf{X}$ a space of one layer simple feed forward neural network with a certain class activation function like sigmoid, tanh, ReLU, etc. For any $\epsilon > 0$ and compact subset $K \subset \mathbb{R}^n$, there exists $\tilde{f} \in \bf{X}$ such that 
-$$ \underset{x \in K}{sup}\| f(x) - \tilde{f}(x)\| < \epsilon.$$
-In the original paper, more general statement has been shown. Most of functions you see are included in Borel function, unless you work on pure mathematics. Hence, we can say that we can choose a neural network for almost any function with any accuracy.</p>
-<p>Note that this statement, however, is just qualitative. The approximation is not constructive and does not give any ideas as to how to determine the number of hidden.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, we implement a multi layer perceptron taking output as duplication of S&P500.; Generally speaking, the batch normalization has an effect to make learning faster and avoid over fitting by reducing covariate shift. Application of batch normalization to output layer, however, makes a model unstable because of scales difference between target value and batch normalized output. Therefore, we will use batch normalization for all layers but the last layer.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="neural1" src="http://jjakimoto.github.io/images/sp500/neural1.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The network just adjust output to the scale of S&P500; by increasing bias and produce almost the same value irrelevant to input values. This is one of the examples to indicate that  Universal Approximation Theorem does not grantee that we can easily find the optimal solutions. Before implementing network, we have to establish a model that reflects the characteristic of data.</p>
-<p>Since S&P500; consists of linear combination of stocks, duplication has to satisfy the linear sensitivity with respect to stock prices, which is not satisfied by the simple neural network. Instead, we use the network to learn weight like linear regression: i.e.
-$$\bf{f(\bf{x})}\cdot \bf{x},$$
-where $\bf{f}(\cdot)$ is the output of the neural network.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="neural2" src="http://jjakimoto.github.io/images/sp500/neural2.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="neural_error" src="http://jjakimoto.github.io/images/sp500/neural_error.png" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The change of architecture improves the performance.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Reducing dimensions has an effect of reduction of variance for the duplication of S&P500;, which leads to the better performance in the latter part of observations. Especially, we have better performance when choosing only dominant factors: large volume companies' stocks.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Nonlinearity and universal approximation theorem makes neural network attractive. Neural network, however,  is difficult to determine the optimal hyper parameters and optimize parameters. As you seen in the example, a simple architecture taking stock price as input and output as duplication does not fit data at all. Introducing linear regression structure does the trick. Thus, when applying neural network, we have to consider which parts network should be applied to; otherwise, we fail in even fitting training data.</p>
-<p>Various research has been done for neural network. As a future work, we can apply state of art algorithms to prediction of S&P500; with the historical data.</p>
+<p>Above figure is the cross validation of squared error with 20 features chosen by the following methods: correlation coefficient, random forest, and random.  The first two methods have been discussed so far. Random means here choosing 20 features at random. First two methods have way better results than the random one.</p>
 </div>
 </div>
 </div>
