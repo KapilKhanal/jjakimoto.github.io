@@ -2,17 +2,24 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+
+# Default setting
 AUTHOR = 'Tomoaki Fujii'
 SITENAME = 'Data Rounder'
 SITESUBTITLE = 'Machine Learning and Programming'
 SITEURL = 'http://jjakimoto.github.io'
+
+# pusblish an article as a draft in default setting
+DEFAULT_METADATA = {
+    'status': 'draft',
+}
 
 PATH = 'content'
 STATIC_PATHS=['images']
 PAGE_PATHS = ['pages']
 
 
-THEME = "/Users/tomoaki/work/blog/mytheme"
+THEME = "/home/tomoaki/work/DS_blog/mytheme"
 # THEME = "/Users/tomoaki/work/blog/pelican-themes/bootlex"
 
 # PELICAN_COMMENT_SYSTEM = True
