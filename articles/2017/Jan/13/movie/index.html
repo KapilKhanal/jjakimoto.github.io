@@ -1115,7 +1115,7 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The bag of words is oversimplified representation, which neglect the context. Next, we consider the another vector representation: skip-gram and continuous bag of words (CBOW) model, which has been introduced by T. Mikolov et al. in <a href="https://arxiv.org/abs/1301.3781">the paper</a>. The main idea is estimating the meaning of each word from neighbor words. We assume the relation as in the below figure:</p>
-<p><img alt="vector_representation" src="{filename}images/movie_review/vector_representation.png" /></p>
+<p><img alt="vector_representation" src="http://jjakimoto.github.io/images/movie_review/vector_representation.png" /></p>
 <p>This figure comes from <a href="https://arxiv.org/abs/1301.3781">the same paper</a> by T. Mikolov et al. While the current word vector is determined by the summation of forward and backward word vectors  in CBOW model, the certain range forward and backward word vectors are determined by the current word vector in skip-gram model. Both models use log linear model to reduce the computational complexity by getting rid of non-linear hidden layer. T. Mikolov et al. has also introduced negative sampling to learn the skip-gram model efficiently in <a href="https://arxiv.org/abs/1310.4546">the paper</a>.</p>
 <p>These algorithms succeeded to extract linear feature. For instance, we denote by $vec[\cdot]$ a vector representation of a word. Then, we have the the following result:
 $$vec[king] - vec[man] + vec[woman] \approx vec[queen].$$
@@ -1139,10 +1139,10 @@ We can say that these algorithms are succeeded to find an effective representati
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In most of applications like sentiment analysis, we are required to extract features from one sentence or paragraph. Though the Word2Vec has succeeded to grab semantic features of each word, they have poor performance when converting features of words into those of a paragraph through average over a document or CNN. As a sort of extensions, Q. Le and T. Mikolov have developed Doc2Vec, which extract features from various length one sentence or paragraph and produces fixed-length feature representation. In <a href="https://arxiv.org/pdf/1405.4053v2.pdf">the paper</a>, they have introduced two kind vector representations: Distributed Memory version of Paragraph Vectors (PV-DM) and Distributed Bag of Words version of Paragraph Vectors (PV-DBOW).</p>
 <p>PV-DM simply adds one feature vector to CBOW model. The below figure explains the model architecture (cited from <a href="(https://arxiv.org/pdf/1405.4053v2.pdf">the original paper</a>).</p>
-<p><img alt="pvdm" src="{filename}images/movie_review/pvdm.png" /></p>
+<p><img alt="pvdm" src="http://jjakimoto.github.io/images/movie_review/pvdm.png" /></p>
 <p>At the training stage, weight parameters for words and paragraphs are learned in the same way as Word2Vec. Note that weight parameters for words are shared across all of the documents while weight parameters for each paragraph is used only for one paragraph. At the prediction time after training, we fix weight parameters for classifier layer and words. Then, we learn the weight parameters for unseen paragraph.</p>
 <p>PV-DBOW, on the other hand, extract features of a paragraph through optimization with sampled words, which is close to skip-gram model. The below figure explains the model architecture (cited from <a href="(https://arxiv.org/pdf/1405.4053v2.pdf">the original paper</a>).</p>
-<p><img alt="pvdbow" src="{filename}images/movie_review/pvdbow.png" /></p>
+<p><img alt="pvdbow" src="http://jjakimoto.github.io/images/movie_review/pvdbow.png" /></p>
 <p>This model ignores the context and omit necessity to memorize weight parameters for words. At training time, we sample the text window and words from chosen text window. Then, we optimize parameters through stochastic gradient decent.</p>
 <p>Empirically, taking concatenation of both vector representations gives better performance.</p>
 </div>
