@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Data Rounder - Tomoaki Fujii</title><link>http://jjakimoto.github.io/</link><description>Machine Learning and Programming</description><lastBuildDate>Sun, 26 Mar 2017 12:00:00 +0900</lastBuildDate><item><title>Data Explore and Visualization</title><link>http://jjakimoto.github.io/articles/2017/Mar/26/house_price/</link><description>
+<rss version="2.0"><channel><title>Data Rounder - Tomoaki Fujii</title><link>http://jjakimoto.github.io/</link><description>Machine Learning and Programming</description><lastBuildDate>Thu, 26 Oct 2017 12:00:00 +0900</lastBuildDate><item><title>Bootstrap and Backtest for Algorithmic Trading (Reality Check)</title><link>http://jjakimoto.github.io/articles/2017/Oct/26/RC/</link><description>
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Applying machine learning to algorithmic trading is getting more and more attention recently. Machine learning approach usually takes the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Build models&lt;/li&gt;
+&lt;li&gt;Optimize model parameters&lt;/li&gt;
+&lt;li&gt;Model selection or hyper parameters tuning&lt;/li&gt;
+&lt;li&gt;Evaluate performances&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In the first and second stage, we build models and optimize their parameters on given data. Next, we evaluate several models' performances with their various hyperparameter configurations on out of samples. Then, we pick up the best performance one.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Thu, 26 Oct 2017 12:00:00 +0900</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2017-10-26:/articles/2017/Oct/26/RC/</guid><category>Hypothesis Test</category></item><item><title>Data Explore and Visualization</title><link>http://jjakimoto.github.io/articles/2017/Mar/26/house_price/</link><description>
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
