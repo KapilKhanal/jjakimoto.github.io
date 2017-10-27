@@ -1,98 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Categories — Data Rounder</title>
-	<meta name="description" content="The Categories page lists all categories used to classify the posts. Each post is categorized by a category helping readers find out easily what they are looking for.">
-	<meta name="author" content="Tomoaki Fujii">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-	<!--[if lt IE 9]>
-		<script src="http://jjakimoto.github.io/theme/html5.js"></script>
-		<![endif]-->
-	<link href="http://jjakimoto.github.io/theme/css/ipython.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
-	<link href="http://jjakimoto.github.io/theme/css/local.css" rel="stylesheet">
-	<link href="http://jjakimoto.github.io/theme/css/pygments.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>Data Rounder</title>
+    <link rel="stylesheet" type="text/css" href="https://jjakimoto.github.io/theme/css/style.css" />
 </head>
-<body>
-<div class="container">
-	<div class="page-header">
-		<h1><a href="http://jjakimoto.github.io/">Data Rounder</a>
-			<br>	</div>
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-<h1>Categories</h1>
-<ul>
-	<li><a href="http://jjakimoto.github.io/category/machine-learning-finance.html">Machine Learning, Finance</li>
+
+<body id="index" class="home">
+    <!--
+        <header id="banner" class="body">
+        <h1><a href="http://jjakimoto.github.io/">Data Rounder </a></h1>
+        <h2>Machine Learning and Programming</h2>
+     -->
+ 
+ <!-- Headbar -->
+<ul class="topnav">
+  <li><a href="http://jjakimoto.github.io/">Data Rounder</a></li>
+  <li><a href="http://jjakimoto.github.io/pages/about">About</a></li>
+  <li><a href="http://jjakimoto.github.io/pages/books">Books I Have Read</a></li>
 </ul>
-		</div>
-	</div> 	<!-- <hr> -->
-</div> <!-- /container -->
-<footer class="aw-footer bg-danger">
-	<div class="container"> <!-- footer -->
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-				<div class="row">
-					<div class="col-md-3">
-						<h4>Navigation</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="http://jjakimoto.github.io">Data Rounder</a></li>
-							<li><a href="http://jjakimoto.github.io/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3">
-						<h4>Author</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="#">You can add links in your config file</a></li>
-							<li><a href="#">Another social link</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3">
-						<h4>Categories</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="http://jjakimoto.github.io/category/machine-learning,-finance.html">Machine Learning, Finance (1)</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3">
-						<h4>Links</h4>
-						<ul class="list-unstyled my-list-style">
-							<li><a href="http://getpelican.com/">Pelican</a></li>
-							<li><a href="http://python.org/">Python.org</a></li>
-							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-							<li><a href="#">You can modify those links in your config file</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 text-center center-block aw-bottom">
-			<p>&copy; Tomoaki Fujii 2016</p>
-			<p>Powered by Pelican</p>
-		</div>
-	</div>
-</div>
-<!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-jQuery(document).ready(function($) {
-	$("div.collapseheader").click(function () {
-		$header = $(this).children("span").first();
-		$codearea = $(this).children(".input_area");
-		$codearea.slideToggle(500, function () {
-			$header.text(function () {
-				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
-			});
-		});
-	});
-});
-</script>
+              
+<!-- Sidebar -->
+<nav class="sidebar">
+    <ul class="large">
+        <li>
+            <h1>Me</h1>
+            <img alt="me" src="http://jjakimoto.github.io/images/about/me.jpg" />
+            <p>I am a data scientist with a passion for Python and C++ in particular. <a href="https://jjakimoto.github.io/pages/about">More.....</a></p>
+       </li>
+        <li>
+            <h1>Social</h1>
+            <ul class="small">
+                <li><a href="https://github.com/jjakimoto"><p>GitHub</p></a></li>
+                <li><a href="https://www.linkedin.com/in/tomoaki-fujii-5bba56133"><p>LinkedIn</p></a></li>
+                <li><a href="https://www.facebook.com/tomoaki.fujii.73"><p>Facebook</p></a></li>
+           </ul>
+       </li>
+        <li>
+            <h1>Categories</h1>
+            <ul class="small">
+                <li><a href="http://jjakimoto.github.io/category/machine-learning.html"><p>Machine Learning(6)</p> </a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<!-- contents -->
+ <article class="mycontent">
+<ul>
+    <li><a href="http://jjakimoto.github.io/category/machine-learning.html">Machine Learning</a></li>
+</ul>
+ </article>
+    
+    
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
 </body>
 </html>

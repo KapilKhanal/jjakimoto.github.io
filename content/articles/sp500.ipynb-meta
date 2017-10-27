@@ -1,9 +1,0 @@
-Title: Duplication of S&P500 with Stock Prices
-Slug: sp500
-Date: 2016-12-31 12:00
-Category: Machine Learning
-Tags: Regresion
-Author: Tomoaki Fujii
-Status: published
-Summary: Duplication of S&P500 with Stock Prices through various algorithms:PCA, factor analysis, neural network. We compare their performance.
-
