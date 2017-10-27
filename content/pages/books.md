@@ -1,5 +1,6 @@
 Title: Books I Have Read
 Slug: books
+Status: published
 
 
 I show the list of books I have recently read. Most of books are related to Mathematics, Machine Learning, and Programming. 

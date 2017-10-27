@@ -17,6 +17,7 @@ DEFAULT_METADATA = {
 PATH = 'content'
 STATIC_PATHS=['images']
 PAGE_PATHS = ['pages']
+ARTICLE_PATHS = ['articles']
 
 
 THEME = "/home/tomoaki/work/DS_blog/mytheme"
@@ -28,7 +29,7 @@ DISQUS_SITENAME = "datarounder"
 
 TIMEZONE = 'Asia/Tokyo'
 DATE_FORMATS={
-        'en': '%a, %d/%m/%Y',
+        'en': '%a, %m/%d/%Y',
 }
 LOCALE=('en_US')
 
@@ -65,8 +66,8 @@ PLUGINS = ['ipynb.markup', 'pelican_comment_system']
 
 DISPLAY_PAGES_ON_MENU = True
 
-# ARTICLE_URL = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/'
-# ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
+ARTICLE_URL = 'articles/{date:%Y}/{date:%b}/{date:%d}/{slug}/'
+ARTICLE_SAVE_AS = 'articles/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
 PAGE_URL = 'pages/{slug}/'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
 

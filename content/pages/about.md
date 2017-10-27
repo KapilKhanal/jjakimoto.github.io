@@ -1,5 +1,6 @@
 Title: About
 Slug: about
+Status: published
 
 
 ![tojinbo]({filename}../images/about/tojinbo.jpg){:style="float: right;margin-right: 7px;margin-top: 7px; height: auto; width: 20%;"}

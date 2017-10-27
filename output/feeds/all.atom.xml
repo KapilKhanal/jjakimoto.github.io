@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Data Rounder</title><link href="http://jjakimoto.github.io/" rel="alternate"></link><link href="http://jjakimoto.github.io/feeds/all.atom.xml" rel="self"></link><id>http://jjakimoto.github.io/</id><updated>2017-03-26T12:00:00+09:00</updated><entry><title>Data Explore and Visualization</title><link href="http://jjakimoto.github.io/house_price.html" rel="alternate"></link><published>2017-03-26T12:00:00+09:00</published><updated>2017-03-26T12:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-03-26:/house_price.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Data Rounder</title><link href="http://jjakimoto.github.io/" rel="alternate"></link><link href="http://jjakimoto.github.io/feeds/all.atom.xml" rel="self"></link><id>http://jjakimoto.github.io/</id><updated>2017-03-26T12:00:00+09:00</updated><entry><title>Data Explore and Visualization</title><link href="http://jjakimoto.github.io/articles/2017/Mar/26/house_price/" rel="alternate"></link><published>2017-03-26T12:00:00+09:00</published><updated>2017-03-26T12:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-03-26:/articles/2017/Mar/26/house_price/</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -1199,7 +1199,7 @@ Determine which features have to be employed as input.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="y_dist" src="http://jjakimoto.github.io/images/house_price/y_dist.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="y_dist" src="{filename}images/house_price/y_dist.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1251,7 +1251,7 @@ Determine which features have to be employed as input.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="y_probplot" src="http://jjakimoto.github.io/images/house_price/y_probplot.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="y_probplot" src="{filename}images/house_price/y_probplot.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1280,7 +1280,7 @@ Determine which features have to be employed as input.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="logy_probplot" src="http://jjakimoto.github.io/images/house_price/logy_probplot.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="logy_probplot" src="{filename}images/house_price/logy_probplot.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1355,7 +1355,7 @@ Determine which features have to be employed as input.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="missing" src="http://jjakimoto.github.io/images/house_price/missing.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="missing" src="{filename}images/house_price/missing.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1422,7 +1422,7 @@ Determine which features have to be employed as input.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="corr_dummies" src="http://jjakimoto.github.io/images/house_price/corr_dummies.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="corr_dummies" src="{filename}images/house_price/corr_dummies.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1485,7 +1485,7 @@ We consider reducing the number of features to a subset of features strongly cor
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="20corr" src="http://jjakimoto.github.io/images/house_price/20corr.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="20corr" src="{filename}images/house_price/20corr.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1525,7 +1525,7 @@ We consider reducing the number of features to a subset of features strongly cor
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="15corr" src="http://jjakimoto.github.io/images/house_price/15corr.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="15corr" src="{filename}images/house_price/15corr.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1571,7 +1571,7 @@ We consider reducing the number of features to a subset of features strongly cor
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="overallqual" src="http://jjakimoto.github.io/images/house_price/overallqual.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="overallqual" src="{filename}images/house_price/overallqual.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1602,7 +1602,7 @@ We consider reducing the number of features to a subset of features strongly cor
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="yearbuilt" src="http://jjakimoto.github.io/images/house_price/yearbuilt.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="yearbuilt" src="{filename}images/house_price/yearbuilt.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1639,7 +1639,7 @@ We consider reducing the number of features to a subset of features strongly cor
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="categorical" src="http://jjakimoto.github.io/images/house_price/categorical.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="categorical" src="{filename}images/house_price/categorical.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1659,7 +1659,7 @@ We consider reducing the number of features to a subset of features strongly cor
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="numerical" src="http://jjakimoto.github.io/images/house_price/numerical.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="numerical" src="{filename}images/house_price/numerical.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1719,7 +1719,7 @@ We consider reducing the number of features to a subset of features strongly cor
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="importance" src="http://jjakimoto.github.io/images/house_price/importance.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="importance" src="{filename}images/house_price/importance.jpg" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1884,13 +1884,13 @@ We consider reducing the number of features to a subset of features strongly cor
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="Feature Selection"></category></entry><entry><title>Feature Selection and Random Forests</title><link href="http://jjakimoto.github.io/RF.html" rel="alternate"></link><published>2017-01-28T12:00:00+09:00</published><updated>2017-01-28T12:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-01-28:/RF.html</id><summary type="html">
+</content><category term="Feature Selection"></category></entry><entry><title>Feature Selection and Random Forests</title><link href="http://jjakimoto.github.io/articles/2017/Jan/28/RF/" rel="alternate"></link><published>2017-01-28T12:00:00+09:00</published><updated>2017-01-28T12:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-01-28:/articles/2017/Jan/28/RF/</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;In prediction tasks, given data does not necessary consist of only useful information. The data may contain irrelevant features, which impairs the performance of a predictor due to overfitting. This situation is often the case for medical data. Sometimes, only a few hundreds of samples are available while we have thousands of features. In this case, we have to extract a small subset of effective features to reduce computational costs and overfitting. Random forest is one of the popular predictors due to the robustness. As one of the useful byproducts, random forests are able to estimate how much each feature has an effect on a performance of the forests. Thus, random forests give us one of possible approaches to reduce the number features to use. In this article, we work on a binary classification task of &lt;a href="https://archive.ics.uci.edu/ml/datasets/Dorothea"&gt;“Dorothea Data Set” from UCL Machine Learning Repository&lt;/a&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
+&lt;p&gt;In prediction tasks, given data does not necessary consist of only useful information. The data may contain irrelevant features, which impairs the performance of a predictor due to overfitting. This situation is often the case for medical data. Sometimes, only a few hundreds of samples are available while we have thousands of features. In this case, we have to extract a small subset of effective features to reduce computational costs and overfitting. Random forest is one of the popular predictors due to the robustness. As one of the useful byproducts, random forests are able to estimate how much each feature has an effect on a performance of the forests. Thus, random forests give us one of possible approaches to reduce the number features to use. In this article, we work on a binary classification task of &lt;a href="https://archive.ics.uci.edu/ml/datasets/Dorothea"&gt;“Dorothea Data Set” from UCI Machine Learning Repository&lt;/a&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -2867,7 +2867,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;In prediction tasks, given data does not necessary consist of only useful information. The data may contain irrelevant features, which impairs the performance of a predictor due to overfitting. This situation is often the case for medical data. Sometimes, only a few hundreds of samples are available while we have thousands of features. In this case, we have to extract a small subset of effective features to reduce computational costs and overfitting. Random forest is one of the popular predictors due to the robustness. As one of the useful byproducts, random forests are able to estimate how much each feature has an effect on a performance of the forests. Thus, random forests give us one of possible approaches to reduce the number features to use. In this article, we work on a binary classification task of &lt;a href="https://archive.ics.uci.edu/ml/datasets/Dorothea"&gt;“Dorothea Data Set” from UCL Machine Learning Repository&lt;/a&gt;. We show that features selected by random forests are efficient not only for random forests  themselves but also for logistic regression.&lt;/p&gt;
+&lt;p&gt;In prediction tasks, given data does not necessary consist of only useful information. The data may contain irrelevant features, which impairs the performance of a predictor due to overfitting. This situation is often the case for medical data. Sometimes, only a few hundreds of samples are available while we have thousands of features. In this case, we have to extract a small subset of effective features to reduce computational costs and overfitting. Random forest is one of the popular predictors due to the robustness. As one of the useful byproducts, random forests are able to estimate how much each feature has an effect on a performance of the forests. Thus, random forests give us one of possible approaches to reduce the number features to use. In this article, we work on a binary classification task of &lt;a href="https://archive.ics.uci.edu/ml/datasets/Dorothea"&gt;“Dorothea Data Set” from UCI Machine Learning Repository&lt;/a&gt;. We show that features selected by random forests are efficient not only for random forests  themselves but also for logistic regression.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3132,9 +3132,9 @@ take vote as to which class will data should be classified for classification.&l
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="10000_importance" src="http://jjakimoto.github.io/images/RF/10000_importance.png" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="1000_importance" src="http://jjakimoto.github.io/images/RF/1000_importance.png" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="100_importance" src="http://jjakimoto.github.io/images/RF/100_importance.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="10000_importance" src="{filename}images/RF/10000_importance.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="1000_importance" src="{filename}images/RF/1000_importance.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="100_importance" src="{filename}images/RF/100_importance.png" /&gt;&lt;/p&gt;
 &lt;p&gt;These figures are the largest 100, 1000, and 10000 importance of features. As we see in the figures, the importance decreases drastically till reaching around 100. This implies that a prediction with the top 100 importance features is able to attain good enough performances.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3234,7 +3234,7 @@ take vote as to which class will data should be classified for classification.&l
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="10000_importance" src="http://jjakimoto.github.io/images/RF/auc_compare.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="10000_importance" src="{filename}images/RF/auc_compare.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Results labeled “&lt;em&gt;_shuffle” correspond to AUC scores of predictors with randomly chosen input features.  Logistic regression with selected features almost reached the peak around 100 features as well as random forests. With more features, logistic regression had rather worse performance. Compared to the scores of “&lt;/em&gt;_shuffle”,  we saw that predictors with selected features had significantly better performance with small number of features.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3286,7 +3286,7 @@ take vote as to which class will data should be classified for classification.&l
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="Classification"></category></entry><entry><title>Movie Review with Vector Representations</title><link href="http://jjakimoto.github.io/movie.html" rel="alternate"></link><published>2017-01-13T12:00:00+09:00</published><updated>2017-01-13T12:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-01-13:/movie.html</id><summary type="html">
+</content><category term="Classification"></category></entry><entry><title>Movie Review with Vector Representations</title><link href="http://jjakimoto.github.io/articles/2017/Jan/13/movie/" rel="alternate"></link><published>2017-01-13T12:00:00+09:00</published><updated>2017-01-13T12:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-01-13:/articles/2017/Jan/13/movie/</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -4341,7 +4341,7 @@ h6:hover .anchor-link {
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;The bag of words is oversimplified representation, which neglect the context. Next, we consider the another vector representation: skip-gram and continuous bag of words (CBOW) model, which has been introduced by T. Mikolov et al. in &lt;a href="https://arxiv.org/abs/1301.3781"&gt;the paper&lt;/a&gt;. The main idea is estimating the meaning of each word from neighbor words. We assume the relation as in the below figure:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="vector_representation" src="http://jjakimoto.github.io/images/movie_review/vector_representation.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="vector_representation" src="{filename}images/movie_review/vector_representation.png" /&gt;&lt;/p&gt;
 &lt;p&gt;This figure comes from &lt;a href="https://arxiv.org/abs/1301.3781"&gt;the same paper&lt;/a&gt; by T. Mikolov et al. While the current word vector is determined by the summation of forward and backward word vectors  in CBOW model, the certain range forward and backward word vectors are determined by the current word vector in skip-gram model. Both models use log linear model to reduce the computational complexity by getting rid of non-linear hidden layer. T. Mikolov et al. has also introduced negative sampling to learn the skip-gram model efficiently in &lt;a href="https://arxiv.org/abs/1310.4546"&gt;the paper&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;These algorithms succeeded to extract linear feature. For instance, we denote by $vec[\cdot]$ a vector representation of a word. Then, we have the the following result:
 $$vec[king] - vec[man] + vec[woman] \approx vec[queen].$$
@@ -4365,10 +4365,10 @@ We can say that these algorithms are succeeded to find an effective representati
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;In most of applications like sentiment analysis, we are required to extract features from one sentence or paragraph. Though the Word2Vec has succeeded to grab semantic features of each word, they have poor performance when converting features of words into those of a paragraph through average over a document or CNN. As a sort of extensions, Q. Le and T. Mikolov have developed Doc2Vec, which extract features from various length one sentence or paragraph and produces fixed-length feature representation. In &lt;a href="https://arxiv.org/pdf/1405.4053v2.pdf"&gt;the paper&lt;/a&gt;, they have introduced two kind vector representations: Distributed Memory version of Paragraph Vectors (PV-DM) and Distributed Bag of Words version of Paragraph Vectors (PV-DBOW).&lt;/p&gt;
 &lt;p&gt;PV-DM simply adds one feature vector to CBOW model. The below figure explains the model architecture (cited from &lt;a href="(https://arxiv.org/pdf/1405.4053v2.pdf"&gt;the original paper&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;&lt;img alt="pvdm" src="http://jjakimoto.github.io/images/movie_review/pvdm.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pvdm" src="{filename}images/movie_review/pvdm.png" /&gt;&lt;/p&gt;
 &lt;p&gt;At the training stage, weight parameters for words and paragraphs are learned in the same way as Word2Vec. Note that weight parameters for words are shared across all of the documents while weight parameters for each paragraph is used only for one paragraph. At the prediction time after training, we fix weight parameters for classifier layer and words. Then, we learn the weight parameters for unseen paragraph.&lt;/p&gt;
 &lt;p&gt;PV-DBOW, on the other hand, extract features of a paragraph through optimization with sampled words, which is close to skip-gram model. The below figure explains the model architecture (cited from &lt;a href="(https://arxiv.org/pdf/1405.4053v2.pdf"&gt;the original paper&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;&lt;img alt="pvdbow" src="http://jjakimoto.github.io/images/movie_review/pvdbow.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pvdbow" src="{filename}images/movie_review/pvdbow.png" /&gt;&lt;/p&gt;
 &lt;p&gt;This model ignores the context and omit necessity to memorize weight parameters for words. At training time, we sample the text window and words from chosen text window. Then, we optimize parameters through stochastic gradient decent.&lt;/p&gt;
 &lt;p&gt;Empirically, taking concatenation of both vector representations gives better performance.&lt;/p&gt;
 &lt;/div&gt;
@@ -4656,7 +4656,7 @@ We can say that these algorithms are succeeded to find an effective representati
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="NLP"></category></entry><entry><title>Reinforcement Learning for Stock Trading</title><link href="http://jjakimoto.github.io/RL_trade.html" rel="alternate"></link><published>2017-01-07T12:00:00+09:00</published><updated>2017-01-07T12:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-01-07:/RL_trade.html</id><summary type="html">
+</content><category term="NLP"></category></entry><entry><title>Reinforcement Learning for Stock Trading</title><link href="http://jjakimoto.github.io/articles/2017/Jan/07/RL_trade/" rel="alternate"></link><published>2017-01-07T12:00:00+09:00</published><updated>2017-01-07T12:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-01-07:/articles/2017/Jan/07/RL_trade/</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -5807,7 +5807,7 @@ $$f_{actor}:\mathbb{R}^n \to \mathbb{R}^{n}. $$&lt;/p&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;We compare the performance with other algorithms: randomly chosen portfolio.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="trade_result" src="http://jjakimoto.github.io/images/RL_trade/mean_result.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="trade_result" src="{filename}images/RL_trade/mean_result.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;In the above graph, we have two results: ‘Multi_CNN’ and ‘random’. Since performances fluctuate, we evalute algorithms with 10 sample mean. ‘Multi_CNN’ corresponds to the result of the algorithm we develop in this article. Randomly chosen portfolio — ‘random’ in the graph — follows the normal distribution $N(0, 5 \cdot \bf{I_n})$, where $\bf{I_n}$ is n-dimensional identity matrix. Multi scale CNN perfumes better and random one just wanders around zero. This implies the effectiveness of multi scale CNN along with the fact that managing portfolio at random does not make any profit.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5860,7 +5860,7 @@ $$f_{actor}:\mathbb{R}^n \to \mathbb{R}^{n}. $$&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="Reinforcement Learning"></category></entry><entry><title>Duplication of S&amp;P500 with Stock Prices</title><link href="http://jjakimoto.github.io/sp500.html" rel="alternate"></link><published>2016-12-31T12:00:00+09:00</published><updated>2016-12-31T12:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2016-12-31:/sp500.html</id><summary type="html">
+</content><category term="Reinforcement Learning"></category></entry><entry><title>Duplication of S&amp;P500 with Stock Prices</title><link href="http://jjakimoto.github.io/articles/2016/Dec/31/sp500/" rel="alternate"></link><published>2016-12-31T12:00:00+09:00</published><updated>2016-12-31T12:00:00+09:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2016-12-31:/articles/2016/Dec/31/sp500/</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -7003,7 +7003,7 @@ where $y$ and $\bf{x}$ are S&amp;P500; and stock prices; $\bf{w}$ and $\bf{x}$ a
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="vanilla_linear" src="http://jjakimoto.github.io/images/sp500/vanilla_linear.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="vanilla_linear" src="{filename}images/sp500/vanilla_linear.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7050,7 +7050,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="vanilla_error" src="http://jjakimoto.github.io/images/sp500/vanilla_error.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="vanilla_error" src="{filename}images/sp500/vanilla_error.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7086,7 +7086,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="compare1" src="http://jjakimoto.github.io/images/sp500/compare1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="compare1" src="{filename}images/sp500/compare1.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7095,7 +7095,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="compare_error1" src="http://jjakimoto.github.io/images/sp500/compare_error1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="compare_error1" src="{filename}images/sp500/compare_error1.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7149,7 +7149,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="ARD_weight" src="http://jjakimoto.github.io/images/sp500/ARD_weight.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ARD_weight" src="{filename}images/sp500/ARD_weight.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7167,7 +7167,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="ARD_linear" src="http://jjakimoto.github.io/images/sp500/ARD_linear.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ARD_linear" src="{filename}images/sp500/ARD_linear.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7176,7 +7176,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="ARD_linear_error" src="http://jjakimoto.github.io/images/sp500/ARD_linear_error.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ARD_linear_error" src="{filename}images/sp500/ARD_linear_error.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7213,7 +7213,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="50biggest_volume" src="http://jjakimoto.github.io/images/sp500/50biggest_volume.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="50biggest_volume" src="{filename}images/sp500/50biggest_volume.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7240,7 +7240,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="sublinear" src="http://jjakimoto.github.io/images/sp500/sublinear.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="sublinear" src="{filename}images/sp500/sublinear.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7249,7 +7249,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="sublinear_error" src="http://jjakimoto.github.io/images/sp500/sublinear_error.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="sublinear_error" src="{filename}images/sp500/sublinear_error.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7267,7 +7267,7 @@ where $\tilde{y_i}$ and $y_i$ are duplication and truth value of S&amp;P500.;&lt
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="compare_error2" src="http://jjakimoto.github.io/images/sp500/compare_error2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="compare_error2" src="{filename}images/sp500/compare_error2.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7315,7 +7315,7 @@ In the original paper, more general statement has been shown. Most of functions 
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="neural1" src="http://jjakimoto.github.io/images/sp500/neural1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="neural1" src="{filename}images/sp500/neural1.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7336,7 +7336,7 @@ where $\bf{f}(\cdot)$ is the output of the neural network.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="neural2" src="http://jjakimoto.github.io/images/sp500/neural2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="neural2" src="{filename}images/sp500/neural2.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7345,7 +7345,7 @@ where $\bf{f}(\cdot)$ is the output of the neural network.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="neural_error" src="http://jjakimoto.github.io/images/sp500/neural_error.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="neural_error" src="{filename}images/sp500/neural_error.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
