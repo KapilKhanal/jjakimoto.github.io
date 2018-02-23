@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Data Rounder - Articles by Tomoaki Fujii</title>
+    <link rel="stylesheet" type="text/css" href="https://jjakimoto.github.io/theme/css/style.css" />
+</head>
+
+<body id="index" class="home">
+    <!--
+        <header id="banner" class="body">
+        <h1><a href="http://jjakimoto.github.io/">Data Rounder </a></h1>
+        <h2>Machine Learning and Programming</h2>
+     -->
+ 
+ <!-- Headbar -->
+<ul class="topnav">
+  <li><a href="http://jjakimoto.github.io/">Data Rounder</a></li>
+  <li><a href="http://jjakimoto.github.io/pages/about">About</a></li>
+  <li><a href="http://jjakimoto.github.io/pages/books">Books I Have Read</a></li>
+</ul>
+              
+<!-- Sidebar -->
+<nav class="sidebar">
+    <ul class="large">
+        <li>
+            <h1>Me</h1>
+            <img alt="me" src="http://jjakimoto.github.io/images/about/me.jpg" />
+            <p>I am a data scientist with a passion for Python and C++ in particular. <a href="https://jjakimoto.github.io/pages/about">More.....</a></p>
+       </li>
+        <li>
+            <h1>Social</h1>
+            <ul class="small">
+                <li><a href="https://github.com/jjakimoto"><p>GitHub</p></a></li>
+                <li><a href="https://www.linkedin.com/in/tomoaki-fujii-5bba56133"><p>LinkedIn</p></a></li>
+                <li><a href="https://www.facebook.com/tomoaki.fujii.73"><p>Facebook</p></a></li>
+           </ul>
+       </li>
+        <li>
+            <h1>Categories</h1>
+            <ul class="small">
+                <li><a href="http://jjakimoto.github.io/category/machine-learning.html"><p>Machine Learning(6)</p> </a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<!-- contents -->
+ <article class="mycontent">
+<section id="content">
+<h2>Articles by Tomoaki Fujii</h2>
+
+<ul id="post-list" style="list-style-type: none">
+        <li><article class="hentry">
+                <header> <h1 class="entry-title"><a href="http://jjakimoto.github.io/articles/2017/Oct/26/RC/" rel="bookmark" title="Permalink to Bootstrap and Backtest for Algorithmic Trading (Reality Check)">Bootstrap and Backtest for Algorithmic Trading (Reality Check)</a></h1> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-10-26T12:00:00+09:00"> Thu, 10/26/2017 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="http://jjakimoto.github.io/author/tomoaki-fujii.html">Tomoaki Fujii</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Applying machine learning to algorithmic trading is getting more and more attention recently. Machine learning approach usually takes the following steps:</p>
+<ol>
+<li>Build models</li>
+<li>Optimize model parameters</li>
+<li>Model selection or hyper parameters tuning</li>
+<li>Evaluate performances</li>
+</ol>
+<p>In the first and second stage, we build models and optimize their parameters on given data. Next, we evaluate several models' performances with their various hyperparameter configurations on out of samples. Then, we pick up the best performance one.</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h1 class="entry-title"><a href="http://jjakimoto.github.io/articles/2017/Mar/26/house_price/" rel="bookmark" title="Permalink to Data Explore and Visualization">Data Explore and Visualization</a></h1> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-03-26T12:00:00+09:00"> Sun, 03/26/2017 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="http://jjakimoto.github.io/author/tomoaki-fujii.html">Tomoaki Fujii</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Data exploration is important. Before jumping into analysis, you will get some intuition as to how to use data and establish more sophisticated modeling. In some cases, how to use data improve even models robust to high dimensional input like Deep Learning. In this article, we work on data exploration and visualization for the house price data from <a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data">a kaggle competition</a> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h1 class="entry-title"><a href="http://jjakimoto.github.io/articles/2017/Jan/28/RF/" rel="bookmark" title="Permalink to Feature Selection and Random Forests">Feature Selection and Random Forests</a></h1> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-01-28T12:00:00+09:00"> Sat, 01/28/2017 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="http://jjakimoto.github.io/author/tomoaki-fujii.html">Tomoaki Fujii</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In prediction tasks, given data does not necessary consist of only useful information. The data may contain irrelevant features, which impairs the performance of a predictor due to overfitting. This situation is often the case for medical data. Sometimes, only a few hundreds of samples are available while we have thousands of features. In this case, we have to extract a small subset of effective features to reduce computational costs and overfitting. Random forest is one of the popular predictors due to the robustness. As one of the useful byproducts, random forests are able to estimate how much each feature has an effect on a performance of the forests. Thus, random forests give us one of possible approaches to reduce the number features to use. In this article, we work on a binary classification task of <a href="https://archive.ics.uci.edu/ml/datasets/Dorothea">“Dorothea Data Set” from UCI Machine Learning Repository</a> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h1 class="entry-title"><a href="http://jjakimoto.github.io/articles/2017/Jan/13/movie/" rel="bookmark" title="Permalink to Movie Review with Vector Representations">Movie Review with Vector Representations</a></h1> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-01-13T12:00:00+09:00"> Fri, 01/13/2017 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="http://jjakimoto.github.io/author/tomoaki-fujii.html">Tomoaki Fujii</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Majority of data is expressed as text format such as news articles, SNS and speech. Each article has some meanings and opinions, which have significant effects on things around us like economics, politics, etc. Therefore, using these information for prediction systems is important. Most of prediction algorithms, however, take input in the form of tensor (1st-order tensor is vector), which requires us to represent text data in the tensor(vector) form. In this article, we review popular three vector representation: Bag or Words, Word2Vec, and Doc2Vec. Then, we compare these qualities through sentiment analysis for movie reviews of <a href="http://ai.stanford.edu/~amaas/data/sentiment">IMDb</a> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h1 class="entry-title"><a href="http://jjakimoto.github.io/articles/2017/Jan/07/RL_trade/" rel="bookmark" title="Permalink to Reinforcement Learning for Stock Trading">Reinforcement Learning for Stock Trading</a></h1> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-01-07T12:00:00+09:00"> Sat, 01/07/2017 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="http://jjakimoto.github.io/author/tomoaki-fujii.html">Tomoaki Fujii</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Reinforcement learning has recently been succeeded to go over the human's ability in video games and Go. This implies possiblities to beat human's performance in other fields where human is doing well. Stock trading can be one of such fields. Some professional  In this article, we consider application of reinforcement learning to stock trading. Especially, we work on constructing a portoflio to make profit. Since portfolio can take inifinite number, we tackle this task based on Deep Deterministic Policy Gradient (DDPG). The behavior of stock prices is konwn to depend on history and several time scales, which leads us to use multiscale CNN for Q and actor network. We show that our algorithm has better performance than monkey trading(taking actions at random).</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h1 class="entry-title"><a href="http://jjakimoto.github.io/articles/2016/Dec/31/sp500/" rel="bookmark" title="Permalink to Duplication of S&P500 with Stock Prices">Duplication of S&P500 with Stock Prices</a></h1> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2016-12-31T12:00:00+09:00"> Sat, 12/31/2016 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="http://jjakimoto.github.io/author/tomoaki-fujii.html">Tomoaki Fujii</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Economic indicators are statistics to measure growth and contraction of economics. Trading based on such indicators, what is called technical trading, is one of the main trends in recent stock trading. Especially S&P500;(Standard and Poor's 500 Index) is frequently used as a bench mark to evaluate portfolio -- a grouping of financial assets like stocks. Roughly speaking, constructing a portfolio with better return and lower risk than S&P500; is one of the main goals for stock trading. Therefore, clarifying the relation between S&P500; and stock prices are important to construct a good portfolio.</p> </div><!-- /.entry-content -->
+        </article></li>
+</ul><!-- /#posts-list -->
+</section><!-- /#content -->
+ </article>
+    
+    
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+</body>
+</html>
