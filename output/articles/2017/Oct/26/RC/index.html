@@ -1,72 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-      <title>Data Rounder</title>
-    <link rel="stylesheet" type="text/css" href="https://jjakimoto.github.io/theme/css/style.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Data Rounder, ">
+    <link href="/favicon.png" rel="icon">
+
+        <link rel="alternate"  href="http://jjakimoto.github.io/feeds/all.atom.xml" type="application/atom+xml" title="Data Rounder Full Atom Feed"/>
+
+        <title>Data Rounder - Bootstrap and Backtest for Algorithmic Trading (Reality Check)</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="/theme/css/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="/theme/css/styles.css">
+    <link rel="stylesheet" href="/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
 
 
-    <meta name="tags" content="Hypothesis Test" />
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
 </head>
 
-<body id="index" class="home">
-    <!--
-        <header id="banner" class="body">
-        <h1><a href="http://jjakimoto.github.io/">Data Rounder </a></h1>
-        <h2>Machine Learning, Finance, and Technologies</h2>
-     -->
- 
- <!-- Headbar -->
-<ul class="topnav">
-  <li><a href="http://jjakimoto.github.io/">Data Rounder</a></li>
-  <li><a href="http://jjakimoto.github.io/pages/about">About</a></li>
-  <li><a href="http://jjakimoto.github.io/pages/books">Books I Have Read</a></li>
-</ul>
-              
-<!-- Sidebar -->
-<nav class="sidebar">
-    <ul class="large">
-        <li>
-            <h1>Me</h1>
-            <img alt="me" src="http://jjakimoto.github.io/images/about/me.jpg" />
-            <p>I am a data scientist with a passion for Python and C++ in particular. <a href="https://jjakimoto.github.io/pages/about">More.....</a></p>
-       </li>
-        <li>
-            <h1>Social</h1>
-            <ul class="small">
-                <li><a href="https://github.com/jjakimoto"><p>GitHub</p></a></li>
-                <li><a href="https://www.linkedin.com/in/tomoaki-fujii-5bba56133"><p>LinkedIn</p></a></li>
-                <li><a href="https://www.facebook.com/tomoaki.fujii.73"><p>Facebook</p></a></li>
-           </ul>
-       </li>
-        <li>
-            <h1>Categories</h1>
-            <ul class="small">
-                <li><a href="http://jjakimoto.github.io/category/machine-learning.html"><p>Machine Learning(6)</p> </a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
-<!-- contents -->
- <article class="mycontent">
-<section id="content" class="body">
-  <header>
-    <h1 class="entry-title"  >
-      <a href="http://jjakimoto.github.io/articles/2017/Oct/26/RC/" rel="bookmark"
-         title="Permalink to Bootstrap and Backtest for Algorithmic Trading (Reality Check)">Bootstrap and Backtest for Algorithmic Trading (Reality Check)</a></h1>
- 
-  </header>
-  <footer class="post-info">
-    <time class="published" datetime="2017-10-26T12:00:00-04:00">
-      Thu 26 October 2017
-    </time>
-    <address class="vcard author">
-      By           <a class="url fn" href="http://jjakimoto.github.io/author/tomoaki-fujii.html">Tomoaki Fujii</a>
-    </address>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
-    <style type="text/css">/*!
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/pages/books/">Books</a></li>
+        <li><a href="/pages/about/">About</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/"><i class="fa fa-linkedin"></i></a></li>
+        <li><a href="http://jjakimoto.github.io/feeds/all.atom.xml"><i class="fa fa-rss"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-3-4">
+            <div class="l-box">
+
+    <header id="post-header">
+        <h1>Bootstrap and Backtest for Algorithmic Trading (Reality Check)</h1>
+            <div class="post-meta">
+                October 26, 2017
+            </div>
+            <div class="post-tags">
+                <ul>
+                    <li>tags:</li>
+                    <li><a href="/tag/Hypothesis Test/">Hypothesis Test</a></li>
+                </ul>
+            </div>
+    </header>
+
+    <section id="post">
+        <style type="text/css">/*!
 *
 * IPython notebook
 *
@@ -1038,7 +1054,8 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1055,7 +1072,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1063,7 +1081,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1071,7 +1090,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1088,7 +1108,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1096,7 +1117,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1106,7 +1128,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1114,7 +1137,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1376,12 +1400,12 @@ hBqc9WqQLHsAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>$$t_n =  \frac{\bar{x} - \mu}{\hat{\sigma}}$$
-where $\bar{x}$ is sample mean and $\hat{\sigma}$ is sample standard deviation with n instances. $t_n$ is know as $n-1$ degree <a href="https://www.amazon.com/Introduction-Mathematical-Statistics-Robert-Hogg/dp/0321795431">t-student distribution</a>.</p>
+$$t_n =  \frac{\bar{x} - \mu}{\hat{\sigma}}$$<p>where $\bar{x}$ is sample mean and $\hat{\sigma}$ is sample standard deviation with n instances. $t_n$ is know as $n-1$ degree <a href="https://www.amazon.com/Introduction-Mathematical-Statistics-Robert-Hogg/dp/0321795431">t-student distribution</a>.</p>
 <p>In our cases, null hypothesis asserts that $x1 - x0$ is distributed according to $N(0, 1)$. Thus, we set $\mu=0$ in the above equation.</p>
 </div>
 </div>
@@ -2021,7 +2045,8 @@ z9j0iciSD2AAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2029,7 +2054,8 @@ z9j0iciSD2AAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2037,7 +2063,8 @@ z9j0iciSD2AAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2053,7 +2080,8 @@ z9j0iciSD2AAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2272,7 +2300,8 @@ AEOECgAAYMj/D6lvnQFL8rQKAAAAAElFTkSuQmCC
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2662,7 +2691,8 @@ pF4MFZIkSZJ6MVRIkiRJ6uX/AXDSKq2nqeqwAAAAAElFTkSuQmCC
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3203,7 +3233,8 @@ SsgAAAC6EjIAAICuhAwAAKCr/x/qGxUkLn6v2gAAAABJRU5ErkJggg==
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3211,7 +3242,8 @@ SsgAAAC6EjIAAICuhAwAAKCr/x/qGxUkLn6v2gAAAABJRU5ErkJggg==
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3219,7 +3251,8 @@ SsgAAAC6EjIAAICuhAwAAKCr/x/qGxUkLn6v2gAAAABJRU5ErkJggg==
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3236,7 +3269,8 @@ SsgAAAC6EjIAAICuhAwAAKCr/x/qGxUkLn6v2gAAAABJRU5ErkJggg==
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3244,7 +3278,8 @@ SsgAAAC6EjIAAICuhAwAAKCr/x/qGxUkLn6v2gAAAABJRU5ErkJggg==
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3300,7 +3335,8 @@ SsgAAAC6EjIAAICuhAwAAKCr/x/qGxUkLn6v2gAAAABJRU5ErkJggg==
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3308,7 +3344,8 @@ SsgAAAC6EjIAAICuhAwAAKCr/x/qGxUkLn6v2gAAAABJRU5ErkJggg==
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3316,15 +3353,14 @@ SsgAAAC6EjIAAICuhAwAAKCr/x/qGxUkLn6v2gAAAABJRU5ErkJggg==
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As we discussed before, financial data is one sample path and high variance. To deal with these difficulties, time series bootstrap method called reality check (RC) has been introduced by <a href="http://www.ssc.wisc.edu/~bhansen/718/White2000.pdf">White(2000)</a>. This method has been modified by <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.485.5482&amp;rep=rep1&amp;type=pdf">Hansen(2005)</a>, who gives stronger ability to reject alternative hypothesis when mean value is strictly negative. This method is called a test for Superior Predictive Ability (often denoted by SPA).</p>
 <p>In the following discussion, $d_{k, i}$ denotes the performance of algorithm k subtracted by benchmark at time i. We also use $n$ as a time period and $m$ as the number of algorithms. The difference between RC and SPA comes from the statics to compare:</p>
-<p>$$T^{RC}_n = max \big[ \underset{k = 1, \dots, m}{max}\ n^{1/2} \bar{d}_k, 0\big]$$
-$$T^{SPA}_n = max \big[ \underset{k = 1, \dots, m}{max}\{\frac{n^{1/2} \bar{d}_k}{\hat{\omega}_k}\}, 0\big]$$
-Note that we define $T^{RC}_n$ to take only positive values for the sake of simplicity, which is different from the one defined by <a href="http://www.ssc.wisc.edu/~bhansen/718/White2000.pdf">White</a>. We explore bootstrap method for RC and SPA.</p>
+$$T^{RC}_n = max \big[ \underset{k = 1, \dots, m}{max}\ n^{1/2} \bar{d}_k, 0\big]$$$$T^{SPA}_n = max \big[ \underset{k = 1, \dots, m}{max}\{\frac{n^{1/2} \bar{d}_k}{\hat{\omega}_k}\}, 0\big]$$<p>Note that we define $T^{RC}_n$ to take only positive values for the sake of simplicity, which is different from the one defined by <a href="http://www.ssc.wisc.edu/~bhansen/718/White2000.pdf">White</a>. We explore bootstrap method for RC and SPA.</p>
 <p>Bootstrap resamples from the empirical distribution by mixing the order of samples. Time series data, however, has historical dependency in general, which makes normal bootstrap improper. The variation of bootstrap for time series data has been proposed by <a href="http://www.tandfonline.com/doi/abs/10.1080/01621459.1994.10476870">Politis and Romano(1994)</a>, which is called the stationary bootstrap.</p>
 <p>Let $b \in (1, \infty)$ and let $n$ be the number of samples. Then, here is the the stationary bootstrap:</p>
 <ol>
@@ -3336,7 +3372,8 @@ Note that we define $T^{RC}_n$ to take only positive values for the sake of simp
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3353,22 +3390,21 @@ Note that we define $T^{RC}_n$ to take only positive values for the sake of simp
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>When mean is slightly positive, it is difficult to reject null hypothesis. SPA has improved this point by introducing modified null hypothesis mean value $\hat{\mu}_k^c$.</p>
-<p>$$T^{SPA}_n = max \big[ \underset{k = 1, \dots, m}{max}\{\frac{n^{1/2} \bar{d}_k}{\hat{\omega}_k}\}, 0\big]$$
-$$ \hat{\mu}_k^c = \bar{d}_k 1_{\{\ n^{1/2} \bar{d}_k / \hat{\omega}_k \leq -\sqrt{2log\ log\ n}\ \}}$$</p>
-<p>When approximating samples from null hypothesis, RC recenters with subtracting by sample mean. If true mean is slightly positive, it has high probability to end up negative values, which makes resampling positively biased, As a result, this makes it difficult to reject null hypothesis. To overcome this, <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.485.5482&amp;rep=rep1&amp;type=pdf">Hansen(2005)</a> introduces the modification inspired by <a href="https://en.wikipedia.org/wiki/Law_of_the_iterated_logarithm">the law of the iterated logarithm</a>, which asserts that $-\sqrt{2log\ log\ n}$ is the growth speed of infimum in the limit. More precisely, for a distribution with finite mean and variance, it is known that</p>
-<p>$$ P\big(\ \underset{n \rightarrow \infty}{lim inf}\ \frac{n^{1/2} (\bar{x} - \mu)}{\hat{\sigma}} = -\sqrt{2 log\ log\ n}\ \big) = 1$$</p>
-<p>where $\bar{x}$ is sample mean, $\mu$ is true mean, and $\hat{\sigma}$ is sample deviation. Thus, in the above equation, $n^{1/2} \bar{d}_k / \hat{\omega}_k$ grows slower to negative direction than $-\sqrt{2log\ log\ n}$ if mean is equivalent to or greater than 0. Then, Hansen modifies mean to 0 for null hypothesis if growth rate is slow.</p>
+$$T^{SPA}_n = max \big[ \underset{k = 1, \dots, m}{max}\{\frac{n^{1/2} \bar{d}_k}{\hat{\omega}_k}\}, 0\big]$$$$ \hat{\mu}_k^c = \bar{d}_k 1_{\left\{\ n^{1/2} \bar{d}_k / \hat{\omega}_k \leq -\sqrt{2log\ log\ n}\ \right\}}$$<p>When approximating samples from null hypothesis, RC recenters with subtracting by sample mean. If true mean is slightly positive, it has high probability to end up negative values, which makes resampling positively biased, As a result, this makes it difficult to reject null hypothesis. To overcome this, <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.485.5482&amp;rep=rep1&amp;type=pdf">Hansen(2005)</a> introduces the modification inspired by <a href="https://en.wikipedia.org/wiki/Law_of_the_iterated_logarithm">the law of the iterated logarithm</a>, which asserts that $-\sqrt{2log\ log\ n}$ is the growth speed of infimum in the limit. More precisely, for a distribution with finite mean and variance, it is known that</p>
+$$ P\big(\ \underset{n \rightarrow \infty}{lim \ inf}\ \frac{n^{1/2} (\bar{x} - \mu)}{\hat{\sigma}} = -\sqrt{2 log\ log\ n}\ \big) = 1$$<p>where $\bar{x}$ is sample mean, $\mu$ is true mean, and $\hat{\sigma}$ is sample deviation. Thus, in the above equation, $n^{1/2} \bar{d}_k / \hat{\omega}_k$ grows slower to negative direction than $-\sqrt{2log\ log\ n}$ if mean is equivalent to or greater than 0. Then, Hansen modifies mean to 0 for null hypothesis if growth rate is slow.</p>
 <p>The bootstrap method is the same as RC except for the point: using $\bar{Z}^*_{k, b} = max\{\frac{n^{1/2}(\bar{d}^*_{k, b} - \hat{\mu}_k^c)}{\hat{\omega}_k}, \bar{Z}^*_{k-1, b}\}$instead of $\bar{V}^*_{k, b}$</p>
 <p>In <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.485.5482&amp;rep=rep1&amp;type=pdf">the original paper</a>, $\hat{\mu}_k^l$ and $\hat{\mu}_k^u$ are introduced as lower bound and upper bound of null hypothesis mean. Effective estimating $\hat{\omega}_k$ is also explained. If you have interest, refer to <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.485.5482&amp;rep=rep1&amp;type=pdf">the original paper</a>.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3376,7 +3412,8 @@ $$ \hat{\mu}_k^c = \bar{d}_k 1_{\{\ n^{1/2} \bar{d}_k / \hat{\omega}_k \leq -\sq
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -4344,7 +4381,8 @@ IAII/AEAAIAIIPAHAAAAIoDAHwAAAIiA/we7yZhkrurulAAAAABJRU5ErkJggg==
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -4391,7 +4429,8 @@ dtype: float64</pre>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -4399,7 +4438,8 @@ dtype: float64</pre>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -4437,16 +4477,120 @@ dtype: float64</pre>
 }
 </script>
 
-  </div><!-- /.entry-content -->
+    </section>
+
+
+<nav class="pagination-wrapper">
+    <div class="pagination">
+        <div class="pagination-left">
+        </div>
+        <div class="pagination-right">
+                &nbsp;
+        </div>
+    </div>
+</nav>
+    <aside class="comments">
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    var disqus_config = function () {
+        this.page.url = "http://jjakimoto.github.io/articles/2017/Oct/26/RC/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "RC"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//datarounder.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+    </aside>
+
+            </div>
+        </section>
+
+        <nav id="sidebar" class="pure-u-1 pure-u-md-1-4">
+            <div class="l-box">
+<section>
+    <div class="portrait">
+            <img src="/theme/images/me.jpg" />
+    </div>
+    <div class="name-cv">
+        <div class="name">Tomoaki Fujii</div>
+        <!--div class="cv">
+            <a href="/pdfs/cv.pdf"><i class="fa fa-file-pdf-o"></i> CV</a>
+        </div-->
+    </div>
+    <div class="clear"></div>
+    <div class="sub-name"></div>
+    <div class="contact">f.j.akimoto@gmail.com</div>
 </section>
- </article>
-    
-    
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
+
+<section class="tags">
+    <span class="tag"><a href="/tag/Machine Learning/">#Machine Learning</a></span>
+    <span class="tag"><a href="/tag/Deep Learning/">#Deep Learning</a></span>
+    <span class="tag"><a href="/tag/Finance/">#Finance</a></span>
+    <span class="tag"><a href="/tag/Python/">#Python</a></span>
+</section>
+
+
+<!-- <section class="search">
+    <script>
+  (function() {
+    var cx = '006027474294305969173:cpp1rvft78s';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+</section> -->            </div>
+        </nav>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-3-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://jjakimoto.github.io">Tomoaki Fujii</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=7297581;
+var sc_invisible=1;
+var sc_security="e9e753f7";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="shopify site
+analytics" href="http://statcounter.com/shopify/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/7297581/0/e9e753f7/1/"
+alt="shopify site analytics"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
+

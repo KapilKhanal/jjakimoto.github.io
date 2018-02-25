@@ -14,6 +14,17 @@ AUTHOR = 'Tomoaki Fujii'
 SITENAME = 'Data Rounder'
 SITESUBTITLE = 'Machine Learning, Finance, and Technologies'
 SITEURL = 'http://jjakimoto.github.io'
+SIDEBAR_NAME = AUTHOR
+SIDEBAR_EMAIL = "f.j.akimoto@gmail.com"
+SIDEBAR_TAGS = ['Machine Learning',
+                'Deep Learning',
+                'Finance',
+                'Python',
+                ]
+MENUITEMS = [('Home', '/'),
+             ('Books', '/pages/books/'),
+             ('About', '/pages/about/'),
+             ]
 
 # pusblish an article as a draft in default setting
 DEFAULT_METADATA = {
@@ -30,13 +41,13 @@ MARKDOWN = {}
 # PATH settings
 OUTPUT_PATH = 'output/'
 PATH = 'content'
-STATIC_PATHS=['images']
+STATIC_PATHS = ['images']
 PAGE_PATHS = ['pages']
 ARTICLE_PATHS = ['articles']
 
 # Extention
 MARKUP = ('md', 'ipynb')
-PLUGIN_PATHS = ['./plugins', join(HOME_DIR, "work/pelican-plugins")]
+PLUGIN_PATHS = ['./plugins', "./pelican-plugins"]
 PLUGINS = ['ipynb.markup', "render_math"]
 
 # URL settings
@@ -48,16 +59,12 @@ PAGE_SAVE_AS = 'pages/{slug}/index.html'
 # Time and Date settings
 TIMEZONE = 'America/New_York'
 DEFAULT_DATE_FORMATS = '%a, %m/%d/%Y'
-LOCALE=('en_US')
+LOCALE = ('en_US')
 
 # Template pages settings
 TEMPLATE_PAGES = None
 
-
-THEME = join(CURRENT_DIR, "mytheme")
-# THEME = "/Users/tomoaki/work/pelican-themes/backdrop"
-# You need to define this to use backdrop theme
-# PAGINATED_DIRECT_TEMPLATES = ('categories', 'archives')
+THEME = "themes/mytheme1"
 
 # PELICAN_COMMENT_SYSTEM = True
 # PELICAN_COMMENT_SYSTEM_IDENTICON_DATA = ('author',)

@@ -1,0 +1,37 @@
+<section>
+    <div class="portrait">
+            <img src="/theme/images/me.jpg" />
+    </div>
+    <div class="name-cv">
+        <div class="name">{{ SIDEBAR_NAME }}</div>
+        <!--div class="cv">
+            <a href="/pdfs/cv.pdf"><i class="fa fa-file-pdf-o"></i> CV</a>
+        </div-->
+    </div>
+    <div class="clear"></div>
+    <div class="sub-name">{{ SIDEBAR_SUBNAME }}</div>
+    <div class="contact">{{ SIDEBAR_EMAIL }}</div>
+</section>
+
+<section class="tags">
+{% for tag in SIDEBAR_TAGS %}
+    <span class="tag"><a href="/tag/{{ tag }}/">#{{ tag }}</a></span>
+{% endfor %}
+</section>
+
+
+<!-- <section class="search">
+    <script>
+  (function() {
+    var cx = '006027474294305969173:cpp1rvft78s';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+</section> -->
