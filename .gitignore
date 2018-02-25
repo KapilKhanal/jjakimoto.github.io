@@ -92,3 +92,4 @@ ENV/
 
 # others
 *.swp
+output/*

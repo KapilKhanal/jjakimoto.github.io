@@ -2,8 +2,14 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+import os
+from os.path import dirname, abspath, join
 
-# Default setting
+HOME_DIR = os.getenv("HOME")
+CURRENT_DIR = dirname(abspath("__file__"))
+
+
+# Name
 AUTHOR = 'Tomoaki Fujii'
 SITENAME = 'Data Rounder'
 SITESUBTITLE = 'Machine Learning, Finance, and Technologies'
@@ -14,24 +20,49 @@ DEFAULT_METADATA = {
     'status': 'draft',
 }
 
+# Basic settings
+DEFAULT_CATEGORY = 'misc'
+DISPLAY_CATEGORIES_ON_MENU = True
+DISPLAY_PAGES_ON_MENU = True
+IGNORE_FILES = ['.#*']
+MARKDOWN = {}
+
+# PATH settings
+OUTPUT_PATH = 'output/'
 PATH = 'content'
 STATIC_PATHS=['images']
 PAGE_PATHS = ['pages']
 ARTICLE_PATHS = ['articles']
 
+# Extention
+MARKUP = ('md', 'ipynb')
+PLUGIN_PATHS = ['./plugins', join(HOME_DIR, "work/pelican-plugins")]
+PLUGINS = ['ipynb.markup', "render_math"]
 
-THEME = "/home/tomoaki/work/DS_blog/mytheme"
-# THEME = "/Users/tomoaki/work/blog/pelican-themes/bootlex"
+# URL settings
+ARTICLE_URL = 'articles/{date:%Y}/{date:%b}/{date:%d}/{slug}/'
+ARTICLE_SAVE_AS = 'articles/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
+PAGE_URL = 'pages/{slug}/'
+PAGE_SAVE_AS = 'pages/{slug}/index.html'
+
+# Time and Date settings
+TIMEZONE = 'America/New_York'
+DEFAULT_DATE_FORMATS = '%a, %m/%d/%Y'
+LOCALE=('en_US')
+
+# Template pages settings
+TEMPLATE_PAGES = None
+
+
+THEME = join(CURRENT_DIR, "mytheme")
+# THEME = "/Users/tomoaki/work/pelican-themes/backdrop"
+# You need to define this to use backdrop theme
+# PAGINATED_DIRECT_TEMPLATES = ('categories', 'archives')
 
 # PELICAN_COMMENT_SYSTEM = True
 # PELICAN_COMMENT_SYSTEM_IDENTICON_DATA = ('author',)
 DISQUS_SITENAME = "datarounder"
 
-TIMEZONE = 'Asia/Tokyo'
-DATE_FORMATS={
-        'en': '%a, %m/%d/%Y',
-}
-LOCALE=('en_US')
 
 DEFAULT_LANG = 'en'
 
@@ -58,17 +89,5 @@ DEFAULT_PAGINATION = 10
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
 
-MARKUP = ('md', 'ipynb')
-
-PLUGIN_PATHS = ['./plugins', './pelican-plugins']
-PLUGINS = ['ipynb.markup', 'pelican_comment_system', 'assets', 'sitemap', 'gravatar']
-
-
-DISPLAY_PAGES_ON_MENU = True
-
-ARTICLE_URL = 'articles/{date:%Y}/{date:%b}/{date:%d}/{slug}/'
-ARTICLE_SAVE_AS = 'articles/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
-PAGE_URL = 'pages/{slug}/'
-PAGE_SAVE_AS = 'pages/{slug}/index.html'
 
 # COMMENT_URL = "#my_own_comment_id_{slug}"
