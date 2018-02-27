@@ -24,6 +24,7 @@ SIDEBAR_TAGS = ['Machine Learning',
 MENUITEMS = [('Home', '/'),
              ('Books', '/pages/books/'),
              ('About', '/pages/about/'),
+             ('Links', '/pages/links/'),
              ]
 
 # pusblish an article as a draft in default setting
