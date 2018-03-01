@@ -1096,26 +1096,26 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
-
-<span class="kn">import</span> <span class="nn">pickle</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">keras</span>
-<span class="kn">import</span> <span class="nn">sklearn</span>
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="n">xrange</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="c1"># local library</span>
-<span class="kn">import</span> <span class="nn">utils</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">pickle</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">json</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">os</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">sys</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">copy</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">time</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">keras</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">sklearn</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="n">xrange</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span></span>
+<span class="code-line"><span class="o">%</span><span class="k">matplotlib</span> inline</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1"># local library</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">utils</span></span>
 </pre></div>
 </div>
 </div>
@@ -1125,7 +1125,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>Using TensorFlow backend.
+<pre><span class="code-line">Using TensorFlow backend.</span>
 </pre>
 </div>
 </div>
@@ -1146,16 +1146,16 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [226]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">time</span>
-
-print ("Started!!")
-symbols = utils.get_sap_symbols('sap500')
-np.random.shuffle(symbols)
-start_date="2012-10-01"
-end_date="2016-04-01"
-# use Open data
-input_data = utils.get_data_list_key(symbols, start_date, end_date)
-target_data = utils.get_data('^GSPC', start_date, end_date)['Open']
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="o">%%</span><span class="k">time</span></span>
+<span class="code-line"></span>
+<span class="code-line">print ("Started!!")</span>
+<span class="code-line">symbols = utils.get_sap_symbols('sap500')</span>
+<span class="code-line">np.random.shuffle(symbols)</span>
+<span class="code-line">start_date="2012-10-01"</span>
+<span class="code-line">end_date="2016-04-01"</span>
+<span class="code-line"># use Open data</span>
+<span class="code-line">input_data = utils.get_data_list_key(symbols, start_date, end_date)</span>
+<span class="code-line">target_data = utils.get_data('^GSPC', start_date, end_date)['Open']</span>
 </pre></div>
 </div>
 </div>
@@ -1165,11 +1165,11 @@ target_data = utils.get_data('^GSPC', start_date, end_date)['Open']
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Started!!
-we cound not fetch data from the following companies
-['NEE', 'NWS', 'CSRA', 'HPE', 'CFG', 'WRK', 'PYPL', 'UA', 'COTY', 'QRVO', 'SYF', 'EVHC', 'ZTS', 'NWSA', 'ALLE', 'ABBV', 'MNK', 'KHC', 'WLTW', 'FTV', 'NAVI']
-CPU times: user 7.89 s, sys: 988 ms, total: 8.88 s
-Wall time: 3min 1s
+<pre><span class="code-line">Started!!</span>
+<span class="code-line">we cound not fetch data from the following companies</span>
+<span class="code-line">['NEE', 'NWS', 'CSRA', 'HPE', 'CFG', 'WRK', 'PYPL', 'UA', 'COTY', 'QRVO', 'SYF', 'EVHC', 'ZTS', 'NWSA', 'ALLE', 'ABBV', 'MNK', 'KHC', 'WLTW', 'FTV', 'NAVI']</span>
+<span class="code-line">CPU times: user 7.89 s, sys: 988 ms, total: 8.88 s</span>
+<span class="code-line">Wall time: 3min 1s</span>
 </pre>
 </div>
 </div>

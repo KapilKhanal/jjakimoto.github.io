@@ -2,7 +2,7 @@ Title: Feature Selection and Random Forests
 Slug: RF
 Date: 2017-01-28 12:00
 Category: Machine Learning
-Tags: Classification
+Tags: Classification, NLP
 Author: Tomoaki Fujii
 Status: published
 Summary: We review random forests and consider its application in feature selection.

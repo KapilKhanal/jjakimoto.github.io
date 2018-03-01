@@ -2,12 +2,8 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-import os
-from os.path import dirname, abspath, join
 
-HOME_DIR = os.getenv("HOME")
-CURRENT_DIR = dirname(abspath("__file__"))
-
+THEME = "themes/mytheme"
 
 # Name
 AUTHOR = 'Tomoaki Fujii'
@@ -48,8 +44,12 @@ ARTICLE_PATHS = ['articles']
 
 # Extention
 MARKUP = ('md', 'ipynb')
-PLUGIN_PATHS = ['./plugins', "./pelican-plugins"]
-PLUGINS = ['ipynb.markup', "render_math"]
+PLUGIN_PATHS = ['./plugins', './pelican-plugins']
+PLUGINS = ['ipynb.markup', 'render_math', 'better_codeblock_line_numbering']
+MD_EXTENSIONS = [
+    'codehilite(css_class=highlight,linenums=False)',
+    'extra'
+    ]
 
 # URL settings
 ARTICLE_URL = 'articles/{date:%Y}/{date:%b}/{date:%d}/{slug}/'
@@ -65,10 +65,6 @@ LOCALE = ('en_US')
 # Template pages settings
 TEMPLATE_PAGES = None
 
-THEME = "themes/mytheme1"
-
-# PELICAN_COMMENT_SYSTEM = True
-# PELICAN_COMMENT_SYSTEM_IDENTICON_DATA = ('author',)
 DISQUS_SITENAME = "datarounder"
 
 
@@ -82,10 +78,6 @@ CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
 AUTHOR_FEED_ATOM = 'feeds/%s.atom.xml'
 # AUTHOR_FEED_RSS = None
 
-# Blogroll
-# LINKS = (('GitHub', 'https://github.com/jjakimoto'),)
-
-# GITHUB_URL = 'https://github.com/jjakimoto'
 
 # Social widget
 SOCIAL = (('GitHub', 'https://github.com/jjakimoto'),
@@ -93,9 +85,3 @@ SOCIAL = (('GitHub', 'https://github.com/jjakimoto'),
           ('Facebook', 'https://www.facebook.com/tomoaki.fujii.73'),)
 
 DEFAULT_PAGINATION = 10
-
-# Uncomment following line if you want document-relative URLs when developing
-# RELATIVE_URLS = True
-
-
-# COMMENT_URL = "#my_own_comment_id_{slug}"

@@ -1,8 +1,8 @@
 Title: Bootstrap and Backtest for Algorithmic Trading (Reality Check)
 Slug: RC
 Date: 2017-10-26 12:00
-Category: Machine Learning
-Tags: Hypothesis Test
+Category: Machine Learning, Finance
+Tags: Hypothesis Test, Backtest
 Author: Tomoaki Fujii
 Status: published
 Summary: We review how to apply hypothesis test for time series data
