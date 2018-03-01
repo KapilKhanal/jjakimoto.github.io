@@ -72,7 +72,7 @@
     <header id="post-header">
         <h1>Start your data science blog by Pelican</h1>
             <div class="post-meta">
-                February 28, 2018
+                March 01, 2018
             </div>
             <div class="post-tags">
                 <ul>
@@ -83,13 +83,13 @@
     </header>
 
     <section id="post">
-        <p>Blogging is one of the fantastic ways to demonstrate your projects and help you understand stuffs in more depth. Especially, I believe that blogging helps you land a job more efficiently. Even if you are not looking for a new position, writing articles you are working on would be the practice to explain stuffs to others, which always requires deep understanding. Indeed, A. Einstein mentioned</p>
+        <p>Blogging is one of the fantastic ways to demonstrate your projects and help you understand stuff in more depth. Especially, I believe that blogging helps you land a job more efficiently. Even if you are not looking for a new position, writing articles you are working on would be the practice to explain stuff to others, which always requires deep understanding. Indeed, A. Einstein mentioned</p>
 <blockquote>
-<p>If you can't explain it to a 6 year old then you really don't understand it yourself
-Thus, blogging brings you a lot of benefits. Today is the date to start your blog!</p>
+<p>If you can't explain it to a 6 year old then you really don't understand it yourself</p>
 </blockquote>
+<p>Thus, blogging brings you a lot of benefits. Today is the date to start your blog!</p>
 <p>In this article, I explain how to build your technology blog, especially data science blog.</p>
-<p>I know that folks working around data science space hate suffering from stuffs like learning HTML and making beautiful web design. I am one of them.
+<p>I know that folks working around data science space hate suffering from stuff like learning HTML and making beautiful web design. I am one of them.
 Then, static site generators comes in makes blogging simpler to even non professional guys like me. There are a few options for static site generators such as <a href="http://docs.getpelican.com/en/stable/">Pelican</a> written in Python and <a href="https://jekyllrb.com/">Jekyll</a> written in Ruby.</p>
 <p>In daily analytics, I spend a lot of time on <a href="http://jupyter.org/">Jupyter Notebook</a>. So, my choice of the platform goes to <a href="http://docs.getpelican.com/en/stable/">Pelican</a>, which is able to generate articles directly from IPython Notebook file.</p>
 <p>Let's dig into how to write articles with Pelican!</p>
@@ -97,8 +97,8 @@ Then, static site generators comes in makes blogging simpler to even non profess
 <p>We will go through the following processes:
 1. Install Pelican
 2. Create a default environment
-3. Set up jupyter extension</p>
-<h2>1. Install Pelican</h2>
+3. Set up external plugins</p>
+<h3>1. Install Pelican</h3>
 <p>Before installing anything, building virtual environment is recommended to avoid messing up your local python environment. We use <code>virtualenv</code> here and install it through pip.</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="gp">foo@bar:~$</span> pip install virtualenv</span>
 <span class="code-line"><span class="gp">foo@bar:~$</span> mkdir ~/virtualenvs</span>
@@ -115,7 +115,7 @@ Then, static site generators comes in makes blogging simpler to even non profess
 </pre></div>
 
 
-<h2>2. Create a default environment</h2>
+<h3>2. Create a default environment</h3>
 <p>We determine under which folder the blog will be built. In this article, we are going to build the environment under '~/blog'.
 Under this folder, we will make the following files:
 <em> requirements.txt
@@ -177,17 +177,17 @@ In Pelican, there is command <code>pelican quick-start</code>. Its execution wil
 
 
 <p>Among files above, we edit <code>content</code> and <code>pelicanconf.py</code> frequently.</p>
-<p>Let's start from <code>pelicanconf.py</code>. As an example, what I am using is posted here. This combines themes used in this site and some other couples of things.</p>
+<p>Let's start from <code>pelicanconf.py</code>. As an example, what I am using is <a href="https://github.com/jjakimoto/jjakimoto.github.io/blob/develop/pelicanconf.py">here</a>.</p>
 <p>If you check my <code>pelicanconf.py</code>, you may notice the part,</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;themes/mytheme&quot;</span></span>
 </pre></div>
 
 
-<p>This part defines how your blog looks like. This file is customizable. In my case, I add some stuffs based on <a href="https://github.com/rossant/rossant.github.io/tree/sources/themes">this theme</a>. You can see more detail as to how to customize your theme.</p>
-<p>You also have to introduce external plugin files for IPython Notebook and Markdown.</p>
-<p>For IPython Notebook, you can download files from <a href="https://github.com/danielfrg/pelican-ipynb">this repository</a>.</p>
-<p>For Markdown, you need to download more generic plugins from <a href="https://github.com/getpelican/pelican-plugins">this repository</a>.</p>
-<p>After install, you should add the followings to your <code>pelicanconf.py</code>.</p>
+<p>This folder defines framework of your blog, and of course, it is customizable. My recommendation is finding some cool blog and arrange their them according to your demand. In my case, I add some extra stuff to <a href="https://github.com/rossant/rossant.github.io/tree/sources/themes">this theme</a>. The them what I amd using this website is [here](<a href="https://github.com/jjakimoto/jjakimoto.github.io/tree/develop/themes/mytheme">here</a>. You can see more detail at <a href="http://docs.getpelican.com/en/3.6.3/themes.html">the official documentation</a> as to how to customize your theme.</p>
+<h3>3. Set up external plugins</h3>
+<p>Next, we are going to introduce external plugins for IPython Notebook and Markdown.</p>
+<p>You can download files from <a href="https://github.com/danielfrg/pelican-ipynb">this repository</a> for IPython Notebook and <a href="https://github.com/getpelican/pelican-plugins">this repository</a> for Markdown.</p>
+<p>To activate these plubins, you should add the followings to your <code>pelicanconf.py</code>.</p>
 <div class="highlight"><pre><span class="code-line"><span></span>MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)</span>
 <span class="code-line">PLUGIN_PATHS = [&#39;./plugins&#39;, &#39;./pelican-plugins&#39;]</span>
 <span class="code-line">PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;, &#39;better_codeblock_line_numbering&#39;]</span>
@@ -198,9 +198,98 @@ In Pelican, there is command <code>pelican quick-start</code>. Its execution wil
 </pre></div>
 
 
-<p>All  is set for <code>pelicanconf.py</code>. Next, we move on to creating actual articles.</p>
-<p>Basically, you create articles under <code>content</code>.</p>
-<p>I use <a href="http://cyrille.rossant.net/pelican-github/">this site</a> and <a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/">this site</a>.</p>
+<h4>All set for the environment!!!!!</h4>
+<h1>Set up GitHub repository</h1>
+<p>Pelican blog is managed by a GitHub repository. So, you need to create a page for that. We are going to take the following procedures:</p>
+<ul>
+<li>Sign up for Github if you haven't already.</li>
+<li>Create a repository called <code>username.github.io</code>, where username is your Github username. In my case that is <code>jjakimoto.github.io</code>.</li>
+<li>Switch to the blog folder.</li>
+<li>Add the repository as a remote for your local git repository by running git remote add origin git@github.com:username/username.github.io.git -- replace both references to username with your Github username.</li>
+<li>A Github page will display whatever HTML files are pushed up to the master branch of the repository username.github.io at the URL username.github.io (the repository name and the URL are the same).</li>
+<li>Edit SITEURL in publishconf.py, so that it is set to http://username.github.io, where username is your Github username.</li>
+<li>If you want to store your actual notebooks and other files in the same Git repo as a Github Page, you can use git branches.</li>
+<li>Run git checkout -b develop to create and switch to a branch called develop. We can't use master to store our notebooks, since that's the branch that's used by Github Pages.</li>
+<li>Create a commit and push to Github like normal (using git add, git commit, and git push).</li>
+</ul>
+<h1>Write an article</h1>
+<p>When we writing your articles, we have two options in file format: Markdown <code>.md</code> and IPython Notebook <code>*.ipynb</code>.</p>
+<p>When you write an article from Markdown you always have to add meta information on top of the article. If you are writing article named <code>hoge.ipynb</code>, you have to make `hoge.ipynb-meta' and add meta information. In both cases, meta information looks like this:</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">Title</span><span class="o">:</span> <span class="n">First</span> <span class="n">Post</span></span>
+<span class="code-line"><span class="n">Slug</span><span class="o">:</span> <span class="n">first</span><span class="o">-</span><span class="n">post</span></span>
+<span class="code-line"><span class="n">Date</span><span class="o">:</span> <span class="mi">2018</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">01</span> <span class="mi">12</span><span class="o">:</span><span class="mi">00</span></span>
+<span class="code-line"><span class="n">Category</span><span class="o">:</span> <span class="n">Blogs</span></span>
+<span class="code-line"><span class="n">Tags</span><span class="o">:</span> <span class="n">Pelican</span><span class="o">,</span> <span class="n">Data</span> <span class="n">Science</span></span>
+<span class="code-line"><span class="n">author</span><span class="o">:</span> <span class="n">Tomoaki</span> <span class="n">Fujii</span></span>
+<span class="code-line"><span class="n">Summary</span><span class="o">:</span> <span class="n">My</span> <span class="n">first</span> <span class="n">post</span><span class="o">,</span> <span class="n">read</span> <span class="n">it</span> <span class="n">to</span> <span class="n">find</span> <span class="n">out</span><span class="o">.</span></span>
+<span class="code-line"><span class="n">Status</span><span class="o">:</span> <span class="n">published</span></span>
+</pre></div>
+
+
+<ul>
+<li>Title -- the title of the post.</li>
+<li>Slug -- the path at which the post will be accessed on the server. For example, I set</li>
+</ul>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">ARTICLE_URL</span> <span class="o">=</span> <span class="s1">&#39;articles/{date:%Y}/{date:%b}/{date:</span><span class="si">%d</span><span class="s1">}/{slug}/&#39;</span></span>
+</pre></div>
+
+
+<p>in my <code>pelicanconf.py</code>. So, your article can be accessed through <code>HOME_URL/articles/year/month/date/slug/</code>. In the above example, <code>https://jjakimoto.github.io/articles/2018/03/01/first-post/</code>.
+<em> Date -- the date the post will be published.
+</em> Category -- a category for the post -- this can be anything.
+<em> Tags -- a space-separated list of tags to use for the post. These can be anything.
+</em> Author -- the name of the author of the post.
+<em> Summary -- a short summary of your post.
+</em> Status -- if you set it <code>draft</code>, this article will not be added in index of your blog.  If you want to publish it, you should set to <code>published</code>.</p>
+<p>Their default values can be set in <code>pelicanconf.py</code>. In my case, I set up</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">DEFAULT_METADATA</span> <span class="o">=</span> <span class="p">{</span></span>
+<span class="code-line">    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;draft&#39;</span><span class="p">,</span></span>
+<span class="code-line"><span class="p">}</span></span>
+</pre></div>
+
+
+<h1>Generate page</h1>
+<p>We chose yes for</p>
+<blockquote>
+<p>Do you want to generate a Fabfile/Makefile to automate generation and publishing? (Y/n)</p>
+</blockquote>
+<p>when executing <code>pelican-quickstart</code> in the previous section.
+This generates Makefile and Fabfile for automating publication process.
+I usually use Makefile for the publication with the following commands.</p>
+<div class="highlight"><pre><span class="code-line"><span></span>make html</span>
+</pre></div>
+
+
+<p>This command generates HTML files according to the files under the content folder.</p>
+<div class="highlight"><pre><span class="code-line"><span></span>make serve</span>
+</pre></div>
+
+
+<p>This command starts your blog on your local server. In the default setting, the blog will start on <code>http://localhost:8000</code>. This command is helpful when checking how the blog actually looks like before the publication.
+If you have any drafts, they will be stored under <code>http://localhost:8000/drafts</code>.</p>
+<p>For the publication, execute the following bash commands:</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="go">git add -A</span></span>
+<span class="code-line"><span class="go">git commit -m&quot;New publication&quot;</span></span>
+<span class="code-line"><span class="go">pelican content -s publishconf.py</span></span>
+<span class="code-line"><span class="go">ghp-import output -b master</span></span>
+<span class="code-line"><span class="go">git push origin master</span></span>
+</pre></div>
+
+
+<p>I write them in a file called <a href="https://github.com/jjakimoto/jjakimoto.github.io/blob/develop/publish.sh">publish.sh</a>.
+Then, I just execute</p>
+<div class="highlight"><pre><span class="code-line"><span></span>bash publish.sh</span>
+</pre></div>
+
+
+<p>for the publication.</p>
+<p>That's it!!
+Enjoy writing your blog. I hope blogging will help your aspiring career.</p>
+<p>Thanks for reading ;)</p>
+<p>I wrote this article in reference to the followings:
+<em> <a href="http://cyrille.rossant.net/pelican-github/">Setting up a blog with Pelican and GitHub Pages</a>
+</em> <a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/">Building a data science portfolio: Making a data science blog</a>
+Check them out!</p>
     </section>
 
 
@@ -223,7 +312,7 @@ In Pelican, there is command <code>pelican quick-start</code>. Its execution wil
      */
 
     var disqus_config = function () {
-        this.page.url = "http://jjakimoto.github.io/drafts/start_blog.html";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = "http://jjakimoto.github.io/articles/2018/Mar/01/start_blog/";  // Replace PAGE_URL with your page's canonical URL variable
         this.page.identifier = "start_blog"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
