@@ -236,6 +236,6 @@ Enjoy writing your blog. I hope blogging will help your aspiring career.
 Thanks for reading ;)
 
 I wrote this article in reference to the followings:
-* [Setting up a blog with Pelican and GitHub Pages](http://cyrille.rossant.net/pelican-github/)
-* [Building a data science portfolio: Making a data science blog](https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/)
+- [Setting up a blog with Pelican and GitHub Pages](http://cyrille.rossant.net/pelican-github/)
+- [Building a data science portfolio: Making a data science blog](https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/)
 Check them out!
