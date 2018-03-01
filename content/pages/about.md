@@ -7,9 +7,9 @@ Hi, I am Tomoaki Fujii, a data scientist at a fintech start up, [Hydrogen](https
 
 This blog intends to sum up and share what I have learned in technology space, especially around machine learning.
 
-There are a lot of other awesome mchine learning blogs briefly explaining complicated stuffs. I list out some of them [here](../pages/links). I highly recommend you to check them out.
+There are a lot of other awesome machine learning blogs briefly explaining complicated stuff. I list out some of them [here](../pages/links). I highly recommend you to check them out.
 
-Instead of overlaping their articles, I would liked to focus on the application side like development of algorithmss as actual code.
+Instead of overlapping their articles, I would liked to focus on the application side like development of algorithms as actual code.
 I would be happy if I could share cool stuffs with you.
 
 Thanks for visiting!
