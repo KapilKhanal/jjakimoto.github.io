@@ -83,7 +83,124 @@
     </header>
 
     <section id="post">
-        
+        <p>Blogging is one of the fantastic ways to demonstrate your projects and help you understand stuffs in more depth. Especially, I believe that blogging helps you land a job more efficiently. Even if you are not looking for a new position, writing articles you are working on would be the practice to explain stuffs to others, which always requires deep understanding. Indeed, A. Einstein mentioned</p>
+<blockquote>
+<p>If you can't explain it to a 6 year old then you really don't understand it yourself
+Thus, blogging brings you a lot of benefits. Today is the date to start your blog!</p>
+</blockquote>
+<p>In this article, I explain how to build your technology blog, especially data science blog.</p>
+<p>I know that folks working around data science space hate suffering from stuffs like learning HTML and making beautiful web design. I am one of them.
+Then, static site generators comes in makes blogging simpler to even non professional guys like me. There are a few options for static site generators such as <a href="http://docs.getpelican.com/en/stable/">Pelican</a> written in Python and <a href="https://jekyllrb.com/">Jekyll</a> written in Ruby.</p>
+<p>In daily analytics, I spend a lot of time on <a href="http://jupyter.org/">Jupyter Notebook</a>. So, my choice of the platform goes to <a href="http://docs.getpelican.com/en/stable/">Pelican</a>, which is able to generate articles directly from IPython Notebook file.</p>
+<p>Let's dig into how to write articles with Pelican!</p>
+<h1>Build the environment</h1>
+<p>We will go through the following processes:
+1. Install Pelican
+2. Create a default environment
+3. Set up jupyter extension</p>
+<h2>1. Install Pelican</h2>
+<p>Before installing anything, building virtual environment is recommended to avoid messing up your local python environment. We use <code>virtualenv</code> here and install it through pip.</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="gp">foo@bar:~$</span> pip install virtualenv</span>
+<span class="code-line"><span class="gp">foo@bar:~$</span> mkdir ~/virtualenvs</span>
+<span class="code-line"><span class="gp">foo@bar:~$</span> <span class="nb">cd</span> ~/virtualenvs</span>
+<span class="code-line"><span class="gp">foo@bar:~$</span> virtualenv blogenv</span>
+<span class="code-line"><span class="gp">foo@bar:~$</span> <span class="nb">source</span> virtualenvs/blogenv/bin/activate</span>
+<span class="code-line"><span class="go">(blogenv) foo@bar:~$</span></span>
+</pre></div>
+
+
+<p>Now we have activated a virtual environment. Python packages we install from now does not affect your local python environment.</p>
+<p>Let's install Pelican and Markdown over the established virtual environment through pip.</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="go">pip install pelican markdown</span></span>
+</pre></div>
+
+
+<h2>2. Create a default environment</h2>
+<p>We determine under which folder the blog will be built. In this article, we are going to build the environment under '~/blog'.
+Under this folder, we will make the following files:
+<em> requirements.txt
+</em> .gitignore</p>
+<p>requirements.txt tells you what files is required to use your program.
+Here is the example:</p>
+<div class="highlight"><pre><span class="code-line"><span></span>Markdown==2.6.11</span>
+<span class="code-line">pelican==3.7.1</span>
+<span class="code-line">jupyter&gt;=1.0</span>
+<span class="code-line">ipython&gt;=4.0</span>
+<span class="code-line">nbconvert&gt;=4.0</span>
+<span class="code-line">bs4==4.6.0</span>
+<span class="code-line">ghp-import==0.4.1</span>
+<span class="code-line">matplotlib==2.0.2</span>
+</pre></div>
+
+
+<p>Running <code>pip install -r requirements.txt</code> installs all their packages.</p>
+<p><code>.gitignore</code> avoids you annoyed to mess up git repository. The file whose name matched with patterns in this file will be ignored when executing git command.</p>
+<p>Now, we are going to start your own blog.
+In Pelican, there is command <code>pelican quick-start</code>. Its execution will get you the following console.</p>
+<div class="highlight"><pre><span class="code-line"><span></span>(blogenv) foo@bar:~$ pelican-quickstart</span>
+<span class="code-line">Welcome to pelican-quickstart v3.7.1.</span>
+<span class="code-line"></span>
+<span class="code-line">This script will help you create a new Pelican-based website.</span>
+<span class="code-line"></span>
+<span class="code-line">Please answer the following questions so this script can generate the files</span>
+<span class="code-line">needed by Pelican.</span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line">&gt; Where do you want to create your new web site? [.]</span>
+<span class="code-line">&gt; What will be the title of this web site? Data Rounder</span>
+<span class="code-line">&gt; Who will be the author of this web site? Tomoaki Fujii</span>
+<span class="code-line">&gt; What will be the default language of this web site? [en]</span>
+<span class="code-line">&gt; Do you want to specify a URL prefix? e.g., http://example.com   (Y/n) n</span>
+<span class="code-line">&gt; Do you want to enable article pagination? (Y/n)</span>
+<span class="code-line">&gt; How many articles per page do you want? [10]</span>
+<span class="code-line">&gt; What is your time zone? [Europe/Paris] America/New_York</span>
+<span class="code-line">&gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? (Y/n)</span>
+<span class="code-line">&gt; Do you want an auto-reload &amp; simpleHTTP script to assist with theme and site development? (Y/n)</span>
+<span class="code-line">&gt; Do you want to upload your website using FTP? (y/N)</span>
+<span class="code-line">&gt; Do you want to upload your website using SSH? (y/N)</span>
+<span class="code-line">&gt; Do you want to upload your website using Dropbox? (y/N)</span>
+<span class="code-line">&gt; Do you want to upload your website using S3? (y/N)</span>
+<span class="code-line">&gt; Do you want to upload your website using Rackspace Cloud Files? (y/N)</span>
+<span class="code-line">&gt; Do you want to upload your website using GitHub Pages? (y/N)</span>
+</pre></div>
+
+
+<p>After this process has finished without errors, we have the following files under <code>~/blog</code>:</p>
+<div class="highlight"><pre><span class="code-line"><span></span>content</span>
+<span class="code-line">pelicanconf.py</span>
+<span class="code-line">publishconf.py</span>
+<span class="code-line">fabfile.py</span>
+<span class="code-line">output</span>
+<span class="code-line">develop_server.sh</span>
+<span class="code-line">Makefile</span>
+</pre></div>
+
+
+<p>Among files above, we edit <code>content</code> and <code>pelicanconf.py</code> frequently.</p>
+<p>Let's start from <code>pelicanconf.py</code>. As an example, what I am using is posted here. This combines themes used in this site and some other couples of things.</p>
+<p>If you check my <code>pelicanconf.py</code>, you may notice the part,</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;themes/mytheme&quot;</span></span>
+</pre></div>
+
+
+<p>This part defines how your blog looks like. This file is customizable. In my case, I add some stuffs based on <a href="https://github.com/rossant/rossant.github.io/tree/sources/themes">this theme</a>. You can see more detail as to how to customize your theme.</p>
+<p>You also have to introduce external plugin files for IPython Notebook and Markdown.</p>
+<p>For IPython Notebook, you can download files from <a href="https://github.com/danielfrg/pelican-ipynb">this repository</a>.</p>
+<p>For Markdown, you need to download more generic plugins from <a href="https://github.com/getpelican/pelican-plugins">this repository</a>.</p>
+<p>After install, you should add the followings to your <code>pelicanconf.py</code>.</p>
+<div class="highlight"><pre><span class="code-line"><span></span>MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)</span>
+<span class="code-line">PLUGIN_PATHS = [&#39;./plugins&#39;, &#39;./pelican-plugins&#39;]</span>
+<span class="code-line">PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;, &#39;better_codeblock_line_numbering&#39;]</span>
+<span class="code-line">MD_EXTENSIONS = [</span>
+<span class="code-line">    &#39;codehilite(css_class=highlight,linenums=False)&#39;,</span>
+<span class="code-line">    &#39;extra&#39;</span>
+<span class="code-line">    ]</span>
+</pre></div>
+
+
+<p>All  is set for <code>pelicanconf.py</code>. Next, we move on to creating actual articles.</p>
+<p>Basically, you create articles under <code>content</code>.</p>
+<p>I use <a href="http://cyrille.rossant.net/pelican-github/">this site</a> and <a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/">this site</a>.</p>
     </section>
 
 

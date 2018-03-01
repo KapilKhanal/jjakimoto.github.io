@@ -1102,8 +1102,8 @@ h6:hover .anchor-link {
 <li>Kardashian actually likes playing baseball better than tennis.</li>
 </ol>
 <p>Then, we have the following words list:</p>
-<div class="highlight"><pre><span></span><span class="p">[</span><span class="s2">"I"</span><span class="p">,</span> <span class="s2">"playing"</span><span class="p">,</span> <span class="s2">"tennis"</span><span class="p">,</span> <span class="s2">"Kardashian"</span><span class="p">,</span> <span class="s2">"likes"</span><span class="p">,</span> <span class="s2">"like"</span><span class="p">,</span> <span class="s2">"as"</span><span class="p">,</span>
-    <span class="s2">"much"</span><span class="p">,</span> <span class="s2">"do"</span><span class="p">,</span> <span class="s2">"actually"</span><span class="p">,</span> <span class="s2">"baseball"</span><span class="p">,</span> <span class="s2">"better"</span><span class="p">,</span> <span class="s2">"than"</span><span class="p">]</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="p">[</span><span class="s2">"I"</span><span class="p">,</span> <span class="s2">"playing"</span><span class="p">,</span> <span class="s2">"tennis"</span><span class="p">,</span> <span class="s2">"Kardashian"</span><span class="p">,</span> <span class="s2">"likes"</span><span class="p">,</span> <span class="s2">"like"</span><span class="p">,</span> <span class="s2">"as"</span><span class="p">,</span></span>
+<span class="code-line">    <span class="s2">"much"</span><span class="p">,</span> <span class="s2">"do"</span><span class="p">,</span> <span class="s2">"actually"</span><span class="p">,</span> <span class="s2">"baseball"</span><span class="p">,</span> <span class="s2">"better"</span><span class="p">,</span> <span class="s2">"than"</span><span class="p">]</span></span>
 </pre></div>
 <p>Base on this words list, we obtain</p>
 <ol>
@@ -1191,48 +1191,48 @@ We can say that these algorithms are succeeded to find an effective representati
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span>
-<span class="kn">from</span> <span class="nn">gensim.models.doc2vec</span> <span class="k">import</span> <span class="n">TaggedDocument</span>
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">stopwords</span>
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="n">xrange</span><span class="p">,</span> <span class="nb">zip</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="nb">filter</span>
-
-<span class="k">def</span> <span class="nf">get_document</span><span class="p">(</span><span class="n">file_dirs</span><span class="p">,</span> <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_special</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="n">documents</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">labels</span><span class="o">=</span><span class="p">[]</span>
-    <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">file_dir</span> <span class="ow">in</span> <span class="n">file_dirs</span><span class="p">:</span>
-        <span class="n">name_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">file_dir</span><span class="p">)</span> <span class="k">if</span> <span class="s1">'.txt'</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">name_list</span><span class="p">):</span>
-            <span class="c1"># data is named as id_star.txt</span>
-            <span class="n">comp_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">'(\d+)_(\d+).txt'</span><span class="p">)</span>
-            <span class="n">obj</span> <span class="o">=</span> <span class="n">comp_re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_dir</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="s1">'r'</span><span class="p">)</span>
-            <span class="c1"># convert HTML format data to text data</span>
-            <span class="n">review_text</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="s1">'lxml'</span><span class="p">)</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
-            <span class="n">review_text</span> <span class="o">=</span> <span class="n">review_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-            <span class="c1"># get rid of special characters</span>
-            <span class="k">if</span> <span class="n">remove_special</span><span class="p">:</span>
-                <span class="n">wordlist</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[a-z]+ | [^ a-z]"</span><span class="p">,</span> <span class="n">review_text</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">wordlist</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">"[^a-z]"</span><span class="p">,</span><span class="s2">" "</span><span class="p">,</span> <span class="n">review_text</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-            <span class="c1"># get rid of stop words; e.g., he, she, you, ...</span>
-            <span class="k">if</span> <span class="n">remove_stopwords</span><span class="p">:</span>
-                <span class="n">stops</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">"english"</span><span class="p">))</span>
-                <span class="n">wordlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">wordlist</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">stops</span><span class="p">]</span>
-            <span class="c1"># tag for each document</span>
-            <span class="n">tag</span> <span class="o">=</span> <span class="s2">"SENT_"</span> <span class="o">+</span> <span class="n">obj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'_'</span> <span class="o">+</span> <span class="n">obj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-            <span class="n">documents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TaggedDocument</span><span class="p">(</span><span class="n">words</span><span class="o">=</span><span class="n">wordlist</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="n">tag</span><span class="p">]))</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="c1"># seperate data into positive and negative</span>
-            <span class="n">star</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-            <span class="k">if</span> <span class="n">star</span> <span class="o">></span> <span class="mi">5</span><span class="p">:</span>
-                <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">documents</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">tags</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">os</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">re</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">gensim.models.doc2vec</span> <span class="k">import</span> <span class="n">TaggedDocument</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">stopwords</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="n">xrange</span><span class="p">,</span> <span class="nb">zip</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="nb">filter</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">def</span> <span class="nf">get_document</span><span class="p">(</span><span class="n">file_dirs</span><span class="p">,</span> <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_special</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span></span>
+<span class="code-line">    <span class="n">documents</span> <span class="o">=</span> <span class="p">[]</span></span>
+<span class="code-line">    <span class="n">labels</span><span class="o">=</span><span class="p">[]</span></span>
+<span class="code-line">    <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span></span>
+<span class="code-line">    <span class="k">for</span> <span class="n">file_dir</span> <span class="ow">in</span> <span class="n">file_dirs</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">name_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">file_dir</span><span class="p">)</span> <span class="k">if</span> <span class="s1">'.txt'</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span></span>
+<span class="code-line">        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">name_list</span><span class="p">):</span></span>
+<span class="code-line">            <span class="c1"># data is named as id_star.txt</span></span>
+<span class="code-line">            <span class="n">comp_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">'(\d+)_(\d+).txt'</span><span class="p">)</span></span>
+<span class="code-line">            <span class="n">obj</span> <span class="o">=</span> <span class="n">comp_re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></span>
+<span class="code-line">            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_dir</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="s1">'r'</span><span class="p">)</span></span>
+<span class="code-line">            <span class="c1"># convert HTML format data to text data</span></span>
+<span class="code-line">            <span class="n">review_text</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="s1">'lxml'</span><span class="p">)</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span></span>
+<span class="code-line">            <span class="n">review_text</span> <span class="o">=</span> <span class="n">review_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></span>
+<span class="code-line">            <span class="c1"># get rid of special characters</span></span>
+<span class="code-line">            <span class="k">if</span> <span class="n">remove_special</span><span class="p">:</span></span>
+<span class="code-line">                <span class="n">wordlist</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[a-z]+ | [^ a-z]"</span><span class="p">,</span> <span class="n">review_text</span><span class="p">)</span></span>
+<span class="code-line">            <span class="k">else</span><span class="p">:</span></span>
+<span class="code-line">                <span class="n">wordlist</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">"[^a-z]"</span><span class="p">,</span><span class="s2">" "</span><span class="p">,</span> <span class="n">review_text</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span></span>
+<span class="code-line">            <span class="c1"># get rid of stop words; e.g., he, she, you, ...</span></span>
+<span class="code-line">            <span class="k">if</span> <span class="n">remove_stopwords</span><span class="p">:</span></span>
+<span class="code-line">                <span class="n">stops</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">"english"</span><span class="p">))</span></span>
+<span class="code-line">                <span class="n">wordlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">wordlist</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">stops</span><span class="p">]</span></span>
+<span class="code-line">            <span class="c1"># tag for each document</span></span>
+<span class="code-line">            <span class="n">tag</span> <span class="o">=</span> <span class="s2">"SENT_"</span> <span class="o">+</span> <span class="n">obj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'_'</span> <span class="o">+</span> <span class="n">obj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span></span>
+<span class="code-line">            <span class="n">documents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TaggedDocument</span><span class="p">(</span><span class="n">words</span><span class="o">=</span><span class="n">wordlist</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="n">tag</span><span class="p">]))</span></span>
+<span class="code-line">            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></span>
+<span class="code-line">            <span class="c1"># seperate data into positive and negative</span></span>
+<span class="code-line">            <span class="n">star</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span></span>
+<span class="code-line">            <span class="k">if</span> <span class="n">star</span> <span class="o">></span> <span class="mi">5</span><span class="p">:</span></span>
+<span class="code-line">                <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></span>
+<span class="code-line">            <span class="k">else</span><span class="p">:</span></span>
+<span class="code-line">                <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="p">[</span><span class="n">documents</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">tags</span><span class="p">]</span></span>
 </pre></div>
 </div>
 </div>
@@ -1243,11 +1243,11 @@ We can say that these algorithms are succeeded to find an effective representati
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_labeled</span> <span class="o">=</span> <span class="n">get_document</span><span class="p">([</span><span class="s1">'./aclImdb/train/pos'</span><span class="p">,</span> <span class="s1">'./aclImdb/train/neg'</span><span class="p">],</span> 
-                             <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="n">remove_special</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">train_unlabeled</span> <span class="o">=</span> <span class="n">get_document</span><span class="p">([</span><span class="s1">'./aclImdb/train/unsup'</span><span class="p">],</span> 
-                               <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_special</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">test_data</span> <span class="o">=</span> <span class="n">get_document</span><span class="p">([</span><span class="s1">'./aclImdb/test/pos'</span><span class="p">,</span> <span class="s1">'./aclImdb/test/neg'</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">train_labeled</span> <span class="o">=</span> <span class="n">get_document</span><span class="p">([</span><span class="s1">'./aclImdb/train/pos'</span><span class="p">,</span> <span class="s1">'./aclImdb/train/neg'</span><span class="p">],</span> </span>
+<span class="code-line">                             <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="n">remove_special</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">train_unlabeled</span> <span class="o">=</span> <span class="n">get_document</span><span class="p">([</span><span class="s1">'./aclImdb/train/unsup'</span><span class="p">],</span> </span>
+<span class="code-line">                               <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_special</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">test_data</span> <span class="o">=</span> <span class="n">get_document</span><span class="p">([</span><span class="s1">'./aclImdb/test/pos'</span><span class="p">,</span> <span class="s1">'./aclImdb/test/neg'</span><span class="p">])</span></span>
 </pre></div>
 </div>
 </div>
@@ -1267,12 +1267,12 @@ We can say that these algorithms are succeeded to find an effective representati
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gensim.models.doc2vec</span> <span class="k">import</span> <span class="n">Doc2Vec</span>
-
-<span class="n">pvdm</span> <span class="o">=</span> <span class="n">Doc2Vec</span><span class="p">(</span><span class="n">train_labeled</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">train_unlabeled</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">dm</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                 <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_vocab_size</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
-<span class="n">pvdbow</span> <span class="o">=</span> <span class="n">Doc2Vec</span><span class="p">(</span><span class="n">train_labeled</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">train_unlabeled</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">dm</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                 <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_vocab_size</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">gensim.models.doc2vec</span> <span class="k">import</span> <span class="n">Doc2Vec</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">pvdm</span> <span class="o">=</span> <span class="n">Doc2Vec</span><span class="p">(</span><span class="n">train_labeled</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">train_unlabeled</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">dm</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span></span>
+<span class="code-line">                 <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_vocab_size</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">pvdbow</span> <span class="o">=</span> <span class="n">Doc2Vec</span><span class="p">(</span><span class="n">train_labeled</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">train_unlabeled</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">dm</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span></span>
+<span class="code-line">                 <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_vocab_size</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -1292,8 +1292,8 @@ We can say that these algorithms are succeeded to find an effective representati
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_vectors</span><span class="p">(</span><span class="n">doc2vec</span><span class="p">,</span> <span class="n">sentences</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">doc2vec</span><span class="o">.</span><span class="n">infer_vector</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">words</span><span class="p">),</span> <span class="n">sentences</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">get_vectors</span><span class="p">(</span><span class="n">doc2vec</span><span class="p">,</span> <span class="n">sentences</span><span class="p">):</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">doc2vec</span><span class="o">.</span><span class="n">infer_vector</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">words</span><span class="p">),</span> <span class="n">sentences</span><span class="p">)))</span></span>
 </pre></div>
 </div>
 </div>
@@ -1304,14 +1304,14 @@ We can say that these algorithms are succeeded to find an effective representati
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get paragraph vectors for training</span>
-<span class="n">train_pvdm</span> <span class="o">=</span> <span class="n">get_vectors</span><span class="p">(</span><span class="n">pvdm</span><span class="p">,</span> <span class="n">train_labeled</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">train_pvdbow</span> <span class="o">=</span> <span class="n">get_vectors</span><span class="p">(</span><span class="n">pvdbow</span><span class="p">,</span> <span class="n">train_labeled</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">train_paragraph</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">train_pvdm</span><span class="p">,</span> <span class="n">train_pvdbow</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="c1"># get paragraph vectors for prediction</span>
-<span class="n">test_pvdm</span> <span class="o">=</span> <span class="n">get_vectors</span><span class="p">(</span><span class="n">pvdm</span><span class="p">,</span> <span class="n">test_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">test_pvdbow</span> <span class="o">=</span> <span class="n">get_vectors</span><span class="p">(</span><span class="n">pvdbow</span><span class="p">,</span> <span class="n">test_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">test_paragraph</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">test_pvdm</span><span class="p">,</span> <span class="n">test_pvdbow</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># get paragraph vectors for training</span></span>
+<span class="code-line"><span class="n">train_pvdm</span> <span class="o">=</span> <span class="n">get_vectors</span><span class="p">(</span><span class="n">pvdm</span><span class="p">,</span> <span class="n">train_labeled</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></span>
+<span class="code-line"><span class="n">train_pvdbow</span> <span class="o">=</span> <span class="n">get_vectors</span><span class="p">(</span><span class="n">pvdbow</span><span class="p">,</span> <span class="n">train_labeled</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></span>
+<span class="code-line"><span class="n">train_paragraph</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">train_pvdm</span><span class="p">,</span> <span class="n">train_pvdbow</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></span>
+<span class="code-line"><span class="c1"># get paragraph vectors for prediction</span></span>
+<span class="code-line"><span class="n">test_pvdm</span> <span class="o">=</span> <span class="n">get_vectors</span><span class="p">(</span><span class="n">pvdm</span><span class="p">,</span> <span class="n">test_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></span>
+<span class="code-line"><span class="n">test_pvdbow</span> <span class="o">=</span> <span class="n">get_vectors</span><span class="p">(</span><span class="n">pvdbow</span><span class="p">,</span> <span class="n">test_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></span>
+<span class="code-line"><span class="n">test_paragraph</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">test_pvdm</span><span class="p">,</span> <span class="n">test_pvdbow</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -1332,14 +1332,14 @@ We can say that these algorithms are succeeded to find an effective representati
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Dense</span>
-<span class="kn">from</span> <span class="nn">keras.optimizers</span> <span class="k">import</span> <span class="n">Adam</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">'sigmoid'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'output'</span><span class="p">,</span>  <span class="n">input_shape</span><span class="o">=</span><span class="p">[</span><span class="mi">800</span><span class="p">]))</span>
-
-<span class="n">opt</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">'binary_crossentropy'</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">'acc'</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Dense</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">keras.optimizers</span> <span class="k">import</span> <span class="n">Adam</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">'sigmoid'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'output'</span><span class="p">,</span>  <span class="n">input_shape</span><span class="o">=</span><span class="p">[</span><span class="mi">800</span><span class="p">]))</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">opt</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">'binary_crossentropy'</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">'acc'</span><span class="p">])</span></span>
 </pre></div>
 </div>
 </div>
@@ -1350,7 +1350,7 @@ We can say that these algorithms are succeeded to find an effective representati
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_paragraph</span><span class="p">,</span> <span class="n">train_labeled</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nb_epoch</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_paragraph</span><span class="p">,</span> <span class="n">train_labeled</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nb_epoch</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></span>
 </pre></div>
 </div>
 </div>
@@ -1361,7 +1361,7 @@ We can say that these algorithms are succeeded to find an effective representati
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_classes</span><span class="p">(</span><span class="n">test_paragraph</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_classes</span><span class="p">(</span><span class="n">test_paragraph</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">]</span></span>
 </pre></div>
 </div>
 </div>
