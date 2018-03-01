@@ -5,7 +5,6 @@ Category: Others
 Tags: Blog
 Author: Tomoaki Fujii
 Status: published
-Summary: Explain how to start your data science blog.
 
 
 Blogging is one of the fantastic ways to demonstrate your projects and help you understand stuff in more depth. Especially, I believe that blogging helps you land a job more efficiently. Even if you are not looking for a new position, writing articles you are working on would be the practice to explain stuff to others, which always requires deep understanding. Indeed, A. Einstein mentioned
