@@ -200,20 +200,35 @@ In Pelican, there is command <code>pelican quick-start</code>. Its execution wil
 
 <h4>All set for the environment!!!!!</h4>
 <h1>Set up GitHub repository</h1>
-<p>Pelican blog is managed by a GitHub repository. So, you need to create a page for that. We are going to take the following procedures:</p>
+<p>Pelican blog is managed by a GitHub repository. So, you need to create a repository for your blog with the following procedures under blog folder:</p>
 <ul>
-<li>Sign up for Github if you haven't already.</li>
-<li>Create a repository called <code>username.github.io</code>, where username is your Github username. In my case that is <code>jjakimoto.github.io</code>.</li>
-<li>Switch to the blog folder.</li>
-<li>Add the repository as a remote for your local git repository by running git remote add origin git@github.com:username/username.github.io.git -- replace both references to username with your Github username.</li>
-<li>A Github page will display whatever HTML files are pushed up to the master branch of the repository username.github.io at the URL username.github.io (the repository name and the URL are the same).</li>
-<li>Edit SITEURL in publishconf.py, so that it is set to http://username.github.io, where username is your Github username.</li>
-<li>If you want to store your actual notebooks and other files in the same Git repo as a Github Page, you can use git branches.</li>
-<li>Run git checkout -b develop to create and switch to a branch called develop. We can't use master to store our notebooks, since that's the branch that's used by Github Pages.</li>
-<li>Create a commit and push to Github like normal (using git add, git commit, and git push).</li>
+<li>
+<p>Create a repository called <code>username.github.io</code>, where username is your Github username. In my case that is <code>jjakimoto.github.io</code>.</p>
+</li>
+<li>
+<p>Add the repository as a remote for your local git repository by running git remote add origin git@github.com:username/username.github.io.git -- replace both references to username with your Github username.</p>
+</li>
+<li>
+<p>Add the following line in publishconf.py:</p>
+</li>
 </ul>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">SITEURL</span> <span class="o">=</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">username</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span></span>
+</pre></div>
+
+
+<p>where username is your Github username.</p>
+<ul>
+<li>
+<p>Run git checkout -b develop to create and switch to a branch called develop. We can't use master to store our notebooks, since that's the branch that's used by Github Pages.</p>
+</li>
+<li>
+<p>Create a commit and push to Github like normal (using git add, git commit, and git push).</p>
+</li>
+</ul>
+<p>We have set up the GitHub repository for publishing your article!
+Next, we move on to how to write your articles.</p>
 <h1>Write an article</h1>
-<p>When we writing your articles, we have two options in file format: Markdown <code>.md</code> and IPython Notebook <code>*.ipynb</code>.</p>
+<p>When we writing your articles, we have two options in file format: Markdown <code>*.md</code> and IPython Notebook <code>*.ipynb</code>.</p>
 <p>When you write an article from Markdown you always have to add meta information on top of the article. If you are writing article named <code>hoge.ipynb</code>, you have to make `hoge.ipynb-meta' and add meta information. In both cases, meta information looks like this:</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="n">Title</span><span class="o">:</span> <span class="n">First</span> <span class="n">Post</span></span>
 <span class="code-line"><span class="n">Slug</span><span class="o">:</span> <span class="n">first</span><span class="o">-</span><span class="n">post</span></span>
@@ -270,6 +285,7 @@ If you have any drafts, they will be stored under <code>http://localhost:8000/dr
 <p>For the publication, execute the following bash commands:</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="go">git add -A</span></span>
 <span class="code-line"><span class="go">git commit -m&quot;New publication&quot;</span></span>
+<span class="code-line"><span class="go">git push origin develop# Update develop branch</span></span>
 <span class="code-line"><span class="go">pelican content -s publishconf.py</span></span>
 <span class="code-line"><span class="go">ghp-import output -b master</span></span>
 <span class="code-line"><span class="go">git push origin master</span></span>
@@ -286,10 +302,16 @@ Then, I just execute</p>
 <p>That's it!!
 Enjoy writing your blog. I hope blogging will help your aspiring career.</p>
 <p>Thanks for reading ;)</p>
-<p>I wrote this article in reference to the followings:
-- <a href="http://cyrille.rossant.net/pelican-github/">Setting up a blog with Pelican and GitHub Pages</a>
-- <a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/">Building a data science portfolio: Making a data science blog</a>
-Check them out!</p>
+<p>I wrote this article in reference to the followings:</p>
+<ul>
+<li>
+<p><a href="http://cyrille.rossant.net/pelican-github/">Setting up a blog with Pelican and GitHub Pages</a></p>
+</li>
+<li>
+<p><a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/">Building a data science portfolio: Making a data science blog</a></p>
+</li>
+</ul>
+<p>Check them out!</p>
     </section>
 
 
