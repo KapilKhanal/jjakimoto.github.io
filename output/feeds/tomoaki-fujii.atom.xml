@@ -116,18 +116,33 @@ In Pelican, there is command &lt;code&gt;pelican quick-start&lt;/code&gt;. Its e
 
 &lt;h4&gt;All set for the environment!!!!!&lt;/h4&gt;
 &lt;h1&gt;Set up GitHub repository&lt;/h1&gt;
-&lt;p&gt;Pelican blog is managed by a GitHub repository. So, you need to create a page for that. We are going to take the following procedures:&lt;/p&gt;
+&lt;p&gt;Pelican blog is managed by a GitHub repository. So, you need to create a repository for your blog with the following procedures under blog folder:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Sign up for Github if you haven't already.&lt;/li&gt;
-&lt;li&gt;Create a repository called &lt;code&gt;username.github.io&lt;/code&gt;, where username is your Github username. In my case that is &lt;code&gt;jjakimoto.github.io&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Switch to the blog folder.&lt;/li&gt;
-&lt;li&gt;Add the repository as a remote for your local git repository by running git remote add origin git@github.com:username/username.github.io.git -- replace both references to username with your Github username.&lt;/li&gt;
-&lt;li&gt;A Github page will display whatever HTML files are pushed up to the master branch of the repository username.github.io at the URL username.github.io (the repository name and the URL are the same).&lt;/li&gt;
-&lt;li&gt;Edit SITEURL in publishconf.py, so that it is set to http://username.github.io, where username is your Github username.&lt;/li&gt;
-&lt;li&gt;If you want to store your actual notebooks and other files in the same Git repo as a Github Page, you can use git branches.&lt;/li&gt;
-&lt;li&gt;Run git checkout -b develop to create and switch to a branch called develop. We can't use master to store our notebooks, since that's the branch that's used by Github Pages.&lt;/li&gt;
-&lt;li&gt;Create a commit and push to Github like normal (using git add, git commit, and git push).&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a repository called &lt;code&gt;username.github.io&lt;/code&gt;, where username is your Github username. In my case that is &lt;code&gt;jjakimoto.github.io&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add the repository as a remote for your local git repository by running git remote add origin git@github.com:username/username.github.io.git -- replace both references to username with your Github username.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add the following line in publishconf.py:&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;SITEURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;io&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;where username is your Github username.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Run git checkout -b develop to create and switch to a branch called develop. We can't use master to store our notebooks, since that's the branch that's used by Github Pages.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a commit and push to Github like normal (using git add, git commit, and git push).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We have set up for publishing your article!
+Next, we move on to how to write your articles.&lt;/p&gt;
 &lt;h1&gt;Write an article&lt;/h1&gt;
 &lt;p&gt;When we writing your articles, we have two options in file format: Markdown &lt;code&gt;.md&lt;/code&gt; and IPython Notebook &lt;code&gt;*.ipynb&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;When you write an article from Markdown you always have to add meta information on top of the article. If you are writing article named &lt;code&gt;hoge.ipynb&lt;/code&gt;, you have to make `hoge.ipynb-meta' and add meta information. In both cases, meta information looks like this:&lt;/p&gt;
@@ -186,6 +201,7 @@ If you have any drafts, they will be stored under &lt;code&gt;http://localhost:8
 &lt;p&gt;For the publication, execute the following bash commands:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;git add -A&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;span class="go"&gt;git commit -m&amp;quot;New publication&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="go"&gt;git push origin develop# Update develop branch&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;span class="go"&gt;pelican content -s publishconf.py&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;span class="go"&gt;ghp-import output -b master&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;span class="go"&gt;git push origin master&lt;/span&gt;&lt;/span&gt;
@@ -202,10 +218,16 @@ Then, I just execute&lt;/p&gt;
 &lt;p&gt;That's it!!
 Enjoy writing your blog. I hope blogging will help your aspiring career.&lt;/p&gt;
 &lt;p&gt;Thanks for reading ;)&lt;/p&gt;
-&lt;p&gt;I wrote this article in reference to the followings:
-&lt;em&gt; &lt;a href="http://cyrille.rossant.net/pelican-github/"&gt;Setting up a blog with Pelican and GitHub Pages&lt;/a&gt;
-&lt;/em&gt; &lt;a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/"&gt;Building a data science portfolio: Making a data science blog&lt;/a&gt;
-Check them out!&lt;/p&gt;</content><category term="Blog"></category></entry><entry><title>Bootstrap and Backtest for Algorithmic Trading (Reality Check)</title><link href="http://jjakimoto.github.io/articles/2017/Oct/26/RC/" rel="alternate"></link><published>2017-10-26T12:00:00-04:00</published><updated>2017-10-26T12:00:00-04:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-10-26:/articles/2017/Oct/26/RC/</id><summary type="html">
+&lt;p&gt;I wrote this article in reference to the followings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://cyrille.rossant.net/pelican-github/"&gt;Setting up a blog with Pelican and GitHub Pages&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/"&gt;Building a data science portfolio: Making a data science blog&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Check them out!&lt;/p&gt;</content><category term="Blog"></category></entry><entry><title>Bootstrap and Backtest for Algorithmic Trading (Reality Check)</title><link href="http://jjakimoto.github.io/articles/2017/Oct/26/RC/" rel="alternate"></link><published>2017-10-26T12:00:00-04:00</published><updated>2017-10-26T12:00:00-04:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-10-26:/articles/2017/Oct/26/RC/</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;

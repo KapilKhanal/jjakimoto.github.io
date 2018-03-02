@@ -142,23 +142,27 @@ MD_EXTENSIONS = [
 
 
 # Set up GitHub repository
-Pelican blog is managed by a GitHub repository. So, you need to create a page for that. We are going to take the following procedures:
+Pelican blog is managed by a GitHub repository. So, you need to create a repository for your blog with the following procedures under blog folder:
 
-- Sign up for Github if you haven't already.
 - Create a repository called `username.github.io`, where username is your Github username. In my case that is `jjakimoto.github.io`.
-- Switch to the blog folder.
+
 - Add the repository as a remote for your local git repository by running git remote add origin git@github.com:username/username.github.io.git -- replace both references to username with your Github username.
-- A Github page will display whatever HTML files are pushed up to the master branch of the repository username.github.io at the URL username.github.io (the repository name and the URL are the same).
-- Edit SITEURL in publishconf.py, so that it is set to http://username.github.io, where username is your Github username.
-- If you want to store your actual notebooks and other files in the same Git repo as a Github Page, you can use git branches.
+
+- Add the following line in publishconf.py:
+```python
+SITEURL = http://username.github.io
+```
+where username is your Github username.
+
 - Run git checkout -b develop to create and switch to a branch called develop. We can't use master to store our notebooks, since that's the branch that's used by Github Pages.
+
 - Create a commit and push to Github like normal (using git add, git commit, and git push).
 
-
-
+We have set up the GitHub repository for publishing your article!
+Next, we move on to how to write your articles.
 
 # Write an article
-When we writing your articles, we have two options in file format: Markdown `.md` and IPython Notebook `*.ipynb`.
+When we writing your articles, we have two options in file format: Markdown `*.md` and IPython Notebook `*.ipynb`.
 
 When you write an article from Markdown you always have to add meta information on top of the article. If you are writing article named `hoge.ipynb`, you have to make `hoge.ipynb-meta' and add meta information. In both cases, meta information looks like this:
 ```
@@ -217,6 +221,7 @@ For the publication, execute the following bash commands:
 ```console
 git add -A
 git commit -m"New publication"
+git push origin develop# Update develop branch
 pelican content -s publishconf.py
 ghp-import output -b master
 git push origin master
@@ -236,6 +241,9 @@ Enjoy writing your blog. I hope blogging will help your aspiring career.
 Thanks for reading ;)
 
 I wrote this article in reference to the followings:
+
 - [Setting up a blog with Pelican and GitHub Pages](http://cyrille.rossant.net/pelican-github/)
+
 - [Building a data science portfolio: Making a data science blog](https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/)
+
 Check them out!
