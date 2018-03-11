@@ -84,6 +84,7 @@
 
     <section id="post">
         <p>Choosing a good set of hyperparameters is one of most important steps but also pretty much annoying and time consuming. The small number of hyperparameters may allow you to find an optimal hyperparameters after a few trials. This is, however, not the case for complex models like neural network.</p>
+<div class="math">$$test = 3$$</div>
 <p>Indeed, when I just started my career as a data scientist, I was always frustrated to tune hyperparameters of Neural Network not to either underfit or overfit. Everytime I spent a lot of times and winded up not finding good set of hyperparameters, I was like</p>
 <p><img alt="frustration" src="https://media.giphy.com/media/ilkfz8Mn5Yz7O/giphy.gif"></p>
 <p>Actually there were a lot of ways to tune parameters efficiently and algorithmically, which I was ignorant of back in those days. Especially how to tune Neural Network has been progress rapidly in a recent few years by utilizing various algorithms: <a href="https://arxiv.org/pdf/1706.00764.pdf">spectral analysis [1]</a>, <a href="https://arxiv.org/pdf/1603.06560.pdf">bandit algorithms [2]</a>, <a href="https://arxiv.org/pdf/1711.09846.pdf">evolutionary strategy [3]</a>, <a href="https://arxiv.org/pdf/1611.01578.pdf">reinforcement learning [4]</a>, etc. How to build predictive general models algorithmically is also one of the hot research topics. Many frameworks and algorithms have been suggested <a href="https://cyphe.rs/static/atm.pdf">[5]</a>, <a href="https://papers.nips.cc/paper/5872-efficient-and-robust-automated-machine-learning.pdf">[6]</a>.</p>
@@ -110,16 +111,16 @@
 <h2>Random Search</h2>
 <p>Random search is known effective over high dimensional search space. Especially when we have small subsets of effective hyperparameters out of high dimensional space, we search these effective parameters effectively <a href="http://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf">[8]</a>.</p>
 <h2>Bayesian Search</h2>
-<p>While random search samples points independently, Bayesian search samples promising points more effectively by utilizing historical results. We first use GP (Gaussian process) to estimate objective function based on historical results <a href="https://arxiv.org/pdf/1206.2944.pdf">9</a>.</p>
+<p>While random search samples points independently, Bayesian search samples promising points more effectively by utilizing historical results. We first use GP (Gaussian process) to estimate objective function based on historical results <a href="https://arxiv.org/pdf/1206.2944.pdf">[9]</a>.</p>
 <p>GP also outputs variance along with mean. If this variance is large, small mean does not necessary imply promising because high values also likely happen as well. Points minimizing mean of estimation function are not necessary optimal. Thus, we need to define metric to consider trade off between mean and variance.</p>
-<p>We introduce functions called acquisition function to deal with this issue. One of the most commonly used function is <em>Expected Improvement</em>. Here is the definition:
-$$a_{EI}(x; {x_n,  y_n}, \theta) = \left.E[max(f(x_{best}) - f(x), 0) \right| {x_n,  y_n}, \theta]$$
-where $f(\cdot)$ is score function; ${x_n,  y_n}$ historical input and its response from score function; $\theta$ is parameters of Gaussian process; $E[\cdot]$ is taking expectation with respect to a Gaussian probability.</p>
-<p>The right hand can be calculated analytically to the following form:
-$$a_{EI}(x; {x_n,  y_n}, \theta) = \sigma(x ;  {x_n,  y_n}, \theta) [\gamma(x) \Phi(\gamma(x)) + N (\gamma(x); 0, 1)]$$
-where
-$$\gamma(x) = \frac{f(x_{best}) − \mu(x ; {x_n,  y_n}, \theta)}{\sigma(x ;  {x_n,  y_n}, \theta)}$$
-$N(\cdot; 0, 1)$ and $\Phi(\cdot)$ are p.d.f. and c.d.f of Gaussian distribution, respectively.</p>
+<p>We introduce functions called acquisition function to deal with this issue. One of the most commonly used function is <em>Expected Improvement</em>. Here is the definition:</p>
+<div class="math">$$a_{EI}(x; \{x_n,  y_n\}, \theta) = E[max(f(x_{best}) - f(x), 0) | \{x_n,  y_n\}, \theta]$$</div>
+<p>where <span class="math">\(f(\cdot)\)</span> is score function; <span class="math">\(\{x_n,  y_n\}\)</span> historical input and its response from score function; <span class="math">\(\theta\)</span> is parameters of Gaussian process; <span class="math">\(E[\cdot]\)</span> is taking expectation with respect to a Gaussian probability.</p>
+<p>The right hand can be calculated analytically to the following form:</p>
+<div class="math">$$a_{EI}(x; \{x_n,  y_n\}, \theta) = \sigma(x ;  \{x_n,  y_n\}, \theta) [\gamma(x) \Phi(\gamma(x)) + N (\gamma(x); 0, 1)]$$</div>
+<p>where</p>
+<div class="math">$$\gamma(x) = \frac{f(x_{best}) − \mu(x ; \{x_n,  y_n\}, \theta)}{\sigma(x ;  \{x_n,  y_n\}, \theta)}$$</div>
+<p><span class="math">\(N(\cdot; 0, 1)\)</span> and <span class="math">\(\Phi(\cdot)\)</span> are p.d.f. and c.d.f of Gaussian distribution, respectively.</p>
 <p>Here is python code:</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span></span>
 <span class="code-line"></span>
@@ -584,6 +585,61 @@ For the sake of the simplicity, we define hyperparameters with the following par
 <li>[10] <a href="https://arxiv.org/pdf/1602.05149.pdf">Parallel Bayesian Global Optimization of Expensive Functions</a></li>
 <li>[11] <a href="https://arxiv.org/pdf/1703.04389.pdf">Bayesian Optimization with Gradients</a></li>
 </ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
     </section>
 
 
