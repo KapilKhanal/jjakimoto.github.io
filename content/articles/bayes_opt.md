@@ -1,4 +1,4 @@
-Title: Bayesian Optimization of Hyperparameters in python
+Title: Bayesian Optimization of Hyperparameters with Python
 Slug: bayes_opt
 Date: 2018-03-11 12:00
 Category: Machine Learning
