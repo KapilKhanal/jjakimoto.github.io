@@ -11,8 +11,6 @@ Status: published
 
 Choosing a good set of hyperparameters is one of most important steps but also pretty much annoying and time consuming. The small number of hyperparameters may allow you to find an optimal hyperparameters after a few trials. This is, however, not the case for complex models like neural network.
 
-$$test = 3$$
-
 Indeed, when I just started my career as a data scientist, I was always frustrated to tune hyperparameters of Neural Network not to either underfit or overfit. Everytime I spent a lot of times and winded up not finding good set of hyperparameters, I was like
 
 ![frustration](https://media.giphy.com/media/ilkfz8Mn5Yz7O/giphy.gif)
