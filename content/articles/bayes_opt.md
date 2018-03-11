@@ -11,6 +11,8 @@ Status: published
 
 Choosing a good set of hyperparameters is one of most important steps but also pretty much annoying and time consuming. The small number of hyperparameters may allow you to find an optimal hyperparameters after a few trials. This is, however, not the case for complex models like neural network.
 
+$$test = 3$$
+
 Indeed, when I just started my career as a data scientist, I was always frustrated to tune hyperparameters of Neural Network not to either underfit or overfit. Everytime I spent a lot of times and winded up not finding good set of hyperparameters, I was like
 
 ![frustration](https://media.giphy.com/media/ilkfz8Mn5Yz7O/giphy.gif)
@@ -50,19 +52,25 @@ Random search is known effective over high dimensional search space. Especially 
 
 
 ## Bayesian Search
-While random search samples points independently, Bayesian search samples promising points more effectively by utilizing historical results. We first use GP (Gaussian process) to estimate objective function based on historical results [9](https://arxiv.org/pdf/1206.2944.pdf).
+While random search samples points independently, Bayesian search samples promising points more effectively by utilizing historical results. We first use GP (Gaussian process) to estimate objective function based on historical results [[9]](https://arxiv.org/pdf/1206.2944.pdf).
 
 GP also outputs variance along with mean. If this variance is large, small mean does not necessary imply promising because high values also likely happen as well. Points minimizing mean of estimation function are not necessary optimal. Thus, we need to define metric to consider trade off between mean and variance.
 
 We introduce functions called acquisition function to deal with this issue. One of the most commonly used function is _Expected Improvement_. Here is the definition:
-$$a_{EI}(x; \{x_n,  y_n\}, \theta) = \left.E[max(f(x_{best}) - f(x), 0) \right| \{x_n,  y_n\}, \theta]$$
+
+$$a_{EI}(x; \{x_n,  y_n\}, \theta) = E[max(f(x_{best}) - f(x), 0) | \{x_n,  y_n\}, \theta]$$
+
 where $f(\cdot)$ is score function; $\{x_n,  y_n\}$ historical input and its response from score function; $\theta$ is parameters of Gaussian process; $E[\cdot]$ is taking expectation with respect to a Gaussian probability.
 
 
 The right hand can be calculated analytically to the following form:
+
 $$a_{EI}(x; \{x_n,  y_n\}, \theta) = \sigma(x ;  \{x_n,  y_n\}, \theta) [\gamma(x) \Phi(\gamma(x)) + N (\gamma(x); 0, 1)]$$
+
 where
+
 $$\gamma(x) = \frac{f(x_{best}) − \mu(x ; \{x_n,  y_n\}, \theta)}{\sigma(x ;  \{x_n,  y_n\}, \theta)}$$
+
 $N(\cdot; 0, 1)$ and $\Phi(\cdot)$ are p.d.f. and c.d.f of Gaussian distribution, respectively.
 
 Here is python code:

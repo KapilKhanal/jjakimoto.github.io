@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Data Rounder</title><link href="http://jjakimoto.github.io/" rel="alternate"></link><link href="http://jjakimoto.github.io/feeds/all.atom.xml" rel="self"></link><id>http://jjakimoto.github.io/</id><updated>2018-03-11T12:00:00-04:00</updated><entry><title>Bayesian Optimization of Hyperparameters with Python</title><link href="http://jjakimoto.github.io/articles/2018/Mar/11/bayes_opt/" rel="alternate"></link><published>2018-03-11T12:00:00-04:00</published><updated>2018-03-11T12:00:00-04:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2018-03-11:/articles/2018/Mar/11/bayes_opt/</id><summary type="html">&lt;p&gt;Choosing a good set of hyperparameters is one of most important steps but also pretty much annoying and time consuming. The small number of hyperparameters may allow you to find an optimal hyperparameters after a few trials. This is, however, not the case for complex models like neural network.&lt;/p&gt;
-&lt;p&gt;Indeed …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Choosing a good set of hyperparameters is one of most important steps but also pretty much annoying and time consuming. The small number of hyperparameters may allow you to find an optimal hyperparameters after a few trials. This is, however, not the case for complex models like neural network.&lt;/p&gt;
+&lt;div class="math"&gt;$$test …&lt;/div&gt;</summary><content type="html">&lt;p&gt;Choosing a good set of hyperparameters is one of most important steps but also pretty much annoying and time consuming. The small number of hyperparameters may allow you to find an optimal hyperparameters after a few trials. This is, however, not the case for complex models like neural network.&lt;/p&gt;
+&lt;div class="math"&gt;$$test = 3$$&lt;/div&gt;
 &lt;p&gt;Indeed, when I just started my career as a data scientist, I was always frustrated to tune hyperparameters of Neural Network not to either underfit or overfit. Everytime I spent a lot of times and winded up not finding good set of hyperparameters, I was like&lt;/p&gt;
 &lt;p&gt;&lt;img alt="frustration" src="https://media.giphy.com/media/ilkfz8Mn5Yz7O/giphy.gif"&gt;&lt;/p&gt;
 &lt;p&gt;Actually there were a lot of ways to tune parameters efficiently and algorithmically, which I was ignorant of back in those days. Especially how to tune Neural Network has been progress rapidly in a recent few years by utilizing various algorithms: &lt;a href="https://arxiv.org/pdf/1706.00764.pdf"&gt;spectral analysis [1]&lt;/a&gt;, &lt;a href="https://arxiv.org/pdf/1603.06560.pdf"&gt;bandit algorithms [2]&lt;/a&gt;, &lt;a href="https://arxiv.org/pdf/1711.09846.pdf"&gt;evolutionary strategy [3]&lt;/a&gt;, &lt;a href="https://arxiv.org/pdf/1611.01578.pdf"&gt;reinforcement learning [4]&lt;/a&gt;, etc. How to build predictive general models algorithmically is also one of the hot research topics. Many frameworks and algorithms have been suggested &lt;a href="https://cyphe.rs/static/atm.pdf"&gt;[5]&lt;/a&gt;, &lt;a href="https://papers.nips.cc/paper/5872-efficient-and-robust-automated-machine-learning.pdf"&gt;[6]&lt;/a&gt;.&lt;/p&gt;
@@ -27,16 +28,16 @@
 &lt;h2&gt;Random Search&lt;/h2&gt;
 &lt;p&gt;Random search is known effective over high dimensional search space. Especially when we have small subsets of effective hyperparameters out of high dimensional space, we search these effective parameters effectively &lt;a href="http://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf"&gt;[8]&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Bayesian Search&lt;/h2&gt;
-&lt;p&gt;While random search samples points independently, Bayesian search samples promising points more effectively by utilizing historical results. We first use GP (Gaussian process) to estimate objective function based on historical results &lt;a href="https://arxiv.org/pdf/1206.2944.pdf"&gt;9&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;While random search samples points independently, Bayesian search samples promising points more effectively by utilizing historical results. We first use GP (Gaussian process) to estimate objective function based on historical results &lt;a href="https://arxiv.org/pdf/1206.2944.pdf"&gt;[9]&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;GP also outputs variance along with mean. If this variance is large, small mean does not necessary imply promising because high values also likely happen as well. Points minimizing mean of estimation function are not necessary optimal. Thus, we need to define metric to consider trade off between mean and variance.&lt;/p&gt;
-&lt;p&gt;We introduce functions called acquisition function to deal with this issue. One of the most commonly used function is &lt;em&gt;Expected Improvement&lt;/em&gt;. Here is the definition:
-$$a_{EI}(x; {x_n,  y_n}, \theta) = \left.E[max(f(x_{best}) - f(x), 0) \right| {x_n,  y_n}, \theta]$$
-where $f(\cdot)$ is score function; ${x_n,  y_n}$ historical input and its response from score function; $\theta$ is parameters of Gaussian process; $E[\cdot]$ is taking expectation with respect to a Gaussian probability.&lt;/p&gt;
-&lt;p&gt;The right hand can be calculated analytically to the following form:
-$$a_{EI}(x; {x_n,  y_n}, \theta) = \sigma(x ;  {x_n,  y_n}, \theta) [\gamma(x) \Phi(\gamma(x)) + N (\gamma(x); 0, 1)]$$
-where
-$$\gamma(x) = \frac{f(x_{best}) − \mu(x ; {x_n,  y_n}, \theta)}{\sigma(x ;  {x_n,  y_n}, \theta)}$$
-$N(\cdot; 0, 1)$ and $\Phi(\cdot)$ are p.d.f. and c.d.f of Gaussian distribution, respectively.&lt;/p&gt;
+&lt;p&gt;We introduce functions called acquisition function to deal with this issue. One of the most commonly used function is &lt;em&gt;Expected Improvement&lt;/em&gt;. Here is the definition:&lt;/p&gt;
+&lt;div class="math"&gt;$$a_{EI}(x; \{x_n,  y_n\}, \theta) = E[max(f(x_{best}) - f(x), 0) | \{x_n,  y_n\}, \theta]$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(f(\cdot)\)&lt;/span&gt; is score function; &lt;span class="math"&gt;\(\{x_n,  y_n\}\)&lt;/span&gt; historical input and its response from score function; &lt;span class="math"&gt;\(\theta\)&lt;/span&gt; is parameters of Gaussian process; &lt;span class="math"&gt;\(E[\cdot]\)&lt;/span&gt; is taking expectation with respect to a Gaussian probability.&lt;/p&gt;
+&lt;p&gt;The right hand can be calculated analytically to the following form:&lt;/p&gt;
+&lt;div class="math"&gt;$$a_{EI}(x; \{x_n,  y_n\}, \theta) = \sigma(x ;  \{x_n,  y_n\}, \theta) [\gamma(x) \Phi(\gamma(x)) + N (\gamma(x); 0, 1)]$$&lt;/div&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;div class="math"&gt;$$\gamma(x) = \frac{f(x_{best}) − \mu(x ; \{x_n,  y_n\}, \theta)}{\sigma(x ;  \{x_n,  y_n\}, \theta)}$$&lt;/div&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(N(\cdot; 0, 1)\)&lt;/span&gt; and &lt;span class="math"&gt;\(\Phi(\cdot)\)&lt;/span&gt; are p.d.f. and c.d.f of Gaussian distribution, respectively.&lt;/p&gt;
 &lt;p&gt;Here is python code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/span&gt;
@@ -500,7 +501,62 @@ For the sake of the simplicity, we define hyperparameters with the following par
 &lt;li&gt;[9] &lt;a href="https://arxiv.org/pdf/1206.2944.pdf"&gt;PRACTICAL BAYESIAN OPTIMIZATION OF MACHINE LEARNING ALGORITHMS&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;[10] &lt;a href="https://arxiv.org/pdf/1602.05149.pdf"&gt;Parallel Bayesian Global Optimization of Expensive Functions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;[11] &lt;a href="https://arxiv.org/pdf/1703.04389.pdf"&gt;Bayesian Optimization with Gradients&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="AutoML"></category></entry><entry><title>Start Your Data Science Blog by Pelican</title><link href="http://jjakimoto.github.io/articles/2018/Mar/01/start_blog/" rel="alternate"></link><published>2018-03-01T12:00:00-05:00</published><updated>2018-03-01T12:00:00-05:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2018-03-01:/articles/2018/Mar/01/start_blog/</id><summary type="html">&lt;p&gt;Blogging is one of the fantastic ways to demonstrate your projects and help you understand stuff in more depth. Especially, I believe that blogging helps you land a job more efficiently. Even if you are not looking for a new position, writing articles you are working on would be the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Blogging is one of the fantastic ways to demonstrate your projects and help you understand stuff in more depth. Especially, I believe that blogging helps you land a job more efficiently. Even if you are not looking for a new position, writing articles you are working on would be the practice to explain stuff to others, which always requires deep understanding. Indeed, A. Einstein mentioned&lt;/p&gt;
+&lt;/ul&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="AutoML"></category></entry><entry><title>Start Your Data Science Blog by Pelican</title><link href="http://jjakimoto.github.io/articles/2018/Mar/01/start_blog/" rel="alternate"></link><published>2018-03-01T12:00:00-05:00</published><updated>2018-03-01T12:00:00-05:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2018-03-01:/articles/2018/Mar/01/start_blog/</id><summary type="html">&lt;p&gt;Blogging is one of the fantastic ways to demonstrate your projects and help you understand stuff in more depth. Especially, I believe that blogging helps you land a job more efficiently. Even if you are not looking for a new position, writing articles you are working on would be the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Blogging is one of the fantastic ways to demonstrate your projects and help you understand stuff in more depth. Especially, I believe that blogging helps you land a job more efficiently. Even if you are not looking for a new position, writing articles you are working on would be the practice to explain stuff to others, which always requires deep understanding. Indeed, A. Einstein mentioned&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;If you can't explain it to a 6 year old then you really don't understand it yourself&lt;/p&gt;
 &lt;/blockquote&gt;
