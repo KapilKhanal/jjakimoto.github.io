@@ -17,7 +17,7 @@ Indeed, when I just started my career as a data scientist, I was always frustrat
 
 Actually there were a lot of ways to tune parameters efficiently and algorithmically, which I was ignorant of back in those days. Especially how to tune Neural Network has been progress rapidly in a recent few years by utilizing various algorithms: [spectral analysis [1]](https://arxiv.org/pdf/1706.00764.pdf), [bandit algorithms [2]](https://arxiv.org/pdf/1603.06560.pdf), [evolutionary strategy [3]](https://arxiv.org/pdf/1711.09846.pdf), [reinforcement learning [4]](https://arxiv.org/pdf/1611.01578.pdf), etc. How to build predictive general models algorithmically is also one of the hot research topics. Many frameworks and algorithms have been suggested [[5]](https://cyphe.rs/static/atm.pdf), [[6]](https://papers.nips.cc/paper/5872-efficient-and-robust-automated-machine-learning.pdf).
 
-Automatically building and tuning models is one of the hot topics in research, some of which are successful in outperforming state-of-art models. Thus, building solid tuning algorithms are way cheaper and more efficient than hiring data scientists for tuning models.
+Automatically building and tuning models is one of the hot topics in research, some of which are successful in outperforming state-of-art models. Thus, building solid tuning algorithms is way cheaper and more efficient than hiring data scientists for tuning models.
 
 ![scientist](https://media.giphy.com/media/xUA7b6oaRIgzmAKpUY/giphy.gif)
 
@@ -49,13 +49,13 @@ When you have only a few hyperparameters, this method may works. Once dimension 
 Random search is known effective over high dimensional search space. Especially when we have small subsets of effective hyperparameters out of high dimensional space, we search these effective parameters effectively [[8]](http://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf).
 
 
-## Bayesian search
+## Bayesian Search
 While random search samples points independently, Bayesian search samples promising points more effectively by utilizing historical results. We first use GP (Gaussian process) to estimate objective function based on historical results [9](https://arxiv.org/pdf/1206.2944.pdf).
 
 GP also outputs variance along with mean. If this variance is large, small mean does not necessary imply promising because high values also likely happen as well. Points minimizing mean of estimation function are not necessary optimal. Thus, we need to define metric to consider trade off between mean and variance.
 
 We introduce functions called acquisition function to deal with this issue. One of the most commonly used function is _Expected Improvement_. Here is the definition:
-$$  a_{EI}(x; \{x_n,  y_n\}, \theta) = \left.E[max(f(x_{best}) - f(x), 0) \right| \{x_n,  y_n\}, \theta]$$
+$$a_{EI}(x; \{x_n,  y_n\}, \theta) = \left.E[max(f(x_{best}) - f(x), 0) \right| \{x_n,  y_n\}, \theta]$$
 where $f(\cdot)$ is score function; $\{x_n,  y_n\}$ historical input and its response from score function; $\theta$ is parameters of Gaussian process; $E[\cdot]$ is taking expectation with respect to a Gaussian probability.
 
 
