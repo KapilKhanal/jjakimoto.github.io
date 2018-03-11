@@ -38,7 +38,7 @@ MARKDOWN = {}
 # PATH settings
 OUTPUT_PATH = 'output/'
 PATH = 'content'
-STATIC_PATHS = ['images']
+STATIC_PATHS = ['images', 'data']
 PAGE_PATHS = ['pages']
 ARTICLE_PATHS = ['articles']
 
