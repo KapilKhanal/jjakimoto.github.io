@@ -1,6 +1,6 @@
 Title: Publications
 Slug: publications
-Status: draft
+<!--- Status: published --->
 
 
 Here is my publications.
