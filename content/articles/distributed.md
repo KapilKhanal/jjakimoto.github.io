@@ -1,4 +1,4 @@
-# Dsitributed System
+# Distributed System
 Distributed system is one of the key concepts of blockchain, which apperears in
 context of high performancde computing and scalable database. 
 As an introduction, you can refer to [the paper](https://link.springer.com/content/pdf/10.1007%2Fs00607-016-0508-7.pdf).
@@ -102,3 +102,77 @@ It takes the following steps:
 1. Pick up a pear at random from nodes
 2. Communicate with the chosen pear
 
+
+# Blockchain
+Blockchain is a technology behind Bitcoin. It consists of the followings:
+* Digital Signature
+* Ledger
+* Proof-of-Work
+
+
+## Digital Signature
+As explained in [the previous article], digital signature is used to verify who send messages you have received. The recent
+widely methods, RSA and Markle Tree, utilize a pair of public and private keys. 
+#### Set up
+* Generate a pair of public and private keys
+* Send a copy of public key to whoever wants to communicate with you
+
+#### Communication
+* Sign: $sign_func(Message, PrivateKey) => Signature$
+* Verify: $verify_func(Message, Signature, pk) => True/False$
+
+
+## Ledger
+Ledger basically contains information about transactions like who pays how much to whom. Each transaction has to be recorded
+along with digital signature.
+
+To make the ledger is valid, you need to check the followings:
+* No over spending
+* Make sure the digital signatures are valid
+
+Every time new transactions are broadcasted, you add new lines to your ledger to track the history.
+There, however, still remain two problems:
+* Who checks if transactions are correct
+* How we keep all of the ledgers consistent
+
+Someone may make up
+fake transactions and broadcast them. You may miss some transactions and your ledger is not consistent with others anymore.
+
+In this situation, proof-of-work comes in to solve this problem.
+
+## Proof-of-Work
+Proof-of-work is a process searching an input of a hash function to produce satisfying a certain rule. Let's say you
+can set a rule like first four characters have to 0, e.g., "0000A9E5F3".
+
+Basically, guessing the input of a hash function from given output difficult. You need to resort to brute force search.
+Thus, it takes for a while to find an ideal input value. This computational intensive process makes working on fraud more
+expensive. 
+
+In actual proof-of-work,
+1. Collect new transactions
+2. Keep trying different [$Nonce$](https://en.wikipedia.org/wiki/Cryptographic_nonce) until $hash_value$ of the below equation satisfies given rule
+$$hash_func(Transactions + Nonce + Signature + HashValue_PreviousBlock) => HashValue$$
+
+After proof-of-work has finished, you add the block to the chain called blockchain.
+Blockchain is constructed from blocks verified by proof-of-work. Including previous hash values avoids someone to change
+the transactions record in the middle of the chain. 
+
+You can get more intuitive comprehension by checking [this demonstration](https://youtu.be/_160oMzblY8).
+
+When multiple people start working on proof-of-work at the same time, whoever finishes the process is allowed to add a new
+block to the chain.
+
+You may wonder what if someone change transactions' record and succeeded to add their block after proof-of-work. 
+To prevent this situation, we take the policy:
+> The longest branch is always valid
+
+This process works well when more than 50% of miners are working on proof-of-work for correct transactions. Let's say only
+10% of people works on fraud. The speed of proof-of-work for correct transactions is 9 times faster than  that of the 
+fraud branch expectedly.
+
+Mathematically speaking, if you wait N transactions to determine which branch is longer, the probability that the fraud branch is longer
+goes to 0 as N diverges to infinity.
+
+In the original paper, N is set as 6. 
+
+You can also check the nice explanation at [You Tube](https://youtu.be/bBC-nXj3Ng4)
