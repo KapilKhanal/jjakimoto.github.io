@@ -1,23 +1,34 @@
-Cryptocurrency like Bitcoin has been attracting a lot of attention in a recent few years. One of
-the main differences of this new currency from traditional currency is not requiring a central 
-entity to authorize transactions. Blockchain is known as a key technology to enable 
-such decentralized systems. Thus, it is important to know how this technology works. 
+Title: Toward Understanding Blockchain
+Slug: blockchain
+Date: 2018-06-22 12:00
+Category: Blockchain
+Tags: Blockchain
+Author: Tomoaki Fujii
+Status: published
 
-In order to understand Blockchain, we have to be familiar with two key concepts: cryptography and
-distributed system. In this blog post, we first go thorough these two concepts briefly, and then 
-we look into how Blockchain enables decentralized systems.
+Blockchain is one of the hottest technologies as well as AI/Machine Learning. Indeed,
+a lot of startup are working in this fields. Besides that compared to another hot topic, Deep Learning, Blockchain is 
+still in early stage and there is space you can get in [[1]](https://medium.freecodecamp.org/the-authoritative-guide-to-blockchain-development-855ab65b58bc).
+I know that a lot of folks investing in cryptocurrencies don't give a shit about tech behind it like Blockchain, but if
+you are savvy tech guy, it would be good investment to learn this topic. 
+
+![blockchain_ml]({filename}/images/blockchain/blockchain_ml.png)
+
+Blockchain ranges across various topics such as cryptography and distributed system. In this blog, I briefly go through this
+tipic while suggesting various blogs and papers that I have used for learning this topic. Especially, I highly recommend
+you to check a blog post [[1]] written by Haseeb Qureshi. Let's dig into Blockchain!
 
 
 # 1. Cryptography
-Cryptography [[1]](https://en.wikipedia.org/wiki/Cryptography) is referred to the study of secure
+Cryptography [[2]](https://en.wikipedia.org/wiki/Cryptography) is referred to the study of secure
 communication. The goal is how we send messages to each other without revealing them to someone else.
-One of the most widely used methods is RSA [[2]](https://sites.math.washington.edu/~morrow/336_09/papers/Yevgeny.pdf),
+One of the most widely used methods is RSA [[3]](https://sites.math.washington.edu/~morrow/336_09/papers/Yevgeny.pdf),
 which utilizes properties of prime numbers. This method take advantage of difference in computational difficulties
 between multiplication and prime decomposition. 
-* Nice explanation on Youtube [[3]](https://www.youtube.com/watch?v=vgTtHV04xRI)
-* Python Implementation [[4]](https://gist.github.com/JonCooperWorks/5314103)
+* Nice explanation on Youtube [[4]](https://www.youtube.com/watch?v=vgTtHV04xRI)
+* Python Implementation [[5]](https://gist.github.com/JonCooperWorks/5314103)
 
-There is another method called EDCSA [[5]](https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/).
+There is another method called EDCSA [[6]](https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/).
 This is method is still controversial, but known to be more secure and fast.
 
 ## Encryption and Decryption
@@ -59,26 +70,17 @@ know what output would be, which is produced by public key and the message.
 #### Merkle Tree
 Merkle Tree is one of efficient digital signature algorithms, which enables Blockchain scalable.
 The signature proof is based on executed with binary tree. You can find a simple explanation of this
-algorithm at this blog [[6]](https://hackernoon.com/merkle-tree-introduction-4c44250e2da7). I also recommend
-you to implement Markle Tree by yourself to understand how it works [[7]](https://github.com/evankozliner/merkle-tree/blob/master/MerkleTree.py).
+algorithm at this blog [[7]](https://hackernoon.com/merkle-tree-introduction-4c44250e2da7). I also recommend
+you to implement Markle Tree by yourself to understand how it works [[8]](https://github.com/evankozliner/merkle-tree/blob/master/MerkleTree.py).
 
-For more detail explanation about digital signature, please refer to this paper [[8]](https://www.emsec.rub.de/media/crypto/attachments/files/2011/04/becker_1.pdf).
+For more detail explanation about digital signature, please refer to this paper [[9]](https://www.emsec.rub.de/media/crypto/attachments/files/2011/04/becker_1.pdf).
 
 
-## References
-1. [Cryptography (Wkikpedia)](https://en.wikipedia.org/wiki/Cryptography)
-2. [The RSA Algorithm, E. Milanov](https://sites.math.washington.edu/~morrow/336_09/papers/Yevgeny.pdf)
-3. [Gambling with Secrets: 8/8 (RSA Encryption) (YouTube)](https://www.youtube.com/watch?v=vgTtHV04xRI)
-4. [RSA Python Implementation](https://gist.github.com/JonCooperWorks/5314103)
-5. [A (Relatively Easy To Understand) Primer on Elliptic Curve Cryptography](https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/)
-6. [Merkle Tree Introduction](https://hackernoon.com/merkle-tree-introduction-4c44250e2da7)
-7. [Merkle Tree Python Implementation](https://github.com/evankozliner/merkle-tree/blob/master/MerkleTree.py)
-8. [Merkle Signature Schemes, Merkle Trees and Their Cryptanalysis, G. Becker](https://www.emsec.rub.de/media/crypto/attachments/files/2011/04/becker_1.pdf)
 
 
 # 2. Distributed System
 Distributed system often appears in the context of high performance computing and scalable database. 
-As an introduction, you can refer to the paper [[1]](https://link.springer.com/content/pdf/10.1007%2Fs00607-016-0508-7.pdf).
+As an introduction, you can refer to the paper [[10]](https://link.springer.com/content/pdf/10.1007%2Fs00607-016-0508-7.pdf).
 In this section, we go though the basic concept and how to achieve such systems.
 
 
@@ -89,7 +91,7 @@ properties are usually mentioned:
 * Availability
 * Partition Tolerance
 
-Gilbert and Lynch [[2]](https://www.glassbeam.com/sites/all/themes/glassbeam/images/blog/10.1.1.67.6951.pdf)
+Gilbert and Lynch [[11]](https://www.glassbeam.com/sites/all/themes/glassbeam/images/blog/10.1.1.67.6951.pdf)
 shows that it is impossible to achieve these three properties at the
 same time. This theory is called `CAP Theorem` after initials of three properties. Let's look
 into more precise definitions.
@@ -124,20 +126,20 @@ nodes. Then, some sent messages are unable to reach their destinations.
  
  
 At most, two out of these three properties are able to achieve at the same time.
-You can find more intuitive proof at a nice blog post [[3]](https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/).
+You can find more intuitive proof at a nice blog post [[12]](https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/).
 
 Practically speaking, you have to choose `Partition Tolerance` and either of `Availability` or `Consistency`.
 As the size of your system increases, some failure is more likely to happens.
 Thus, It is not practical consider a system without `Partition Tolerance`. More precise
-explanation is found in this blog post [[4]](https://codahale.com/you-cant-sacrifice-partition-tolerance/).
+explanation is found in this blog post [[13]](https://codahale.com/you-cant-sacrifice-partition-tolerance/).
 
 
 ## Networking
 To establish a distributed system, nodes have to communicate to each other.
-Blockchain adopts pear-to-pear networking [[5]](https://en.wikipedia.org/wiki/Peer-to-peer).
+Blockchain adopts pear-to-pear networking [[14]](https://en.wikipedia.org/wiki/Peer-to-peer).
 
 #### Pear-to-Pear Networking
-Pear-to-pear networking has the following properties [[6]](https://www.digitalcitizen.life/what-is-p2p-peer-to-peer):
+Pear-to-pear networking has the following properties [[15]](https://www.digitalcitizen.life/what-is-p2p-peer-to-peer):
 
 * Act as both client and server
 * Share resources (e.g., processing power, disk storage and network bandwidth)
@@ -170,11 +172,11 @@ There are two types of IP traffic: TCP (Transmission Control Protocol) and UCP
 * Suitable for applications that need fast and efficient transmission
 * Example: game
 
-For more detail, please refer to this blog post [[7]](https://www.diffen.com/difference/TCP_vs_UDP).
+For more detail, please refer to this blog post [[16]](https://www.diffen.com/difference/TCP_vs_UDP).
 
 
 #### Gossip Protocol
-A gossip protocol [[8]](https://en.wikipedia.org/wiki/Gossip_protocol) is a 
+A gossip protocol [[17]](https://en.wikipedia.org/wiki/Gossip_protocol) is a 
 procedure or process of computer-computer communication.
 It takes the following steps:
 
@@ -182,40 +184,40 @@ It takes the following steps:
 2. Communicate with the chosen pear
 
 
-## References
-1. [A brief introduction to distributed systems](https://link.springer.com/content/pdf/10.1007%2Fs00607-016-0508-7.pdf)
-2. [Brewer’s Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web](https://www.glassbeam.com/sites/all/themes/glassbeam/images/blog/10.1.1.67.6951.pdf)
-3. [An Illustrated Proof of the CAP Theorem](https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/)
-4. [You Can’t Sacrifice Partition Tolerance](https://codahale.com/you-cant-sacrifice-partition-tolerance/)
-5. [Peer-to-peer (Wikipedia)](https://en.wikipedia.org/wiki/Peer-to-peer)
-6. [Simple questions: What is P2P (peer-to-peer) and why is it useful?](https://www.digitalcitizen.life/what-is-p2p-peer-to-peer)
-7. [TCP vs. UDP](https://www.diffen.com/difference/TCP_vs_UDP)
-8. [Gossip protocol](https://en.wikipedia.org/wiki/Gossip_protocol)
+
+
+
+
+
 
 
 # 3. Blockchain
-[YouTube](https://youtu.be/bBC-nXj3Ng4)
 Now we finally come to Blockchain!. Blockchain allows you to authenticate transactions in decentralized fashion.
 Blockchain mainly consists of
-* Verification: Check  if a transaction is valid
+* Verification: Check if a transaction is valid
 * Consensus: Match up transaction history through voting system
 
-## Verification
-As explained above, digital signature is used to verify who sends messages you have received. In the case
-of Blockchain, we verify if a transaction is sent from someone you are supposed to have the transaction with.
-To figure how it works, let's start from a simple case: a transaction between only two persons.
+Verification includes simply verifying who send this transaction or if transactions are over the holding amounts, etc.
+In the consensus process, we need to communicate with others and try to agree on what transactions would be included.
+Consensus works in the global scale while verification works locally. Let's look into more detail. 
 
-#### Two persons case
+## Verification
+Digital signature can be used to verify who sends messages you have received. In the case
+of Blockchain, we verify who sends a transaction.
+To figure how it works, let's start from a simple case: a transaction between only two people.
+
+#### Two people case
 When you lend or borrow money,
-you may record how much and when somewhere. If this transaction happens among reliable friends, this
+you may record how much and when somewhere like in a notebook. If this transaction happens among reliable friends, this
 setting is good enough. This, however, is not necessary the case for general cases. Usually, you need someone else
-to validate the record. For traditional currencies, the third person would be some financial institutes like bank. 
+to validate the record. For traditional currencies, the third person would be some financial institutes like bank. They
+monitor transactions if they are valid and record to their database.
 
 Blockchain uses digital signature to validate transactions instead of introducing a third person. Let's say a transaction
-happens between Adnan and Barby. The transaction is `Adnan is going to give an apple to Barby`.
+happens between Adnan and Barby. The transaction looks like `Adnan is going to give an apple to Barby`.
 To set up digital signature,
 they first need to generate their own pairs of private and public keys, and hand their public keys to
-each other. To make sure this transaction, they take the following steps:
+each other. To make sure the transaction, they take the following steps:
 1. Adnan writes a transaction in plaintext saying `From: Adnan, To: Barby, What: 1 apple`
 2. Adnan encrypts the plaintext with his private key.
 3. Adnan prepends a plaint text "singed by Adnan" to the ciphertext and send it to Barby
@@ -334,7 +336,7 @@ You can get more intuitive comprehension about how proof-of-work in Blockchain f
 
 
 #### Blockchain
-We briefly looked how proof-of-work prevent Sybill atack  and build the chain of transaction blocks, Blockchain.
+We briefly looked how proof-of-work prevent Sybill attack and build the chain of transaction blocks, Blockchain.
 Now, we are going to see the detail as to how Blcockchain are  built while preventing frauds. 
 
 
@@ -356,31 +358,63 @@ asymptotically.
 > Increasing costs deprive frauds of economical benefits. As a result, we exepect more participants
 are less likely to work on frauds.
 
+The optimal value of N would be determined by the trade-off between the secure and cost of confirmation. 
+
 
 
 ###### Adding blocks and transaction fee incentives
-* If successful to add bock to the chain, fee is given
-* The more computational power, the higher likely you get the incentive
+We do not give any reasons for someone to join and work on proof-of-work. Then, we give incentive to someone succeeded in
+proof-of-work. This incentive, however, has to be small enough. Otherwise, it holds participants to have transactions. 
+Miners bascially collect a lot of transactions and then get incentive from there. 
+Let's see how the process works.
 
+1. Adnan and Barby generate new transactions and announce therm to the network.
+2. Carl is listening for new transactions with their incentives. Then he works on the following processes:
+    * Collect unconfirmed transactions until total incentives is large enough (Incentives have to be higher than
+    proof-of-work)
+    * Verify all of the collected transactions and add a new transactions that transfers incentives to him
+    * Work on proof-of-work and generate a validated block
+    * Distribute the block to all other participants
+3. Both Adnan and Barby are listening for new block announcements and look for their transaction in the list
+    * Adnan and Barby verify integrity of the block
+    * If the block is valid and their transactions are in the list, then the transactions are confirmed
 
-#### Chosen longer chain
+###### Racing to claim the transaction fees
+You may wonder what if more than one participants work on proof-of-work on the same transactions. Indeed, this situation
+happens all the time and we have to consider the solution to integrate them. In Blockchain, the first one to finish proof-of-work
+takes the all. Here is how it works:
 
+1. Collect unconfirmed transactions and start proof-of-work
+2. Generate a valid bock and broadcast it into the network
+    * Other peers check the validity of the block
+    * If the block is valid, it is added to the participants' ledgers and rebroadcast to other peers
+    * Once the new block is added, abort their previous work
+3. Repeat 1 and 2
 
-When multiple people start working on proof-of-work at the same time, whoever finishes the process is allowed to add a new
-block to the chain.
+By the nature of the race, the more computational power are more likely to be succeeded to finish proof-of-work. Although
+participation in the race itself is for free, how much influence you give to building the chain is determined by how much
+you put the cost to computational power. 
 
-You may wonder what if someone change transactions' record and succeeded to add their block after proof-of-work. 
-To prevent this situation, we take the policy:
+###### Resolving chain conflicts
+If could happen that more than one participants find valid bocks almost at the same time and add blocks on top of the chain.
+In that case, which blocks would be chosen as top-most block for the next proof-of-work?
+
+In this situation, Blockchain takes the policy:
 > The longest branch is always valid
 
-This process works well when more than 50% of miners are working on proof-of-work for correct transactions. Let's say only
-10% of people works on fraud. The speed of proof-of-work for correct transactions is 9 times faster than  that of the 
-fraud branch expectedly.
+Everytime you find a longer branch, you need to switch to that branch. Thus, `any blokcs are never 'final'!`. Prctically speaking,
+we are unable to wait for infinite time to confirm the trasaction is valid. Mostly, we set certain number N to confirm transations.
+The larger N gives you more security while taking a lot of time to confirm the transactions.
 
-Mathematically speaking, if you wait N transactions to determine which branch is longer, the probability that the fraud branch is longer
-goes to 0 as N diverges to infinity.
+This policy also makes sense to avoid confirming fraud transactions. If less than half of miners are working on fraud. The
+speed of devloping valid branch is faster than fraud branch probabilistically. Thsu, if N is large enough, we can make sure
+that the branch contains the valid transaction. 
 
-In the original paper, N is set as 6. 
+###### Properties of Blockchain
+1. Individual transactions are secured by digital signature
+2. Once created, transactions are broadcast into P2P network
+3. One or more transactions are aggregated into a block
+4. Peers listen for new block announcements and merge them into their ledgers
 
 You can also check the nice explanation at [You Tube](https://youtu.be/bBC-nXj3Ng4)
 
@@ -390,3 +424,24 @@ You can also check the nice explanation at [You Tube](https://youtu.be/bBC-nXj3N
 That's it! We walked through the basic of Blockchain. To deepen your comprehension, I highly recommend
 to build your Blockchain, [Hasebi's video](https://youtu.be/3aJI1ABdjQk). Since this field changes really
 fast, it's important to keep you updated with some media. Some platform are recommended in [Hasebi's blog](https://medium.freecodecamp.org/the-authoritative-guide-to-blockchain-development-855ab65b58bc).
+
+# 5. References
+1. [The authoritative guide to blockchain development](https://medium.freecodecamp.org/the-authoritative-guide-to-blockchain-development-855ab65b58bc)
+
+2. [Cryptography (Wkikpedia)](https://en.wikipedia.org/wiki/Cryptography)
+3. [The RSA Algorithm, E. Milanov](https://sites.math.washington.edu/~morrow/336_09/papers/Yevgeny.pdf)
+4. [Gambling with Secrets: 8/8 (RSA Encryption) (YouTube)](https://www.youtube.com/watch?v=vgTtHV04xRI)
+5. [RSA Python Implementation](https://gist.github.com/JonCooperWorks/5314103)
+6. [A (Relatively Easy To Understand) Primer on Elliptic Curve Cryptography](https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/)
+7. [Merkle Tree Introduction](https://hackernoon.com/merkle-tree-introduction-4c44250e2da7)
+8. [Merkle Tree Python Implementation](https://github.com/evankozliner/merkle-tree/blob/master/MerkleTree.py)
+9. [Merkle Signature Schemes, Merkle Trees and Their Cryptanalysis, G. Becker](https://www.emsec.rub.de/media/crypto/attachments/files/2011/04/becker_1.pdf)
+
+10. [A brief introduction to distributed systems](https://link.springer.com/content/pdf/10.1007%2Fs00607-016-0508-7.pdf)
+11. [Brewer’s Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web](https://www.glassbeam.com/sites/all/themes/glassbeam/images/blog/10.1.1.67.6951.pdf)
+12. [An Illustrated Proof of the CAP Theorem](https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/)
+13. [You Can’t Sacrifice Partition Tolerance](https://codahale.com/you-cant-sacrifice-partition-tolerance/)
+14. [Peer-to-peer (Wikipedia)](https://en.wikipedia.org/wiki/Peer-to-peer)
+15. [Simple questions: What is P2P (peer-to-peer) and why is it useful?](https://www.digitalcitizen.life/what-is-p2p-peer-to-peer)
+16. [TCP vs. UDP](https://www.diffen.com/difference/TCP_vs_UDP)
+17. [Gossip protocol](https://en.wikipedia.org/wiki/Gossip_protocol)
