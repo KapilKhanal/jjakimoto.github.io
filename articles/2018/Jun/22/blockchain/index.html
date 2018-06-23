@@ -126,19 +126,19 @@ to remember is
 <h2>Digital Signature</h2>
 <p>Digital signature is one of the methods to identify who sends the message. This method utilizes the idea
 of asymmetric key explained above. The process is the following ways.</p>
-<h4>1. Sign the message</h4>
+<h3>1. Sign the message</h3>
 <ul>
 <li>Encrypt message using private keys: <span class="math">\(Signature = Sign(Message, PrivateKey)\)</span></li>
 </ul>
-<h4>2. Verify the signature</h4>
+<h3>2. Verify the signature</h3>
 <ul>
 <li>Decrypt the signature: <span class="math">\(DecryptedSignature = Func1(Signature)\)</span></li>
-<li>Make correspondence output from the private key and the message: <span class="math">\(Output = Func(Message, PublicKey)\)</span></li>
+<li>Make correspondence output from the private key and the message: <span class="math">\(Output = Func2(Message, PublicKey)\)</span></li>
 <li>See if <span class="math">\(DecryptedSignature\)</span> and <span class="math">\(Output\)</span> are matched up</li>
 </ul>
 <p>Note that unlike secure communications, we open the message itself to public. Receiver only has to
 know what output would be, which is produced by public key and the message.</p>
-<h4>Merkle Tree</h4>
+<h3>- Merkle Tree</h3>
 <p>Merkle Tree is one of efficient digital signature algorithms, which enables Blockchain scalable.
 The signature proof is based on executed with binary tree. You can find a simple explanation of this
 algorithm at this blog <a href="https://hackernoon.com/merkle-tree-introduction-4c44250e2da7">[7]</a>. I also recommend
@@ -158,7 +158,7 @@ properties are usually mentioned:
 shows that it is impossible to achieve these three properties at the
 same time. This theory is called <code>CAP Theorem</code> after initials of three properties. Let's look
 into more precise definitions.</p>
-<h4>Consistency</h4>
+<h3>- Consistency</h3>
 <p>Gilbert and Lynch describe <code>Consistency</code> as </p>
 <blockquote>
 <p>any read operation that begins after a write operation completes must return that value, or the result of a later write operation</p>
@@ -169,7 +169,7 @@ Fetched information from node B is matched up with stored information at A
 if B is updated within one seconds, otherwise not. Thus, depending on frequency of updates, the response
 may not be consistent.</p>
 <p>Keeping consistency is important to build a reliable system.</p>
-<h4>Availability</h4>
+<h3>- Availability</h3>
 <p>Gilbert and Lynch describe <code>Availability</code> as </p>
 <blockquote>
 <p>every request received by a non-failing node in the system must result in a response</p>
@@ -177,7 +177,7 @@ may not be consistent.</p>
 <p>It simply means to keep responding to clients without interruption.
 For example, if we have two node A and B. Even if node A has collapsed, we are able to response with
 node B. Hence, this system has availability up to collapse of one of the nodes. </p>
-<h4>Partition Tolerance</h4>
+<h3>- Partition Tolerance</h3>
 <p>Gilbert and Lynch describe <code>Partition Tolerance</code> as </p>
 <blockquote>
 <p>the network will be allowed to lose arbitrarily many messages sent from one node to another</p>
@@ -194,7 +194,7 @@ explanation is found in this blog post <a href="https://codahale.com/you-cant-sa
 <h2>Networking</h2>
 <p>To establish a distributed system, nodes have to communicate to each other.
 Blockchain adopts pear-to-pear networking <a href="https://en.wikipedia.org/wiki/Peer-to-peer">[14]</a>.</p>
-<h4>Pear-to-Pear Networking</h4>
+<h3>- Pear-to-Pear Networking</h3>
 <p>Pear-to-pear networking has the following properties <a href="https://www.digitalcitizen.life/what-is-p2p-peer-to-peer">[15]</a>:</p>
 <ul>
 <li>Act as both client and server</li>
@@ -205,10 +205,10 @@ Blockchain adopts pear-to-pear networking <a href="https://en.wikipedia.org/wiki
 </ul>
 <p>These properties make it possible to build robust distributed system.
 Napster, music file sharing service, is one of the first applications of pear-to-pear network system.</p>
-<h4>Internet Protocol (IP)</h4>
+<h3>- Internet Protocol (IP)</h3>
 <p>There are two types of IP traffic: TCP (Transmission Control Protocol) and UCP
 (User Datagram Protocol). Blockchain uses TCP. Let's see the difference between them.</p>
-<h5>TCP</h5>
+<h4>1.TCP</h4>
 <ul>
 <li>Connection-oriented protocol</li>
 <li>Rearranges data packets in the order specified</li>
@@ -218,7 +218,7 @@ Napster, music file sharing service, is one of the first applications of pear-to
 <li>Suitable for applications that require high reliability</li>
 <li>Example: email</li>
 </ul>
-<h5>UDP</h5>
+<h4>2. UDP</h4>
 <ul>
 <li>Connectionless protocol</li>
 <li>No inherent order</li>
@@ -229,7 +229,7 @@ Napster, music file sharing service, is one of the first applications of pear-to
 <li>Example: game</li>
 </ul>
 <p>For more detail, please refer to this blog post <a href="https://www.diffen.com/difference/TCP_vs_UDP">[16]</a>.</p>
-<h4>Gossip Protocol</h4>
+<h3>- Gossip Protocol</h3>
 <p>A gossip protocol <a href="https://en.wikipedia.org/wiki/Gossip_protocol">[17]</a> is a 
 procedure or process of computer-computer communication.
 It takes the following steps:</p>
@@ -249,7 +249,7 @@ Consensus works in the global scale while verification works locally. Let's look
 <p>Digital signature can be used to verify who sends messages you have received. In the case
 of Blockchain, we verify who sends a transaction.
 To figure how it works, let's start from a simple case: a transaction between only two people.</p>
-<h4>Two people case</h4>
+<h3>- Two people case</h3>
 <p>When you lend or borrow money,
 you may record how much and when somewhere like in a notebook. If this transaction happens among reliable friends, this
 setting is good enough. This, however, is not necessary the case for general cases. Usually, you need someone else
@@ -275,7 +275,7 @@ you can decrypts ciphertext and calculate the balance of the ledger. </p>
 </em> Non-repudiation: participants can't claim that the transaction did not happen after the fact.
 * Integrity: the transaction receipt can't be modified after the fact.</p>
 <p>These properties get rid of the necessity to require a reliable third person to verify transactions.</p>
-<h4>Multi-party transfers and verification</h4>
+<h3>- Multi-party transfers and verification</h3>
 <p>Let's consider the case where three people are involved: Adnan, Barby, and Carl. They exchange some valuable coins.
 Assume that they have the following transactions:</p>
 <ul>
@@ -301,12 +301,12 @@ Let's discuss this issue at the next section.</p>
 <h2>Consensus</h2>
 <p>Sharing the same ledger is important when verifying transactions. Inconsistency let malicious users
 to make fraud transactions. The one of the typical fraud transactions is double-spending, spending the same transaction twice.</p>
-<h4>Double-spending and distributed consensus</h4>
+<h3>- Double-spending and distributed consensus</h3>
 <p>In the previous chapter, Adnan transfers Barby's transaction to Carl. If Adnan moves quickly before
 someone has not updated their ledger, he can transfer the same transaction to them again. This is
 called a double-spending attack. To combat this situation, we need to consider distributed consensus
 system <a href="https://en.wikipedia.org/wiki/Consensus_(computer_science)">[18]</a>.</p>
-<h4>P2P Network</h4>
+<h3>- P2P Network</h3>
 <p>We consider consensus through voting system. Pear-to-pear (P2P) network comes in to establish
 such system that deals with two issues: Geography and Timezone problems.</p>
 <p>Thus, P2P network 
@@ -330,7 +330,7 @@ which switch foreword and back between CP and AP.</p>
 * The system should be secure against Sybil and similar attacks</p>
 <p>Roughly speaking, out goal is building the network preventing fraud while keeping consistency
 to some extent. Then, proof-of-work comes in to help you build such system.</p>
-<h4>Proof-of-work</h4>
+<h3>- Proof-of-work</h3>
 <p>Blockchain introduces a process called proof-of-work to avoid Sybil attacks.
 The goals of proof-of-work are
 <em> "expensive" for the sender.
@@ -363,17 +363,17 @@ the transaction records in the middle of the chain. </p>
 <p>You can get more intuitive comprehension about how proof-of-work in Blockchain from this demonstration at YouTube
 <a href="https://www.youtube.com/watch?v=_160oMzblY8&amp;feature=youtu.be">[22]</a>.</p>
 <p>I also recommend you to check a good introductory YouTube vide <a href="https://www.youtube.com/watch?time_continue=837&amp;v=bBC-nXj3Ng4">[23]</a>.</p>
-<h4>Blockchain</h4>
+<h3>- Blockchain</h3>
 <p>We briefly looked how proof-of-work works and build the chain of transaction blocks, Blockchain.
 Now, we are going to see the detail as to how Blcockchain are  built while preventing frauds. </p>
-<h6>Issues in validation</h6>
+<h4>1. Issues in validation</h4>
 <p>Since our P2P network has to be scalable and dynamic, we have to deal with the following situations:
 <em> We do not know how many people to contact to get their approval
 </em> We do not know whom to contact to get their approval
 * We do not know whom we are calling</p>
 <p>Lacking identity and global knowledge of all participants in the network does not allow you to grantee
 the validity of transactions with 100%. We are, however, probabilistically able to grantee the validity.</p>
-<h6>N-confirmation transaction</h6>
+<h4>2. N-confirmation transaction</h4>
 <p>For the assumption for Blockchain to work property, there is an important assumption:
 * malicious users are less than half of participants</p>
 <p>Under this assumption, we can grantee asymptotic validation. Let's say you ask N participants to confirm transactions sequentially.
@@ -382,7 +382,7 @@ as N goes to large number. Contacting N, however, costs you more before acceptan
 <em> The larger N, the higher likely transaction is valid
 </em> The larger N costs you for confirmation</p>
 <p>The optimal value of N would be determined considering this trade-off.</p>
-<h6>Miners and transaction fee incentives</h6>
+<h4>3. Miners and transaction fee incentives</h4>
 <p>Note that ones having transactions and ones confirming transactions are not necessary identical. Basically, anyone can join
 P2P Network and work on confirmations. To encourage someone to join the network, we need to give them some rewards,
 i.e., we give incentive fee to someone succeeded in proof-of-work. This incentive keeps attracting participants and enables
@@ -406,7 +406,7 @@ proof-of-work)</li>
 </ul>
 </li>
 </ol>
-<h6>Racing to claim the transaction fees</h6>
+<h4>4. Racing to claim the transaction fees</h4>
 <p>You may wonder what if more than one participants work on proof-of-work at the same time. Indeed, this situation
 happens all the time and we have to consider the solution to integrate them. Blockchain takes the policy that the first
 one to finish proof-of-work
@@ -424,7 +424,7 @@ takes the all. Here is how it works:</p>
 <p>By the nature of the race, the ones with more computational power are more likely to be succeeded to finish proof-of-work. Although
 the participation in the race itself is for free, how much influence you give to building the chain is determined by how much
 you put the cost to computational power. </p>
-<h6>Resolving chain conflicts</h6>
+<h4>5. Resolving chain conflicts</h4>
 <p>It could happen that more than one participants find valid bocks almost at the same time and try to add blocks on top of the chain.
 In that case, which blocks would be chosen as top-most block for the next proof-of-work?</p>
 <p>In this situation, Blockchain takes the policy:</p>
@@ -440,7 +440,7 @@ The
 speed of developing valid branch is faster than that of fraud branch in the expectation. Thus, if N is large enough,
 we can make sure
 that the branch contains valid transactions. </p>
-<h6>Properties of Blockchain</h6>
+<h4>6. Properties of Blockchain</h4>
 <p>We have went through the basic of Blockchain. What we have seen here is just minimal mechanism, which satisfies that:
 1. Individual transactions are secured by digital signature
 2. Once created, transactions are broadcast into P2P network
