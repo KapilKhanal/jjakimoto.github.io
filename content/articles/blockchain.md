@@ -58,18 +58,18 @@ to remember is
 Digital signature is one of the methods to identify who sends the message. This method utilizes the idea
 of asymmetric key explained above. The process is the following ways.
 
-#### 1. Sign the message
+### 1. Sign the message
 * Encrypt message using private keys: $Signature = Sign(Message, PrivateKey)$
 
-#### 2. Verify the signature
+### 2. Verify the signature
 * Decrypt the signature: $DecryptedSignature = Func1(Signature)$
-* Make correspondence output from the private key and the message: $Output = Func(Message, PublicKey)$
+* Make correspondence output from the private key and the message: $Output = Func2(Message, PublicKey)$
 * See if $DecryptedSignature$ and $Output$ are matched up
 
 Note that unlike secure communications, we open the message itself to public. Receiver only has to
 know what output would be, which is produced by public key and the message.
 
-#### Merkle Tree
+### - Merkle Tree
 Merkle Tree is one of efficient digital signature algorithms, which enables Blockchain scalable.
 The signature proof is based on executed with binary tree. You can find a simple explanation of this
 algorithm at this blog [[7]](https://hackernoon.com/merkle-tree-introduction-4c44250e2da7). I also recommend
@@ -98,7 +98,7 @@ shows that it is impossible to achieve these three properties at the
 same time. This theory is called `CAP Theorem` after initials of three properties. Let's look
 into more precise definitions.
 
-#### Consistency
+### - Consistency
 Gilbert and Lynch describe `Consistency` as 
 > any read operation that begins after a write operation completes must return that value, or the result of a later write operation
 
@@ -110,7 +110,7 @@ may not be consistent.
  
 Keeping consistency is important to build a reliable system.
 
-#### Availability
+### - Availability
 Gilbert and Lynch describe `Availability` as 
 > every request received by a non-failing node in the system must result in a response
 
@@ -118,7 +118,7 @@ It simply means to keep responding to clients without interruption.
 For example, if we have two node A and B. Even if node A has collapsed, we are able to response with
 node B. Hence, this system has availability up to collapse of one of the nodes. 
 
-#### Partition Tolerance
+### - Partition Tolerance
 Gilbert and Lynch describe `Partition Tolerance` as 
 > the network will be allowed to lose arbitrarily many messages sent from one node to another
 
@@ -140,7 +140,7 @@ explanation is found in this blog post [[13]](https://codahale.com/you-cant-sacr
 To establish a distributed system, nodes have to communicate to each other.
 Blockchain adopts pear-to-pear networking [[14]](https://en.wikipedia.org/wiki/Peer-to-peer).
 
-#### Pear-to-Pear Networking
+### - Pear-to-Pear Networking
 Pear-to-pear networking has the following properties [[15]](https://www.digitalcitizen.life/what-is-p2p-peer-to-peer):
 
 * Act as both client and server
@@ -152,11 +152,11 @@ Pear-to-pear networking has the following properties [[15]](https://www.digitalc
 These properties make it possible to build robust distributed system.
 Napster, music file sharing service, is one of the first applications of pear-to-pear network system.
 
-#### Internet Protocol (IP)
+### - Internet Protocol (IP)
 There are two types of IP traffic: TCP (Transmission Control Protocol) and UCP
 (User Datagram Protocol). Blockchain uses TCP. Let's see the difference between them.
 
-##### TCP
+#### 1.TCP
 * Connection-oriented protocol
 * Rearranges data packets in the order specified
 * Slower than UDP
@@ -165,7 +165,7 @@ There are two types of IP traffic: TCP (Transmission Control Protocol) and UCP
 * Suitable for applications that require high reliability
 * Example: email
 
-##### UDP
+#### 2. UDP
 * Connectionless protocol
 * No inherent order
 * Faster because of no error recovery attemption
@@ -177,7 +177,7 @@ There are two types of IP traffic: TCP (Transmission Control Protocol) and UCP
 For more detail, please refer to this blog post [[16]](https://www.diffen.com/difference/TCP_vs_UDP).
 
 
-#### Gossip Protocol
+### - Gossip Protocol
 A gossip protocol [[17]](https://en.wikipedia.org/wiki/Gossip_protocol) is a 
 procedure or process of computer-computer communication.
 It takes the following steps:
@@ -208,7 +208,7 @@ Digital signature can be used to verify who sends messages you have received. In
 of Blockchain, we verify who sends a transaction.
 To figure how it works, let's start from a simple case: a transaction between only two people.
 
-#### Two people case
+### - Two people case
 When you lend or borrow money,
 you may record how much and when somewhere like in a notebook. If this transaction happens among reliable friends, this
 setting is good enough. This, however, is not necessary the case for general cases. Usually, you need someone else
@@ -241,7 +241,7 @@ With this system, we can attain the following three properties:
 These properties get rid of the necessity to require a reliable third person to verify transactions.
 
 
-#### Multi-party transfers and verification
+### - Multi-party transfers and verification
 Let's consider the case where three people are involved: Adnan, Barby, and Carl. They exchange some valuable coins.
 Assume that they have the following transactions:
 
@@ -274,14 +274,14 @@ Let's discuss this issue at the next section.
 Sharing the same ledger is important when verifying transactions. Inconsistency let malicious users
 to make fraud transactions. The one of the typical fraud transactions is double-spending, spending the same transaction twice.
 
-#### Double-spending and distributed consensus
+### - Double-spending and distributed consensus
 In the previous chapter, Adnan transfers Barby's transaction to Carl. If Adnan moves quickly before
 someone has not updated their ledger, he can transfer the same transaction to them again. This is
 called a double-spending attack. To combat this situation, we need to consider distributed consensus
 system [[18]](https://en.wikipedia.org/wiki/Consensus_(computer_science)).
 
 
-#### P2P Network
+### - P2P Network
 We consider consensus through voting system. Pear-to-pear (P2P) network comes in to establish
 such system that deals with two issues: Geography and Timezone problems.
 
@@ -312,7 +312,7 @@ This requires the network to deal with the followings:
 Roughly speaking, out goal is building the network preventing fraud while keeping consistency
 to some extent. Then, proof-of-work comes in to help you build such system.
 
-#### Proof-of-work
+### - Proof-of-work
 Blockchain introduces a process called proof-of-work to avoid Sybil attacks.
 The goals of proof-of-work are
 * "expensive" for the sender.
@@ -344,12 +344,12 @@ You can get more intuitive comprehension about how proof-of-work in Blockchain f
 I also recommend you to check a good introductory YouTube vide [[23]](https://www.youtube.com/watch?time_continue=837&v=bBC-nXj3Ng4).
 
 
-#### Blockchain
+### - Blockchain
 We briefly looked how proof-of-work works and build the chain of transaction blocks, Blockchain.
 Now, we are going to see the detail as to how Blcockchain are  built while preventing frauds. 
 
 
-###### Issues in validation
+#### 1. Issues in validation
 Since our P2P network has to be scalable and dynamic, we have to deal with the following situations:
 * We do not know how many people to contact to get their approval
 * We do not know whom to contact to get their approval
@@ -358,7 +358,7 @@ Since our P2P network has to be scalable and dynamic, we have to deal with the f
 Lacking identity and global knowledge of all participants in the network does not allow you to grantee
 the validity of transactions with 100%. We are, however, probabilistically able to grantee the validity.
 
-###### N-confirmation transaction
+#### 2. N-confirmation transaction
 For the assumption for Blockchain to work property, there is an important assumption:
 * malicious users are less than half of participants
 
@@ -371,7 +371,7 @@ as N goes to large number. Contacting N, however, costs you more before acceptan
 The optimal value of N would be determined considering this trade-off.
 
 
-###### Miners and transaction fee incentives
+#### 3. Miners and transaction fee incentives
 Note that ones having transactions and ones confirming transactions are not necessary identical. Basically, anyone can join
 P2P Network and work on confirmations. To encourage someone to join the network, we need to give them some rewards,
 i.e., we give incentive fee to someone succeeded in proof-of-work. This incentive keeps attracting participants and enables
@@ -392,7 +392,7 @@ Let's see how the process works.
     * Adnan and Barby verify integrity of the block
     * If the block is valid and their transactions are in the list, then the transactions are confirmed
 
-###### Racing to claim the transaction fees
+#### 4. Racing to claim the transaction fees
 You may wonder what if more than one participants work on proof-of-work at the same time. Indeed, this situation
 happens all the time and we have to consider the solution to integrate them. Blockchain takes the policy that the first
 one to finish proof-of-work
@@ -409,7 +409,7 @@ By the nature of the race, the ones with more computational power are more likel
 the participation in the race itself is for free, how much influence you give to building the chain is determined by how much
 you put the cost to computational power. 
 
-###### Resolving chain conflicts
+#### 5. Resolving chain conflicts
 It could happen that more than one participants find valid bocks almost at the same time and try to add blocks on top of the chain.
 In that case, which blocks would be chosen as top-most block for the next proof-of-work?
 
@@ -427,7 +427,7 @@ speed of developing valid branch is faster than that of fraud branch in the expe
 we can make sure
 that the branch contains valid transactions. 
 
-###### Properties of Blockchain
+#### 6. Properties of Blockchain
 We have went through the basic of Blockchain. What we have seen here is just minimal mechanism, which satisfies that:
 1. Individual transactions are secured by digital signature
 2. Once created, transactions are broadcast into P2P network
