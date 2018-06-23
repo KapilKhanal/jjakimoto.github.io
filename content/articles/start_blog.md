@@ -1,4 +1,4 @@
-Title: Start your data science blog by Pelican
+Title: Start Your Data Science Blog by Pelican
 Slug: start_blog
 Date: 2018-03-01 12:00
 Category: Others

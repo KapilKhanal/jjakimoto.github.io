@@ -38,18 +38,23 @@ MARKDOWN = {}
 # PATH settings
 OUTPUT_PATH = 'output/'
 PATH = 'content'
-STATIC_PATHS = ['images']
+STATIC_PATHS = ['images', 'data', 'publications']
 PAGE_PATHS = ['pages']
 ARTICLE_PATHS = ['articles']
 
 # Extention
 MARKUP = ('md', 'ipynb')
-PLUGIN_PATHS = ['./plugins', './pelican-plugins']
-PLUGINS = ['ipynb.markup', 'render_math', 'better_codeblock_line_numbering']
-MD_EXTENSIONS = [
-    'codehilite(css_class=highlight,linenums=False)',
-    'extra'
-    ]
+PLUGIN_PATHS = ['./pelican-plugins', './plugins']
+PLUGINS = ['render_math', 'ipynb.markup', 'better_codeblock_line_numbering']
+
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+    },
+    'output_format': 'html5',
+}
 
 # URL settings
 ARTICLE_URL = 'articles/{date:%Y}/{date:%b}/{date:%d}/{slug}/'
@@ -60,7 +65,7 @@ PAGE_SAVE_AS = 'pages/{slug}/index.html'
 # Time and Date settings
 TIMEZONE = 'America/New_York'
 DEFAULT_DATE_FORMATS = '%a, %m/%d/%Y'
-LOCALE = ('en_US')
+# LOCALE = ('en_US')
 
 # Template pages settings
 TEMPLATE_PAGES = None
