@@ -1,5 +1,470 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Data Rounder - Tomoaki Fujii</title><link href="http://jjakimoto.github.io/" rel="alternate"></link><link href="http://jjakimoto.github.io/feeds/tomoaki-fujii.atom.xml" rel="self"></link><id>http://jjakimoto.github.io/</id><updated>2018-03-11T12:00:00-04:00</updated><entry><title>Bayesian Optimization of Hyperparameters with Python</title><link href="http://jjakimoto.github.io/articles/2018/Mar/11/bayes_opt/" rel="alternate"></link><published>2018-03-11T12:00:00-04:00</published><updated>2018-03-11T12:00:00-04:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2018-03-11:/articles/2018/Mar/11/bayes_opt/</id><summary type="html">&lt;p&gt;Choosing a good set of hyperparameters is one of most important steps but also pretty much annoying and time consuming. The small number of hyperparameters may allow you to find an optimal hyperparameters after a few trials. This is, however, not the case for complex models like neural network.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Data Rounder - Tomoaki Fujii</title><link href="http://jjakimoto.github.io/" rel="alternate"></link><link href="http://jjakimoto.github.io/feeds/tomoaki-fujii.atom.xml" rel="self"></link><id>http://jjakimoto.github.io/</id><updated>2018-06-22T12:00:00-04:00</updated><entry><title>Toward Understanding Blockchain</title><link href="http://jjakimoto.github.io/articles/2018/Jun/22/blockchain/" rel="alternate"></link><published>2018-06-22T12:00:00-04:00</published><updated>2018-06-22T12:00:00-04:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2018-06-22:/articles/2018/Jun/22/blockchain/</id><summary type="html">&lt;p&gt;Blockchain is one of the hottest technologies as well as AI/Machine Learning. Indeed,
+a lot of startup are working in this fields. Besides that compared to another hot topic, Deep Learning, Blockchain is 
+still in early stage and there is space you can get in &lt;a href="https://medium.freecodecamp.org/the-authoritative-guide-to-blockchain-development-855ab65b58bc"&gt;[1]&lt;/a&gt;.
+I know that …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Blockchain is one of the hottest technologies as well as AI/Machine Learning. Indeed,
+a lot of startup are working in this fields. Besides that compared to another hot topic, Deep Learning, Blockchain is 
+still in early stage and there is space you can get in &lt;a href="https://medium.freecodecamp.org/the-authoritative-guide-to-blockchain-development-855ab65b58bc"&gt;[1]&lt;/a&gt;.
+I know that a lot of folks investing in cryptocurrencies don't give a shit about tech behind it like Blockchain, but if
+you are savvy tech guy, it would be good investment to learn this topic. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="blockchain_ml" src="{filename}/images/blockchain/blockchain_ml.png"&gt;&lt;/p&gt;
+&lt;p&gt;Blockchain ranges across various topics such as cryptography and distributed system. In this blog, I briefly go through this
+topic while suggesting various blogs and papers that I have used for learning this topic. Especially, I highly recommend
+you to check a blog post written by Haseeb Qureshi &lt;a href="https://medium.freecodecamp.org/the-authoritative-guide-to-blockchain-development-855ab65b58bc"&gt;[1]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let's dig into Blockchain!&lt;/p&gt;
+&lt;h1&gt;1. Cryptography&lt;/h1&gt;
+&lt;p&gt;Cryptography &lt;a href="https://en.wikipedia.org/wiki/Cryptography"&gt;[2]&lt;/a&gt; is referred to the study of secure
+communication. The goal is how we send messages to each other without revealing them to someone else.
+One of the most widely used methods is RSA &lt;a href="https://sites.math.washington.edu/~morrow/336_09/papers/Yevgeny.pdf"&gt;[3]&lt;/a&gt;,
+which utilizes properties of prime numbers. This method take advantage of difference in computational difficulties
+between multiplication and prime decomposition. 
+&lt;em&gt; Nice explanation on Youtube &lt;a href="https://www.youtube.com/watch?v=vgTtHV04xRI"&gt;[4]&lt;/a&gt;
+&lt;/em&gt; Python Implementation &lt;a href="https://gist.github.com/JonCooperWorks/5314103"&gt;[5]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;There is another method called EDCSA &lt;a href="https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/"&gt;[6]&lt;/a&gt;.
+This is method is still controversial, but known to be more secure and fast.&lt;/p&gt;
+&lt;h2&gt;Encryption and Decryption&lt;/h2&gt;
+&lt;p&gt;To achieve secure communications, we need to encrypt data before sending and decrypt received data.
+In the early age, people share secrete information about how to encrypt or decrypt in some way. Then,
+they communicate to each other. This method has a risk that the secret information is stolen while sharing.&lt;/p&gt;
+&lt;p&gt;To reconcile this problem, the idea of asymmetric key is suggested. Both RSA amd EDCSA are based on this
+idea. Asymmetric key consists of public key and private key. Let's look into how this concept works.&lt;/p&gt;
+&lt;h4&gt;1. Set up&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Generate a pair of public and private keys&lt;/li&gt;
+&lt;li&gt;Distribute the public key to someone to communicate with while keeping private key in only your side&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;2. Communication&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Someone encrypts a message using the public key and send the encrypted message to you&lt;/li&gt;
+&lt;li&gt;Decrypt the received encrypted message using the private key&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Note that by not sharing the private key, you can make sure the secure communication. What you have
+to remember is
+&lt;em&gt; Public key is used for encryption and shared 
+&lt;/em&gt; Private key is used for decryption and not shared&lt;/p&gt;
+&lt;h2&gt;Digital Signature&lt;/h2&gt;
+&lt;p&gt;Digital signature is one of the methods to identify who sends the message. This method utilizes the idea
+of asymmetric key explained above. The process is the following ways.&lt;/p&gt;
+&lt;h4&gt;1. Sign the message&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Encrypt message using private keys: &lt;span class="math"&gt;\(Signature = Sign(Message, PrivateKey)\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;2. Verify the signature&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Decrypt the signature: &lt;span class="math"&gt;\(DecryptedSignature = Func1(Signature)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Make correspondence output from the private key and the message: &lt;span class="math"&gt;\(Output = Func(Message, PublicKey)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;See if &lt;span class="math"&gt;\(DecryptedSignature\)&lt;/span&gt; and &lt;span class="math"&gt;\(Output\)&lt;/span&gt; are matched up&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note that unlike secure communications, we open the message itself to public. Receiver only has to
+know what output would be, which is produced by public key and the message.&lt;/p&gt;
+&lt;h4&gt;Merkle Tree&lt;/h4&gt;
+&lt;p&gt;Merkle Tree is one of efficient digital signature algorithms, which enables Blockchain scalable.
+The signature proof is based on executed with binary tree. You can find a simple explanation of this
+algorithm at this blog &lt;a href="https://hackernoon.com/merkle-tree-introduction-4c44250e2da7"&gt;[7]&lt;/a&gt;. I also recommend
+you to implement Markle Tree by yourself to understand how it works &lt;a href="https://github.com/evankozliner/merkle-tree/blob/master/MerkleTree.py"&gt;[8]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For more detail explanation about digital signature, please refer to this paper &lt;a href="https://www.emsec.rub.de/media/crypto/attachments/files/2011/04/becker_1.pdf"&gt;[9]&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;2. Distributed System&lt;/h1&gt;
+&lt;p&gt;Distributed system often appears in the context of high performance computing and scalable database. 
+As an introduction, you can refer to the paper &lt;a href="https://link.springer.com/content/pdf/10.1007%2Fs00607-016-0508-7.pdf"&gt;[10]&lt;/a&gt;.
+In this section, we go though the basic concept and how to achieve such systems.&lt;/p&gt;
+&lt;h2&gt;CAP Theorem&lt;/h2&gt;
+&lt;p&gt;When discussing what distributed systems have to achieve, the following three
+properties are usually mentioned:
+&lt;em&gt; Consistency
+&lt;/em&gt; Availability
+* Partition Tolerance&lt;/p&gt;
+&lt;p&gt;Gilbert and Lynch &lt;a href="https://www.glassbeam.com/sites/all/themes/glassbeam/images/blog/10.1.1.67.6951.pdf"&gt;[11]&lt;/a&gt;
+shows that it is impossible to achieve these three properties at the
+same time. This theory is called &lt;code&gt;CAP Theorem&lt;/code&gt; after initials of three properties. Let's look
+into more precise definitions.&lt;/p&gt;
+&lt;h4&gt;Consistency&lt;/h4&gt;
+&lt;p&gt;Gilbert and Lynch describe &lt;code&gt;Consistency&lt;/code&gt; as &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;any read operation that begins after a write operation completes must return that value, or the result of a later write operation&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Let's say there are two nodes A and B.
+We write file F to node A followed by the reading F query to B after 1.0 seconds.
+Fetched information from node B is matched up with stored information at A
+if B is updated within one seconds, otherwise not. Thus, depending on frequency of updates, the response
+may not be consistent.&lt;/p&gt;
+&lt;p&gt;Keeping consistency is important to build a reliable system.&lt;/p&gt;
+&lt;h4&gt;Availability&lt;/h4&gt;
+&lt;p&gt;Gilbert and Lynch describe &lt;code&gt;Availability&lt;/code&gt; as &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;every request received by a non-failing node in the system must result in a response&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It simply means to keep responding to clients without interruption.
+For example, if we have two node A and B. Even if node A has collapsed, we are able to response with
+node B. Hence, this system has availability up to collapse of one of the nodes. &lt;/p&gt;
+&lt;h4&gt;Partition Tolerance&lt;/h4&gt;
+&lt;p&gt;Gilbert and Lynch describe &lt;code&gt;Partition Tolerance&lt;/code&gt; as &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;the network will be allowed to lose arbitrarily many messages sent from one node to another&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Some parts of your system may corrupt temporary and break connections among
+nodes. Then, some sent messages are unable to reach their destinations.
+&lt;code&gt;Partition Tolerance&lt;/code&gt; means allowing your system to keep running even in such situations.&lt;/p&gt;
+&lt;p&gt;At most, two out of these three properties are able to achieve at the same time.
+You can find more intuitive proof at a nice blog post &lt;a href="https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/"&gt;[12]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Practically speaking, you have to choose &lt;code&gt;Partition Tolerance&lt;/code&gt; and either of &lt;code&gt;Availability&lt;/code&gt; or &lt;code&gt;Consistency&lt;/code&gt;.
+As the size of your system increases, some failure is more likely to happens.
+Thus, It is not practical consider a system without &lt;code&gt;Partition Tolerance&lt;/code&gt;. More precise
+explanation is found in this blog post &lt;a href="https://codahale.com/you-cant-sacrifice-partition-tolerance/"&gt;[13]&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Networking&lt;/h2&gt;
+&lt;p&gt;To establish a distributed system, nodes have to communicate to each other.
+Blockchain adopts pear-to-pear networking &lt;a href="https://en.wikipedia.org/wiki/Peer-to-peer"&gt;[14]&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;Pear-to-Pear Networking&lt;/h4&gt;
+&lt;p&gt;Pear-to-pear networking has the following properties &lt;a href="https://www.digitalcitizen.life/what-is-p2p-peer-to-peer"&gt;[15]&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Act as both client and server&lt;/li&gt;
+&lt;li&gt;Share resources (e.g., processing power, disk storage and network bandwidth)&lt;/li&gt;
+&lt;li&gt;Fast file sharing&lt;/li&gt;
+&lt;li&gt;Difficult to take down&lt;/li&gt;
+&lt;li&gt;Scalable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These properties make it possible to build robust distributed system.
+Napster, music file sharing service, is one of the first applications of pear-to-pear network system.&lt;/p&gt;
+&lt;h4&gt;Internet Protocol (IP)&lt;/h4&gt;
+&lt;p&gt;There are two types of IP traffic: TCP (Transmission Control Protocol) and UCP
+(User Datagram Protocol). Blockchain uses TCP. Let's see the difference between them.&lt;/p&gt;
+&lt;h5&gt;TCP&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;Connection-oriented protocol&lt;/li&gt;
+&lt;li&gt;Rearranges data packets in the order specified&lt;/li&gt;
+&lt;li&gt;Slower than UDP&lt;/li&gt;
+&lt;li&gt;Grantees that data transfers correctly&lt;/li&gt;
+&lt;li&gt;HTTP, HTTPs, FTP, etc.&lt;/li&gt;
+&lt;li&gt;Suitable for applications that require high reliability&lt;/li&gt;
+&lt;li&gt;Example: email&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5&gt;UDP&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;Connectionless protocol&lt;/li&gt;
+&lt;li&gt;No inherent order&lt;/li&gt;
+&lt;li&gt;Faster because of no error recovery attemption&lt;/li&gt;
+&lt;li&gt;No grantee of transfers&lt;/li&gt;
+&lt;li&gt;DNS, DHCP, TFTP, etc.&lt;/li&gt;
+&lt;li&gt;Suitable for applications that need fast and efficient transmission&lt;/li&gt;
+&lt;li&gt;Example: game&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more detail, please refer to this blog post &lt;a href="https://www.diffen.com/difference/TCP_vs_UDP"&gt;[16]&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;Gossip Protocol&lt;/h4&gt;
+&lt;p&gt;A gossip protocol &lt;a href="https://en.wikipedia.org/wiki/Gossip_protocol"&gt;[17]&lt;/a&gt; is a 
+procedure or process of computer-computer communication.
+It takes the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Pick up a pear at random from nodes&lt;/li&gt;
+&lt;li&gt;Communicate with the chosen pear&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;3. Blockchain&lt;/h1&gt;
+&lt;p&gt;Now we finally come to Blockchain!. Blockchain allows you to authenticate transactions in decentralized fashion.
+Blockchain mainly consists of
+&lt;em&gt; Verification: Check if a transaction is valid
+&lt;/em&gt; Consensus: Match up transaction history through voting system&lt;/p&gt;
+&lt;p&gt;Verification includes simply verifying who send this transaction or if transactions are over the holding amounts, etc.
+In the consensus process, we need to communicate with others and try to agree on what transactions would be included.
+Consensus works in the global scale while verification works locally. Let's look into more detail. &lt;/p&gt;
+&lt;h2&gt;Verification&lt;/h2&gt;
+&lt;p&gt;Digital signature can be used to verify who sends messages you have received. In the case
+of Blockchain, we verify who sends a transaction.
+To figure how it works, let's start from a simple case: a transaction between only two people.&lt;/p&gt;
+&lt;h4&gt;Two people case&lt;/h4&gt;
+&lt;p&gt;When you lend or borrow money,
+you may record how much and when somewhere like in a notebook. If this transaction happens among reliable friends, this
+setting is good enough. This, however, is not necessary the case for general cases. Usually, you need someone else
+to validate the record. For traditional currencies, the third person would be some financial institutes like bank. They
+monitor transactions if they are valid and record them to their database.&lt;/p&gt;
+&lt;p&gt;Blockchain uses digital signature to validate transactions instead of introducing a third person. Let's say a transaction
+happens between Adnan and Barby. The transaction looks like &lt;code&gt;Adnan is going to give an apple to Barby&lt;/code&gt;.
+To set up digital signature,
+they first need to generate their own pairs of private and public keys, and hand their public keys to
+each other. To make sure the transaction, they take the following steps:
+1. Adnan writes a transaction in plaintext saying &lt;code&gt;From: Adnan, To: Barby, What: 1 apple&lt;/code&gt;
+2. Adnan encrypts the plaintext with his private key.
+3. Adnan prepends a plaint text "singed by Adnan" to the ciphertext and send it to Barby
+4. Barby receives the text and finds "signed by Adnan"
+5. Barby decrypts the ciphertext with the public key of Adnan to verify if the transaction comes from him&lt;/p&gt;
+&lt;p&gt;Note that the processes 3 and 4 are necessary when more than two parties are involved. Otherwise, Barby is
+unable to decide whose public key she has to use.&lt;/p&gt;
+&lt;p&gt;Transactions secured by signatures are stored at &lt;code&gt;ledger&lt;/code&gt;. A ledger consists of multiple transactions.
+Each transaction contains a ciphertext and a plaintext about whose sign. By using corresponding public keys,
+you can decrypts ciphertext and calculate the balance of the ledger. &lt;/p&gt;
+&lt;p&gt;With this system, we can attain the following three properties:
+&lt;em&gt; Authentication: a malicious party can't masquerade as someone else.
+&lt;/em&gt; Non-repudiation: participants can't claim that the transaction did not happen after the fact.
+* Integrity: the transaction receipt can't be modified after the fact.&lt;/p&gt;
+&lt;p&gt;These properties get rid of the necessity to require a reliable third person to verify transactions.&lt;/p&gt;
+&lt;h4&gt;Multi-party transfers and verification&lt;/h4&gt;
+&lt;p&gt;Let's consider the case where three people are involved: Adnan, Barby, and Carl. They exchange some valuable coins.
+Assume that they have the following transactions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Transaction 1. &lt;code&gt;From: Barby, ciphertext 1 =&amp;gt; To: Adnan, What: 3 coins&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Transaction 2. &lt;code&gt;From: Adnan, ciphertext 2 =&amp;gt; To: Carl, What: 3 coins&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can translate this situation to that Barby pays 3 coins to Carl. Thus, Adnan can add another
+transaction to the ledger:
+* Transaction 3. &lt;code&gt;From Adnan, ciper_3 =&amp;gt; To: Carl, What: Hashed value of chipertext 1&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Here are what Carl is going to do:
+1. Fetch Barby's and Adnan's public keys and verifies Transaction 1 and 2.
+2. Verify that Adnan transfers a valid transaction:
+    * The transaction is addressed to Adnan
+    * Adnan has not previously transfered the same transaction to anyone else&lt;/p&gt;
+&lt;p&gt;After all checks pass, Carl asks Barby to pay.
+Then, here are what Barby is going to do:
+1. Fetch Adnan's public key and verify Transaction 3
+2. Verify that the transfer is referencing one of her own transaction with Adnan&lt;/p&gt;
+&lt;p&gt;Utilizing digital signature allows you to have secure transactions. There still, however, remains
+some flaws in this system. When validating a transaction, the reference, i.e., the ledger is not always updated.
+If someone makes the same transaction more than once almost at the same time, this flaw would not be detected.
+Let's discuss this issue at the next section.&lt;/p&gt;
+&lt;h2&gt;Consensus&lt;/h2&gt;
+&lt;p&gt;Sharing the same ledger is important when verifying transactions. Inconsistency let malicious users
+to make fraud transactions. The one of the typical fraud transactions is double-spending, spending the same transaction twice.&lt;/p&gt;
+&lt;h4&gt;Double-spending and distributed consensus&lt;/h4&gt;
+&lt;p&gt;In the previous chapter, Adnan transfers Barby's transaction to Carl. If Adnan moves quickly before
+someone has not updated their ledger, he can transfer the same transaction to them again. This is
+called a double-spending attack. To combat this situation, we need to consider distributed consensus
+system &lt;a href="https://en.wikipedia.org/wiki/Consensus_(computer_science)"&gt;[18]&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;P2P Network&lt;/h4&gt;
+&lt;p&gt;We consider consensus through voting system. Pear-to-pear (P2P) network comes in to establish
+such system that deals with two issues: Geography and Timezone problems.&lt;/p&gt;
+&lt;p&gt;Thus, P2P network 
+&lt;em&gt; Communicates through online (Geography)
+&lt;/em&gt; Updates ledger automatically (Timezone)
+* Uses Gossip Protocol to update the ledger with voting system&lt;/p&gt;
+&lt;p&gt;There still remains some problems with out P2P design:
+&lt;em&gt; Ensuring that every participant is always up to date imposes high coordination costs and affects availability:
+if a single peer is unreachable the system cannot commit new transactions.(Availability)
+&lt;/em&gt; In practice, we do not know the global status of the P2P network: Some of nodes may have left the network.
+(Partition Tolerance)
+* The system is open to a Sybil attack &lt;a href="https://en.wikipedia.org/wiki/Sybil_attack"&gt;[19]&lt;/a&gt;. (Consensus)&lt;/p&gt;
+&lt;p&gt;According to the CAP Theorem, all of the problems are unable to solve at the same time.
+Rather than taking either of CP or AP, we operate the P2P network under the weaker consistency&lt;a href="https://www.igvita.com/2010/06/24/weak-consistency-and-cap-implications/"&gt;[20]&lt;/a&gt;,
+which switch foreword and back between CP and AP.&lt;/p&gt;
+&lt;p&gt;This requires the network to deal with the followings:
+&lt;em&gt; We must accept that some ledgers will be out of sync (at least temporarily).
+&lt;/em&gt; The system must eventually converge on a global ordering (linearizability) of all transactions.
+&lt;em&gt; The system must resolve ledger conflicts in a predictable manner.
+&lt;/em&gt; The system must enforce global invariants, e.g., no double-spends.
+* The system should be secure against Sybil and similar attacks&lt;/p&gt;
+&lt;p&gt;Roughly speaking, out goal is building the network preventing fraud while keeping consistency
+to some extent. Then, proof-of-work comes in to help you build such system.&lt;/p&gt;
+&lt;h4&gt;Proof-of-work&lt;/h4&gt;
+&lt;p&gt;Blockchain introduces a process called proof-of-work to avoid Sybil attacks.
+The goals of proof-of-work are
+&lt;em&gt; "expensive" for the sender.
+&lt;/em&gt; "cheap" to verify by everyone else.&lt;/p&gt;
+&lt;p&gt;These goals make Sybil attacks expensive and get rid of their economical benefits while keeping running
+the secure system with reasonable cost. Let's see how these goals are achieved.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Process of sender: To search an input of a hash function to produce an output satisfying a certain rule&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Let's say you can set a rule like first four characters have to be 0, e.g., "0000A9E5F3". Guessing the input of a hash function from given the output is difficult. You need to resort to brute force search.
+Thus, it takes for a while to find an ideal input value.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Process of verification: To hash transaction and see if hashed value is matched up with the output&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This process is computationally cheap.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Proof-of-work works in the following way,
+1. Collect new transactions
+2. Keep trying different &lt;span class="math"&gt;\(Nonce\)&lt;/span&gt; &lt;a href="https://en.wikipedia.org/wiki/Cryptographic_nonce"&gt;[21]&lt;/a&gt; until &lt;span class="math"&gt;\(hash_value\)&lt;/span&gt; of the below equation satisfies given rule
+&lt;/p&gt;
+&lt;div class="math"&gt;$$hash_func(Transactions + Nonce + Signature + HashValue_PreviousBlock) =&amp;gt; HashValue$$&lt;/div&gt;
+&lt;p&gt;After proof-of-work has finished, you add the block to a chain called Blockchain.
+Blockchain is constructed from blocks verified by proof-of-work. Including previous hash values avoids someone to change
+the transaction records in the middle of the chain. &lt;/p&gt;
+&lt;p&gt;You can get more intuitive comprehension about how proof-of-work in Blockchain from this demonstration at YouTube
+&lt;a href="https://www.youtube.com/watch?v=_160oMzblY8&amp;amp;feature=youtu.be"&gt;[22]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I also recommend you to check a good introductory YouTube vide &lt;a href="https://www.youtube.com/watch?time_continue=837&amp;amp;v=bBC-nXj3Ng4"&gt;[23]&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;Blockchain&lt;/h4&gt;
+&lt;p&gt;We briefly looked how proof-of-work works and build the chain of transaction blocks, Blockchain.
+Now, we are going to see the detail as to how Blcockchain are  built while preventing frauds. &lt;/p&gt;
+&lt;h6&gt;Issues in validation&lt;/h6&gt;
+&lt;p&gt;Since our P2P network has to be scalable and dynamic, we have to deal with the following situations:
+&lt;em&gt; We do not know how many people to contact to get their approval
+&lt;/em&gt; We do not know whom to contact to get their approval
+* We do not know whom we are calling&lt;/p&gt;
+&lt;p&gt;Lacking identity and global knowledge of all participants in the network does not allow you to grantee
+the validity of transactions with 100%. We are, however, probabilistically able to grantee the validity.&lt;/p&gt;
+&lt;h6&gt;N-confirmation transaction&lt;/h6&gt;
+&lt;p&gt;For the assumption for Blockchain to work property, there is an important assumption:
+* malicious users are less than half of participants&lt;/p&gt;
+&lt;p&gt;Under this assumption, we can grantee asymptotic validation. Let's say you ask N participants to confirm transactions sequentially.
+Assume that each of them agree on previous confirmations. In this case, the probability that the transactions are valid increases
+as N goes to large number. Contacting N, however, costs you more before acceptance. Thus, we have the trade-off between: 
+&lt;em&gt; The larger N, the higher likely transaction is valid
+&lt;/em&gt; The larger N costs you for confirmation&lt;/p&gt;
+&lt;p&gt;The optimal value of N would be determined considering this trade-off.&lt;/p&gt;
+&lt;h6&gt;Miners and transaction fee incentives&lt;/h6&gt;
+&lt;p&gt;Note that ones having transactions and ones confirming transactions are not necessary identical. Basically, anyone can join
+P2P Network and work on confirmations. To encourage someone to join the network, we need to give them some rewards,
+i.e., we give incentive fee to someone succeeded in proof-of-work. This incentive keeps attracting participants and enables
+the network to work property. The one working on confirmation is often called &lt;code&gt;miner&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;The incentive fee for each transaction has to be small enough. Otherwise, this fee saturates the benefit of having transactions.
+Therefore, miners collect a lot of transactions and then get large enough incentive. 
+Let's see how the process works.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Adnan and Barby generate new transactions and announce therm to the network.&lt;/li&gt;
+&lt;li&gt;Carl is listening for new transactions with their incentives. Then he works on the following processes:&lt;ul&gt;
+&lt;li&gt;Collect unconfirmed transactions until total incentives is large enough (Incentives have to be higher than
+proof-of-work)&lt;/li&gt;
+&lt;li&gt;Verify all of the collected transactions and add a new transactions that transfers incentives to him&lt;/li&gt;
+&lt;li&gt;Work on proof-of-work and generate a validated block&lt;/li&gt;
+&lt;li&gt;Distribute the block to all other participants&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Both Adnan and Barby are listening for new block announcements and look for their transaction in the list&lt;ul&gt;
+&lt;li&gt;Adnan and Barby verify integrity of the block&lt;/li&gt;
+&lt;li&gt;If the block is valid and their transactions are in the list, then the transactions are confirmed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h6&gt;Racing to claim the transaction fees&lt;/h6&gt;
+&lt;p&gt;You may wonder what if more than one participants work on proof-of-work at the same time. Indeed, this situation
+happens all the time and we have to consider the solution to integrate them. Blockchain takes the policy that the first
+one to finish proof-of-work
+takes the all. Here is how it works:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Collect unconfirmed transactions and start proof-of-work&lt;/li&gt;
+&lt;li&gt;Generate a valid bock and broadcast it into the network&lt;ul&gt;
+&lt;li&gt;Other peers check the validity of the block&lt;/li&gt;
+&lt;li&gt;If the block is valid, it is added to the participants' ledgers and rebroadcast to other peers&lt;/li&gt;
+&lt;li&gt;Once the new block is added, abort their previous work&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Repeat 1 and 2&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;By the nature of the race, the ones with more computational power are more likely to be succeeded to finish proof-of-work. Although
+the participation in the race itself is for free, how much influence you give to building the chain is determined by how much
+you put the cost to computational power. &lt;/p&gt;
+&lt;h6&gt;Resolving chain conflicts&lt;/h6&gt;
+&lt;p&gt;It could happen that more than one participants find valid bocks almost at the same time and try to add blocks on top of the chain.
+In that case, which blocks would be chosen as top-most block for the next proof-of-work?&lt;/p&gt;
+&lt;p&gt;In this situation, Blockchain takes the policy:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The longest branch is always valid&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Every time you find a longer branch, you need to switch to that branch. Thus, &lt;code&gt;any blokcs are never 'final'!&lt;/code&gt;. Practically speaking,
+we are unable to wait for infinite time to confirm that the transaction is valid. Mostly, we set a certain number N to
+confirm transactions.
+The larger N gives you more security while taking a lot of time for confirmations.&lt;/p&gt;
+&lt;p&gt;This policy also makes sense to avoid confirming fraud transactions. If less than half of miners are working on fraud.
+The
+speed of developing valid branch is faster than that of fraud branch in the expectation. Thus, if N is large enough,
+we can make sure
+that the branch contains valid transactions. &lt;/p&gt;
+&lt;h6&gt;Properties of Blockchain&lt;/h6&gt;
+&lt;p&gt;We have went through the basic of Blockchain. What we have seen here is just minimal mechanism, which satisfies that:
+1. Individual transactions are secured by digital signature
+2. Once created, transactions are broadcast into P2P network
+3. One or more transactions are aggregated into a block
+4. Peers listen for new block announcements and merge them into their ledgers&lt;/p&gt;
+&lt;p&gt;You can see more detail discussion at this blog post &lt;a href="https://www.igvita.com/2014/05/05/minimum-viable-block-chain/"&gt;[24]&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;4. Wrap Up&lt;/h1&gt;
+&lt;p&gt;That's it! We walked through the basic of Blockchain. To deepen your comprehension, I highly recommend
+to build your Blockchain, &lt;a href="https://youtu.be/3aJI1ABdjQk"&gt;[25]&lt;/a&gt;. Since this field changes really
+fast, it's important to keep you updated with some media. &lt;/p&gt;
+&lt;h1&gt;5. References&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://medium.freecodecamp.org/the-authoritative-guide-to-blockchain-development-855ab65b58bc"&gt;The authoritative guide to blockchain development&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Cryptography"&gt;Cryptography (Wkikpedia)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://sites.math.washington.edu/~morrow/336_09/papers/Yevgeny.pdf"&gt;The RSA Algorithm, E. Milanov&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=vgTtHV04xRI"&gt;Gambling with Secrets: 8/8 (RSA Encryption) (YouTube)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gist.github.com/JonCooperWorks/5314103"&gt;RSA Python Implementation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/"&gt;A (Relatively Easy To Understand) Primer on Elliptic Curve Cryptography&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://hackernoon.com/merkle-tree-introduction-4c44250e2da7"&gt;Merkle Tree Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/evankozliner/merkle-tree/blob/master/MerkleTree.py"&gt;Merkle Tree Python Implementation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.emsec.rub.de/media/crypto/attachments/files/2011/04/becker_1.pdf"&gt;Merkle Signature Schemes, Merkle Trees and Their Cryptanalysis, G. Becker&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://link.springer.com/content/pdf/10.1007%2Fs00607-016-0508-7.pdf"&gt;A brief introduction to distributed systems&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.glassbeam.com/sites/all/themes/glassbeam/images/blog/10.1.1.67.6951.pdf"&gt;Brewer’s Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/"&gt;An Illustrated Proof of the CAP Theorem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://codahale.com/you-cant-sacrifice-partition-tolerance/"&gt;You Can’t Sacrifice Partition Tolerance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Peer-to-peer"&gt;Peer-to-peer (Wikipedia)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.digitalcitizen.life/what-is-p2p-peer-to-peer"&gt;Simple questions: What is P2P (peer-to-peer) and why is it useful?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.diffen.com/difference/TCP_vs_UDP"&gt;TCP vs. UDP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Gossip_protocol"&gt;Gossip protocol&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Consensus_(computer_science)"&gt;Consensus (Wikipedia)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Sybil_attack"&gt;Sybil attack (Wikipedia)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.igvita.com/2010/06/24/weak-consistency-and-cap-implications/"&gt;Weak Consistency and CAP Implications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Cryptographic_nonce"&gt;Cryptographic nonce (Wikipedia)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=_160oMzblY8&amp;amp;feature=youtu.be"&gt;Blockchain 101 - A Visual Demo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?time_continue=837&amp;amp;v=bBC-nXj3Ng4"&gt;Ever wonder how Bitcoin (and other cryptocurrencies) actually work?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.igvita.com/2014/05/05/minimum-viable-block-chain/"&gt;Minimum Viable Block Chain&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=3aJI1ABdjQk&amp;amp;feature=youtu.be"&gt;Let's build a blockchain! — A mini-cryptocurrency in Ruby (Haseeb Qureshi)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Blockchain"></category></entry><entry><title>Bayesian Optimization of Hyperparameters with Python</title><link href="http://jjakimoto.github.io/articles/2018/Mar/11/bayes_opt/" rel="alternate"></link><published>2018-03-11T12:00:00-04:00</published><updated>2018-03-11T12:00:00-04:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2018-03-11:/articles/2018/Mar/11/bayes_opt/</id><summary type="html">&lt;p&gt;Choosing a good set of hyperparameters is one of most important steps but also pretty much annoying and time consuming. The small number of hyperparameters may allow you to find an optimal hyperparameters after a few trials. This is, however, not the case for complex models like neural network.&lt;/p&gt;
 &lt;p&gt;Indeed …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Choosing a good set of hyperparameters is one of most important steps but also pretty much annoying and time consuming. The small number of hyperparameters may allow you to find an optimal hyperparameters after a few trials. This is, however, not the case for complex models like neural network.&lt;/p&gt;
 &lt;p&gt;Indeed, when I just started my career as a data scientist, I was always frustrated to tune hyperparameters of Neural Network not to either underfit or overfit. Everytime I spent a lot of times and winded up not finding good set of hyperparameters, I was like&lt;/p&gt;
 &lt;p&gt;&lt;img alt="frustration" src="https://media.giphy.com/media/ilkfz8Mn5Yz7O/giphy.gif"&gt;&lt;/p&gt;
