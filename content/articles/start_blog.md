@@ -125,6 +125,14 @@ This folder defines framework of your blog, and of course, it is customizable. M
 Next, we are going to introduce external plugins for IPython Notebook and Markdown.
 
 You can download files from [this repository](https://github.com/danielfrg/pelican-ipynb) for IPython Notebook and [this repository](https://github.com/getpelican/pelican-plugins) for Markdown.
+The following commands introduce plugins in your repository
+```buildoutcfg
+# Install IPython plugins
+git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb
+# Install Pelican plugins
+git submodule add git@github.com:getpelican/pelican-plugins.git
+```
+
 
 To activate these plubins, you should add the followings to your `pelicanconf.py`.
 ```
