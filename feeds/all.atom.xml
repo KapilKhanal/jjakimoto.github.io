@@ -273,9 +273,9 @@ Thus, it takes for a while to find an ideal input value.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;Proof-of-work works in the following way,
 1. Collect new transactions
-2. Keep trying different &lt;span class="math"&gt;\(Nonce\)&lt;/span&gt; &lt;a href="https://en.wikipedia.org/wiki/Cryptographic_nonce"&gt;[21]&lt;/a&gt; until &lt;span class="math"&gt;\(hash\_value\)&lt;/span&gt; of the below equation satisfies given rule
+2. Keep trying different &lt;span class="math"&gt;\(Nonce\)&lt;/span&gt; &lt;a href="https://en.wikipedia.org/wiki/Cryptographic_nonce"&gt;[21]&lt;/a&gt; until &lt;span class="math"&gt;\(hash_value\)&lt;/span&gt; of the below equation satisfies given rule
 &lt;/p&gt;
-&lt;div class="math"&gt;$$hash\_func(Transactions + Nonce + Signature + HashValue_PreviousBlock) =&amp;gt; HashValue$$&lt;/div&gt;
+&lt;div class="math"&gt;$$hash_func(Transactions + Nonce + Signature + HashValue_PreviousBlock) =&amp;gt; HashValue$$&lt;/div&gt;
 &lt;p&gt;After proof-of-work has finished, you add the block to a chain called Blockchain.
 Blockchain is constructed from blocks verified by proof-of-work. Including previous hash values avoids someone to change
 the transaction records in the middle of the chain. &lt;/p&gt;
