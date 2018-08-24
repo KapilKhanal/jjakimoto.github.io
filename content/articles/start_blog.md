@@ -154,7 +154,7 @@ SITEURL = http://username.github.io
 ```
 where username is your Github username.
 
-- Run git checkout -b develop to create and switch to a branch called develop. We can't use master to store our notebooks, since that's the branch that's used by Github Pages.
+- Run git checkout -b develop to create and switch to a branch called develop. We can't use master to store our notebooks, since that's the branch used by Github Pages.
 
 - Create a commit and push to Github like normal (using git add, git commit, and git push).
 
