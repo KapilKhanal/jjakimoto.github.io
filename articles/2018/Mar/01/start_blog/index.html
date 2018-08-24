@@ -186,7 +186,15 @@ In Pelican, there is command <code>pelican quick-start</code>. Its execution wil
 <p>This folder defines framework of your blog, and of course, it is customizable. My recommendation is finding some cool blog and arrange their them according to your demand. In my case, I add some extra stuff to <a href="https://github.com/rossant/rossant.github.io/tree/sources/themes">this theme</a>. The them what I amd using this website is [here](<a href="https://github.com/jjakimoto/jjakimoto.github.io/tree/develop/themes/mytheme">here</a>. You can see more detail at <a href="http://docs.getpelican.com/en/3.6.3/themes.html">the official documentation</a> as to how to customize your theme.</p>
 <h3>3. Set up external plugins</h3>
 <p>Next, we are going to introduce external plugins for IPython Notebook and Markdown.</p>
-<p>You can download files from <a href="https://github.com/danielfrg/pelican-ipynb">this repository</a> for IPython Notebook and <a href="https://github.com/getpelican/pelican-plugins">this repository</a> for Markdown.</p>
+<p>You can download files from <a href="https://github.com/danielfrg/pelican-ipynb">this repository</a> for IPython Notebook and <a href="https://github.com/getpelican/pelican-plugins">this repository</a> for Markdown.
+The following commands introduce plugins in your repository</p>
+<div class="highlight"><pre><span class="code-line"><span></span># Install IPython plugins</span>
+<span class="code-line">git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb</span>
+<span class="code-line"># Install Pelican plugins</span>
+<span class="code-line">git submodule add git@github.com:getpelican/pelican-plugins.git</span>
+</pre></div>
+
+
 <p>To activate these plubins, you should add the followings to your <code>pelicanconf.py</code>.</p>
 <div class="highlight"><pre><span class="code-line"><span></span>MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)</span>
 <span class="code-line">PLUGIN_PATHS = [&#39;./plugins&#39;, &#39;./pelican-plugins&#39;]</span>
