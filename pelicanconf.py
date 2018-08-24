@@ -45,8 +45,8 @@ ARTICLE_PATHS = ['articles']
 # Extention
 MARKUP = ('md', 'ipynb')
 PLUGIN_PATHS = ['./pelican-plugins', './plugins']
-# PLUGINS = ['render_math', 'ipynb.markup', 'better_codeblock_line_numbering']
-PLUGINS = ['liquid_tags.notebook', 'liquid_tags.literal']
+PLUGINS = ['render_math', 'ipynb.markup', 'better_codeblock_line_numbering']
+# PLUGINS = ['liquid_tags.notebook', 'liquid_tags.literal']
 
 MARKDOWN = {
     'extension_configs': {
