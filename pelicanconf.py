@@ -43,9 +43,15 @@ PAGE_PATHS = ['pages']
 ARTICLE_PATHS = ['articles']
 
 # Extention
+# MARKUP = ('md', 'ipynb')
+# PLUGIN_PATHS = ['./pelican-plugins', './plugins']
+# PLUGINS = ['render_math', 'ipynb.markup', 'better_codeblock_line_numbering']
+
 MARKUP = ('md', 'ipynb')
-PLUGIN_PATHS = ['./pelican-plugins', './plugins']
-PLUGINS = ['render_math', 'ipynb.markup', 'better_codeblock_line_numbering']
+
+PLUGIN_PATHS = ['./plugins']
+PLUGINS = ['ipynb.markup']
+
 
 MARKDOWN = {
     'extension_configs': {
