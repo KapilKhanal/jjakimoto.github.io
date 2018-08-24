@@ -32,7 +32,7 @@ DEFAULT_METADATA = {
 DEFAULT_CATEGORY = 'misc'
 DISPLAY_CATEGORIES_ON_MENU = True
 DISPLAY_PAGES_ON_MENU = True
-IGNORE_FILES = ['.#*']
+IGNORE_FILES = ['.#*', '.ipynb_checkpoints']
 MARKDOWN = {}
 
 # PATH settings
@@ -46,7 +46,6 @@ ARTICLE_PATHS = ['articles']
 MARKUP = ('md', 'ipynb')
 PLUGIN_PATHS = ['./pelican-plugins', './plugins']
 PLUGINS = ['render_math', 'ipynb.markup', 'better_codeblock_line_numbering']
-# PLUGINS = ['liquid_tags.notebook', 'liquid_tags.literal']
 
 MARKDOWN = {
     'extension_configs': {
@@ -92,5 +91,3 @@ SOCIAL = (('GitHub', 'https://github.com/jjakimoto'),
 
 DEFAULT_PAGINATION = 10
 
-# Ignore checkpoints
-IGNORE_FILES = ['.ipynb_checkpoints']
