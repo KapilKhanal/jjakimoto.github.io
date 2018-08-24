@@ -44,13 +44,13 @@ to remember is
 of asymmetric key explained above. The process is the following ways.&lt;/p&gt;
 &lt;h3&gt;1. Sign the message&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Encrypt message using private keys: $Signature = Sign(Message, PrivateKey)$&lt;/li&gt;
+&lt;li&gt;Encrypt message using private keys: &lt;span class="math"&gt;\(Signature = Sign(Message, PrivateKey)\)&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;2. Verify the signature&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Decrypt the signature: $DecryptedSignature = Func1(Signature)$&lt;/li&gt;
-&lt;li&gt;Make correspondence output from the private key and the message: $Output = Func2(Message, PublicKey)$&lt;/li&gt;
-&lt;li&gt;See if $DecryptedSignature$ and $Output$ are matched up&lt;/li&gt;
+&lt;li&gt;Decrypt the signature: &lt;span class="math"&gt;\(DecryptedSignature = Func1(Signature)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Make correspondence output from the private key and the message: &lt;span class="math"&gt;\(Output = Func2(Message, PublicKey)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;See if &lt;span class="math"&gt;\(DecryptedSignature\)&lt;/span&gt; and &lt;span class="math"&gt;\(Output\)&lt;/span&gt; are matched up&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Note that unlike secure communications, we open the message itself to public. Receiver only has to
 know what output would be, which is produced by public key and the message.&lt;/p&gt;
@@ -270,8 +270,9 @@ Thus, it takes for a while to find an ideal input value.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;Proof-of-work works in the following way,
 1. Collect new transactions
-2. Keep trying different $Nonce$ &lt;a href="https://en.wikipedia.org/wiki/Cryptographic_nonce"&gt;[21]&lt;/a&gt; until $hash_value$ of the below equation satisfies given rule
-$$hash_func(Transactions + Nonce + Signature + HashValue_PreviousBlock) =&amp;gt; HashValue$$&lt;/p&gt;
+2. Keep trying different &lt;span class="math"&gt;\(Nonce\)&lt;/span&gt; &lt;a href="https://en.wikipedia.org/wiki/Cryptographic_nonce"&gt;[21]&lt;/a&gt; until &lt;span class="math"&gt;\(hash\_value\)&lt;/span&gt; of the below equation satisfies given rule
+&lt;/p&gt;
+&lt;div class="math"&gt;$$hash\_func(Transactions + Nonce + Signature + HashValue_PreviousBlock) =&amp;gt; HashValue$$&lt;/div&gt;
 &lt;p&gt;After proof-of-work has finished, you add the block to a chain called Blockchain.
 Blockchain is constructed from blocks verified by proof-of-work. Including previous hash values avoids someone to change
 the transaction records in the middle of the chain. &lt;/p&gt;
@@ -405,4 +406,59 @@ fast, it's important to keep you updated with some media. &lt;/p&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?time_continue=837&amp;amp;v=bBC-nXj3Ng4"&gt;Ever wonder how Bitcoin (and other cryptocurrencies) actually work?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.igvita.com/2014/05/05/minimum-viable-block-chain/"&gt;Minimum Viable Block Chain&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=3aJI1ABdjQk&amp;amp;feature=youtu.be"&gt;Let's build a blockchain! — A mini-cryptocurrency in Ruby (Haseeb Qureshi)&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary><category term="Blockchain"></category></entry></feed>
+&lt;/ol&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</summary><category term="Blockchain"></category></entry></feed>
