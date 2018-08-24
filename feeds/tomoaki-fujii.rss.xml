@@ -1,49 +1,1136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Data Rounder - Tomoaki Fujii</title><link>http://jjakimoto.github.io/</link><description>Machine Learning, Finance, and Technologies</description><lastBuildDate>Fri, 22 Jun 2018 12:00:00 -0400</lastBuildDate><item><title>Toward Understanding Blockchain</title><link>http://jjakimoto.github.io/articles/2018/Jun/22/blockchain/</link><description>&lt;p&gt;Blockchain is one of the hottest technologies as well as AI/Machine Learning. Indeed,
+<rss version="2.0"><channel><title>Data Rounder</title><link>http://jjakimoto.github.io/</link><description>Machine Learning, Finance, and Technologies</description><lastBuildDate>Fri, 22 Jun 2018 12:00:00 -0400</lastBuildDate><item><title>Toward Understanding Blockchain</title><link>http://jjakimoto.github.io/articles/2018/Jun/22/blockchain/</link><description>&lt;p&gt;Blockchain is one of the hottest technologies as well as AI/Machine Learning. Indeed,
 a lot of startup are working in this fields. Besides that compared to another hot topic, Deep Learning, Blockchain is 
 still in early stage and there is space you can get in &lt;a href="https://medium.freecodecamp.org/the-authoritative-guide-to-blockchain-development-855ab65b58bc"&gt;[1]&lt;/a&gt;.
-I know that …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Fri, 22 Jun 2018 12:00:00 -0400</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2018-06-22:/articles/2018/Jun/22/blockchain/</guid><category>Blockchain</category></item><item><title>Bayesian Optimization of Hyperparameters with Python</title><link>http://jjakimoto.github.io/articles/2018/Mar/11/bayes_opt/</link><description>&lt;p&gt;Choosing a good set of hyperparameters is one of most important steps but also pretty much annoying and time consuming. The small number of hyperparameters may allow you to find an optimal hyperparameters after a few trials. This is, however, not the case for complex models like neural network.&lt;/p&gt;
-&lt;p&gt;Indeed …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Sun, 11 Mar 2018 12:00:00 -0400</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2018-03-11:/articles/2018/Mar/11/bayes_opt/</guid><category>AutoML</category></item><item><title>Start Your Data Science Blog by Pelican</title><link>http://jjakimoto.github.io/articles/2018/Mar/01/start_blog/</link><description>&lt;p&gt;Blogging is one of the fantastic ways to demonstrate your projects and help you understand stuff in more depth. Especially, I believe that blogging helps you land a job more efficiently. Even if you are not looking for a new position, writing articles you are working on would be the …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Thu, 01 Mar 2018 12:00:00 -0500</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2018-03-01:/articles/2018/Mar/01/start_blog/</guid><category>Blog</category></item><item><title>Bootstrap and Backtest for Algorithmic Trading (Reality Check)</title><link>http://jjakimoto.github.io/articles/2017/Oct/26/RC/</link><description>
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Applying machine learning to algorithmic trading is getting more and more attention recently. Machine learning approach usually takes the following steps:&lt;/p&gt;
+I know that a lot of folks investing in cryptocurrencies don't give a shit about tech behind it like Blockchain, but if
+you are savvy tech guy, it would be good investment to learn this topic. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="blockchain_ml" src="http://jjakimoto.github.io/images/blockchain/blockchain_ml.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Blockchain ranges across various topics such as cryptography and distributed system. In this blog, I briefly go through this
+topic while suggesting various blogs and papers that I have used for learning this topic. Especially, I highly recommend
+you to check a blog post written by Haseeb Qureshi &lt;a href="https://medium.freecodecamp.org/the-authoritative-guide-to-blockchain-development-855ab65b58bc"&gt;[1]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let's dig into Blockchain!&lt;/p&gt;
+&lt;h1&gt;1. Cryptography&lt;/h1&gt;
+&lt;p&gt;Cryptography &lt;a href="https://en.wikipedia.org/wiki/Cryptography"&gt;[2]&lt;/a&gt; is referred to the study of secure
+communication. The goal is how we send messages to each other without revealing them to someone else.
+One of the most widely used methods is RSA &lt;a href="https://sites.math.washington.edu/~morrow/336_09/papers/Yevgeny.pdf"&gt;[3]&lt;/a&gt;,
+which utilizes properties of prime numbers. This method take advantage of difference in computational difficulties
+between multiplication and prime decomposition. 
+&lt;em&gt; Nice explanation on Youtube &lt;a href="https://www.youtube.com/watch?v=vgTtHV04xRI"&gt;[4]&lt;/a&gt;
+&lt;/em&gt; Python Implementation &lt;a href="https://gist.github.com/JonCooperWorks/5314103"&gt;[5]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;There is another method called EDCSA &lt;a href="https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/"&gt;[6]&lt;/a&gt;.
+This is method is still controversial, but known to be more secure and fast.&lt;/p&gt;
+&lt;h2&gt;Encryption and Decryption&lt;/h2&gt;
+&lt;p&gt;To achieve secure communications, we need to encrypt data before sending and decrypt received data.
+In the early age, people share secrete information about how to encrypt or decrypt in some way. Then,
+they communicate to each other. This method has a risk that the secret information is stolen while sharing.&lt;/p&gt;
+&lt;p&gt;To reconcile this problem, the idea of asymmetric key is suggested. Both RSA amd EDCSA are based on this
+idea. Asymmetric key consists of public key and private key. Let's look into how this concept works.&lt;/p&gt;
+&lt;h4&gt;1. Set up&lt;/h4&gt;
 &lt;ol&gt;
-&lt;li&gt;Build models&lt;/li&gt;
-&lt;li&gt;Optimize model parameters&lt;/li&gt;
-&lt;li&gt;Model selection or hyper parameters tuning&lt;/li&gt;
-&lt;li&gt;Evaluate performances&lt;/li&gt;
+&lt;li&gt;Generate a pair of public and private keys&lt;/li&gt;
+&lt;li&gt;Distribute the public key to someone to communicate with while keeping private key in only your side&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;In the first and second stage, we build models and optimize their parameters on given data. Next, we evaluate several models' performances with their various hyperparameter configurations on out of samples. Then, we pick up the best performance one.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Thu, 26 Oct 2017 12:00:00 -0400</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2017-10-26:/articles/2017/Oct/26/RC/</guid><category>Hypothesis Test</category><category>Backtest</category></item><item><title>Data Explore and Visualization</title><link>http://jjakimoto.github.io/articles/2017/Mar/26/house_price/</link><description>
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Data exploration is important. Before jumping into analysis, you will get some intuition as to how to use data and establish more sophisticated modeling. In some cases, how to use data improve even models robust to high dimensional input like Deep Learning. In this article, we work on data exploration and visualization for the house price data from &lt;a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data"&gt;a kaggle competition&lt;/a&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Sun, 26 Mar 2017 12:00:00 -0400</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2017-03-26:/articles/2017/Mar/26/house_price/</guid><category>Feature Selection</category></item><item><title>Feature Selection and Random Forests</title><link>http://jjakimoto.github.io/articles/2017/Jan/28/RF/</link><description>
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;In prediction tasks, given data does not necessary consist of only useful information. The data may contain irrelevant features, which impairs the performance of a predictor due to overfitting. This situation is often the case for medical data. Sometimes, only a few hundreds of samples are available while we have thousands of features. In this case, we have to extract a small subset of effective features to reduce computational costs and overfitting. Random forest is one of the popular predictors due to the robustness. As one of the useful byproducts, random forests are able to estimate how much each feature has an effect on a performance of the forests. Thus, random forests give us one of possible approaches to reduce the number features to use. In this article, we work on a binary classification task of &lt;a href="https://archive.ics.uci.edu/ml/datasets/Dorothea"&gt;“Dorothea Data Set” from UCI Machine Learning Repository&lt;/a&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Sat, 28 Jan 2017 12:00:00 -0500</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2017-01-28:/articles/2017/Jan/28/RF/</guid><category>Classification</category><category>NLP</category></item><item><title>Movie Review with Vector Representations</title><link>http://jjakimoto.github.io/articles/2017/Jan/13/movie/</link><description>
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Majority of data is expressed as text format such as news articles, SNS and speech. Each article has some meanings and opinions, which have significant effects on things around us like economics, politics, etc. Therefore, using these information for prediction systems is important. Most of prediction algorithms, however, take input in the form of tensor (1st-order tensor is vector), which requires us to represent text data in the tensor(vector) form. In this article, we review popular three vector representation: Bag or Words, Word2Vec, and Doc2Vec. Then, we compare these qualities through sentiment analysis for movie reviews of &lt;a href="http://ai.stanford.edu/~amaas/data/sentiment"&gt;IMDb&lt;/a&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Fri, 13 Jan 2017 12:00:00 -0500</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2017-01-13:/articles/2017/Jan/13/movie/</guid><category>NLP</category></item><item><title>Reinforcement Learning for Stock Trading</title><link>http://jjakimoto.github.io/articles/2017/Jan/07/RL_trade/</link><description>
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Reinforcement learning has recently been succeeded to go over the human's ability in video games and Go. This implies possiblities to beat human's performance in other fields where human is doing well. Stock trading can be one of such fields. Some professional  In this article, we consider application of reinforcement learning to stock trading. Especially, we work on constructing a portoflio to make profit. Since portfolio can take inifinite number, we tackle this task based on Deep Deterministic Policy Gradient (DDPG). The behavior of stock prices is konwn to depend on history and several time scales, which leads us to use multiscale CNN for Q and actor network. We show that our algorithm has better performance than monkey trading(taking actions at random).&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Sat, 07 Jan 2017 12:00:00 -0500</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2017-01-07:/articles/2017/Jan/07/RL_trade/</guid><category>Reinforcement Learning</category><category>Trading</category></item><item><title>Duplication of S&amp;P500 with Stock Prices</title><link>http://jjakimoto.github.io/articles/2016/Dec/31/sp500/</link><description>
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Economic indicators are statistics to measure growth and contraction of economics. Trading based on such indicators, what is called technical trading, is one of the main trends in recent stock trading. Especially S&amp;P500;(Standard and Poor's 500 Index) is frequently used as a bench mark to evaluate portfolio -- a grouping of financial assets like stocks. Roughly speaking, constructing a portfolio with better return and lower risk than S&amp;P500; is one of the main goals for stock trading. Therefore, clarifying the relation between S&amp;P500; and stock prices are important to construct a good portfolio.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Sat, 31 Dec 2016 12:00:00 -0500</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2016-12-31:/articles/2016/Dec/31/sp500/</guid><category>Regression</category><category>SP500</category></item></channel></rss>
+&lt;h4&gt;2. Communication&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Someone encrypts a message using the public key and send the encrypted message to you&lt;/li&gt;
+&lt;li&gt;Decrypt the received encrypted message using the private key&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Note that by not sharing the private key, you can make sure the secure communication. What you have
+to remember is
+&lt;em&gt; Public key is used for encryption and shared 
+&lt;/em&gt; Private key is used for decryption and not shared&lt;/p&gt;
+&lt;h2&gt;Digital Signature&lt;/h2&gt;
+&lt;p&gt;Digital signature is one of the methods to identify who sends the message. This method utilizes the idea
+of asymmetric key explained above. The process is the following ways.&lt;/p&gt;
+&lt;h3&gt;1. Sign the message&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Encrypt message using private keys: $Signature = Sign(Message, PrivateKey)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;2. Verify the signature&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Decrypt the signature: $DecryptedSignature = Func1(Signature)$&lt;/li&gt;
+&lt;li&gt;Make correspondence output from the private key and the message: $Output = Func2(Message, PublicKey)$&lt;/li&gt;
+&lt;li&gt;See if $DecryptedSignature$ and $Output$ are matched up&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note that unlike secure communications, we open the message itself to public. Receiver only has to
+know what output would be, which is produced by public key and the message.&lt;/p&gt;
+&lt;h3&gt;- Merkle Tree&lt;/h3&gt;
+&lt;p&gt;Merkle Tree is one of efficient digital signature algorithms, which enables Blockchain scalable.
+The signature proof is based on executed with binary tree. You can find a simple explanation of this
+algorithm at this blog &lt;a href="https://hackernoon.com/merkle-tree-introduction-4c44250e2da7"&gt;[7]&lt;/a&gt;. I also recommend
+you to implement Markle Tree by yourself to understand how it works &lt;a href="https://github.com/evankozliner/merkle-tree/blob/master/MerkleTree.py"&gt;[8]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For more detail explanation about digital signature, please refer to this paper &lt;a href="https://www.emsec.rub.de/media/crypto/attachments/files/2011/04/becker_1.pdf"&gt;[9]&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;2. Distributed System&lt;/h1&gt;
+&lt;p&gt;Distributed system often appears in the context of high performance computing and scalable database. 
+As an introduction, you can refer to the paper &lt;a href="https://link.springer.com/content/pdf/10.1007%2Fs00607-016-0508-7.pdf"&gt;[10]&lt;/a&gt;.
+In this section, we go though the basic concept and how to achieve such systems.&lt;/p&gt;
+&lt;h2&gt;CAP Theorem&lt;/h2&gt;
+&lt;p&gt;When discussing what distributed systems have to achieve, the following three
+properties are usually mentioned:
+&lt;em&gt; Consistency
+&lt;/em&gt; Availability
+* Partition Tolerance&lt;/p&gt;
+&lt;p&gt;Gilbert and Lynch &lt;a href="https://www.glassbeam.com/sites/all/themes/glassbeam/images/blog/10.1.1.67.6951.pdf"&gt;[11]&lt;/a&gt;
+shows that it is impossible to achieve these three properties at the
+same time. This theory is called &lt;code&gt;CAP Theorem&lt;/code&gt; after initials of three properties. Let's look
+into more precise definitions.&lt;/p&gt;
+&lt;h3&gt;- Consistency&lt;/h3&gt;
+&lt;p&gt;Gilbert and Lynch describe &lt;code&gt;Consistency&lt;/code&gt; as &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;any read operation that begins after a write operation completes must return that value, or the result of a later write operation&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Let's say there are two nodes A and B.
+We write file F to node A followed by the reading F query to B after 1.0 seconds.
+Fetched information from node B is matched up with stored information at A
+if B is updated within one seconds, otherwise not. Thus, depending on frequency of updates, the response
+may not be consistent.&lt;/p&gt;
+&lt;p&gt;Keeping consistency is important to build a reliable system.&lt;/p&gt;
+&lt;h3&gt;- Availability&lt;/h3&gt;
+&lt;p&gt;Gilbert and Lynch describe &lt;code&gt;Availability&lt;/code&gt; as &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;every request received by a non-failing node in the system must result in a response&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It simply means to keep responding to clients without interruption.
+For example, if we have two node A and B. Even if node A has collapsed, we are able to response with
+node B. Hence, this system has availability up to collapse of one of the nodes. &lt;/p&gt;
+&lt;h3&gt;- Partition Tolerance&lt;/h3&gt;
+&lt;p&gt;Gilbert and Lynch describe &lt;code&gt;Partition Tolerance&lt;/code&gt; as &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;the network will be allowed to lose arbitrarily many messages sent from one node to another&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Some parts of your system may corrupt temporary and break connections among
+nodes. Then, some sent messages are unable to reach their destinations.
+&lt;code&gt;Partition Tolerance&lt;/code&gt; means allowing your system to keep running even in such situations.&lt;/p&gt;
+&lt;p&gt;At most, two out of these three properties are able to achieve at the same time.
+You can find more intuitive proof at a nice blog post &lt;a href="https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/"&gt;[12]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Practically speaking, you have to choose &lt;code&gt;Partition Tolerance&lt;/code&gt; and either of &lt;code&gt;Availability&lt;/code&gt; or &lt;code&gt;Consistency&lt;/code&gt;.
+As the size of your system increases, some failure is more likely to happens.
+Thus, It is not practical consider a system without &lt;code&gt;Partition Tolerance&lt;/code&gt;. More precise
+explanation is found in this blog post &lt;a href="https://codahale.com/you-cant-sacrifice-partition-tolerance/"&gt;[13]&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Networking&lt;/h2&gt;
+&lt;p&gt;To establish a distributed system, nodes have to communicate to each other.
+Blockchain adopts pear-to-pear networking &lt;a href="https://en.wikipedia.org/wiki/Peer-to-peer"&gt;[14]&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;- Pear-to-Pear Networking&lt;/h3&gt;
+&lt;p&gt;Pear-to-pear networking has the following properties &lt;a href="https://www.digitalcitizen.life/what-is-p2p-peer-to-peer"&gt;[15]&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Act as both client and server&lt;/li&gt;
+&lt;li&gt;Share resources (e.g., processing power, disk storage and network bandwidth)&lt;/li&gt;
+&lt;li&gt;Fast file sharing&lt;/li&gt;
+&lt;li&gt;Difficult to take down&lt;/li&gt;
+&lt;li&gt;Scalable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These properties make it possible to build robust distributed system.
+Napster, music file sharing service, is one of the first applications of pear-to-pear network system.&lt;/p&gt;
+&lt;h3&gt;- Internet Protocol (IP)&lt;/h3&gt;
+&lt;p&gt;There are two types of IP traffic: TCP (Transmission Control Protocol) and UCP
+(User Datagram Protocol). Blockchain uses TCP. Let's see the difference between them.&lt;/p&gt;
+&lt;h4&gt;1.TCP&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Connection-oriented protocol&lt;/li&gt;
+&lt;li&gt;Rearranges data packets in the order specified&lt;/li&gt;
+&lt;li&gt;Slower than UDP&lt;/li&gt;
+&lt;li&gt;Grantees that data transfers correctly&lt;/li&gt;
+&lt;li&gt;HTTP, HTTPs, FTP, etc.&lt;/li&gt;
+&lt;li&gt;Suitable for applications that require high reliability&lt;/li&gt;
+&lt;li&gt;Example: email&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;2. UDP&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Connectionless protocol&lt;/li&gt;
+&lt;li&gt;No inherent order&lt;/li&gt;
+&lt;li&gt;Faster because of no error recovery attemption&lt;/li&gt;
+&lt;li&gt;No grantee of transfers&lt;/li&gt;
+&lt;li&gt;DNS, DHCP, TFTP, etc.&lt;/li&gt;
+&lt;li&gt;Suitable for applications that need fast and efficient transmission&lt;/li&gt;
+&lt;li&gt;Example: game&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more detail, please refer to this blog post &lt;a href="https://www.diffen.com/difference/TCP_vs_UDP"&gt;[16]&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;- Gossip Protocol&lt;/h3&gt;
+&lt;p&gt;A gossip protocol &lt;a href="https://en.wikipedia.org/wiki/Gossip_protocol"&gt;[17]&lt;/a&gt; is a 
+procedure or process of computer-computer communication.
+It takes the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Pick up a pear at random from nodes&lt;/li&gt;
+&lt;li&gt;Communicate with the chosen pear&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;3. Blockchain&lt;/h1&gt;
+&lt;p&gt;Now we finally come to Blockchain!. Blockchain allows you to authenticate transactions in decentralized fashion.
+Blockchain mainly consists of
+&lt;em&gt; Verification: Check if a transaction is valid
+&lt;/em&gt; Consensus: Match up transaction history through voting system&lt;/p&gt;
+&lt;p&gt;Verification includes simply verifying who send this transaction or if transactions are over the holding amounts, etc.
+In the consensus process, we need to communicate with others and try to agree on what transactions would be included.
+Consensus works in the global scale while verification works locally. Let's look into more detail. &lt;/p&gt;
+&lt;h2&gt;Verification&lt;/h2&gt;
+&lt;p&gt;Digital signature can be used to verify who sends messages you have received. In the case
+of Blockchain, we verify who sends a transaction.
+To figure how it works, let's start from a simple case: a transaction between only two people.&lt;/p&gt;
+&lt;h3&gt;- Two people case&lt;/h3&gt;
+&lt;p&gt;When you lend or borrow money,
+you may record how much and when somewhere like in a notebook. If this transaction happens among reliable friends, this
+setting is good enough. This, however, is not necessary the case for general cases. Usually, you need someone else
+to validate the record. For traditional currencies, the third person would be some financial institutes like bank. They
+monitor transactions if they are valid and record them to their database.&lt;/p&gt;
+&lt;p&gt;Blockchain uses digital signature to validate transactions instead of introducing a third person. Let's say a transaction
+happens between Adnan and Barby. The transaction looks like &lt;code&gt;Adnan is going to give an apple to Barby&lt;/code&gt;.
+To set up digital signature,
+they first need to generate their own pairs of private and public keys, and hand their public keys to
+each other. To make sure the transaction, they take the following steps:
+1. Adnan writes a transaction in plaintext saying &lt;code&gt;From: Adnan, To: Barby, What: 1 apple&lt;/code&gt;
+2. Adnan encrypts the plaintext with his private key.
+3. Adnan prepends a plaint text "singed by Adnan" to the ciphertext and send it to Barby
+4. Barby receives the text and finds "signed by Adnan"
+5. Barby decrypts the ciphertext with the public key of Adnan to verify if the transaction comes from him&lt;/p&gt;
+&lt;p&gt;Note that the processes 3 and 4 are necessary when more than two parties are involved. Otherwise, Barby is
+unable to decide whose public key she has to use.&lt;/p&gt;
+&lt;p&gt;Transactions secured by signatures are stored at &lt;code&gt;ledger&lt;/code&gt;. A ledger consists of multiple transactions.
+Each transaction contains a ciphertext and a plaintext about whose sign. By using corresponding public keys,
+you can decrypts ciphertext and calculate the balance of the ledger. &lt;/p&gt;
+&lt;p&gt;With this system, we can attain the following three properties:
+&lt;em&gt; Authentication: a malicious party can't masquerade as someone else.
+&lt;/em&gt; Non-repudiation: participants can't claim that the transaction did not happen after the fact.
+* Integrity: the transaction receipt can't be modified after the fact.&lt;/p&gt;
+&lt;p&gt;These properties get rid of the necessity to require a reliable third person to verify transactions.&lt;/p&gt;
+&lt;h3&gt;- Multi-party transfers and verification&lt;/h3&gt;
+&lt;p&gt;Let's consider the case where three people are involved: Adnan, Barby, and Carl. They exchange some valuable coins.
+Assume that they have the following transactions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Transaction 1. &lt;code&gt;From: Barby, ciphertext 1 =&amp;gt; To: Adnan, What: 3 coins&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Transaction 2. &lt;code&gt;From: Adnan, ciphertext 2 =&amp;gt; To: Carl, What: 3 coins&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can translate this situation to that Barby pays 3 coins to Carl. Thus, Adnan can add another
+transaction to the ledger:
+* Transaction 3. &lt;code&gt;From Adnan, ciper_3 =&amp;gt; To: Carl, What: Hashed value of chipertext 1&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Here are what Carl is going to do:
+1. Fetch Barby's and Adnan's public keys and verifies Transaction 1 and 2.
+2. Verify that Adnan transfers a valid transaction:
+    * The transaction is addressed to Adnan
+    * Adnan has not previously transfered the same transaction to anyone else&lt;/p&gt;
+&lt;p&gt;After all checks pass, Carl asks Barby to pay.
+Then, here are what Barby is going to do:
+1. Fetch Adnan's public key and verify Transaction 3
+2. Verify that the transfer is referencing one of her own transaction with Adnan&lt;/p&gt;
+&lt;p&gt;Utilizing digital signature allows you to have secure transactions. There still, however, remains
+some flaws in this system. When validating a transaction, the reference, i.e., the ledger is not always updated.
+If someone makes the same transaction more than once almost at the same time, this flaw would not be detected.
+Let's discuss this issue at the next section.&lt;/p&gt;
+&lt;h2&gt;Consensus&lt;/h2&gt;
+&lt;p&gt;Sharing the same ledger is important when verifying transactions. Inconsistency let malicious users
+to make fraud transactions. The one of the typical fraud transactions is double-spending, spending the same transaction twice.&lt;/p&gt;
+&lt;h3&gt;- Double-spending and distributed consensus&lt;/h3&gt;
+&lt;p&gt;In the previous chapter, Adnan transfers Barby's transaction to Carl. If Adnan moves quickly before
+someone has not updated their ledger, he can transfer the same transaction to them again. This is
+called a double-spending attack. To combat this situation, we need to consider distributed consensus
+system &lt;a href="https://en.wikipedia.org/wiki/Consensus_(computer_science)"&gt;[18]&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;- P2P Network&lt;/h3&gt;
+&lt;p&gt;We consider consensus through voting system. Pear-to-pear (P2P) network comes in to establish
+such system that deals with two issues: Geography and Timezone problems.&lt;/p&gt;
+&lt;p&gt;Thus, P2P network 
+&lt;em&gt; Communicates through online (Geography)
+&lt;/em&gt; Updates ledger automatically (Timezone)
+* Uses Gossip Protocol to update the ledger with voting system&lt;/p&gt;
+&lt;p&gt;There still remains some problems with out P2P design:
+&lt;em&gt; Ensuring that every participant is always up to date imposes high coordination costs and affects availability:
+if a single peer is unreachable the system cannot commit new transactions.(Availability)
+&lt;/em&gt; In practice, we do not know the global status of the P2P network: Some of nodes may have left the network.
+(Partition Tolerance)
+* The system is open to a Sybil attack &lt;a href="https://en.wikipedia.org/wiki/Sybil_attack"&gt;[19]&lt;/a&gt;. (Consensus)&lt;/p&gt;
+&lt;p&gt;According to the CAP Theorem, all of the problems are unable to solve at the same time.
+Rather than taking either of CP or AP, we operate the P2P network under the weaker consistency&lt;a href="https://www.igvita.com/2010/06/24/weak-consistency-and-cap-implications/"&gt;[20]&lt;/a&gt;,
+which switch foreword and back between CP and AP.&lt;/p&gt;
+&lt;p&gt;This requires the network to deal with the followings:
+&lt;em&gt; We must accept that some ledgers will be out of sync (at least temporarily).
+&lt;/em&gt; The system must eventually converge on a global ordering (linearizability) of all transactions.
+&lt;em&gt; The system must resolve ledger conflicts in a predictable manner.
+&lt;/em&gt; The system must enforce global invariants, e.g., no double-spends.
+* The system should be secure against Sybil and similar attacks&lt;/p&gt;
+&lt;p&gt;Roughly speaking, out goal is building the network preventing fraud while keeping consistency
+to some extent. Then, proof-of-work comes in to help you build such system.&lt;/p&gt;
+&lt;h3&gt;- Proof-of-work&lt;/h3&gt;
+&lt;p&gt;Blockchain introduces a process called proof-of-work to avoid Sybil attacks.
+The goals of proof-of-work are
+&lt;em&gt; "expensive" for the sender.
+&lt;/em&gt; "cheap" to verify by everyone else.&lt;/p&gt;
+&lt;p&gt;These goals make Sybil attacks expensive and get rid of their economical benefits while keeping running
+the secure system with reasonable cost. Let's see how these goals are achieved.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Process of sender: To search an input of a hash function to produce an output satisfying a certain rule&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Let's say you can set a rule like first four characters have to be 0, e.g., "0000A9E5F3". Guessing the input of a hash function from given the output is difficult. You need to resort to brute force search.
+Thus, it takes for a while to find an ideal input value.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Process of verification: To hash transaction and see if hashed value is matched up with the output&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This process is computationally cheap.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Proof-of-work works in the following way,
+1. Collect new transactions
+2. Keep trying different $Nonce$ &lt;a href="https://en.wikipedia.org/wiki/Cryptographic_nonce"&gt;[21]&lt;/a&gt; until $hash_value$ of the below equation satisfies given rule
+$$hash_func(Transactions + Nonce + Signature + HashValue_PreviousBlock) =&amp;gt; HashValue$$&lt;/p&gt;
+&lt;p&gt;After proof-of-work has finished, you add the block to a chain called Blockchain.
+Blockchain is constructed from blocks verified by proof-of-work. Including previous hash values avoids someone to change
+the transaction records in the middle of the chain. &lt;/p&gt;
+&lt;p&gt;You can get more intuitive comprehension about how proof-of-work in Blockchain from this demonstration at YouTube
+&lt;a href="https://www.youtube.com/watch?v=_160oMzblY8&amp;amp;feature=youtu.be"&gt;[22]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I also recommend you to check a good introductory YouTube vide &lt;a href="https://www.youtube.com/watch?time_continue=837&amp;amp;v=bBC-nXj3Ng4"&gt;[23]&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;- Blockchain&lt;/h3&gt;
+&lt;p&gt;We briefly looked how proof-of-work works and build the chain of transaction blocks, Blockchain.
+Now, we are going to see the detail as to how Blcockchain are  built while preventing frauds. &lt;/p&gt;
+&lt;h4&gt;1. Issues in validation&lt;/h4&gt;
+&lt;p&gt;Since our P2P network has to be scalable and dynamic, we have to deal with the following situations:
+&lt;em&gt; We do not know how many people to contact to get their approval
+&lt;/em&gt; We do not know whom to contact to get their approval
+* We do not know whom we are calling&lt;/p&gt;
+&lt;p&gt;Lacking identity and global knowledge of all participants in the network does not allow you to grantee
+the validity of transactions with 100%. We are, however, probabilistically able to grantee the validity.&lt;/p&gt;
+&lt;h4&gt;2. N-confirmation transaction&lt;/h4&gt;
+&lt;p&gt;For the assumption for Blockchain to work property, there is an important assumption:
+* malicious users are less than half of participants&lt;/p&gt;
+&lt;p&gt;Under this assumption, we can grantee asymptotic validation. Let's say you ask N participants to confirm transactions sequentially.
+Assume that each of them agree on previous confirmations. In this case, the probability that the transactions are valid increases
+as N goes to large number. Contacting N, however, costs you more before acceptance. Thus, we have the trade-off between: 
+&lt;em&gt; The larger N, the higher likely transaction is valid
+&lt;/em&gt; The larger N costs you for confirmation&lt;/p&gt;
+&lt;p&gt;The optimal value of N would be determined considering this trade-off.&lt;/p&gt;
+&lt;h4&gt;3. Miners and transaction fee incentives&lt;/h4&gt;
+&lt;p&gt;Note that ones having transactions and ones confirming transactions are not necessary identical. Basically, anyone can join
+P2P Network and work on confirmations. To encourage someone to join the network, we need to give them some rewards,
+i.e., we give incentive fee to someone succeeded in proof-of-work. This incentive keeps attracting participants and enables
+the network to work property. The one working on confirmation is often called &lt;code&gt;miner&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;The incentive fee for each transaction has to be small enough. Otherwise, this fee saturates the benefit of having transactions.
+Therefore, miners collect a lot of transactions and then get large enough incentive. 
+Let's see how the process works.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Adnan and Barby generate new transactions and announce therm to the network.&lt;/li&gt;
+&lt;li&gt;Carl is listening for new transactions with their incentives. Then he works on the following processes:&lt;ul&gt;
+&lt;li&gt;Collect unconfirmed transactions until total incentives is large enough (Incentives have to be higher than
+proof-of-work)&lt;/li&gt;
+&lt;li&gt;Verify all of the collected transactions and add a new transactions that transfers incentives to him&lt;/li&gt;
+&lt;li&gt;Work on proof-of-work and generate a validated block&lt;/li&gt;
+&lt;li&gt;Distribute the block to all other participants&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Both Adnan and Barby are listening for new block announcements and look for their transaction in the list&lt;ul&gt;
+&lt;li&gt;Adnan and Barby verify integrity of the block&lt;/li&gt;
+&lt;li&gt;If the block is valid and their transactions are in the list, then the transactions are confirmed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;4. Racing to claim the transaction fees&lt;/h4&gt;
+&lt;p&gt;You may wonder what if more than one participants work on proof-of-work at the same time. Indeed, this situation
+happens all the time and we have to consider the solution to integrate them. Blockchain takes the policy that the first
+one to finish proof-of-work
+takes the all. Here is how it works:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Collect unconfirmed transactions and start proof-of-work&lt;/li&gt;
+&lt;li&gt;Generate a valid bock and broadcast it into the network&lt;ul&gt;
+&lt;li&gt;Other peers check the validity of the block&lt;/li&gt;
+&lt;li&gt;If the block is valid, it is added to the participants' ledgers and rebroadcast to other peers&lt;/li&gt;
+&lt;li&gt;Once the new block is added, abort their previous work&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Repeat 1 and 2&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;By the nature of the race, the ones with more computational power are more likely to be succeeded to finish proof-of-work. Although
+the participation in the race itself is for free, how much influence you give to building the chain is determined by how much
+you put the cost to computational power. &lt;/p&gt;
+&lt;h4&gt;5. Resolving chain conflicts&lt;/h4&gt;
+&lt;p&gt;It could happen that more than one participants find valid bocks almost at the same time and try to add blocks on top of the chain.
+In that case, which blocks would be chosen as top-most block for the next proof-of-work?&lt;/p&gt;
+&lt;p&gt;In this situation, Blockchain takes the policy:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The longest branch is always valid&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Every time you find a longer branch, you need to switch to that branch. Thus, &lt;code&gt;any blokcs are never 'final'!&lt;/code&gt;. Practically speaking,
+we are unable to wait for infinite time to confirm that the transaction is valid. Mostly, we set a certain number N to
+confirm transactions.
+The larger N gives you more security while taking a lot of time for confirmations.&lt;/p&gt;
+&lt;p&gt;This policy also makes sense to avoid confirming fraud transactions. If less than half of miners are working on fraud.
+The
+speed of developing valid branch is faster than that of fraud branch in the expectation. Thus, if N is large enough,
+we can make sure
+that the branch contains valid transactions. &lt;/p&gt;
+&lt;h4&gt;6. Properties of Blockchain&lt;/h4&gt;
+&lt;p&gt;We have went through the basic of Blockchain. What we have seen here is just minimal mechanism, which satisfies that:
+1. Individual transactions are secured by digital signature
+2. Once created, transactions are broadcast into P2P network
+3. One or more transactions are aggregated into a block
+4. Peers listen for new block announcements and merge them into their ledgers&lt;/p&gt;
+&lt;p&gt;You can see more detail discussion at this blog post &lt;a href="https://www.igvita.com/2014/05/05/minimum-viable-block-chain/"&gt;[24]&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;4. Wrap Up&lt;/h1&gt;
+&lt;p&gt;That's it! We walked through the basic of Blockchain. To deepen your comprehension, I highly recommend
+to build your Blockchain, &lt;a href="https://youtu.be/3aJI1ABdjQk"&gt;[25]&lt;/a&gt;. Since this field changes really
+fast, it's important to keep you updated with some media. &lt;/p&gt;
+&lt;h1&gt;5. References&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://medium.freecodecamp.org/the-authoritative-guide-to-blockchain-development-855ab65b58bc"&gt;The authoritative guide to blockchain development&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Cryptography"&gt;Cryptography (Wkikpedia)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://sites.math.washington.edu/~morrow/336_09/papers/Yevgeny.pdf"&gt;The RSA Algorithm, E. Milanov&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=vgTtHV04xRI"&gt;Gambling with Secrets: 8/8 (RSA Encryption) (YouTube)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gist.github.com/JonCooperWorks/5314103"&gt;RSA Python Implementation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/"&gt;A (Relatively Easy To Understand) Primer on Elliptic Curve Cryptography&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://hackernoon.com/merkle-tree-introduction-4c44250e2da7"&gt;Merkle Tree Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/evankozliner/merkle-tree/blob/master/MerkleTree.py"&gt;Merkle Tree Python Implementation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.emsec.rub.de/media/crypto/attachments/files/2011/04/becker_1.pdf"&gt;Merkle Signature Schemes, Merkle Trees and Their Cryptanalysis, G. Becker&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://link.springer.com/content/pdf/10.1007%2Fs00607-016-0508-7.pdf"&gt;A brief introduction to distributed systems&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.glassbeam.com/sites/all/themes/glassbeam/images/blog/10.1.1.67.6951.pdf"&gt;Brewer’s Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/"&gt;An Illustrated Proof of the CAP Theorem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://codahale.com/you-cant-sacrifice-partition-tolerance/"&gt;You Can’t Sacrifice Partition Tolerance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Peer-to-peer"&gt;Peer-to-peer (Wikipedia)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.digitalcitizen.life/what-is-p2p-peer-to-peer"&gt;Simple questions: What is P2P (peer-to-peer) and why is it useful?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.diffen.com/difference/TCP_vs_UDP"&gt;TCP vs. UDP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Gossip_protocol"&gt;Gossip protocol&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Consensus_(computer_science)"&gt;Consensus (Wikipedia)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Sybil_attack"&gt;Sybil attack (Wikipedia)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.igvita.com/2010/06/24/weak-consistency-and-cap-implications/"&gt;Weak Consistency and CAP Implications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Cryptographic_nonce"&gt;Cryptographic nonce (Wikipedia)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=_160oMzblY8&amp;amp;feature=youtu.be"&gt;Blockchain 101 - A Visual Demo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?time_continue=837&amp;amp;v=bBC-nXj3Ng4"&gt;Ever wonder how Bitcoin (and other cryptocurrencies) actually work?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.igvita.com/2014/05/05/minimum-viable-block-chain/"&gt;Minimum Viable Block Chain&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=3aJI1ABdjQk&amp;amp;feature=youtu.be"&gt;Let's build a blockchain! — A mini-cryptocurrency in Ruby (Haseeb Qureshi)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Fri, 22 Jun 2018 12:00:00 -0400</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2018-06-22:articles/2018/Jun/22/blockchain/</guid><category>Blockchain</category></item><item><title>Bayesian Optimization of Hyperparameters with Python</title><link>http://jjakimoto.github.io/articles/2018/Mar/11/bayes_opt/</link><description>&lt;p&gt;Choosing a good set of hyperparameters is one of most important steps but also pretty much annoying and time consuming. The small number of hyperparameters may allow you to find an optimal hyperparameters after a few trials. This is, however, not the case for complex models like neural network.&lt;/p&gt;
+&lt;p&gt;Indeed, when I just started my career as a data scientist, I was always frustrated to tune hyperparameters of Neural Network not to either underfit or overfit. Everytime I spent a lot of times and winded up not finding good set of hyperparameters, I was like&lt;/p&gt;
+&lt;p&gt;&lt;img alt="frustration" src="https://media.giphy.com/media/ilkfz8Mn5Yz7O/giphy.gif" /&gt;&lt;/p&gt;
+&lt;p&gt;Actually there were a lot of ways to tune parameters efficiently and algorithmically, which I was ignorant of back in those days. Especially how to tune Neural Network has been progress rapidly in a recent few years by utilizing various algorithms: &lt;a href="https://arxiv.org/pdf/1706.00764.pdf"&gt;spectral analysis [1]&lt;/a&gt;, &lt;a href="https://arxiv.org/pdf/1603.06560.pdf"&gt;bandit algorithms [2]&lt;/a&gt;, &lt;a href="https://arxiv.org/pdf/1711.09846.pdf"&gt;evolutionary strategy [3]&lt;/a&gt;, &lt;a href="https://arxiv.org/pdf/1611.01578.pdf"&gt;reinforcement learning [4]&lt;/a&gt;, etc. How to build predictive general models algorithmically is also one of the hot research topics. Many frameworks and algorithms have been suggested &lt;a href="https://cyphe.rs/static/atm.pdf"&gt;[5]&lt;/a&gt;, &lt;a href="https://papers.nips.cc/paper/5872-efficient-and-robust-automated-machine-learning.pdf"&gt;[6]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Automatically building and tuning models is one of the hot topics in research, some of which are successful in outperforming state-of-art models. Thus, building solid tuning algorithms is way cheaper and more efficient than hiring data scientists for tuning models.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="scientist" src="https://media.giphy.com/media/xUA7b6oaRIgzmAKpUY/giphy.gif" /&gt;&lt;/p&gt;
+&lt;p&gt;In this blog post, we will go through the most basic three algorithms: grid, random, and Bayesian search. And, we will learn how to implement it in python.&lt;/p&gt;
+&lt;h1&gt;Background&lt;/h1&gt;
+&lt;p&gt;When optimizing hyperparameters, information available is mostly only score value of defined metrics(e.g., accuracy for classification) with each set of hyperparameters. We query a set of hyperparameters and get a score value as a response. Thus, optimization algorithms have to make efficient queries and find an optimal set without knowing how objective function looks like. This kind of optimization problem is called balck-box optimization. Here is the definition of black-box optimization:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"Black Box" optimization refers to a problem setup in which an optimization algorithm is supposed to optimize (e.g., minimize) an objective function through a so-called black-box interface: the algorithm may query the value f(x) for a point x, but it does not obtain gradient information, and in particular it cannot make any assumptions on the analytic form of f (e.g., being linear or quadratic). We think of such an objective function as being wrapped in a black-box. The goal of optimization is to find an as good as possible value f(x) within a predefined time, often defined by the number of available queries to the black box. Problems of this type regularly appear in practice, e.g., when optimizing parameters of a model that is either in fact hidden in a black box (e.g., a third party software library) or just too complex to be modeled explicitly.&lt;/p&gt;
+&lt;p&gt;by &lt;a href="https://bbcomp.ini.rub.de/"&gt;Balck-Box Optimization Competition homepage&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;* There are some hyperparameter optimization methods to make use of gradient information, e.g., &lt;a href="http://proceedings.mlr.press/v37/maclaurin15.pdf"&gt;[7]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Grid, random, and Bayesian search, are three of basic algorithms of black-box optimization. They have the following characteristics (We assume the problem is minimization here):&lt;/p&gt;
+&lt;h2&gt;Grid Search&lt;/h2&gt;
+&lt;p&gt;Grid search is the simplest method. First, we place finite number of points on each hyperparameter axis and then make grid points by combining them. Here is the example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1e-6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1e-4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="mf"&gt;1e-8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;When you have only a few hyperparameters, this method may works. Once dimension increases, the number of trials blows up exponentially.&lt;/p&gt;
+&lt;h2&gt;Random Search&lt;/h2&gt;
+&lt;p&gt;Random search is known effective over high dimensional search space. Especially when we have small subsets of effective hyperparameters out of high dimensional space, we search these effective parameters effectively &lt;a href="http://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf"&gt;[8]&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Bayesian Search&lt;/h2&gt;
+&lt;p&gt;While random search samples points independently, Bayesian search samples promising points more effectively by utilizing historical results. We first use GP (Gaussian process) to estimate objective function based on historical results &lt;a href="https://arxiv.org/pdf/1206.2944.pdf"&gt;[9]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;GP also outputs variance along with mean. If this variance is large, small mean does not necessary imply promising because high values also likely happen as well. Points minimizing mean of estimation function are not necessary optimal. Thus, we need to define metric to consider trade off between mean and variance.&lt;/p&gt;
+&lt;p&gt;We introduce functions called acquisition function to deal with this issue. One of the most commonly used function is &lt;em&gt;Expected Improvement&lt;/em&gt;. Here is the definition:&lt;/p&gt;
+&lt;p&gt;$$a_{EI}(x; {x_n,  y_n}, \theta) = E[max(f(x_{best}) - f(x), 0) | {x_n,  y_n}, \theta]$$&lt;/p&gt;
+&lt;p&gt;where $f(\cdot)$ is score function; ${x_n,  y_n}$ historical input and its response from score function; $\theta$ is parameters of Gaussian process; $E[\cdot]$ is taking expectation with respect to a Gaussian probability.&lt;/p&gt;
+&lt;p&gt;The right hand can be calculated analytically to the following form:&lt;/p&gt;
+&lt;p&gt;$$a_{EI}(x; {x_n,  y_n}, \theta) = \sigma(x ;  {x_n,  y_n}, \theta) [\gamma(x) \Phi(\gamma(x)) + N (\gamma(x); 0, 1)]$$&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;$$\gamma(x) = \frac{f(x_{best}) − \mu(x ; {x_n,  y_n}, \theta)}{\sigma(x ;  {x_n,  y_n}, \theta)}$$&lt;/p&gt;
+&lt;p&gt;$N(\cdot; 0, 1)$ and $\Phi(\cdot)$ are p.d.f. and c.d.f of Gaussian distribution, respectively.&lt;/p&gt;
+&lt;p&gt;Here is python code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;expected_improvement&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;evaluated_loss&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;jitter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.01&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot; expected_improvement&lt;/span&gt;
+&lt;span class="sd"&gt;    Expected improvement acquisition function.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Note&lt;/span&gt;
+&lt;span class="sd"&gt;    ----&lt;/span&gt;
+&lt;span class="sd"&gt;    This implementation aims for minimization&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Parameters:&lt;/span&gt;
+&lt;span class="sd"&gt;    ----------&lt;/span&gt;
+&lt;span class="sd"&gt;    x: array-like, shape = (n_hyperparams,)&lt;/span&gt;
+&lt;span class="sd"&gt;    model: GPRegressor object of GPy.&lt;/span&gt;
+&lt;span class="sd"&gt;        Gaussian process trained on previously evaluated hyperparameters.&lt;/span&gt;
+&lt;span class="sd"&gt;    evaluated_loss: array-like(float), shape = (# historical results,).&lt;/span&gt;
+&lt;span class="sd"&gt;         the values of the loss function for the previously evaluated&lt;/span&gt;
+&lt;span class="sd"&gt;         hyperparameters.&lt;/span&gt;
+&lt;span class="sd"&gt;    jitter: float&lt;/span&gt;
+&lt;span class="sd"&gt;        positive value to make the acquisition more explorative.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;atleast_2d&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;mu&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;predict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# Consider 1d case&lt;/span&gt;
+    &lt;span class="n"&gt;sigma&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;mu&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mu&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="c1"&gt;# Avoid too small sigma&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sigma&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;loss_optimum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;evaluated_loss&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;gamma&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;loss_optimum&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;mu&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;jitter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;sigma&lt;/span&gt;
+        &lt;span class="n"&gt;ei_val&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sigma&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gamma&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;norm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cdf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gamma&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;norm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gamma&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ei_val&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Summing up the above discussion, Bayesian optimization is executed in the following steps:
+1. Sample a few points and score them.
+2. Initialize GP with sampled points
+3. Sample points that minimize acquisition function
+4. Score sampled points and store the results in GP
+5. Iterate 3. and 4.&lt;/p&gt;
+&lt;p&gt;To implement them in python, I have implemented two class objects: &lt;a href="https://github.com/jjakimoto/BBOptimizer/tree/develop/bboptimizer/samplers"&gt;Sampler&lt;/a&gt; and &lt;a href="https://github.com/jjakimoto/BBOptimizer/blob/develop/bboptimizer/optimizer.py"&gt;Optimizer&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Sampler class basically consists of two methods:
+- update: Update GP based on historical results
+- sample: Sample optimal points with respect to an acquisition function&lt;/p&gt;
+&lt;p&gt;Optimizer class utilizes a sampler to find optimal points.&lt;/p&gt;
+&lt;p&gt;Here are python codes for the step 3. and 4.:&lt;/p&gt;
+&lt;p&gt;Step 3.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_bayes_sample&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;num_restarts&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;init_xs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_random_sample&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num_restarts&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# Define search space&lt;/span&gt;
+    &lt;span class="n"&gt;bounds&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;design_space&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_bounds&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="c1"&gt;# Historical results&lt;/span&gt;
+    &lt;span class="n"&gt;evaluated_loss&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_y&lt;/span&gt;
+    &lt;span class="n"&gt;ys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="n"&gt;xs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Find a point to minimize acquisition function&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x0&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;init_xs&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;minimize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;acquisition_func&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                       &lt;span class="n"&gt;x0&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                       &lt;span class="n"&gt;bounds&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;bounds&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                       &lt;span class="n"&gt;method&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;L-BFGS-B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                       &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;evaluated_loss&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="n"&gt;ys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;xs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;idx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argmax&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ys&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;best_x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;xs&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="n"&gt;idx&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;best_x&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_random_sample&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;num_samples&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;Xs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num_samples&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;random_sample&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;params_conf&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;Xs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Xs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Step 4.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;eps&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1e-6&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;
+    &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)[:,&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="c1"&gt;# Update data in GP&lt;/span&gt;
+    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_XY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_vec&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# Update hyperparameters of GP&lt;/span&gt;
+    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;optimize&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;self.model.optimize()&lt;/code&gt; optimize GP model defined at &lt;a href="https://github.com/SheffieldML/GPy"&gt;GPy&lt;/a&gt;.
+Then, we use these update and sample methods of the sampler object to optimize parameters&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num_iter&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;Xs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sampler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;ys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Xs&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;score_func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;ys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;sampler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Xs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ys&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;Xs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sampler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;
+    &lt;span class="n"&gt;best_idx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argmin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ys&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# Default is minimization&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_maximize&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;ys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ys&lt;/span&gt;
+    &lt;span class="c1"&gt;# Update with  fixed parameters&lt;/span&gt;
+    &lt;span class="n"&gt;best_X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Xs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;best_idx&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;best_y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ys&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;best_idx&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;best_X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;best_y&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To make it easy to understand the above codes, I change some parts from actual implementation. If you want to see the full implementation, check out &lt;a href="https://github.com/jjakimoto/BBOptimizer"&gt;this repository&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Experiments&lt;/h1&gt;
+&lt;p&gt;Let's compare performance of these algorithms!!&lt;/p&gt;
+&lt;h2&gt;Toy Model&lt;/h2&gt;
+&lt;p&gt;As a simple example, we shall test the following function:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+
+&lt;span class="n"&gt;map_func&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;linear&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;square&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sin&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;score_func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;x2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;map_func&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;x4&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]](&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;x1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;map_func&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;x4&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]](&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;x3&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="n"&gt;score_val&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;score_val&lt;/span&gt;
+
+
+&lt;span class="n"&gt;params_conf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;x1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;continuous&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;num_grid&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;scale&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;x2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;continuous&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;num_grid&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;x3&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;continuous&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;num_grid&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;x4&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;linear&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sin&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;square&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;categorical&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The &lt;code&gt;x3&lt;/code&gt; determines which function is used with for the two  variables: &lt;code&gt;x1&lt;/code&gt; and &lt;code&gt;x3&lt;/code&gt;. Comparatively speaking, &lt;code&gt;x2&lt;/code&gt; does not affect the performance because of sine function. The precise way of defining search space is explained in &lt;a href="https://github.com/jjakimoto/BBOptimizer"&gt;my repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;From the definition above, we know the optimal result in advance:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;params = {&amp;#39;x1&amp;#39;: 5, &amp;#39;x2&amp;#39;: 3.141592..., &amp;#39;x3&amp;#39;, 5.0, &amp;#39;x4&amp;#39;: &amp;#39;sqaure&amp;#39;}
+score = 51.0
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To execute optimization, we use&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;random&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;bboptimizer&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Optimizer&lt;/span&gt;
+
+&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;seed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;seed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;bayes_opt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Optimizer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;score_func&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params_conf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sampler&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;bayes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r_min&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;maximize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;bayes_opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;seed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;seed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;random_opt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Optimizer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;score_func&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params_conf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sampler&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;random&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;maximize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;random_opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;seed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;seed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;grid_opt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Optimizer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;score_func&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params_conf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sampler&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;grid&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;num_grid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;maximize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;grid_opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here is the result:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="toy_model_opt" src="http://jjakimoto.github.io/images/bayes_opt/toy_model_opt.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;In this example, Bayesian search achieves the almost optimal values:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;best_parmas&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;x1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;x2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;5.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;x3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;5.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;x4&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;square&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="n"&gt;best_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;50.95892427466314&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;after 8 Bayesian samples and 10 random initialization while random and grid search achieve &lt;code&gt;24.004995120648054&lt;/code&gt; and &lt;code&gt;25.968924274663138&lt;/code&gt; even after 50 trials. In this example, grid search works slightly better than random search. This is because optimal values of &lt;code&gt;x2&lt;/code&gt; and &lt;code&gt;x3&lt;/code&gt; are placed at the end of search space, which allows grid search to try these values deterministically.&lt;/p&gt;
+&lt;h2&gt;Hyperparameter Optimization&lt;/h2&gt;
+&lt;p&gt;Next problem is tuning hyperparameters of one of the basic machine learning models, Support Vector Machine. We consider optimizing regularization parameters &lt;code&gt;C&lt;/code&gt; and &lt;code&gt;gamma&lt;/code&gt; with accuracy score under fixed kernel to RBF at &lt;code&gt;scikit-learn&lt;/code&gt; implementation. We use an artificially classification problem made up with  &lt;code&gt;make_classification&lt;/code&gt; of &lt;code&gt;scikit-learn&lt;/code&gt;. Let's set up the problem!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.svm&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SVC&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.datasets&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;make_classification&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;accuracy_score&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.model_selection&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;StratifiedShuffleSplit&lt;/span&gt;
+
+
+&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;target&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;make_classification&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n_samples&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2500&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                   &lt;span class="n"&gt;n_features&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                   &lt;span class="n"&gt;n_informative&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                   &lt;span class="n"&gt;n_redundant&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;score_func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;splitter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;StratifiedShuffleSplit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n_splits&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;train_idx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_idx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;splitter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="p"&gt;))[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;train_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;train_idx&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;train_target&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;train_idx&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;clf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SVC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;clf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;train_data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;train_target&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;pred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;clf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;predict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;test_idx&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="n"&gt;true_y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;test_idx&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;accuracy_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;true_y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pred&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;score&lt;/span&gt;
+
+&lt;span class="n"&gt;params_conf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;domain&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1e5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;continuous&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;scale&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;log&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;gamma&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;domain&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1e5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;continuous&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;scale&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;log&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;kernel&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;domain&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rbf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;fixed&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here is the results:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="hyper_opt" src="http://jjakimoto.github.io/images/bayes_opt/hyper_opt.jpg" /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;bayes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;best_params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;100000.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;gamma&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.03836608377440943&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;kernel&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rbf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="n"&gt;best_score&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.928&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;random:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;best_params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;196.07647697179934&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;gamma&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.07509896588333721&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;kernel&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rbf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="n"&gt;best_score&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.91&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;grid:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;best_params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;4.641588833612772&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;gamma&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.03162277660168379&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;kernel&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rbf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="n"&gt;best_score&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.904&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As you see in the result above, Bayesian optimization outperformed other algorithms.&lt;/p&gt;
+&lt;h2&gt;Hyperparameters Optimization Neural Network&lt;/h2&gt;
+&lt;p&gt;As a final example, we are going to optimize hyperparameters of Neural Network.
+For the sake of the simplicity, we define hyperparameters with the following parameters:&lt;/p&gt;
+&lt;p&gt;For training configuration, we define
+- learning rate
+- the number of training epochs
+- optimization algorithm
+- batch size&lt;/p&gt;
+&lt;p&gt;For each input, hidden, output layers we define
+- the number of layers
+- the number of hidden units
+- weight regularizer
+- activation function
+- dropout rate
+- if use batch normalization&lt;/p&gt;
+&lt;p&gt;Thus, we have 22 hyperparameters, which is almost infeasible to be optimized by grid search. In this example, we test Bayesian and random search to find good set of 22 hyperparameters.&lt;/p&gt;
+&lt;p&gt;To test optimization algorithms, we use machine learning "hello world" problem, classifying MNIST handwrite digit data. We fetch data from tensorflow interface and use the train and valid data.&lt;/p&gt;
+&lt;p&gt;Let's set up the problem:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.preprocessing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;OneHotEncoder&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;tensorflow&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;tf&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Sequential&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.layers&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Dense&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;BatchNormalization&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Dropout&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.layers&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Activation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Reshape&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.optimizers&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Adam&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Adadelta&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;SGD&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;RMSprop&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.regularizers&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;l2&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;bboptimizer&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Optimizer&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Fetch MNIST dataset&lt;/span&gt;
+&lt;span class="n"&gt;mnist&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;contrib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;learn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;datasets&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load_dataset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;mnist&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;train&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mnist&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;train&lt;/span&gt;
+&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;train&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;images&lt;/span&gt;
+&lt;span class="n"&gt;train_X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;
+&lt;span class="n"&gt;train_y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;expand_dims&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;train&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;labels&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;train_y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OneHotEncoder&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;train_y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;valid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mnist&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;validation&lt;/span&gt;
+&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;valid&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;images&lt;/span&gt;
+&lt;span class="n"&gt;valid_X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;
+&lt;span class="n"&gt;valid_y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;expand_dims&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;valid&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;labels&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;valid_y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OneHotEncoder&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;valid_y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_optimzier&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;rmsprop&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;RMSprop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;adam&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Adam&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sgd&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;SGD&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;adadelta&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Adadelta&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;construct_NN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Sequential&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Reshape&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;784&lt;/span&gt;&lt;span class="p"&gt;,),&lt;/span&gt; &lt;span class="n"&gt;input_shape&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;784&lt;/span&gt;&lt;span class="p"&gt;,)))&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update_model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_params&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;_model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Dropout&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;_drop_rate&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+        &lt;span class="n"&gt;_model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Dense&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;units&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;_params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;_num_units&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                    &lt;span class="n"&gt;activation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                    &lt;span class="n"&gt;kernel_regularizer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;l2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;_w_reg&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])))&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;_params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;_is_batch&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+            &lt;span class="n"&gt;_model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BatchNormalization&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;_params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;_activation&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;_model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Activation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;_activation&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;_model&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Add input layer&lt;/span&gt;
+    &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;update_model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;input&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# Add hidden layer&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;num_hidden_layers&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]):&lt;/span&gt;
+        &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;update_model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hidden&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# Add output layer&lt;/span&gt;
+    &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;update_model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;output&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;optimizer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_optimzier&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;optimizer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                              &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;learning_rate&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;optimizer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;optimizer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+              &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;categorical_crossentropy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+              &lt;span class="n"&gt;metrics&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;accuracy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;score_func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;construct_NN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;train_X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;train_y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+              &lt;span class="n"&gt;epochs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;epochs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+              &lt;span class="n"&gt;batch_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;batch_size&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;verbose&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;evaluate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;valid_X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;valid_y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;batch_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;batch_size&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="n"&gt;idx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;metrics_names&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;acc&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;idx&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;score&lt;/span&gt;
+
+&lt;span class="n"&gt;params_conf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;num_hidden_layers&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;integer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;batch_size&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;integer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;scale&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;learning_rate&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;continuous&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1e-1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;scale&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;epochs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;integer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;250&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;scale&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;optimizer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;categorical&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;rmsprop&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sgd&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;adam&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;adadelta&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;input_drop_rate&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;continuous&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;input_num_units&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;integer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;scale&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;input_w_reg&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;continuous&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1e-1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;scale&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;input_is_batch&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;categorical&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;input_activation&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;categorical&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;relu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sigmoid&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;tanh&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hidden_drop_rate&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;continuous&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.75&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hidden_num_units&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;integer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;scale&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hidden_w_reg&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;continuous&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1e-1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;scale&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hidden_is_batch&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;categorical&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hidden_activation&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;categorical&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;relu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sigmoid&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;tanh&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;output_drop_rate&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;continuous&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;output_num_units&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;fixed&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;output_w_reg&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;continuous&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1e-1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;scale&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;output_is_batch&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;categorical&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;output_activation&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;fixed&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;&amp;quot;domain&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;softmax&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here is the result:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="hyper_opt" src="http://jjakimoto.github.io/images/bayes_opt/hyper_nn_opt.jpg" /&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;bayes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;best_params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;num_hidden_layers&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;batch_size&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;learning_rate&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0009053002734681439&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;epochs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;250&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;optimizer&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rmsprop&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;input_drop_rate&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;input_num_units&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;input_w_reg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2840834618450513e-06&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;input_is_batch&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;input_activation&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sigmoid&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;hidden_drop_rate&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;hidden_num_units&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;41&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;hidden_w_reg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;6.970606129393136e-07&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;hidden_is_batch&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;hidden_activation&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;relu&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;output_drop_rate&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;output_w_reg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1e-10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;output_is_batch&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;output_num_units&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;output_activation&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;softmax&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;best_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.9864&lt;/span&gt;
+
+
+&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;best_params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;batch_size&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;74&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;epochs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;204&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;hidden_activation&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;tanh&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;hidden_drop_rate&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.6728025784523577&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;hidden_is_batch&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;hidden_num_units&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;hidden_w_reg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.4924891356983298e-08&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;input_activation&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;relu&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;input_drop_rate&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.12861674273569668&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;input_is_batch&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;input_num_units&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;92&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;input_w_reg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.00018805052553280536&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;learning_rate&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0006256532585348427&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;num_hidden_layers&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;optimizer&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;adam&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;output_activation&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;softmax&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;output_drop_rate&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.11413180495018566&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;output_is_batch&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;output_num_units&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;output_w_reg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;2.544391637336686e-06&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;best_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.9822000049591064&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In this example, Bayesian search finds that maximum value of the number of epochs is more likely to bring better score and keep using this value from the middle of searching. Then, Bayesian search finds better values more efficiently.&lt;/p&gt;
+&lt;h1&gt;Wrap Up&lt;/h1&gt;
+&lt;p&gt;As we go through in this article, Bayesian optimization is easy to implement and efficient to optimize hyperparameters of Machine Learning algorithms. If you have computer resources, I highly recommend you to parallelize processes to speed up &lt;a href="https://arxiv.org/pdf/1602.05149.pdf"&gt;[10]&lt;/a&gt;. As you have time, you can also try to use Bayesian methods to utilize gradient information &lt;a href="https://arxiv.org/pdf/1703.04389.pdf"&gt;[11]&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;[0] &lt;a href="https://github.com/jjakimoto/BBOptimizer"&gt;BBOptimizer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[1] &lt;a href="https://arxiv.org/pdf/1706.00764.pdf"&gt;Hyperparameter Optimization: A Spectral Approach&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[2] &lt;a href="https://arxiv.org/pdf/1603.06560.pdf"&gt;Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[3] &lt;a href="https://arxiv.org/pdf/1711.09846.pdf"&gt;Population Based Training of Neural Networks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[4] &lt;a href="https://arxiv.org/pdf/1611.01578.pdf"&gt;NEURAL ARCHITECTURE SEARCH WITH REINFORCEMENT LEARNING&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[5] &lt;a href="https://cyphe.rs/static/atm.pdf"&gt;ATM: A distributed, collaborative, scalable system for automated machine learning&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[6] &lt;a href="https://papers.nips.cc/paper/5872-efficient-and-robust-automated-machine-learning.pdf"&gt;Efficient and Robust Automated Machine Learning&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[7] &lt;a href="http://proceedings.mlr.press/v37/maclaurin15.pdf"&gt;Gradient-based Hyperparameter Optimization through Reversible Learning&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[8] &lt;a href="http://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf"&gt;Random Search for Hyper-Parameter Optimization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[9] &lt;a href="https://arxiv.org/pdf/1206.2944.pdf"&gt;PRACTICAL BAYESIAN OPTIMIZATION OF MACHINE LEARNING ALGORITHMS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[10] &lt;a href="https://arxiv.org/pdf/1602.05149.pdf"&gt;Parallel Bayesian Global Optimization of Expensive Functions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[11] &lt;a href="https://arxiv.org/pdf/1703.04389.pdf"&gt;Bayesian Optimization with Gradients&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Sun, 11 Mar 2018 12:00:00 -0400</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2018-03-11:articles/2018/Mar/11/bayes_opt/</guid><category>AutoML</category></item><item><title>Start Your Data Science Blog by Pelican</title><link>http://jjakimoto.github.io/articles/2018/Mar/01/start_blog/</link><description>&lt;p&gt;Blogging is one of the fantastic ways to demonstrate your projects and help you understand stuff in more depth. Especially, I believe that blogging helps you land a job more efficiently. Even if you are not looking for a new position, writing articles you are working on would be the practice to explain stuff to others, which always requires deep understanding. Indeed, A. Einstein mentioned&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you can't explain it to a 6 year old then you really don't understand it yourself&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Thus, blogging brings you a lot of benefits. Today is the date to start your blog!&lt;/p&gt;
+&lt;p&gt;In this article, I explain how to build your technology blog, especially data science blog.&lt;/p&gt;
+&lt;p&gt;I know that folks working around data science space hate suffering from stuff like learning HTML and making beautiful web design. I am one of them.
+Then, static site generators comes in makes blogging simpler to even non professional guys like me. There are a few options for static site generators such as &lt;a href="http://docs.getpelican.com/en/stable/"&gt;Pelican&lt;/a&gt; written in Python and &lt;a href="https://jekyllrb.com/"&gt;Jekyll&lt;/a&gt; written in Ruby.&lt;/p&gt;
+&lt;p&gt;In daily analytics, I spend a lot of time on &lt;a href="http://jupyter.org/"&gt;Jupyter Notebook&lt;/a&gt;. So, my choice of the platform goes to &lt;a href="http://docs.getpelican.com/en/stable/"&gt;Pelican&lt;/a&gt;, which is able to generate articles directly from IPython Notebook file.&lt;/p&gt;
+&lt;p&gt;Let's dig into how to write articles with Pelican!&lt;/p&gt;
+&lt;h1&gt;Build the environment&lt;/h1&gt;
+&lt;p&gt;We will go through the following processes:
+1. Install Pelican
+2. Create a default environment
+3. Set up external plugins&lt;/p&gt;
+&lt;h3&gt;1. Install Pelican&lt;/h3&gt;
+&lt;p&gt;Before installing anything, building virtual environment is recommended to avoid messing up your local python environment. We use &lt;code&gt;virtualenv&lt;/code&gt; here and install it through pip.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;foo@bar:~$&lt;/span&gt; pip install virtualenv
+&lt;span class="gp"&gt;foo@bar:~$&lt;/span&gt; mkdir ~/virtualenvs
+&lt;span class="gp"&gt;foo@bar:~$&lt;/span&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; ~/virtualenvs
+&lt;span class="gp"&gt;foo@bar:~$&lt;/span&gt; virtualenv blogenv
+&lt;span class="gp"&gt;foo@bar:~$&lt;/span&gt; &lt;span class="nb"&gt;source&lt;/span&gt; virtualenvs/blogenv/bin/activate
+&lt;span class="go"&gt;(blogenv) foo@bar:~$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now we have activated a virtual environment. Python packages we install from now does not affect your local python environment.&lt;/p&gt;
+&lt;p&gt;Let's install Pelican and Markdown over the established virtual environment through pip.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;pip install pelican markdown&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;2. Create a default environment&lt;/h3&gt;
+&lt;p&gt;We determine under which folder the blog will be built. In this article, we are going to build the environment under '~/blog'.
+Under this folder, we will make the following files:
+&lt;em&gt; requirements.txt
+&lt;/em&gt; .gitignore&lt;/p&gt;
+&lt;p&gt;requirements.txt tells you what files is required to use your program.
+Here is the example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Markdown==2.6.11
+pelican==3.7.1
+jupyter&amp;gt;=1.0
+ipython&amp;gt;=4.0
+nbconvert&amp;gt;=4.0
+bs4==4.6.0
+ghp-import==0.4.1
+matplotlib==2.0.2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Running &lt;code&gt;pip install -r requirements.txt&lt;/code&gt; installs all their packages.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.gitignore&lt;/code&gt; avoids you annoyed to mess up git repository. The file whose name matched with patterns in this file will be ignored when executing git command.&lt;/p&gt;
+&lt;p&gt;Now, we are going to start your own blog.
+In Pelican, there is command &lt;code&gt;pelican quick-start&lt;/code&gt;. Its execution will get you the following console.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(blogenv) foo@bar:~$ pelican-quickstart
+Welcome to pelican-quickstart v3.7.1.
+
+This script will help you create a new Pelican-based website.
+
+Please answer the following questions so this script can generate the files
+needed by Pelican.
+
+
+&amp;gt; Where do you want to create your new web site? [.]
+&amp;gt; What will be the title of this web site? Data Rounder
+&amp;gt; Who will be the author of this web site? Tomoaki Fujii
+&amp;gt; What will be the default language of this web site? [en]
+&amp;gt; Do you want to specify a URL prefix? e.g., http://example.com   (Y/n) n
+&amp;gt; Do you want to enable article pagination? (Y/n)
+&amp;gt; How many articles per page do you want? [10]
+&amp;gt; What is your time zone? [Europe/Paris] America/New_York
+&amp;gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? (Y/n)
+&amp;gt; Do you want an auto-reload &amp;amp; simpleHTTP script to assist with theme and site development? (Y/n)
+&amp;gt; Do you want to upload your website using FTP? (y/N)
+&amp;gt; Do you want to upload your website using SSH? (y/N)
+&amp;gt; Do you want to upload your website using Dropbox? (y/N)
+&amp;gt; Do you want to upload your website using S3? (y/N)
+&amp;gt; Do you want to upload your website using Rackspace Cloud Files? (y/N)
+&amp;gt; Do you want to upload your website using GitHub Pages? (y/N)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;After this process has finished without errors, we have the following files under &lt;code&gt;~/blog&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;content
+pelicanconf.py
+publishconf.py
+fabfile.py
+output
+develop_server.sh
+Makefile
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Among files above, we edit &lt;code&gt;content&lt;/code&gt; and &lt;code&gt;pelicanconf.py&lt;/code&gt; frequently.&lt;/p&gt;
+&lt;p&gt;Let's start from &lt;code&gt;pelicanconf.py&lt;/code&gt;. As an example, what I am using is &lt;a href="https://github.com/jjakimoto/jjakimoto.github.io/blob/develop/pelicanconf.py"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you check my &lt;code&gt;pelicanconf.py&lt;/code&gt;, you may notice the part,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;themes/mytheme&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This folder defines framework of your blog, and of course, it is customizable. My recommendation is finding some cool blog and arrange their them according to your demand. In my case, I add some extra stuff to &lt;a href="https://github.com/rossant/rossant.github.io/tree/sources/themes"&gt;this theme&lt;/a&gt;. The them what I amd using this website is [here](&lt;a href="https://github.com/jjakimoto/jjakimoto.github.io/tree/develop/themes/mytheme"&gt;here&lt;/a&gt;. You can see more detail at &lt;a href="http://docs.getpelican.com/en/3.6.3/themes.html"&gt;the official documentation&lt;/a&gt; as to how to customize your theme.&lt;/p&gt;
+&lt;h3&gt;3. Set up external plugins&lt;/h3&gt;
+&lt;p&gt;Next, we are going to introduce external plugins for IPython Notebook and Markdown.&lt;/p&gt;
+&lt;p&gt;You can download files from &lt;a href="https://github.com/danielfrg/pelican-ipynb"&gt;this repository&lt;/a&gt; for IPython Notebook and &lt;a href="https://github.com/getpelican/pelican-plugins"&gt;this repository&lt;/a&gt; for Markdown.&lt;/p&gt;
+&lt;p&gt;To activate these plubins, you should add the followings to your &lt;code&gt;pelicanconf.py&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;MARKUP = (&amp;#39;md&amp;#39;, &amp;#39;ipynb&amp;#39;)
+PLUGIN_PATHS = [&amp;#39;./plugins&amp;#39;, &amp;#39;./pelican-plugins&amp;#39;]
+PLUGINS = [&amp;#39;ipynb.markup&amp;#39;, &amp;#39;render_math&amp;#39;, &amp;#39;better_codeblock_line_numbering&amp;#39;]
+MD_EXTENSIONS = [
+    &amp;#39;codehilite(css_class=highlight,linenums=False)&amp;#39;,
+    &amp;#39;extra&amp;#39;
+    ]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;All set for the environment!!!!!&lt;/h4&gt;
+&lt;h1&gt;Set up GitHub repository&lt;/h1&gt;
+&lt;p&gt;Pelican blog is managed by a GitHub repository. So, you need to create a repository for your blog with the following procedures under blog folder:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Create a repository called &lt;code&gt;username.github.io&lt;/code&gt;, where username is your Github username. In my case that is &lt;code&gt;jjakimoto.github.io&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add the repository as a remote for your local git repository by running git remote add origin git@github.com:username/username.github.io.git -- replace both references to username with your Github username.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add the following line in publishconf.py:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;SITEURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;io&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;where username is your Github username.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Run git checkout -b develop to create and switch to a branch called develop. We can't use master to store our notebooks, since that's the branch used by Github Pages.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a commit and push to Github like normal (using git add, git commit, and git push).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We have set up the GitHub repository for publishing your article!
+Next, we move on to how to write your articles.&lt;/p&gt;
+&lt;h1&gt;Write an article&lt;/h1&gt;
+&lt;p&gt;When we writing your articles, we have two options in file format: Markdown &lt;code&gt;*.md&lt;/code&gt; and IPython Notebook &lt;code&gt;*.ipynb&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;When you write an article from Markdown you always have to add meta information on top of the article. If you are writing article named &lt;code&gt;hoge.ipynb&lt;/code&gt;, you have to make `hoge.ipynb-meta' and add meta information. In both cases, meta information looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;First&lt;/span&gt; &lt;span class="n"&gt;Post&lt;/span&gt;
+&lt;span class="n"&gt;Slug&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;post&lt;/span&gt;
+&lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2018&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;03&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;01&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;00&lt;/span&gt;
+&lt;span class="n"&gt;Category&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Blogs&lt;/span&gt;
+&lt;span class="n"&gt;Tags&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Pelican&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Data&lt;/span&gt; &lt;span class="n"&gt;Science&lt;/span&gt;
+&lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Tomoaki&lt;/span&gt; &lt;span class="n"&gt;Fujii&lt;/span&gt;
+&lt;span class="n"&gt;Summary&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;My&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="n"&gt;post&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;read&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="n"&gt;out&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;Status&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;published&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Title -- the title of the post.&lt;/li&gt;
+&lt;li&gt;Slug -- the path at which the post will be accessed on the server. For example, I set&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ARTICLE_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;articles/{date:%Y}/{date:%b}/{date:&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s1"&gt;}/{slug}/&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;in my &lt;code&gt;pelicanconf.py&lt;/code&gt;. So, your article can be accessed through &lt;code&gt;HOME_URL/articles/year/month/date/slug/&lt;/code&gt;. In the above example, &lt;code&gt;https://jjakimoto.github.io/articles/2018/03/01/first-post/&lt;/code&gt;.
+&lt;em&gt; Date -- the date the post will be published.
+&lt;/em&gt; Category -- a category for the post -- this can be anything.
+&lt;em&gt; Tags -- a space-separated list of tags to use for the post. These can be anything.
+&lt;/em&gt; Author -- the name of the author of the post.
+&lt;em&gt; Summary -- a short summary of your post.
+&lt;/em&gt; Status -- if you set it &lt;code&gt;draft&lt;/code&gt;, this article will not be added in index of your blog.  If you want to publish it, you should set to &lt;code&gt;published&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Their default values can be set in &lt;code&gt;pelicanconf.py&lt;/code&gt;. In my case, I set up&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;DEFAULT_METADATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;status&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;draft&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Generate page&lt;/h1&gt;
+&lt;p&gt;We chose yes for&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Do you want to generate a Fabfile/Makefile to automate generation and publishing? (Y/n)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;when executing &lt;code&gt;pelican-quickstart&lt;/code&gt; in the previous section.
+This generates Makefile and Fabfile for automating publication process.
+I usually use Makefile for the publication with the following commands.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;make html
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This command generates HTML files according to the files under the content folder.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;make serve
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This command starts your blog on your local server. In the default setting, the blog will start on &lt;code&gt;http://localhost:8000&lt;/code&gt;. This command is helpful when checking how the blog actually looks like before the publication.
+If you have any drafts, they will be stored under &lt;code&gt;http://localhost:8000/drafts&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For the publication, execute the following bash commands:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;git add -A&lt;/span&gt;
+&lt;span class="go"&gt;git commit -m&amp;quot;New publication&amp;quot;&lt;/span&gt;
+&lt;span class="go"&gt;git push origin develop# Update develop branch&lt;/span&gt;
+&lt;span class="go"&gt;pelican content -s publishconf.py&lt;/span&gt;
+&lt;span class="go"&gt;ghp-import output -b master&lt;/span&gt;
+&lt;span class="go"&gt;git push origin master&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I write them in a file called &lt;a href="https://github.com/jjakimoto/jjakimoto.github.io/blob/develop/publish.sh"&gt;publish.sh&lt;/a&gt;.
+Then, I just execute&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;bash publish.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;for the publication.&lt;/p&gt;
+&lt;p&gt;That's it!!
+Enjoy writing your blog. I hope blogging will help your aspiring career.&lt;/p&gt;
+&lt;p&gt;Thanks for reading ;)&lt;/p&gt;
+&lt;p&gt;I wrote this article in reference to the followings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://cyrille.rossant.net/pelican-github/"&gt;Setting up a blog with Pelican and GitHub Pages&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/"&gt;Building a data science portfolio: Making a data science blog&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Check them out!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomoaki Fujii</dc:creator><pubDate>Thu, 01 Mar 2018 12:00:00 -0500</pubDate><guid isPermaLink="false">tag:jjakimoto.github.io,2018-03-01:articles/2018/Mar/01/start_blog/</guid><category>Blog</category></item></channel></rss>
