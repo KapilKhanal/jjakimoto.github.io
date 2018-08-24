@@ -100,18 +100,18 @@ Then, static site generators comes in makes blogging simpler to even non profess
 3. Set up external plugins</p>
 <h3>1. Install Pelican</h3>
 <p>Before installing anything, building virtual environment is recommended to avoid messing up your local python environment. We use <code>virtualenv</code> here and install it through pip.</p>
-<div class="highlight"><pre><span class="code-line"><span></span><span class="gp">foo@bar:~$</span> pip install virtualenv</span>
-<span class="code-line"><span class="gp">foo@bar:~$</span> mkdir ~/virtualenvs</span>
-<span class="code-line"><span class="gp">foo@bar:~$</span> <span class="nb">cd</span> ~/virtualenvs</span>
-<span class="code-line"><span class="gp">foo@bar:~$</span> virtualenv blogenv</span>
-<span class="code-line"><span class="gp">foo@bar:~$</span> <span class="nb">source</span> virtualenvs/blogenv/bin/activate</span>
-<span class="code-line"><span class="go">(blogenv) foo@bar:~$</span></span>
+<div class="highlight"><pre><span></span><span class="gp">foo@bar:~$</span> pip install virtualenv
+<span class="gp">foo@bar:~$</span> mkdir ~/virtualenvs
+<span class="gp">foo@bar:~$</span> <span class="nb">cd</span> ~/virtualenvs
+<span class="gp">foo@bar:~$</span> virtualenv blogenv
+<span class="gp">foo@bar:~$</span> <span class="nb">source</span> virtualenvs/blogenv/bin/activate
+<span class="go">(blogenv) foo@bar:~$</span>
 </pre></div>
 
 
 <p>Now we have activated a virtual environment. Python packages we install from now does not affect your local python environment.</p>
 <p>Let's install Pelican and Markdown over the established virtual environment through pip.</p>
-<div class="highlight"><pre><span class="code-line"><span></span><span class="go">pip install pelican markdown</span></span>
+<div class="highlight"><pre><span></span><span class="go">pip install pelican markdown</span>
 </pre></div>
 
 
@@ -122,14 +122,14 @@ Under this folder, we will make the following files:
 </em> .gitignore</p>
 <p>requirements.txt tells you what files is required to use your program.
 Here is the example:</p>
-<div class="highlight"><pre><span class="code-line"><span></span>Markdown==2.6.11</span>
-<span class="code-line">pelican==3.7.1</span>
-<span class="code-line">jupyter&gt;=1.0</span>
-<span class="code-line">ipython&gt;=4.0</span>
-<span class="code-line">nbconvert&gt;=4.0</span>
-<span class="code-line">bs4==4.6.0</span>
-<span class="code-line">ghp-import==0.4.1</span>
-<span class="code-line">matplotlib==2.0.2</span>
+<div class="highlight"><pre><span></span>Markdown==2.6.11
+pelican==3.7.1
+jupyter&gt;=1.0
+ipython&gt;=4.0
+nbconvert&gt;=4.0
+bs4==4.6.0
+ghp-import==0.4.1
+matplotlib==2.0.2
 </pre></div>
 
 
@@ -137,49 +137,49 @@ Here is the example:</p>
 <p><code>.gitignore</code> avoids you annoyed to mess up git repository. The file whose name matched with patterns in this file will be ignored when executing git command.</p>
 <p>Now, we are going to start your own blog.
 In Pelican, there is command <code>pelican quick-start</code>. Its execution will get you the following console.</p>
-<div class="highlight"><pre><span class="code-line"><span></span>(blogenv) foo@bar:~$ pelican-quickstart</span>
-<span class="code-line">Welcome to pelican-quickstart v3.7.1.</span>
-<span class="code-line"></span>
-<span class="code-line">This script will help you create a new Pelican-based website.</span>
-<span class="code-line"></span>
-<span class="code-line">Please answer the following questions so this script can generate the files</span>
-<span class="code-line">needed by Pelican.</span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line">&gt; Where do you want to create your new web site? [.]</span>
-<span class="code-line">&gt; What will be the title of this web site? Data Rounder</span>
-<span class="code-line">&gt; Who will be the author of this web site? Tomoaki Fujii</span>
-<span class="code-line">&gt; What will be the default language of this web site? [en]</span>
-<span class="code-line">&gt; Do you want to specify a URL prefix? e.g., http://example.com   (Y/n) n</span>
-<span class="code-line">&gt; Do you want to enable article pagination? (Y/n)</span>
-<span class="code-line">&gt; How many articles per page do you want? [10]</span>
-<span class="code-line">&gt; What is your time zone? [Europe/Paris] America/New_York</span>
-<span class="code-line">&gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? (Y/n)</span>
-<span class="code-line">&gt; Do you want an auto-reload &amp; simpleHTTP script to assist with theme and site development? (Y/n)</span>
-<span class="code-line">&gt; Do you want to upload your website using FTP? (y/N)</span>
-<span class="code-line">&gt; Do you want to upload your website using SSH? (y/N)</span>
-<span class="code-line">&gt; Do you want to upload your website using Dropbox? (y/N)</span>
-<span class="code-line">&gt; Do you want to upload your website using S3? (y/N)</span>
-<span class="code-line">&gt; Do you want to upload your website using Rackspace Cloud Files? (y/N)</span>
-<span class="code-line">&gt; Do you want to upload your website using GitHub Pages? (y/N)</span>
+<div class="highlight"><pre><span></span>(blogenv) foo@bar:~$ pelican-quickstart
+Welcome to pelican-quickstart v3.7.1.
+
+This script will help you create a new Pelican-based website.
+
+Please answer the following questions so this script can generate the files
+needed by Pelican.
+
+
+&gt; Where do you want to create your new web site? [.]
+&gt; What will be the title of this web site? Data Rounder
+&gt; Who will be the author of this web site? Tomoaki Fujii
+&gt; What will be the default language of this web site? [en]
+&gt; Do you want to specify a URL prefix? e.g., http://example.com   (Y/n) n
+&gt; Do you want to enable article pagination? (Y/n)
+&gt; How many articles per page do you want? [10]
+&gt; What is your time zone? [Europe/Paris] America/New_York
+&gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? (Y/n)
+&gt; Do you want an auto-reload &amp; simpleHTTP script to assist with theme and site development? (Y/n)
+&gt; Do you want to upload your website using FTP? (y/N)
+&gt; Do you want to upload your website using SSH? (y/N)
+&gt; Do you want to upload your website using Dropbox? (y/N)
+&gt; Do you want to upload your website using S3? (y/N)
+&gt; Do you want to upload your website using Rackspace Cloud Files? (y/N)
+&gt; Do you want to upload your website using GitHub Pages? (y/N)
 </pre></div>
 
 
 <p>After this process has finished without errors, we have the following files under <code>~/blog</code>:</p>
-<div class="highlight"><pre><span class="code-line"><span></span>content</span>
-<span class="code-line">pelicanconf.py</span>
-<span class="code-line">publishconf.py</span>
-<span class="code-line">fabfile.py</span>
-<span class="code-line">output</span>
-<span class="code-line">develop_server.sh</span>
-<span class="code-line">Makefile</span>
+<div class="highlight"><pre><span></span>content
+pelicanconf.py
+publishconf.py
+fabfile.py
+output
+develop_server.sh
+Makefile
 </pre></div>
 
 
 <p>Among files above, we edit <code>content</code> and <code>pelicanconf.py</code> frequently.</p>
 <p>Let's start from <code>pelicanconf.py</code>. As an example, what I am using is <a href="https://github.com/jjakimoto/jjakimoto.github.io/blob/develop/pelicanconf.py">here</a>.</p>
 <p>If you check my <code>pelicanconf.py</code>, you may notice the part,</p>
-<div class="highlight"><pre><span class="code-line"><span></span><span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;themes/mytheme&quot;</span></span>
+<div class="highlight"><pre><span></span><span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;themes/mytheme&quot;</span>
 </pre></div>
 
 
@@ -188,21 +188,21 @@ In Pelican, there is command <code>pelican quick-start</code>. Its execution wil
 <p>Next, we are going to introduce external plugins for IPython Notebook and Markdown.</p>
 <p>You can download files from <a href="https://github.com/danielfrg/pelican-ipynb">this repository</a> for IPython Notebook and <a href="https://github.com/getpelican/pelican-plugins">this repository</a> for Markdown.
 The following commands introduce plugins in your repository</p>
-<div class="highlight"><pre><span class="code-line"><span></span># Install IPython plugins</span>
-<span class="code-line">git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb</span>
-<span class="code-line"># Install Pelican plugins</span>
-<span class="code-line">git submodule add git@github.com:getpelican/pelican-plugins.git</span>
+<div class="highlight"><pre><span></span># Install IPython plugins
+git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb
+# Install Pelican plugins
+git submodule add git@github.com:getpelican/pelican-plugins.git
 </pre></div>
 
 
 <p>To activate these plubins, you should add the followings to your <code>pelicanconf.py</code>.</p>
-<div class="highlight"><pre><span class="code-line"><span></span>MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)</span>
-<span class="code-line">PLUGIN_PATHS = [&#39;./plugins&#39;, &#39;./pelican-plugins&#39;]</span>
-<span class="code-line">PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;, &#39;better_codeblock_line_numbering&#39;]</span>
-<span class="code-line">MD_EXTENSIONS = [</span>
-<span class="code-line">    &#39;codehilite(css_class=highlight,linenums=False)&#39;,</span>
-<span class="code-line">    &#39;extra&#39;</span>
-<span class="code-line">    ]</span>
+<div class="highlight"><pre><span></span>MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)
+PLUGIN_PATHS = [&#39;./plugins&#39;, &#39;./pelican-plugins&#39;]
+PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;, &#39;better_codeblock_line_numbering&#39;]
+MD_EXTENSIONS = [
+    &#39;codehilite(css_class=highlight,linenums=False)&#39;,
+    &#39;extra&#39;
+    ]
 </pre></div>
 
 
@@ -220,7 +220,7 @@ The following commands introduce plugins in your repository</p>
 <p>Add the following line in publishconf.py:</p>
 </li>
 </ul>
-<div class="highlight"><pre><span class="code-line"><span></span><span class="n">SITEURL</span> <span class="o">=</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">username</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span></span>
+<div class="highlight"><pre><span></span><span class="n">SITEURL</span> <span class="o">=</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">username</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span>
 </pre></div>
 
 
@@ -238,14 +238,14 @@ Next, we move on to how to write your articles.</p>
 <h1>Write an article</h1>
 <p>When we writing your articles, we have two options in file format: Markdown <code>*.md</code> and IPython Notebook <code>*.ipynb</code>.</p>
 <p>When you write an article from Markdown you always have to add meta information on top of the article. If you are writing article named <code>hoge.ipynb</code>, you have to make `hoge.ipynb-meta' and add meta information. In both cases, meta information looks like this:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><span class="n">Title</span><span class="o">:</span> <span class="n">First</span> <span class="n">Post</span></span>
-<span class="code-line"><span class="n">Slug</span><span class="o">:</span> <span class="n">first</span><span class="o">-</span><span class="n">post</span></span>
-<span class="code-line"><span class="n">Date</span><span class="o">:</span> <span class="mi">2018</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">01</span> <span class="mi">12</span><span class="o">:</span><span class="mi">00</span></span>
-<span class="code-line"><span class="n">Category</span><span class="o">:</span> <span class="n">Blogs</span></span>
-<span class="code-line"><span class="n">Tags</span><span class="o">:</span> <span class="n">Pelican</span><span class="o">,</span> <span class="n">Data</span> <span class="n">Science</span></span>
-<span class="code-line"><span class="n">author</span><span class="o">:</span> <span class="n">Tomoaki</span> <span class="n">Fujii</span></span>
-<span class="code-line"><span class="n">Summary</span><span class="o">:</span> <span class="n">My</span> <span class="n">first</span> <span class="n">post</span><span class="o">,</span> <span class="n">read</span> <span class="n">it</span> <span class="n">to</span> <span class="n">find</span> <span class="n">out</span><span class="o">.</span></span>
-<span class="code-line"><span class="n">Status</span><span class="o">:</span> <span class="n">published</span></span>
+<div class="highlight"><pre><span></span><span class="n">Title</span><span class="o">:</span> <span class="n">First</span> <span class="n">Post</span>
+<span class="n">Slug</span><span class="o">:</span> <span class="n">first</span><span class="o">-</span><span class="n">post</span>
+<span class="n">Date</span><span class="o">:</span> <span class="mi">2018</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">01</span> <span class="mi">12</span><span class="o">:</span><span class="mi">00</span>
+<span class="n">Category</span><span class="o">:</span> <span class="n">Blogs</span>
+<span class="n">Tags</span><span class="o">:</span> <span class="n">Pelican</span><span class="o">,</span> <span class="n">Data</span> <span class="n">Science</span>
+<span class="n">author</span><span class="o">:</span> <span class="n">Tomoaki</span> <span class="n">Fujii</span>
+<span class="n">Summary</span><span class="o">:</span> <span class="n">My</span> <span class="n">first</span> <span class="n">post</span><span class="o">,</span> <span class="n">read</span> <span class="n">it</span> <span class="n">to</span> <span class="n">find</span> <span class="n">out</span><span class="o">.</span>
+<span class="n">Status</span><span class="o">:</span> <span class="n">published</span>
 </pre></div>
 
 
@@ -253,7 +253,7 @@ Next, we move on to how to write your articles.</p>
 <li>Title -- the title of the post.</li>
 <li>Slug -- the path at which the post will be accessed on the server. For example, I set</li>
 </ul>
-<div class="highlight"><pre><span class="code-line"><span></span><span class="n">ARTICLE_URL</span> <span class="o">=</span> <span class="s1">&#39;articles/{date:%Y}/{date:%b}/{date:</span><span class="si">%d</span><span class="s1">}/{slug}/&#39;</span></span>
+<div class="highlight"><pre><span></span><span class="n">ARTICLE_URL</span> <span class="o">=</span> <span class="s1">&#39;articles/{date:%Y}/{date:%b}/{date:</span><span class="si">%d</span><span class="s1">}/{slug}/&#39;</span>
 </pre></div>
 
 
@@ -265,9 +265,9 @@ Next, we move on to how to write your articles.</p>
 <em> Summary -- a short summary of your post.
 </em> Status -- if you set it <code>draft</code>, this article will not be added in index of your blog.  If you want to publish it, you should set to <code>published</code>.</p>
 <p>Their default values can be set in <code>pelicanconf.py</code>. In my case, I set up</p>
-<div class="highlight"><pre><span class="code-line"><span></span><span class="n">DEFAULT_METADATA</span> <span class="o">=</span> <span class="p">{</span></span>
-<span class="code-line">    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;draft&#39;</span><span class="p">,</span></span>
-<span class="code-line"><span class="p">}</span></span>
+<div class="highlight"><pre><span></span><span class="n">DEFAULT_METADATA</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;draft&#39;</span><span class="p">,</span>
+<span class="p">}</span>
 </pre></div>
 
 
@@ -279,30 +279,30 @@ Next, we move on to how to write your articles.</p>
 <p>when executing <code>pelican-quickstart</code> in the previous section.
 This generates Makefile and Fabfile for automating publication process.
 I usually use Makefile for the publication with the following commands.</p>
-<div class="highlight"><pre><span class="code-line"><span></span>make html</span>
+<div class="highlight"><pre><span></span>make html
 </pre></div>
 
 
 <p>This command generates HTML files according to the files under the content folder.</p>
-<div class="highlight"><pre><span class="code-line"><span></span>make serve</span>
+<div class="highlight"><pre><span></span>make serve
 </pre></div>
 
 
 <p>This command starts your blog on your local server. In the default setting, the blog will start on <code>http://localhost:8000</code>. This command is helpful when checking how the blog actually looks like before the publication.
 If you have any drafts, they will be stored under <code>http://localhost:8000/drafts</code>.</p>
 <p>For the publication, execute the following bash commands:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><span class="go">git add -A</span></span>
-<span class="code-line"><span class="go">git commit -m&quot;New publication&quot;</span></span>
-<span class="code-line"><span class="go">git push origin develop# Update develop branch</span></span>
-<span class="code-line"><span class="go">pelican content -s publishconf.py</span></span>
-<span class="code-line"><span class="go">ghp-import output -b master</span></span>
-<span class="code-line"><span class="go">git push origin master</span></span>
+<div class="highlight"><pre><span></span><span class="go">git add -A</span>
+<span class="go">git commit -m&quot;New publication&quot;</span>
+<span class="go">git push origin develop# Update develop branch</span>
+<span class="go">pelican content -s publishconf.py</span>
+<span class="go">ghp-import output -b master</span>
+<span class="go">git push origin master</span>
 </pre></div>
 
 
 <p>I write them in a file called <a href="https://github.com/jjakimoto/jjakimoto.github.io/blob/develop/publish.sh">publish.sh</a>.
 Then, I just execute</p>
-<div class="highlight"><pre><span class="code-line"><span></span>bash publish.sh</span>
+<div class="highlight"><pre><span></span>bash publish.sh
 </pre></div>
 
 
