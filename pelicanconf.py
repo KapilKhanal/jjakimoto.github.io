@@ -90,3 +90,6 @@ SOCIAL = (('GitHub', 'https://github.com/jjakimoto'),
           ('Facebook', 'https://www.facebook.com/tomoaki.fujii.73'),)
 
 DEFAULT_PAGINATION = 10
+
+# Ignore checkpoints
+IGNORE_FILES = ['.ipynb_checkpoints']

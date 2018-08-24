@@ -1119,7 +1119,15 @@ In Pelican, there is command &lt;code&gt;pelican quick-start&lt;/code&gt;. Its e
 &lt;p&gt;This folder defines framework of your blog, and of course, it is customizable. My recommendation is finding some cool blog and arrange their them according to your demand. In my case, I add some extra stuff to &lt;a href="https://github.com/rossant/rossant.github.io/tree/sources/themes"&gt;this theme&lt;/a&gt;. The them what I amd using this website is [here](&lt;a href="https://github.com/jjakimoto/jjakimoto.github.io/tree/develop/themes/mytheme"&gt;here&lt;/a&gt;. You can see more detail at &lt;a href="http://docs.getpelican.com/en/3.6.3/themes.html"&gt;the official documentation&lt;/a&gt; as to how to customize your theme.&lt;/p&gt;
 &lt;h3&gt;3. Set up external plugins&lt;/h3&gt;
 &lt;p&gt;Next, we are going to introduce external plugins for IPython Notebook and Markdown.&lt;/p&gt;
-&lt;p&gt;You can download files from &lt;a href="https://github.com/danielfrg/pelican-ipynb"&gt;this repository&lt;/a&gt; for IPython Notebook and &lt;a href="https://github.com/getpelican/pelican-plugins"&gt;this repository&lt;/a&gt; for Markdown.&lt;/p&gt;
+&lt;p&gt;You can download files from &lt;a href="https://github.com/danielfrg/pelican-ipynb"&gt;this repository&lt;/a&gt; for IPython Notebook and &lt;a href="https://github.com/getpelican/pelican-plugins"&gt;this repository&lt;/a&gt; for Markdown.
+The following commands introduce plugins in your repository&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;# Install IPython plugins&lt;/span&gt;
+&lt;span class="code-line"&gt;git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb&lt;/span&gt;
+&lt;span class="code-line"&gt;# Install Pelican plugins&lt;/span&gt;
+&lt;span class="code-line"&gt;git submodule add git@github.com:getpelican/pelican-plugins.git&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;To activate these plubins, you should add the followings to your &lt;code&gt;pelicanconf.py&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;MARKUP = (&amp;#39;md&amp;#39;, &amp;#39;ipynb&amp;#39;)&lt;/span&gt;
 &lt;span class="code-line"&gt;PLUGIN_PATHS = [&amp;#39;./plugins&amp;#39;, &amp;#39;./pelican-plugins&amp;#39;]&lt;/span&gt;
