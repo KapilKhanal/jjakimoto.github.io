@@ -172,7 +172,7 @@ Next, we move on to how to write your articles.
 # Write an article
 When we writing your articles, we have two options in file format: Markdown `*.md` and IPython Notebook `*.ipynb`.
 
-When you write an article from Markdown you always have to add meta information on top of the article. If you are writing article named `hoge.ipynb`, you have to make `hoge.ipynb-meta' and add meta information. In both cases, meta information looks like this:
+When you write an article from Markdown you always have to add meta information on top of the article. If you are writing article named `hoge.ipynb`, you have to make `hoge.nbdata' (hoge.ipynb-meta is previously used) and add meta information. In both cases, meta information looks like this:
 ```
 Title: First Post
 Slug: first-post
