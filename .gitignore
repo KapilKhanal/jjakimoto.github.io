@@ -93,3 +93,4 @@ ENV/
 # others
 *.swp
 output/*
+*.xml
