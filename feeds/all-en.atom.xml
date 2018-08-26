@@ -1151,10 +1151,10 @@ As a toy example, we test the algorithm with MNIST.&lt;/p&gt;
 
  
  
-&lt;div id="4dc89e7e-3e34-4748-add7-25983d79741c"&gt;&lt;/div&gt;
+&lt;div id="aa6d01ff-d048-49f7-b043-c4d536640e49"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_widget_view "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#4dc89e7e-3e34-4748-add7-25983d79741c');
+var element = $('#aa6d01ff-d048-49f7-b043-c4d536640e49');
 &lt;/script&gt;
 &lt;script type="application/vnd.jupyter.widget-view+json"&gt;
 {"model_id": "4b3b4121351b4b60956587092e99b0e5", "version_major": 2, "version_minor": 0}
@@ -8534,7 +8534,7 @@ h6:hover .anchor-link {
 .ansi-white-intense-bg { background-color: #A1A6B2; }
 
 .ansi-bold { font-weight: bold; }
-&lt;/style&gt;
+&lt;/style&gt;&lt;body&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -9455,7 +9455,7 @@ We consider reducing the number of features to a subset of features strongly cor
 &lt;/div&gt;
  
 
-
+&lt;/body&gt;
 &lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
@@ -13234,7 +13234,7 @@ h6:hover .anchor-link {
 .ansi-white-intense-bg { background-color: #A1A6B2; }
 
 .ansi-bold { font-weight: bold; }
-&lt;/style&gt;
+&lt;/style&gt;&lt;body&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -13426,7 +13426,7 @@ $$f_{actor}:\mathbb{R}^n \to \mathbb{R}^{n}. $$&lt;/p&gt;
 &lt;/div&gt;
  
 
-
+&lt;/body&gt;
 &lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
