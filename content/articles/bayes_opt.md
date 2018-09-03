@@ -19,7 +19,7 @@ Actually there were a lot of ways to tune parameters efficiently and algorithmic
 
 Some of algorithms are successful in outperforming state-of-art manually tuned models. Thus, building solid tuning algorithms could be cheaper and more efficient than hiring data scientists for tuning models.
 
-![scientist](https://giphy.com/gifs/xUA7b6oaRIgzmAKpUY/html5)
+![scientist](https://media.giphy.com/media/xUA7b6oaRIgzmAKpUY/giphy.gif)
 
 In this blog post, we will go through the most basic three algorithms: grid, random, and Bayesian search. And, we will learn how to implement it in python.
 
