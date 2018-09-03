@@ -9,22 +9,22 @@ Status: published
 
 
 
-Choosing a good set of hyperparameters is one of most important steps but also pretty much annoying and time consuming. The small number of hyperparameters may allow you to find an optimal hyperparameters after a few trials. This is, however, not the case for complex models like neural network.
+Choosing a good set of hyperparameters is one of most important steps, but it is annoying and time consuming. The small number of hyperparameters may allow you to find an optimal set of hyperparameters after a few trials. This is, however, not the case for complex models like neural network.
 
-Indeed, when I just started my career as a data scientist, I was always frustrated to tune hyperparameters of Neural Network not to either underfit or overfit. Everytime I spent a lot of times and winded up not finding good set of hyperparameters, I was like
+When I just started my career as a data scientist, I was always frustrated to tune hyperparameters of Neural Network not to either underfit or overfit.
 
 ![frustration](https://media.giphy.com/media/ilkfz8Mn5Yz7O/giphy.gif)
 
 Actually there were a lot of ways to tune parameters efficiently and algorithmically, which I was ignorant of back in those days. Especially how to tune Neural Network has been progress rapidly in a recent few years by utilizing various algorithms: [spectral analysis [1]](https://arxiv.org/pdf/1706.00764.pdf), [bandit algorithms [2]](https://arxiv.org/pdf/1603.06560.pdf), [evolutionary strategy [3]](https://arxiv.org/pdf/1711.09846.pdf), [reinforcement learning [4]](https://arxiv.org/pdf/1611.01578.pdf), etc. How to build predictive general models algorithmically is also one of the hot research topics. Many frameworks and algorithms have been suggested [[5]](https://cyphe.rs/static/atm.pdf), [[6]](https://papers.nips.cc/paper/5872-efficient-and-robust-automated-machine-learning.pdf).
 
-Automatically building and tuning models is one of the hot topics in research, some of which are successful in outperforming state-of-art models. Thus, building solid tuning algorithms is way cheaper and more efficient than hiring data scientists for tuning models.
+Some of algorithms are successful in outperforming state-of-art manually tuned models. Thus, building solid tuning algorithms could be cheaper and more efficient than hiring data scientists for tuning models.
 
 ![scientist](https://media.giphy.com/media/xUA7b6oaRIgzmAKpUY/giphy.gif)
 
 In this blog post, we will go through the most basic three algorithms: grid, random, and Bayesian search. And, we will learn how to implement it in python.
 
 # Background
-When optimizing hyperparameters, information available is mostly only score value of defined metrics(e.g., accuracy for classification) with each set of hyperparameters. We query a set of hyperparameters and get a score value as a response. Thus, optimization algorithms have to make efficient queries and find an optimal set without knowing how objective function looks like. This kind of optimization problem is called balck-box optimization. Here is the definition of black-box optimization:
+When optimizing hyperparameters, information available is score value of defined metrics(e.g., accuracy for classification) with each set of hyperparameters. We query a set of hyperparameters and get a score value as a response. Thus, optimization algorithms have to make efficient queries and find an optimal set without knowing how objective function looks like. This kind of optimization problem is called balck-box optimization. Here is the definition of black-box optimization:
 
 > "Black Box" optimization refers to a problem setup in which an optimization algorithm is supposed to optimize (e.g., minimize) an objective function through a so-called black-box interface: the algorithm may query the value f(x) for a point x, but it does not obtain gradient information, and in particular it cannot make any assumptions on the analytic form of f (e.g., being linear or quadratic). We think of such an objective function as being wrapped in a black-box. The goal of optimization is to find an as good as possible value f(x) within a predefined time, often defined by the number of available queries to the black box. Problems of this type regularly appear in practice, e.g., when optimizing parameters of a model that is either in fact hidden in a black box (e.g., a third party software library) or just too complex to be modeled explicitly.
 
