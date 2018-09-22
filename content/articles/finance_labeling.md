@@ -1,3 +1,11 @@
+Title: Labeling for Supervised Learning in Finance
+Slug: finance_labeling
+Date: 2018-06-22 12:00
+Category: Mahine Learning
+Tags: Finance
+Author: Tomoaki Fujii
+Status: published
+
 Predicting future stock price movement is known difficult due to low signal-to-noise ratio
 and non stationary price distribution.
 Off-the-shelf successful ML algorithms often end up giving you disappointed results.
