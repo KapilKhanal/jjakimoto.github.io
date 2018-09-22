@@ -1,6 +1,6 @@
 Title: Labeling for Supervised Learning in Finance
 Slug: finance_labeling
-Date: 2018-06-22 12:00
+Date: 2018-09-22 12:00
 Category: Mahine Learning
 Tags: Finance
 Author: Tomoaki Fujii
