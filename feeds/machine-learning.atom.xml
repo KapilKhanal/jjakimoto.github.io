@@ -1151,10 +1151,10 @@ As a toy example, we test the algorithm with MNIST.&lt;/p&gt;
 
  
  
-&lt;div id="0609077f-ad3a-4ed9-b7b7-dbf3535d1e12"&gt;&lt;/div&gt;
+&lt;div id="43d12132-1678-45a5-9de8-b04cab076bba"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_widget_view "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#0609077f-ad3a-4ed9-b7b7-dbf3535d1e12');
+var element = $('#43d12132-1678-45a5-9de8-b04cab076bba');
 &lt;/script&gt;
 &lt;script type="application/vnd.jupyter.widget-view+json"&gt;
 {"model_id": "ae792dc1177c49b29aaeeec8701d3686", "version_major": 2, "version_minor": 0}

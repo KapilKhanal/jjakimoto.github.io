@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Data Rounder, ">
+    <link href="/favicon.png" rel="icon">
+
+        <link rel="alternate"  href="http://jjakimoto.github.io/feeds/all.atom.xml" type="application/atom+xml" title="Data Rounder Full Atom Feed"/>
+
+        <title>Data Rounder - Labeling for Supervised Learning in Finance</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="/theme/css/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="/theme/css/styles.css">
+    <link rel="stylesheet" href="/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/pages/books/">Books</a></li>
+        <li><a href="/pages/about/">About</a></li>
+        <li><a href="/pages/links/">Links</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/"><i class="fa fa-linkedin"></i></a></li>
+        <li><a href="http://jjakimoto.github.io/feeds/all.atom.xml"><i class="fa fa-rss"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-3-4">
+            <div class="l-box">
+
+    <header id="post-header">
+        <h1>Labeling for Supervised Learning in Finance</h1>
+            <div class="post-meta">
+                June 22, 2018
+            </div>
+            <div class="post-tags">
+                <ul>
+                    <li>tags:</li>
+                    <li><a href="/tag/Finance/">Finance</a></li>
+                </ul>
+            </div>
+    </header>
+
+    <section id="post">
+        <p>Predicting future stock price movement is known difficult due to low signal-to-noise ratio
+and non stationary price distribution.
+Off-the-shelf successful ML algorithms often end up giving you disappointed results.
+Indeed, a lot of ML quant hedge funds show up and disappear every year. </p>
+<p><img alt="southpark_finance" src="https://media.giphy.com/media/3o6ZtiGv3tTlXTsWli/giphy.gif" /></p>
+<p>To deal with this difficult problems, we need to set up ML formalizations more carefully.
+In this article, we focus on considering how to label data and execute supervised learning.
+Most approaches here are based on a recently published book, <code>Advances in Financial Machine Learning</code><a href="https://www.amazon.com/Advances-Financial-Machine-Learning-Marcos/dp/1119482089">[1]</a>.
+I highly recommend you to check it for various useful methods.</p>
+<h4>Spoiler Alert!</h4>
+<p>The prediction result itself is not impressive.
+We just go through the basic way to formalize the problem.
+I will write about how to validate model and tune hyperparameters to improve the performance
+in a different blog post. </p>
+<h1>Classification Approach</h1>
+<p>Predicting the direction of stock prices are used to make signals for algorithm trading.
+This task is formalized as classification, where classifiers predict if the future price goes up or down.
+Then, the resultant outputs of classifiers can be fed into trading algorithms as signals,
+e.g., buying(selling) a stock when the prediction is positive(negative).
+To treat the task as classification, we need to get labels according to the future price.
+One of the approaches I have seen a lot is simply labeling with next date price direction.
+Labels getting through this approach may be contaminated by noise due to low signal-to-noise ratio,
+i.e., strong noise compared to signal.</p>
+<p>For example, even if the next date return distribution has positive mean,
+the price may end up going downward due to the noise.
+Let's see this from more mathematical perspective. </p>
+<p>Let <span class="math">\(P_n\)</span> and <span class="math">\(P_0\)</span> be n date forward and current stock price.
+They are related through the following equation:</p>
+<div class="math">$$P_n = P_0 \prod_{i=1}^N (1 + r_i)$$</div>
+<p>
+, where <span class="math">\(r_i\)</span> is return for each date.</p>
+<p>If <span class="math">\(r_i &lt;&lt; 1\)</span>, <span class="math">\(\forall i\)</span>, we approximate this relation by
+</p>
+<div class="math">$$P_n \sim P_0 (1 + \sum_{i=1}^n r_i)$$</div>
+<p>If all returns are sampled according to the same normal distribution distribution,
+i.e., <span class="math">\(r_i \sim N(\mu, \sigma), \forall i\)</span>,
+</p>
+<div class="math">$$\sum_{i=1}^N r_i \sim N(n\mu, \sqrt{n} \sigma)$$</div>
+<p>.</p>
+<p>Thus, mean value grows faster than standard deviation.
+This result implies that labeling price with further future gives you more reliable labels.
+For example, consider the case where mean is positive. We want to label the direction positive up to one standard deviation.
+In order to achieve this, we need to take n such that</p>
+<div class="math">$$n \mu \geq \sqrt{n} \sigma$$</div>
+<div class="math">$$ n \geq (\frac{\sigma}{\mu})^2$$</div>
+<p>If we use n larger than the square of noise ratio,
+the price direction will be labeled correctly with about 84 percent.</p>
+<h2>Synthetic Data</h2>
+<p>Let's see the above statement of above discussion in a synthetic data.</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">mu</span> <span class="o">=</span> <span class="mf">0.1</span></span>
+<span class="code-line"><span class="n">sig</span> <span class="o">=</span> <span class="mf">1.</span></span>
+<span class="code-line"><span class="n">N</span> <span class="o">=</span> <span class="mi">400</span></span>
+<span class="code-line"><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">1000</span></span>
+<span class="code-line"><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">samples</span> <span class="o">=</span> <span class="p">[]</span></span>
+<span class="code-line"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span></span>
+<span class="code-line">    <span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">rs</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rs</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">r_mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">r_sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></span>
+</pre></div>
+
+
+<p>We consider the example where mean is 0.1 and standard deviation is 1.0.
+Since the signal-to-noise ratio is 10, we can deduce that 100 steps are required to get reliable labels.</p>
+<p><img alt="synthetic" src="http://jjakimoto.github.io/images/finance_labeling/synthetic.png" /></p>
+<p>As we expected, points within one standard deviation resides in positive area after 100 steps.
+Before 100 steps, the points are highly likely to end up sitting on negative area.
+If you label data point with short term forward points, you may get wrong labels.</p>
+<h2>Labeling</h2>
+<p>If the above statement is applicable to actual stock price data, let's label data with 10 years forward price! 
+Does this make sense? The answer is probably no.
+One of the main differences between actual stock price and the synthetic data is stationarity of the distribution.
+The price distribution is always changing along with the market condition
+ How much forward price you use would be trade-off between reliability and consistency.
+ This length has to be tuned as a hyperparameter of your algorithms.
+ Although we do not discuss here how to validate model performance correctly and tune hyperparameters,
+ we will go through the way to implement a strategy of labeling stock price data. </p>
+<p>As an example, we play with <code>MicroSoft</code> daily stock price data.</p>
+<p><img alt="MSFT" src="http://jjakimoto.github.io/images/finance_labeling/MSFT.png" /></p>
+<p>In <code>Advances in Financial Machine Learning</code><a href="https://www.amazon.com/Advances-Financial-Machine-Learning-Marcos/dp/1119482089">[1]</a>,
+the author suggests <code>triple barrier method</code>.
+He labels data with the two horizontal and the one vertical barriers.
+The horizontal barriers define what price level would be classified as positive or negative while the vertical barrier set how long you look further at maximum for labeling.
+More precisely, each data point is labeled by the first barrier hit by the future price.</p>
+<p>The implementation is based on Chapter 3 of <code>Advances in Financial Machine Learning</code>.
+Some implementations are omitted for the sake of simplicity.
+Please check out my repository<a href="https://github.com/jjakimoto/finance_ml">[2]</a> for the full implementation.</p>
+<p>First, we set up the vertical barrier.</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">get_t1</span><span class="p">(</span><span class="n">close</span><span class="p">,</span> <span class="n">timestamps</span><span class="p">,</span> <span class="n">num_days</span><span class="p">):</span></span>
+<span class="code-line">    <span class="sd">&quot;&quot;&quot;Return horizontal timestamps</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="sd">    Note</span></span>
+<span class="code-line"><span class="sd">    ----</span></span>
+<span class="code-line"><span class="sd">    Not include the case to hit the vertical line at the end of close.index</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="sd">    Parameters</span></span>
+<span class="code-line"><span class="sd">    ----------</span></span>
+<span class="code-line"><span class="sd">    close: pd.Series</span></span>
+<span class="code-line"><span class="sd">    timestamps: pd.DatetimeIndex</span></span>
+<span class="code-line"><span class="sd">    num_days: int</span></span>
+<span class="code-line"><span class="sd">        The number of forward dates for vertical barrier</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="sd">    Returns</span></span>
+<span class="code-line"><span class="sd">    -------</span></span>
+<span class="code-line"><span class="sd">    pd.Series: Vertical barrier timestamps</span></span>
+<span class="code-line"><span class="sd">    &quot;&quot;&quot;</span></span>
+<span class="code-line">    <span class="n">t1</span> <span class="o">=</span> <span class="n">close</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">timestamps</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">num_days</span><span class="p">))</span></span>
+<span class="code-line">    <span class="n">t1</span> <span class="o">=</span> <span class="n">t1</span><span class="p">[</span><span class="n">t1</span> <span class="o">&lt;</span> <span class="n">close</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span></span>
+<span class="code-line">    <span class="n">t1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">close</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">t1</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">timestamps</span><span class="p">[:</span><span class="n">t1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="n">t1</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1"># We use all data points in this article</span></span>
+<span class="code-line"><span class="n">timestamps</span> <span class="o">=</span> <span class="n">close</span><span class="o">.</span><span class="n">index</span></span>
+<span class="code-line"><span class="n">num_days</span> <span class="o">=</span> <span class="mi">10</span></span>
+<span class="code-line"><span class="n">t1</span> <span class="o">=</span> <span class="n">get_t1</span><span class="p">(</span><span class="n">close</span><span class="p">,</span> <span class="n">timestamps</span><span class="p">,</span> <span class="n">num_days</span><span class="p">)</span></span>
+<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">t1</span><span class="o">.</span><span class="n">head</span><span class="p">())</span></span>
+</pre></div>
+
+
+<p>Output:</p>
+<div class="highlight"><pre><span class="code-line"><span></span>Date</span>
+<span class="code-line">2000-01-03   2000-01-13</span>
+<span class="code-line">2000-01-04   2000-01-14</span>
+<span class="code-line">2000-01-05   2000-01-18</span>
+<span class="code-line">2000-01-06   2000-01-18</span>
+<span class="code-line">2000-01-07   2000-01-18</span>
+<span class="code-line">Name: Date, dtype: datetime64[ns]</span>
+</pre></div>
+
+
+<p>Each element defines what timestamp is defined as the vertical barrier. </p>
+<p>To define the horizontal barriers, we need two parameters.
+One of them is <code>trgt</code>, which defines the scale of barrier width.
+The basic idea is that we need to change the width of barriers depending on market conditions.
+For example, if we are facing a volatile market, we need to use a wide width.
+You can use daily volatilities to set <code>trgt</code>.
+The daily volatilities are estimated through exponential moving average.</p>
+<p>The other parameter is <code>sltp</code>:stop loss and take profit.
+These parameters give you flexibility to define the width of barriers depending on your preference.
+The positive(negative) label barrier is defined by <code>sltp[0]</code>(<code>sltp[1]</code>) times <code>trgt</code>.</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">get_touch_idx</span><span class="p">(</span><span class="n">close</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">sltp</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></span>
+<span class="code-line">    <span class="sd">&quot;&quot;&quot;Return timestamps of when data points touch the barriers</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="sd">    Parameters</span></span>
+<span class="code-line"><span class="sd">    ----------</span></span>
+<span class="code-line"><span class="sd">    close: pd.Series</span></span>
+<span class="code-line"><span class="sd">        Close price series</span></span>
+<span class="code-line"><span class="sd">    events: pd.DataFrame with columns: &#39;t1&#39;, &#39;trgt&#39;, and &#39;side&#39;</span></span>
+<span class="code-line"><span class="sd">        t1: time stamp of vertical barrier, could be np.nan</span></span>
+<span class="code-line"><span class="sd">        trgt: unit of width of horizontal barriers</span></span>
+<span class="code-line"><span class="sd">        side: Side label for metalabeling</span></span>
+<span class="code-line"><span class="sd">    sltp: list</span></span>
+<span class="code-line"><span class="sd">        Coefficients of width of Stop Loss and Take Profit.</span></span>
+<span class="code-line"><span class="sd">        sltp[0] and sltp[1] correspond to width of stop loss</span></span>
+<span class="code-line"><span class="sd">        and take profit, respectively. If 0 or negative, the barrier</span></span>
+<span class="code-line"><span class="sd">        is siwthced off.</span></span>
+<span class="code-line"><span class="sd">    molecule: list, optional</span></span>
+<span class="code-line"><span class="sd">        Subset of indices of events to be processed</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="sd">    Returns</span></span>
+<span class="code-line"><span class="sd">    -------</span></span>
+<span class="code-line"><span class="sd">    pd.DataFrame: each colum corresponds to the time to touch the barrier</span></span>
+<span class="code-line"><span class="sd">    &quot;&quot;&quot;</span></span>
+<span class="code-line">    <span class="c1"># Sample a subset with specific indices</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">molecule</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">_events</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">molecule</span><span class="p">]</span></span>
+<span class="code-line">    <span class="k">else</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">_events</span> <span class="o">=</span> <span class="n">events</span></span>
+<span class="code-line">    <span class="n">touch_idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">_events</span><span class="o">.</span><span class="n">index</span><span class="p">)</span></span>
+<span class="code-line">    <span class="c1"># Set Stop Loss and Take Profoit</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">sltp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">sls</span> <span class="o">=</span> <span class="o">-</span><span class="n">sltp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">_events</span><span class="p">[</span><span class="s2">&quot;trgt&quot;</span><span class="p">]</span></span>
+<span class="code-line">    <span class="k">else</span><span class="p">:</span></span>
+<span class="code-line">        <span class="c1"># Switch off stop loss</span></span>
+<span class="code-line">        <span class="n">sls</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">_events</span><span class="o">.</span><span class="n">index</span><span class="p">)</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">sltp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">tps</span> <span class="o">=</span> <span class="n">sltp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">_events</span><span class="p">[</span><span class="s2">&quot;trgt&quot;</span><span class="p">]</span></span>
+<span class="code-line">    <span class="k">else</span><span class="p">:</span></span>
+<span class="code-line">        <span class="c1"># Switch off profit taking</span></span>
+<span class="code-line">        <span class="n">tps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">_events</span><span class="o">.</span><span class="n">index</span><span class="p">)</span></span>
+<span class="code-line">    <span class="c1"># Replace undefined value with the last time index</span></span>
+<span class="code-line">    <span class="n">vertical_lines</span> <span class="o">=</span> <span class="n">_events</span><span class="p">[</span><span class="s2">&quot;t1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">close</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></span>
+<span class="code-line">    <span class="k">for</span> <span class="n">loc</span><span class="p">,</span> <span class="n">t1</span> <span class="ow">in</span> <span class="n">vertical_lines</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span></span>
+<span class="code-line">        <span class="n">df</span> <span class="o">=</span> <span class="n">close</span><span class="p">[</span><span class="n">loc</span><span class="p">:</span><span class="n">t1</span><span class="p">]</span></span>
+<span class="code-line">        <span class="c1"># Change the direction depending on the side</span></span>
+<span class="code-line">        <span class="n">df</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span> <span class="o">/</span> <span class="n">close</span><span class="p">[</span><span class="n">loc</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">_events</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">loc</span><span class="p">,</span> <span class="s1">&#39;side&#39;</span><span class="p">]</span></span>
+<span class="code-line">        <span class="n">touch_idx</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">loc</span><span class="p">,</span> <span class="s1">&#39;sl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span> <span class="o">&lt;</span> <span class="n">sls</span><span class="p">[</span><span class="n">loc</span><span class="p">]]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">()</span></span>
+<span class="code-line">        <span class="n">touch_idx</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">loc</span><span class="p">,</span> <span class="s1">&#39;tp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span> <span class="o">&gt;</span> <span class="n">tps</span><span class="p">[</span><span class="n">loc</span><span class="p">]]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">()</span></span>
+<span class="code-line">    <span class="n">touch_idx</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_events</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="n">touch_idx</span></span>
+</pre></div>
+
+
+<p><code>get_touch_idx</code> gets when and what kind of barriers the future price hits. </p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">finance_ml.multiprocessing</span> <span class="kn">import</span> <span class="n">mp_pandas_obj</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">def</span> <span class="nf">get_events</span><span class="p">(</span><span class="n">close</span><span class="p">,</span> <span class="n">timestamps</span><span class="p">,</span> <span class="n">sltp</span><span class="p">,</span> <span class="n">trgt</span><span class="p">,</span> <span class="n">min_ret</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span></span>
+<span class="code-line">               <span class="n">num_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">t1</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></span>
+<span class="code-line">    <span class="sd">&quot;&quot;&quot;Return DataFrame containing infomation defining barriers</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="sd">    Parameters</span></span>
+<span class="code-line"><span class="sd">    ----------</span></span>
+<span class="code-line"><span class="sd">    close: pd.Series</span></span>
+<span class="code-line"><span class="sd">        Close price series</span></span>
+<span class="code-line"><span class="sd">    timestamps: pd.DatetimeIndex</span></span>
+<span class="code-line"><span class="sd">        sampled points to analyze</span></span>
+<span class="code-line"><span class="sd">    sltp: list</span></span>
+<span class="code-line"><span class="sd">        Coefficients of width of Stop Loss and Take Profit.</span></span>
+<span class="code-line"><span class="sd">        sltp[0] and sltp[1] correspond to width of stop loss</span></span>
+<span class="code-line"><span class="sd">        and take profit, respectively. If 0 or negative, the barrier</span></span>
+<span class="code-line"><span class="sd">        is siwthced off.</span></span>
+<span class="code-line"><span class="sd">    trgt: pd.Series</span></span>
+<span class="code-line"><span class="sd">        Time series of threashold</span></span>
+<span class="code-line"><span class="sd">    min_ret: float, (default 0)</span></span>
+<span class="code-line"><span class="sd">        Minimum value of points to label</span></span>
+<span class="code-line"><span class="sd">    num_threads: int, (default 1)</span></span>
+<span class="code-line"><span class="sd">        The number of threads to use</span></span>
+<span class="code-line"><span class="sd">    t1: pd.Series, optional</span></span>
+<span class="code-line"><span class="sd">        Vertical lines</span></span>
+<span class="code-line"><span class="sd">    side: pd.Series, optional</span></span>
+<span class="code-line"><span class="sd">        Side of trading positions</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="sd">    Returns</span></span>
+<span class="code-line"><span class="sd">    -------</span></span>
+<span class="code-line"><span class="sd">    pd.DataFrame with columns: &#39;t1&#39;, &#39;trgt&#39;, &#39;type&#39;, and &#39;side&#39;</span></span>
+<span class="code-line"><span class="sd">    &quot;&quot;&quot;</span></span>
+<span class="code-line">    <span class="c1"># Get sampled target values</span></span>
+<span class="code-line">    <span class="n">trgt</span> <span class="o">=</span> <span class="n">trgt</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">timestamps</span><span class="p">]</span></span>
+<span class="code-line">    <span class="n">trgt</span> <span class="o">=</span> <span class="n">trgt</span><span class="p">[</span><span class="n">trgt</span> <span class="o">&gt;</span> <span class="n">min_ret</span><span class="p">]</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">trgt</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span></span>
+<span class="code-line">        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">,</span> <span class="s1">&#39;trgt&#39;</span><span class="p">,</span> <span class="s1">&#39;side&#39;</span><span class="p">])</span></span>
+<span class="code-line">    <span class="c1"># Get time boundary t1</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">t1</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">t1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">timestamps</span><span class="p">)</span></span>
+<span class="code-line">    <span class="c1"># slpt has to be either of integer, list or tuple</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sltp</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sltp</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span></span>
+<span class="code-line">        <span class="n">_sltp</span> <span class="o">=</span> <span class="n">sltp</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span></span>
+<span class="code-line">    <span class="k">else</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">_sltp</span> <span class="o">=</span> <span class="p">[</span><span class="n">sltp</span><span class="p">,</span> <span class="n">sltp</span><span class="p">]</span></span>
+<span class="code-line">    <span class="c1"># Define the side</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">side</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span></span>
+<span class="code-line">        <span class="c1"># Default is LONG</span></span>
+<span class="code-line">        <span class="n">_side</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">trgt</span><span class="o">.</span><span class="n">index</span><span class="p">)</span></span>
+<span class="code-line">    <span class="k">else</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">_side</span> <span class="o">=</span> <span class="n">side</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">trgt</span><span class="o">.</span><span class="n">index</span><span class="p">]</span></span>
+<span class="code-line">    <span class="n">events</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">({</span><span class="s1">&#39;t1&#39;</span><span class="p">:</span> <span class="n">t1</span><span class="p">,</span> <span class="s1">&#39;trgt&#39;</span><span class="p">:</span> <span class="n">trgt</span><span class="p">,</span> <span class="s1">&#39;side&#39;</span><span class="p">:</span> <span class="n">_side</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">events</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;trgt&#39;</span><span class="p">])</span></span>
+<span class="code-line">    <span class="n">time_idx</span> <span class="o">=</span> <span class="n">mp_pandas_obj</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">get_touch_idx</span><span class="p">,</span></span>
+<span class="code-line">                             <span class="n">pd_obj</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;molecule&#39;</span><span class="p">,</span> <span class="n">events</span><span class="o">.</span><span class="n">index</span><span class="p">),</span></span>
+<span class="code-line">                             <span class="n">num_threads</span><span class="o">=</span><span class="n">num_threads</span><span class="p">,</span></span>
+<span class="code-line">                             <span class="n">close</span><span class="o">=</span><span class="n">close</span><span class="p">,</span> <span class="n">events</span><span class="o">=</span><span class="n">events</span><span class="p">,</span> <span class="n">sltp</span><span class="o">=</span><span class="n">_sltp</span><span class="p">)</span></span>
+<span class="code-line">    <span class="c1"># Skip when all of barrier are not touched</span></span>
+<span class="code-line">    <span class="n">time_idx</span> <span class="o">=</span> <span class="n">time_idx</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">events</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_idx</span><span class="o">.</span><span class="n">idxmin</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">events</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_idx</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">side</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">events</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;side&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="n">events</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">finance_ml.stats</span> <span class="kn">import</span> <span class="n">get_daily_vol</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">vol</span> <span class="o">=</span> <span class="n">get_daily_vol</span><span class="p">(</span><span class="n">close</span><span class="p">)</span></span>
+<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;volatility&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">vol</span><span class="o">.</span><span class="n">head</span><span class="p">())</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">events</span> <span class="o">=</span> <span class="n">get_events</span><span class="p">(</span><span class="n">close</span><span class="p">,</span> <span class="n">timestamps</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">vol</span><span class="p">,</span> <span class="n">min_ret</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span></span>
+<span class="code-line">                    <span class="n">num_threads</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">t1</span><span class="o">=</span><span class="n">t1</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span></span>
+<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">head</span><span class="p">())</span></span>
+</pre></div>
+
+
+<p>Output:</p>
+<div class="highlight"><pre><span class="code-line"><span></span>volatility</span>
+<span class="code-line">Date</span>
+<span class="code-line">2000-01-04         NaN</span>
+<span class="code-line">2000-01-05    0.031374</span>
+<span class="code-line">2000-01-06    0.025522</span>
+<span class="code-line">2000-01-10    0.024588</span>
+<span class="code-line">2000-01-11    0.022054</span>
+<span class="code-line">Name: Close, dtype: float64</span>
+<span class="code-line"></span>
+<span class="code-line">events</span>
+<span class="code-line">                   t1      trgt type</span>
+<span class="code-line">Date                                </span>
+<span class="code-line">2000-01-05 2000-01-12  0.031374   sl</span>
+<span class="code-line">2000-01-06 2000-01-18  0.025522   t1</span>
+<span class="code-line">2000-01-10 2000-01-12  0.024588   sl</span>
+<span class="code-line">2000-01-11 2000-01-18  0.022054   tp</span>
+<span class="code-line">2000-01-12 2000-01-14  0.020946   tp</span>
+</pre></div>
+
+
+<p><code>get_events</code> uses <code>get_torch_idx</code> internally and obtains labels.</p>
+<p>Output, <code>events</code>, contains the followings:
+- <code>t1</code>, when the barrier is touched
+- <code>trgt</code>, scale used to define horizontal barriers
+- <code>type</code>, which barrier is touched</p>
+<p>Next, we define <code>get_sizes</code>, which generates numerical labels using <code>events</code>.
+When labeling points hitting the vertical barrier, there are two possible choices.
+One of them is assigning the sign of the return at the hitting point.
+The other way is using another label for hitting the vertical barrier.</p>
+<p>In this article, we take the former approach to get binary labels.</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">get_sizes</span><span class="p">(</span><span class="n">close</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">sign_label</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span></span>
+<span class="code-line">    <span class="sd">&quot;&quot;&quot;Return bet sizes</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="sd">    Parameters</span></span>
+<span class="code-line"><span class="sd">    ----------</span></span>
+<span class="code-line"><span class="sd">    close: pd.Series</span></span>
+<span class="code-line"><span class="sd">    events: pd.DataFrame</span></span>
+<span class="code-line"><span class="sd">        t1: time of barrier</span></span>
+<span class="code-line"><span class="sd">        type: type of barrier - tp, sl, or t1</span></span>
+<span class="code-line"><span class="sd">        trgt: horizontal barrier width</span></span>
+<span class="code-line"><span class="sd">        side: position side</span></span>
+<span class="code-line"><span class="sd">    sign_label: bool, (default True)</span></span>
+<span class="code-line"><span class="sd">        If True, assign label for points touching vertical</span></span>
+<span class="code-line"><span class="sd">        line accroing to return&#39;s sign</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="sd">    Returns</span></span>
+<span class="code-line"><span class="sd">    -------</span></span>
+<span class="code-line"><span class="sd">    pd.Series: bet sizes</span></span>
+<span class="code-line"><span class="sd">    &quot;&quot;&quot;</span></span>
+<span class="code-line">    <span class="c1"># Prices algined with events</span></span>
+<span class="code-line">    <span class="n">events</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">])</span></span>
+<span class="code-line">    <span class="c1"># All used indices</span></span>
+<span class="code-line">    <span class="n">time_idx</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">events</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span></span>
+<span class="code-line">    <span class="n">close</span> <span class="o">=</span> <span class="n">close</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">time_idx</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bfill&#39;</span><span class="p">)</span></span>
+<span class="code-line">    <span class="c1"># Create out object</span></span>
+<span class="code-line">    <span class="n">out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">events</span><span class="o">.</span><span class="n">index</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">out</span><span class="p">[</span><span class="s1">&#39;ret&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">close</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">events</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">/</span> <span class="n">close</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span></span>
+<span class="code-line">        <span class="n">events</span><span class="o">.</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">-</span> <span class="mf">1.</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="s1">&#39;side&#39;</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;ret&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">events</span><span class="p">[</span><span class="s1">&#39;side&#39;</span><span class="p">]</span></span>
+<span class="code-line">        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;side&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">events</span><span class="p">[</span><span class="s1">&#39;side&#39;</span><span class="p">]</span></span>
+<span class="code-line">    <span class="n">out</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;ret&#39;</span><span class="p">])</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">sign_label</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;ret&#39;</span><span class="p">])</span></span>
+<span class="code-line">        <span class="n">out</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;ret&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span></span>
+<span class="code-line">    <span class="k">else</span><span class="p">:</span></span>
+<span class="code-line">        <span class="c1"># 0 when touching vertical line</span></span>
+<span class="code-line">        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">events</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;t1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="s1">&#39;side&#39;</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">out</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;ret&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="n">out</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">labels</span> <span class="o">=</span> <span class="n">get_sizes</span><span class="p">(</span><span class="n">close</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">sign_label</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></span>
+<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">head</span><span class="p">())</span></span>
+</pre></div>
+
+
+<p>Output:</p>
+<div class="highlight"><pre><span class="code-line"><span></span>                 <span class="n">ret</span>  <span class="n">size</span></span>
+<span class="code-line"><span class="n">Date</span>                      </span>
+<span class="code-line"><span class="mi">2000</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">05</span> <span class="o">-</span><span class="mf">0.070293</span>  <span class="o">-</span><span class="mf">1.0</span></span>
+<span class="code-line"><span class="mi">2000</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">06</span>  <span class="mf">0.048273</span>   <span class="mf">1.0</span></span>
+<span class="code-line"><span class="mi">2000</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">10</span> <span class="o">-</span><span class="mf">0.057372</span>  <span class="o">-</span><span class="mf">1.0</span></span>
+<span class="code-line"><span class="mi">2000</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">11</span>  <span class="mf">0.054311</span>   <span class="mf">1.0</span></span>
+<span class="code-line"><span class="mi">2000</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">12</span>  <span class="mf">0.060864</span>   <span class="mf">1.0</span></span>
+</pre></div>
+
+
+<h2>Prediction</h2>
+<p>Finally, we come to the stage for prediction. Yay! In this stage, we simply test results through split datasets: training and test.</p>
+<p>We simply use trailing histories of volume and close for input features.</p>
+<p><img alt="MSFT_Volume" src="http://jjakimoto.github.io/images/finance_labeling/MSFT_Volume.png" /></p>
+<p>We split data into from <code>2000-01-01</code> to <code>2017-08-31</code> for training and from <code>2017-09-01</code> to <code>2018-03-31</code> for test.</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="c1"># Separate data time stamps</span></span>
+<span class="code-line"><span class="k">def</span> <span class="nf">get_partial_index</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">start</span><span class="p">]</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">]</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">train_end</span> <span class="o">=</span> <span class="s1">&#39;2017-08-31&#39;</span></span>
+<span class="code-line"><span class="n">test_start</span> <span class="o">=</span> <span class="s1">&#39;2017-09-01&#39;</span></span>
+<span class="code-line"><span class="n">train_idx</span> <span class="o">=</span> <span class="n">get_partial_index</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">train_end</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">test_idx</span> <span class="o">=</span> <span class="n">get_partial_index</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">test_start</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">def</span> <span class="nf">generate_features</span><span class="p">(</span><span class="n">close</span><span class="p">,</span> <span class="n">volume</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">timestamps</span><span class="p">,</span> <span class="n">timelag</span><span class="p">):</span></span>
+<span class="code-line">    <span class="n">index</span> <span class="o">=</span> <span class="n">close</span><span class="o">.</span><span class="n">index</span></span>
+<span class="code-line">    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span></span>
+<span class="code-line">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">timelag</span><span class="p">):</span></span>
+<span class="code-line">        <span class="c1"># Normalize</span></span>
+<span class="code-line">        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">close</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">values</span> <span class="o">/</span> <span class="n">close</span><span class="o">.</span><span class="n">values</span><span class="p">)</span></span>
+<span class="code-line">        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">volume</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">values</span> <span class="o">/</span> <span class="n">volume</span><span class="o">.</span><span class="n">values</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="n">features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">timestamps</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span></span>
+<span class="code-line">    <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span></span>
+<span class="code-line">    <span class="n">time_idx</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">index</span> <span class="o">&amp;</span> <span class="n">label</span><span class="o">.</span><span class="n">index</span></span>
+<span class="code-line">    <span class="n">y</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">time_idx</span><span class="p">]</span><span class="o">.</span><span class="n">values</span></span>
+<span class="code-line">    <span class="n">label_map</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span></span>
+<span class="code-line">    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">label_map</span><span class="p">[</span><span class="n">y_i</span><span class="p">]</span> <span class="k">for</span> <span class="n">y_i</span> <span class="ow">in</span> <span class="n">y</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">X</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">time_idx</span><span class="p">]</span><span class="o">.</span><span class="n">values</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">timelag</span> <span class="o">=</span> <span class="mi">30</span></span>
+<span class="code-line"><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span> <span class="o">=</span> <span class="n">generate_features</span><span class="p">(</span><span class="n">close</span><span class="p">,</span> <span class="n">volume</span><span class="p">,</span> <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">],</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">timelag</span><span class="o">=</span><span class="n">timelag</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">test_X</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">generate_features</span><span class="p">(</span><span class="n">close</span><span class="p">,</span> <span class="n">volume</span><span class="p">,</span> <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">],</span> <span class="n">test_idx</span><span class="p">,</span> <span class="n">timelag</span><span class="o">=</span><span class="n">timelag</span><span class="p">)</span></span>
+</pre></div>
+
+
+<p>Note that close and volume features are normalized with the current value <a href="https://arxiv.org/pdf/1706.10059.pdf">[3]</a>.
+Intuitively, the scales of close and volume themselves do not have any meanings. The value in comparison to the current close and value are rather essential information. This normalization allows you to build models irrelevant to the scales.</p>
+<p>We build up Neural Net classifier with <code>PyTorch</code> and my utility repository
+<code>torch_utils</code><a href="https://github.com/jjakimoto/PyTorch-Utils">[4]</a>.</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">torch</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="kn">as</span> <span class="nn">nn</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="kn">as</span> <span class="nn">F</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">torch.utils.data</span> <span class="kn">as</span> <span class="nn">tdata</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">torch.optim</span> <span class="kn">as</span> <span class="nn">optim</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">torch_utils.datasets</span> <span class="kn">import</span> <span class="n">NumpyDataset</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">torch_utils.training</span> <span class="kn">import</span> <span class="n">train_step</span><span class="p">,</span> <span class="n">test_step</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">input_dim</span> <span class="o">=</span> <span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></span>
+<span class="code-line"><span class="n">output_dim</span> <span class="o">=</span> <span class="mi">1</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">class</span> <span class="nc">Net</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span></span>
+<span class="code-line">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></span>
+<span class="code-line">        <span class="nb">super</span><span class="p">(</span><span class="n">Net</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span></span>
+<span class="code-line">        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span></span>
+<span class="code-line">        <span class="bp">self</span><span class="o">.</span><span class="n">bn1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span></span>
+<span class="code-line">        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span></span>
+<span class="code-line">        <span class="bp">self</span><span class="o">.</span><span class="n">bn2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span></span>
+<span class="code-line">        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span></span>
+<span class="code-line">        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bn1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span></span>
+<span class="code-line">        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bn2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span></span>
+<span class="code-line">        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></span>
+<span class="code-line">        <span class="k">return</span> <span class="n">x</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=.</span><span class="mi">5</span><span class="p">):</span></span>
+<span class="code-line">        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></span>
+<span class="code-line">        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></span>
+<span class="code-line">        <span class="k">return</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">threshold</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span></span>
+<span class="code-line"><span class="n">train_loader</span> <span class="o">=</span> <span class="n">tdata</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">NumpyDataset</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)),</span></span>
+<span class="code-line">                                             <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">test_loader</span> <span class="o">=</span> <span class="n">tdata</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">NumpyDataset</span><span class="p">(</span><span class="n">test_X</span><span class="p">,</span> <span class="n">test_y</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)),</span></span>
+<span class="code-line">                                            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">1000</span></span>
+<span class="code-line"><span class="n">model</span> <span class="o">=</span> <span class="n">Net</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">loss_func</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">binary_cross_entropy_with_logits</span></span>
+<span class="code-line"><span class="n">score_func</span> <span class="o">=</span> <span class="n">accuracy_score</span></span>
+<span class="code-line"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span></span>
+<span class="code-line">    <span class="n">train_step</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span></span>
+<span class="code-line">               <span class="n">loss_func</span><span class="o">=</span><span class="n">loss_func</span><span class="p">,</span> <span class="n">score_func</span><span class="o">=</span><span class="n">score_func</span><span class="p">,</span></span>
+<span class="code-line">               <span class="n">epoch</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">log_interval</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span></span>
+<span class="code-line">        <span class="n">test_step</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">loss_func</span><span class="o">=</span><span class="n">loss_func</span><span class="p">,</span> <span class="n">score_func</span><span class="o">=</span><span class="n">score_func</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">test_X</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">())</span></span>
+<span class="code-line"><span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span></span>
+<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Test Accuracy: {accuracy:.4g}&#39;</span><span class="p">)</span></span>
+</pre></div>
+
+
+<p>Output:</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">Test</span> <span class="n">Accuracy</span><span class="p">:</span> <span class="mf">0.5229</span></span>
+</pre></div>
+
+
+<p>TADA! The resultant test accuracy is <code>0.5229</code>.....
+Ummmmmm......., this is no better than chance.
+One of the possible reasons for this is overfitting.
+We need to tweak the model architecture and way to train models.
+We can also consider that classification might be difficult for finance.
+Here is the explanation in the Quora <a href="https://www.quora.com/Loss-cross-entropy-is-decreasing-but-accuracy-remains-the-same-while-training-convolutional-neural-networks-How-can-it-happen">[5]</a>.
+Even if a model is able to learn the distribution, it might be difficult to predict the correct label under the noisy situation.</p>
+<h1>Regression Approach</h1>
+<p>As we see previously, classification is difficult. It might make more sense to predict the price or return itself.
+We try to predict future returns based on the same input features as classification.
+We need to consider how many days future to look forward to define target returns.</p>
+<p>To compare performances among different <code>num_day</code> parameters: <code>1, 2, 3, 4, 5, 10, 20</code>,
+we use free scale metrics <code>np.mean(np.abs(y_pred - y)) / np.std(y)</code>.
+Here are the results. </p>
+<p><img alt="regression_1days" src="http://jjakimoto.github.io/images/finance_labeling/regression_1days.png" />
+<img alt="regression_3days" src="http://jjakimoto.github.io/images/finance_labeling/regression_3days.png" />
+<img alt="regression_5days" src="http://jjakimoto.github.io/images/finance_labeling/regression_5days.png" />
+<img alt="regression_10days" src="http://jjakimoto.github.io/images/finance_labeling/regression_10days.png" />
+<img alt="regression_20days" src="http://jjakimoto.github.io/images/finance_labeling/regression_20days.png" /></p>
+<p><img alt="error_regression" src="http://jjakimoto.github.io/images/finance_labeling/error_regression.png" /></p>
+<p>We do not see any specific relation between the length of days forward and performance.
+To find more reliable results, we need to validate model and tune hyperparameters.</p>
+<h1>Wrap Up</h1>
+<p>The results we have seen in this article looks disappointed. We can mainly consider the following reasons:
+1. The small number of data points
+2. Require to choose appropriate models</p>
+<p>The first reason comes from the fact that the only single path is given and exactly the same pattern will never show up. Generally speaking, ML algorithms needs to see a lot of samples from the same distribution. Especially, when using Neural Network, a lot of data points are required.</p>
+<p>For the second reason, I did not spend a lot of times on model selection.
+We need to set up proper way to validate model performances, which will be discussed in a future blog post.
+As one of the research direction, we can consider Bayesian approaches.
+Due to the noisy nature of financial data,
+Bayesian approaches help you avoid overfitting and give you more appropriate confidence levels of predictions. </p>
+<h1>References</h1>
+<ul>
+<li>[1] <a href="https://www.amazon.com/Advances-Financial-Machine-Learning-Marcos/dp/1119482089">Advances in Financial Machine Learning</a></li>
+<li>[2] <a href="https://github.com/jjakimoto/finance_ml">finance_ml</a></li>
+<li>[3] <a href="https://arxiv.org/pdf/1706.10059.pdf">A Deep Reinforcement Learning Framework for the Financial Portfolio Management Problem</a></li>
+<li>[4] <a href="https://github.com/jjakimoto/PyTorch-Utils">PyTorch-Utils</a></li>
+<li>[5] <a href="https://www.quora.com/Loss-cross-entropy-is-decreasing-but-accuracy-remains-the-same-while-training-convolutional-neural-networks-How-can-it-happen">Loss (cross entropy) is decreasing but accuracy remains the same while training convolutional neural networks. How can it happen?</a></li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+
+<nav class="pagination-wrapper">
+    <div class="pagination">
+        <div class="pagination-left">
+        </div>
+        <div class="pagination-right">
+                &nbsp;
+        </div>
+    </div>
+</nav>
+    <aside class="comments">
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    var disqus_config = function () {
+        this.page.url = "http://jjakimoto.github.io/articles/2018/Jun/22/finance_labeling/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "finance_labeling"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//datarounder.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+    </aside>
+
+            </div>
+        </section>
+
+        <nav id="sidebar" class="pure-u-1 pure-u-md-1-4">
+            <div class="l-box">
+<section>
+    <div class="portrait">
+            <img src="/theme/images/me.jpg" />
+    </div>
+    <div class="name-cv">
+        <div class="name">Tomoaki Fujii</div>
+        <!--div class="cv">
+            <a href="/pdfs/cv.pdf"><i class="fa fa-file-pdf-o"></i> CV</a>
+        </div-->
+    </div>
+    <div class="clear"></div>
+    <div class="sub-name"></div>
+    <div class="contact">f.j.akimoto@gmail.com</div>
+</section>
+
+<section class="tags">
+    <span class="tag"><a href="/tag/Machine Learning/">#Machine Learning</a></span>
+    <span class="tag"><a href="/tag/Deep Learning/">#Deep Learning</a></span>
+    <span class="tag"><a href="/tag/Finance/">#Finance</a></span>
+    <span class="tag"><a href="/tag/Python/">#Python</a></span>
+</section>
+
+
+<!-- <section class="search">
+    <script>
+  (function() {
+    var cx = '006027474294305969173:cpp1rvft78s';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+</section> -->            </div>
+        </nav>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-3-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://jjakimoto.github.io">Tomoaki Fujii</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=11652802;
+var sc_invisible=0;
+var sc_security="b99d97e0";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="//c.statcounter.com/11652802/0/b99d97e0/0/" alt="Web
+Analytics"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+
