@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Data Rounder, ">
+    <link href="/favicon.png" rel="icon">
+
+        <link rel="alternate"  href="http://jjakimoto.github.io/feeds/all.atom.xml" type="application/atom+xml" title="Data Rounder Full Atom Feed"/>
+
+        <title>Data Rounder - Thought and Trial on Reinforcement Learning for Finance</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="/theme/css/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="/theme/css/styles.css">
+    <link rel="stylesheet" href="/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/pages/books/">Books</a></li>
+        <li><a href="/pages/about/">About</a></li>
+        <li><a href="/pages/links/">Links</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/"><i class="fa fa-linkedin"></i></a></li>
+        <li><a href="http://jjakimoto.github.io/feeds/all.atom.xml"><i class="fa fa-rss"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-3-4">
+            <div class="l-box">
+
+    <header id="post-header">
+        <h1>Thought and Trial on Reinforcement Learning for Finance</h1>
+            <div class="post-meta">
+                October 11, 2018
+            </div>
+            <div class="post-tags">
+                <ul>
+                    <li>tags:</li>
+                    <li><a href="/tag/Reinforcement Learning/">Reinforcement Learning</a></li>
+                </ul>
+            </div>
+    </header>
+
+    <section id="post">
+        <p>RL(Reinforcement Learning) has been recently attracting a lot of attentions. RL based algorithms have achieved tremendous
+results in various fields such as video games<a href="https://blog.openai.com/openai-five/">Dota</a>, robotics<a href="https://ai.googleblog.com/2018/06/scalable-deep-reinforcement-learning.html">robotics</a>,
+and model architecture search<a href="(https://arxiv.org/pdf/1611.01578.pdf)">[architecuter]</a>. Although financial
+trading is also one of the potential applications, this area has been relatively less researched due
+to some difficulties to deal with the dynamical market environment. In this blog post, I will overview 
+some researches and try algorithms suggested at a paper for portfolio management <a href="https://arxiv.org/pdf/1706.10059.pdf">port</a>.</p>
+<h1>Why we should use Reinforcement Learning</h1>
+<p>In a blog post of <code>WildML</code><a href="http://www.wildml.com/2018/02/introduction-to-learning-to-trade-with-reinforcement-learning/">[wildml]</a>
+, the author overviews the landscape of applications of RL to algorithm trading and remarks the reasons why RL is promising.</p>
+<p>The first reason is to allow you to build end-to-end system easily. Supervised learning algorithms may predict
+the price movement, but they do not tell you how to allocate your assets. That is, you need to implement another
+algorithm or strategy to determine the betting size. On the other hand, RL can directly optimizes a policy that determines
+optimal asset allocation.</p>
+<p>The other reason is to make it easy to take complex dynamics of a environment into consideration.
+For example, you do not know what price you can actually execute your orders at. There is what is called
+slippage. Even if you want to sell or buy stocks at the price you are seeing in the market right now,
+their prices are changing before all of the executions have been completed. Besides that, there is usually
+transaction fee, which may eat up your account if you have too frequent transactions with small profits. 
+It hard to label data for supervised learning algorithms to take all of fees and slippage into considerations.
+RL does not require explicit labels for that.</p>
+<p>Due to above reasons, RL might be promising algorithms for finance. Collecting experiences for learning,
+however, could be more expensive than successful applications like video games. If you screw at a video game,
+you do not lose anything. You just accumulate frustrations and waste your time. 
+This is not the case for trading. You do not want to blow up your bank account just for learning your model.
+Therefore, most researchers take alternative approach, using either of synthetic or historical data.</p>
+<h1>Research so far ...</h1>
+<p>The synthetic data can be generated through mathematical models. The research team from J.P.Morgan
+attempt to find hedging strategies using a neural network instead of solutions deduced from mathematical
+equations. They test proposed algorithms over data generated from Heston model<a href="https://en.wikipedia.org/wiki/Heston_model">[heston]</a>.
+Their frame work is dealing with data sequentially through RL to minimize a convex risk measure. I. Halperin
+theorizes and suggests a way to implement Q-Learning and its numerical experiments for option pricing and hedge strategies <a href="https://arxiv.org/pdf/1712.04609.pdf">qlbs</a>.
+Although He makes this point for a single risky stock and minimization of variance of a hedge portfolio, 
+the approach can be extended to multiple stocks and other utility functions. The thing both approaches
+have in common is that the approaches do not assume the existence of risk-neutral measure, which is often
+assumed in classical mathematical finance. Besides that, they are model free approaches. You are able to
+combat the complex market dynamics.</p>
+<p>Historical data is also used to verify model performance. David W. Lu suggests an algorithm using Q-learning
+to make signals for positions(long or short) <a href="(https://arxiv.org/pdf/1707.07338.pdf)">agentinspired</a>. He uses trailing history
+of price  difference, previous position, and bias parameter for input of LSTM or RNN. He directly optimizes
+directly optimize Sharp Ratio or Downside Deviation.
+Z. Jiang, et al, use policy gradient to generate the percentage of allocation for each asset <a href="https://arxiv.org/pdf/1706.10059.pdf">[portofliomanagement]</a>.
+For example,
+if you have 10 currencies and one cash, output dimension will be 11 dimension. Each of element represents
+percentage of allocation. Their approach is more like online learning. For each frame, the algorithm receive OHLC data and resample
+data to update parameters to maximize accumulated returns over sampled data points. Optimizing accumulated
+returns may more make sense in finance if you use historical data to train your model. What you have to
+maximize is more obvious for each frame than video game. That would be returns and risk in finance.
+Approach directly optimiznig certain cost fucntion instead of value function may more make sense in finance,
+because we usually have idea about what we have to optimize, cumulative returns, Sharpe Ratio, etc.  </p>
+<p>Both synthetic and historical data have pros and cons. Synthetic data is easy to collect, and you can test your algorithms
+over lager number of sample paths to make sure statistical significance. The generated paths, however,
+do not always reflect the actual property of the market dynamics. Indeed, the actual price data is not stationary.
+The market is always changing the regime and price distribution. Mathematical modeling is powerful,
+but models are not perfect.</p>
+<p>Historical data allows you to simulate your model over events that actually have happened in the past.
+But, the number of data points may not be large enough to train and validate models. Especially, 
+most deep reinforcement learning algorithms require millions of steps to achieve good performances.</p>
+<p>As an intermediate approach, we can consider resampling paths from historical data. H. White suggests a bootsrapping
+method for sequential data to test statistical significance of trading algorithms <a href="https://www.ssc.wisc.edu/~bhansen/718/White2000.pdf">reality</a>.
+In chapter 12 of <code>Advances in Financial Machine Learning</code><a href="https://www.amazon.com/Advances-Financial-Machine-Learning-Marcos/dp/1119482089">[advancedml]</a>, 
+the author suggests split historical data into subsets and generate paths from heir combinatorics. This
+approach can be seen as sampling different stories from actual sequence of events. This allows you
+to see the robustness of generated models over multiple stories. For example,
+if you take out data around 2008 from training dataset, you train a model that does not know the financial crisis in 2008
+and see the performance when the model faces it. </p>
+<p>We have considered several methods to train and validate models so far. The thing that none of them
+could cover is slippage and effect toward the market from your executions.
+As mentioned previously you are not always able to execute your order immediately and the price you actually 
+execute your orders at would change. Especially, if you deal with illiquid or volatile assets, this gap becomes huge.
+Although we have not mentioned so far, the financial market always react to your orders.
+As long as you are dealing with small amount of money from your personal bank account, the effect would be trivial.
+This, however, is not the case for large financial institutes like  hedge funds and investment banks.
+To find truely optimal strategies, we need to take care of these factors as well.  </p>
+<p>To model or learn pseudo environments reflecting these factors could be one of the research direction.
+I have not come across significant results for this topic so far. If you know something, let me know ;)</p>
+<h2>Implementation</h2>
+<p>In this blog post, I will try out the algorithms suggested by <a href="https://arxiv.org/pdf/1706.10059.pdf">[portofliomanagement]</a>. 
+I will implement PyTorch and please check out github repository.</p>
+<h1>References</h1>
+<ul>
+<li>[1] <a href="http://www.wildml.com/2018/02/introduction-to-learning-to-trade-with-reinforcement-learning/">Introduction to Learning to Trade with Reinforcement Learning</a></li>
+<li>[2] <a href="https://arxiv.org/pdf/1706.10059.pdf">A Deep Reinforcement Learning Framework for the Financial Portfolio Management Problem</a></li>
+<li>[3] <a href="https://arxiv.org/pdf/1809.01506.pdf">Deep Reinforcement Learning in High Frequency Trading</a></li>
+<li>[4] <a href="https://arxiv.org/pdf/1802.03042.pdf">Deep Hedging</a></li>
+<li>[5] <a href="https://arxiv.org/pdf/1707.07338.pdf">Agent Inspired Trading Using Recurrent Reinforcement Learning and LSTM Neural Networks</a></li>
+<li>[6] <a href="https://arxiv.org/pdf/1712.04609.pdf">QLBS: Q-Learner in the Black-Scholes(-Merton) Worlds</a></li>
+<li>[7] <a href="https://en.wikipedia.org/wiki/Heston_model">Heston Model</a></li>
+<li>[8] <a href="https://arxiv.org/pdf/1611.01578.pdf">NEURAL ARCHITECTURE SEARCH WITH REINFORCEMENT LEARNING</a>
+= [9] <a href="https://ai.googleblog.com/2018/06/scalable-deep-reinforcement-learning.html">Scalable Deep Reinforcement Learning for Robotic Manipulation</a></li>
+<li>[10] <a href="https://blog.openai.com/openai-five/">OpenAI Five</a></li>
+<li>[11] <a href="http://cs229.stanford.edu/proj2009/LvDuZhai.pdf">Algorithm Trading using Q-Learning and Recurrent Reinforcement Learning</a></li>
+<li>[12] <a href="https://www.ssc.wisc.edu/~bhansen/718/White2000.pdf">A Reality Check for Data Snooping</a></li>
+<li>[13]</li>
+</ul>
+<h1>Reinforcement Learning</h1>
+<h2>Deep Reinforcement Learning in High Frequency Trading</h2>
+<ul>
+<li>https://arxiv.org/pdf/1809.01506.pdf</li>
+<li>Ensemble three one-vs-one MLP, each of which predict binary labels</li>
+<li>Ensemble weight keeps updating through Reinforcement Learning</li>
+<li>500 trailing tick history and label for 100 forward</li>
+<li>MLP has (10, 10) hidden layers</li>
+<li>Accuracy will be around 70 %</li>
+<li>Only when confidence level is over the threshold, execute trading</li>
+<li>The perticipant percentage is around 10%</li>
+</ul>
+<h2>A Deep Reinforcement Learning Framework for the Financial Portfolio Management Problem</h2>
+<ul>
+<li>https://arxiv.org/pdf/1706.10059.pdf</li>
+<li>Use Close, High, and Low as input</li>
+<li>Use replay memory and portfolio vector memory for training</li>
+<li>Use 50 trailing history</li>
+</ul>
+<h2>Deep Hedging</h2>
+<ul>
+<li>https://arxiv.org/pdf/1802.03042.pdf</li>
+<li>Find the hedging strategy through Neural Network</li>
+<li>Optimize convex measure</li>
+<li>Show the experiments over numerically sampled Heston model</li>
+<li>Use (2d, d+15, d+ 15, d) MLP Model, where d is the number of assets</li>
+</ul>
+<h2>Agent Inspired Trading Using Recurrent Reinforcement Learning and LSTM Neural Networks</h2>
+<ul>
+<li>https://arxiv.org/pdf/1707.07338.pdf</li>
+<li>Direct reinforcement(Not required value function)</li>
+<li>Recurrent Reinforcement Learning using LSTM or RNN</li>
+<li>Optimize Sharp Ratio or Downside Deviation</li>
+<li>Input:<ul>
+<li>Trailing history of price difference</li>
+<li>Previous position</li>
+<li>Bias parameter</li>
+</ul>
+</li>
+<li>Previous position is fed into the input of the output layer</li>
+<li>Validation is done on a single period, which is not trustable</li>
+</ul>
+<h2>QLBS: Q-Learner in the Black-Scholes(-Merton) Worlds</h2>
+<ul>
+<li>https://arxiv.org/pdf/1712.04609.pdf</li>
+<li>Derive pricing through Q-Learning format</li>
+</ul>
+    </section>
+
+
+<nav class="pagination-wrapper">
+    <div class="pagination">
+        <div class="pagination-left">
+        </div>
+        <div class="pagination-right">
+                &nbsp;
+        </div>
+    </div>
+</nav>
+    <aside class="comments">
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    var disqus_config = function () {
+        this.page.url = "http://jjakimoto.github.io/drafts/rl_portfolio.html";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "rl_portfolio"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//datarounder.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+    </aside>
+
+            </div>
+        </section>
+
+        <nav id="sidebar" class="pure-u-1 pure-u-md-1-4">
+            <div class="l-box">
+<section>
+    <div class="portrait">
+            <img src="/theme/images/me.jpg" />
+    </div>
+    <div class="name-cv">
+        <div class="name">Tomoaki Fujii</div>
+        <!--div class="cv">
+            <a href="/pdfs/cv.pdf"><i class="fa fa-file-pdf-o"></i> CV</a>
+        </div-->
+    </div>
+    <div class="clear"></div>
+    <div class="sub-name"></div>
+    <div class="contact">f.j.akimoto@gmail.com</div>
+</section>
+
+<section class="tags">
+    <span class="tag"><a href="/tag/Machine Learning/">#Machine Learning</a></span>
+    <span class="tag"><a href="/tag/Deep Learning/">#Deep Learning</a></span>
+    <span class="tag"><a href="/tag/Finance/">#Finance</a></span>
+    <span class="tag"><a href="/tag/Python/">#Python</a></span>
+</section>
+
+
+<!-- <section class="search">
+    <script>
+  (function() {
+    var cx = '006027474294305969173:cpp1rvft78s';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+</section> -->            </div>
+        </nav>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-3-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://jjakimoto.github.io">Tomoaki Fujii</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=11652802;
+var sc_invisible=0;
+var sc_security="b99d97e0";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="//c.statcounter.com/11652802/0/b99d97e0/0/" alt="Web
+Analytics"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+
