@@ -1,9 +1,7 @@
-Title: Books I Have Read
+Title: List of My Favorite Books...
 Slug: books
 Status: published
 
-
-List of my favorite books...
 
 <!-- &#9733; black star / &#9734; white star -->
 

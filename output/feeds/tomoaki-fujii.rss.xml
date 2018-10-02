@@ -1727,10 +1727,10 @@ As a toy example, we test the algorithm with MNIST.&lt;/p&gt;
 
  
  
-&lt;div id="ba2f22a7-7a0b-4a4a-b866-4911fae43f3b"&gt;&lt;/div&gt;
+&lt;div id="1c834691-77c7-4607-bd69-5947505a3669"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_widget_view "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#ba2f22a7-7a0b-4a4a-b866-4911fae43f3b');
+var element = $('#1c834691-77c7-4607-bd69-5947505a3669');
 &lt;/script&gt;
 &lt;script type="application/vnd.jupyter.widget-view+json"&gt;
 {"model_id": "ae792dc1177c49b29aaeeec8701d3686", "version_major": 2, "version_minor": 0}
