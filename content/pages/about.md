@@ -3,7 +3,7 @@ Slug: about
 Status: published
 
 
-Hi, I am a data scientist working in financial industry in NYC.
+Hi, I am working as a quant at a crypto hedge fund in San Francisco Bay Area.
 Born in the U.S. and raised up in Japan. After finishing my master in applied mathematics at Kyoto University, I moved back to the U.S.
 
 
