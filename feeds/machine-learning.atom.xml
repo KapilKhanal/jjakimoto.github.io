@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Data Rounder</title><link href="http://jjakimoto.github.io/" rel="alternate"></link><link href="http://jjakimoto.github.io/feeds/machine-learning.atom.xml" rel="self"></link><id>http://jjakimoto.github.io/</id><updated>2018-08-26T12:00:00-04:00</updated><entry><title>Integrated Gradient to Estimate Attributions of Input</title><link href="http://jjakimoto.github.io/articles/2018/Aug/26/IG/" rel="alternate"></link><published>2018-08-26T12:00:00-04:00</published><updated>2018-08-26T12:00:00-04:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2018-08-26:articles/2018/Aug/26/IG/</id><summary type="html">&lt;style type="text/css"&gt;/*!
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Data Rounder</title><link href="http://jjakimoto.github.io/" rel="alternate"></link><link href="http://jjakimoto.github.io/feeds/machine-learning.atom.xml" rel="self"></link><id>http://jjakimoto.github.io/</id><updated>2018-08-26T12:00:00-04:00</updated><entry><title>Integrated Gradient to Estimate Attributions of Input</title><link href="http://jjakimoto.github.io/articles/IG/" rel="alternate"></link><published>2018-08-26T12:00:00-04:00</published><updated>2018-08-26T12:00:00-04:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2018-08-26:articles/IG/</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -1151,10 +1151,10 @@ As a toy example, we test the algorithm with MNIST.&lt;/p&gt;
 
  
  
-&lt;div id="da3fc861-13bf-4fb2-beec-46f68cc97d80"&gt;&lt;/div&gt;
+&lt;div id="6a4b83ea-af0d-4b1c-ae60-7133d1f38c0a"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_widget_view "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#da3fc861-13bf-4fb2-beec-46f68cc97d80');
+var element = $('#6a4b83ea-af0d-4b1c-ae60-7133d1f38c0a');
 &lt;/script&gt;
 &lt;script type="application/vnd.jupyter.widget-view+json"&gt;
 {"model_id": "ae792dc1177c49b29aaeeec8701d3686", "version_major": 2, "version_minor": 0}
@@ -1801,7 +1801,7 @@ var element = $('#da3fc861-13bf-4fb2-beec-46f68cc97d80');
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="Deep Learning"></category></entry><entry><title>Bayesian Optimization of Hyperparameters with Python</title><link href="http://jjakimoto.github.io/articles/2018/Mar/11/bayes_opt/" rel="alternate"></link><published>2018-03-11T12:00:00-04:00</published><updated>2018-03-11T12:00:00-04:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2018-03-11:articles/2018/Mar/11/bayes_opt/</id><summary type="html">&lt;p&gt;Choosing a good set of hyperparameters is one of most important steps, but it is annoying and time consuming. The small number of hyperparameters may allow you to find an optimal set of hyperparameters after a few trials. This is, however, not the case for complex models like neural network.&lt;/p&gt;
+</summary><category term="Deep Learning"></category></entry><entry><title>Bayesian Optimization of Hyperparameters with Python</title><link href="http://jjakimoto.github.io/articles/bayes_opt/" rel="alternate"></link><published>2018-03-11T12:00:00-04:00</published><updated>2018-03-11T12:00:00-04:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2018-03-11:articles/bayes_opt/</id><summary type="html">&lt;p&gt;Choosing a good set of hyperparameters is one of most important steps, but it is annoying and time consuming. The small number of hyperparameters may allow you to find an optimal set of hyperparameters after a few trials. This is, however, not the case for complex models like neural network.&lt;/p&gt;
 &lt;p&gt;When I just started my career as a data scientist, I was always frustrated to tune hyperparameters of Neural Network not to either underfit or overfit.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="frustration" src="https://media.giphy.com/media/ilkfz8Mn5Yz7O/giphy.gif" /&gt;&lt;/p&gt;
 &lt;p&gt;Actually there were a lot of ways to tune parameters efficiently and algorithmically, which I was ignorant of back in those days. Especially how to tune Neural Network has been progress rapidly in a recent few years by utilizing various algorithms: &lt;a href="https://arxiv.org/pdf/1706.00764.pdf"&gt;spectral analysis [1]&lt;/a&gt;, &lt;a href="https://arxiv.org/pdf/1603.06560.pdf"&gt;bandit algorithms [2]&lt;/a&gt;, &lt;a href="https://arxiv.org/pdf/1711.09846.pdf"&gt;evolutionary strategy [3]&lt;/a&gt;, &lt;a href="https://arxiv.org/pdf/1611.01578.pdf"&gt;reinforcement learning [4]&lt;/a&gt;, etc. How to build predictive general models algorithmically is also one of the hot research topics. Many frameworks and algorithms have been suggested &lt;a href="https://cyphe.rs/static/atm.pdf"&gt;[5]&lt;/a&gt;, &lt;a href="https://papers.nips.cc/paper/5872-efficient-and-robust-automated-machine-learning.pdf"&gt;[6]&lt;/a&gt;.&lt;/p&gt;
@@ -2356,7 +2356,7 @@ For the sake of the simplicity, we define hyperparameters with the following par
         "}";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</summary><category term="AutoML"></category></entry><entry><title>Data Explore and Visualization</title><link href="http://jjakimoto.github.io/articles/2017/Mar/26/house_price/" rel="alternate"></link><published>2017-03-26T12:00:00-04:00</published><updated>2017-03-26T12:00:00-04:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-03-26:articles/2017/Mar/26/house_price/</id><summary type="html">&lt;style type="text/css"&gt;/*!
+&lt;/script&gt;</summary><category term="AutoML"></category></entry><entry><title>Data Explore and Visualization</title><link href="http://jjakimoto.github.io/articles/house_price/" rel="alternate"></link><published>2017-03-26T12:00:00-04:00</published><updated>2017-03-26T12:00:00-04:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-03-26:articles/house_price/</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -4277,7 +4277,7 @@ We consider reducing the number of features to a subset of features strongly cor
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="Feature Selection"></category></entry><entry><title>Feature Selection and Random Forests</title><link href="http://jjakimoto.github.io/articles/2017/Jan/28/RF/" rel="alternate"></link><published>2017-01-28T12:00:00-05:00</published><updated>2017-01-28T12:00:00-05:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-01-28:articles/2017/Jan/28/RF/</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="Feature Selection"></category></entry><entry><title>Feature Selection and Random Forests</title><link href="http://jjakimoto.github.io/articles/RF/" rel="alternate"></link><published>2017-01-28T12:00:00-05:00</published><updated>2017-01-28T12:00:00-05:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-01-28:articles/RF/</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -5680,7 +5680,7 @@ take vote as to which class will data should be classified for classification.&l
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="Classification"></category><category term="NLP"></category></entry><entry><title>Movie Review with Vector Representations</title><link href="http://jjakimoto.github.io/articles/2017/Jan/13/movie/" rel="alternate"></link><published>2017-01-13T12:00:00-05:00</published><updated>2017-01-13T12:00:00-05:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-01-13:articles/2017/Jan/13/movie/</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="Classification"></category><category term="NLP"></category></entry><entry><title>Movie Review with Vector Representations</title><link href="http://jjakimoto.github.io/articles/movie/" rel="alternate"></link><published>2017-01-13T12:00:00-05:00</published><updated>2017-01-13T12:00:00-05:00</updated><author><name>Tomoaki Fujii</name></author><id>tag:jjakimoto.github.io,2017-01-13:articles/movie/</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
